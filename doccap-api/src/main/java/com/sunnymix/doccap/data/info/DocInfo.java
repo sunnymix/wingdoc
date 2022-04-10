@@ -4,8 +4,6 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import java.time.OffsetDateTime;
-
 /**
  * @author sunnymix
  */
@@ -17,15 +15,9 @@ public class DocInfo {
     private String id;
 
     @NonNull
-    private String name;
+    private String title;
 
     @NonNull
     private String author;
-
-    @NonNull
-    private OffsetDateTime created;
-
-    @NonNull
-    private OffsetDateTime updated;
 
 }

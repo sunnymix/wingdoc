@@ -20,4 +20,12 @@ public class Page {
         return __(0, Integer.MAX_VALUE, false);
     }
 
+    public static Page list(Integer size) {
+        return __(0, size, false);
+    }
+
+    public static Page one() {
+        return __(0, 1, false);
+    }
+
 }

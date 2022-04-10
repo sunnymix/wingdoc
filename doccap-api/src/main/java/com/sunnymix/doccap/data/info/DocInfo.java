@@ -18,6 +18,9 @@ public class DocInfo {
     private String author;
 
     public static DocInfo __(Doc doc) {
+        if (doc == null) {
+            return null;
+        }
         return __(
                 doc.getId(),
                 doc.getTitle(),

@@ -44,3 +44,7 @@ out/
 ### Node.js ###
 node_modules
 
+### spring ###
+application-local.properties
+### gradle ###
+build-local.properties

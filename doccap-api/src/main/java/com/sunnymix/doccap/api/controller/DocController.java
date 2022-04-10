@@ -1,13 +1,15 @@
 package com.sunnymix.doccap.api.controller;
 
-import com.sunnymix.doccap.data.Id;
+import com.sunnymix.doccap.dao.jooq.tables.pojos.Doc;
 import com.sunnymix.doccap.data.info.DocInfo;
 import com.sunnymix.doccap.data.io.Out;
-import org.springframework.web.bind.annotation.PostMapping;
+import com.sunnymix.doccap.repo.DocRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author sunnymix
@@ -15,12 +17,17 @@ import java.util.List;
 @RestController
 public class DocController {
 
-    @PostMapping("/doc/list")
-    public static Out<List<DocInfo>> list() {
-        return Out.ok(new ArrayList<>() {{
-            add(DocInfo.__(Id.newId(), "Doc 1", "Sunny"));
-            add(DocInfo.__(Id.newId(), "Doc 2", "Sunny"));
-        }});
+    @Autowired
+    private DocRepo docRepo;
+
+    @GetMapping("/doc/list")
+    public Out<List<DocInfo>> list() {
+        Out<List<Doc>> docOut = docRepo.list();
+        if (!docOut.getSuccess()) {
+            return Out.error(docOut);
+        }
+        List<DocInfo> docInfoList = docOut.getData().stream().map(DocInfo::__).collect(Collectors.toList());
+        return Out.ok(docInfoList, docOut);
     }
 
 }

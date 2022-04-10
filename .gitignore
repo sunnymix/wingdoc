@@ -47,4 +47,4 @@ node_modules
 ### spring ###
 application-local.properties
 ### gradle ###
-build-local.properties
+local.properties

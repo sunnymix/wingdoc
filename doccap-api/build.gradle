@@ -1,7 +1,13 @@
+buildscript {
+    ext {
+    }
+}
+
 plugins {
-    id 'org.springframework.boot' version '2.6.6'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version "$springBootVersion"
+    id 'io.spring.dependency-management' version "$springDependencyManagement"
     id 'java'
+    id 'nu.studer.jooq' version "$jooqGradlePluginVersion"
 }
 
 group = 'com.sunnymix'
@@ -19,12 +25,83 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    // spring
+    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    // lombok
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    // mysql
+    runtimeOnly "mysql:mysql-connector-java:$mysqlVersion"
+    // jooq
+    implementation "org.springframework.boot:spring-boot-starter-jooq:$springJooqVersion"
+    compileOnly "org.jooq:jooq-meta:$jooqVersion"
+    compileOnly "org.jooq:jooq-codegen:$jooqVersion"
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+sourceSets {
+    orgmain {
+        java.srcDirs files('src/main/java', 'gensrc/main/java')
+    }
+}
+
+jooq {
+    version = jooqVersion
+
+    dependencies {
+        jooqGenerator "mysql:mysql-connector-java:$mysqlVersion"
+    }
+
+    configurations {
+        main {
+            def schema = 'doccap'
+            def basePackageName = 'com.sunnymix.doccap.dao.jooq'
+            def targetDirectory = "$projectDir/gensrc/main/java"
+
+            generateSchemaSourceOnCompilation = false
+
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.INFO
+
+                jdbc {
+                    driver = 'com.mysql.jdbc.Driver'
+                    url = "$dbHost/$schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false"
+                    user = "$dbUser"
+                    password = "$dbPassword"
+                }
+
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.mysql.MySQLDatabase'
+                        inputSchema = schema
+                        outputSchema = schema
+                        includes = '.*'
+                        excludes = 'flyway_schema_history'
+
+                        forcedTypes {
+                            forcedType {
+                            }
+                        }
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = basePackageName
+                        directory = targetDirectory
+                    }
+                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                }
+            }
+        }
+    }
 }

@@ -33,12 +33,20 @@ public class Out<T> {
         return __(true, Page.all(), data, null, null);
     }
 
+    public static <T> Out<T> ok(T data, Out out) {
+        return __(true, out.getPage(), data, null, null);
+    }
+
     public static <T> Out<T> error() {
         return __(false, Page.all(), null, "1", "server error");
     }
 
     public static <T> Out<T> error(String code, String msg) {
         return __(false, Page.all(), null, code, msg);
+    }
+
+    public static <T> Out<T> error(Out out) {
+        return __(false, out.getPage(), null, out.getCode(), out.getMsg());
     }
 
 }

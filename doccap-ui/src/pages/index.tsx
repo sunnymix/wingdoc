@@ -7,6 +7,8 @@ import {
   Switch
 } from "react-router-dom";
 
+import Doc from '@/components/doc/Doc';
+
 const { TabPane } = Tabs;
 const { Option } = Select;
 
@@ -18,9 +20,11 @@ export default function Page() {
           path="/:page?"
           render={({ match, history }) => {
             return (
-              <div>
+              <div
+                style={{
+                  padding: 5
+                }}>
                 <Tabs
-                  centered
                   size="middle"
                   defaultActiveKey={match.params.page || "home"}
                   onChange={ key => history.push(`/${key}`)}
@@ -29,7 +33,7 @@ export default function Page() {
                     Home
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
-                    Doc
+                    <Doc/>
                   </TabPane>
                 </Tabs>
               </div>

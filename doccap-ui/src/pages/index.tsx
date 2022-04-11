@@ -22,9 +22,12 @@ export default function Page() {
                 <Tabs
                   centered
                   size="middle"
-                  defaultActiveKey={match.params.page || "doc"}
+                  defaultActiveKey={match.params.page || "home"}
                   onChange={ key => history.push(`/${key}`)}
                 >
+                  <TabPane tab="Home" key="home">
+                    Home
+                  </TabPane>
                   <TabPane tab="Doc" key="doc">
                     Doc
                   </TabPane>

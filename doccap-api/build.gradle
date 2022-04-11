@@ -4,10 +4,10 @@ buildscript {
 }
 
 plugins {
-    id 'org.springframework.boot' version "$springBootVersion"
-    id 'io.spring.dependency-management' version "$springDependencyManagement"
+    id 'org.springframework.boot' version "$_springBootVersion"
+    id 'io.spring.dependency-management' version "$_springDependencyManagement"
     id 'java'
-    id 'nu.studer.jooq' version "$jooqGradlePluginVersion"
+    id 'nu.studer.jooq' version "$_jooqGradlePluginVersion"
 }
 
 group = 'com.sunnymix'
@@ -26,16 +26,16 @@ repositories {
 
 dependencies {
     // spring
-    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    implementation "org.springframework.boot:spring-boot-starter-web:$_springBootVersion"
     // lombok
-    compileOnly "org.projectlombok:lombok:$lombokVersion"
-    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+    compileOnly "org.projectlombok:lombok:$_lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$_lombokVersion"
     // mysql
-    runtimeOnly "mysql:mysql-connector-java:$mysqlVersion"
+    runtimeOnly "mysql:mysql-connector-java:$_mysqlVersion"
     // jooq
-    implementation "org.springframework.boot:spring-boot-starter-jooq:$springJooqVersion"
-    compileOnly "org.jooq:jooq-meta:$jooqVersion"
-    compileOnly "org.jooq:jooq-codegen:$jooqVersion"
+    implementation "org.springframework.boot:spring-boot-starter-jooq:$_springJooqVersion"
+    compileOnly "org.jooq:jooq-meta:$_jooqVersion"
+    compileOnly "org.jooq:jooq-codegen:$_jooqVersion"
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -51,10 +51,10 @@ sourceSets {
 }
 
 jooq {
-    version = jooqVersion
+    version = _jooqVersion
 
     dependencies {
-        jooqGenerator "mysql:mysql-connector-java:$mysqlVersion"
+        jooqGenerator "mysql:mysql-connector-java:$_mysqlVersion"
     }
 
     configurations {
@@ -70,9 +70,9 @@ jooq {
 
                 jdbc {
                     driver = 'com.mysql.jdbc.Driver'
-                    url = "$dbHost/$schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false"
-                    user = "$dbUser"
-                    password = "$dbPassword"
+                    url = "$_dbHost/$schema?useUnicode=true&characterEncoding=UTF-8&useSSL=false"
+                    user = _dbUser
+                    password = _dbPassword
                 }
 
                 generator {

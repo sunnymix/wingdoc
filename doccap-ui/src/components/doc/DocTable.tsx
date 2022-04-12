@@ -16,10 +16,6 @@ const DocTable: FC<{}> = ({}) => {
   useEffect(() => {
     searchDocs();
   }, []);
-
-  const handleSee = ((doc: any) => {
-    history.push('/doc/' + doc.id);
-  });
   
   return (
   <>
@@ -30,7 +26,6 @@ const DocTable: FC<{}> = ({}) => {
       >
       <thead>
         <tr>
-          <th>ID</th>
           <th>Title</th>
           <th>Author</th>
           <th>Actions</th>
@@ -39,7 +34,6 @@ const DocTable: FC<{}> = ({}) => {
       <tbody>
       {docs.map((doc: any, index: number) => (
         <tr key={doc.id}>
-          <td>{doc.id}</td>
           <td>{doc.title}</td>
           <td>{doc.author}</td>
           <td>

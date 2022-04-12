@@ -4,6 +4,7 @@
 package com.sunnymix.doccap.dao.jooq;
 
 
+import com.sunnymix.doccap.dao.jooq.tables.Block;
 import com.sunnymix.doccap.dao.jooq.tables.Doc;
 
 import java.util.Arrays;
@@ -28,6 +29,11 @@ public class Doccap extends SchemaImpl {
     public static final Doccap DOCCAP = new Doccap();
 
     /**
+     * The table <code>doccap.block</code>.
+     */
+    public final Block BLOCK = Block.BLOCK;
+
+    /**
      * The table <code>doccap.doc</code>.
      */
     public final Doc DOC = Doc.DOC;
@@ -48,6 +54,7 @@ public class Doccap extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Block.BLOCK,
             Doc.DOC
         );
     }

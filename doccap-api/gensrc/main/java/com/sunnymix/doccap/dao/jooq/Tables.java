@@ -4,6 +4,7 @@
 package com.sunnymix.doccap.dao.jooq;
 
 
+import com.sunnymix.doccap.dao.jooq.tables.Block;
 import com.sunnymix.doccap.dao.jooq.tables.Doc;
 
 
@@ -12,6 +13,11 @@ import com.sunnymix.doccap.dao.jooq.tables.Doc;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>doccap.block</code>.
+     */
+    public static final Block BLOCK = Block.BLOCK;
 
     /**
      * The table <code>doccap.doc</code>.

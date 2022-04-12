@@ -1,0 +1,22 @@
+table.simple {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.auto {
+  width: auto;
+}
+
+table.simple th,
+table.simple td {
+  height: 32px;
+  padding: 4px 20px;
+  vertical-align: middle;
+  border: 1px solid #dedede;
+}
+
+table.simple th {
+  text-align: left;
+  font-weight: 500;
+  background-color: #f8f8f8;
+}

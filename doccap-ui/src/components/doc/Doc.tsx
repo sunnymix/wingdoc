@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import DocTable from './DocTable';
 
 const Doc: FC<{}> = ({}) => {
   return (
     <>
-    <div>Docs</div>
+    <DocTable/>
     </>
   )
 };

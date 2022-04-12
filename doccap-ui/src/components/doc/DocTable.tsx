@@ -1,7 +1,8 @@
 import { FC, useEffect, useState } from 'react';
-import { Space } from 'antd';
+import { Space, Button } from 'antd';
 import DocApi from './DocApi';
 import TableStyle from '../common/TableStyle.css';
+import { history } from 'umi';
 
 const DocTable: FC<{}> = ({}) => {
   const [docs, setDocs] = useState([]);
@@ -15,7 +16,10 @@ const DocTable: FC<{}> = ({}) => {
   useEffect(() => {
     searchDocs();
   }, []);
-  
+
+  const handleSee = ((doc: any) => {
+    history.push('/doc/' + doc.id);
+  });
   
   return (
   <>
@@ -29,6 +33,7 @@ const DocTable: FC<{}> = ({}) => {
           <th>ID</th>
           <th>Title</th>
           <th>Author</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +42,9 @@ const DocTable: FC<{}> = ({}) => {
           <td>{doc.id}</td>
           <td>{doc.title}</td>
           <td>{doc.author}</td>
+          <td>
+            <Button type="link" onClick={() => handleSee(doc)}>See</Button>
+          </td>
         </tr>
       ))}
         <tr>

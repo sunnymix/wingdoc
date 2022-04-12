@@ -13,12 +13,15 @@ const { TabPane } = Tabs;
 const { Option } = Select;
 
 export default function Page() {
+
   return (
     <Router basename='/doccap-ui/'>
       <Switch>
         <Route
-          path="/:page?"
+          path="/:module?/:p1?/:p2?"
           render={({ match, history }) => {
+            // console.log(match);
+
             return (
               <div
                 style={{
@@ -26,7 +29,7 @@ export default function Page() {
                 }}>
                 <Tabs
                   size="middle"
-                  defaultActiveKey={match.params.page || "home"}
+                  defaultActiveKey={match.params.module || "home"}
                   onChange={ key => history.push(`/${key}`)}
                 >
                   <TabPane tab="Home" key="home">

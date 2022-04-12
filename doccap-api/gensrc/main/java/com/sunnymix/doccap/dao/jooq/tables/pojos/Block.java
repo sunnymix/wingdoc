@@ -17,25 +17,25 @@ public class Block implements Serializable {
 
     private final String  id;
     private final String  docId;
-    private final String  source;
+    private final String  text;
     private final Integer pos;
 
     public Block(Block value) {
         this.id = value.id;
         this.docId = value.docId;
-        this.source = value.source;
+        this.text = value.text;
         this.pos = value.pos;
     }
 
     public Block(
         String  id,
         String  docId,
-        String  source,
+        String  text,
         Integer pos
     ) {
         this.id = id;
         this.docId = docId;
-        this.source = source;
+        this.text = text;
         this.pos = pos;
     }
 
@@ -54,10 +54,10 @@ public class Block implements Serializable {
     }
 
     /**
-     * Getter for <code>doccap.block.source</code>. 内容
+     * Getter for <code>doccap.block.text</code>. 内容
      */
-    public String getSource() {
-        return this.source;
+    public String getText() {
+        return this.text;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Block implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(docId);
-        sb.append(", ").append(source);
+        sb.append(", ").append(text);
         sb.append(", ").append(pos);
 
         sb.append(")");

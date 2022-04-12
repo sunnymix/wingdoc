@@ -17,7 +17,7 @@ public class BlockInfo {
 
     private Integer pos;
 
-    private String source;
+    private String text;
 
     public static BlockInfo __(Block block) {
         if (block == null) {
@@ -27,7 +27,7 @@ public class BlockInfo {
                 block.getId(),
                 block.getDocId(),
                 block.getPos(),
-                block.getSource()
+                block.getText()
         );
     }
 

@@ -58,9 +58,9 @@ public class Block extends TableImpl<BlockRecord> {
     public final TableField<BlockRecord, String> DOC_ID = createField(DSL.name("doc_id"), SQLDataType.VARCHAR(50).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "文档ID");
 
     /**
-     * The column <code>doccap.block.source</code>. 内容
+     * The column <code>doccap.block.text</code>. 内容
      */
-    public final TableField<BlockRecord, String> SOURCE = createField(DSL.name("source"), SQLDataType.CLOB.nullable(false), this, "内容");
+    public final TableField<BlockRecord, String> TEXT = createField(DSL.name("text"), SQLDataType.CLOB.nullable(false), this, "内容");
 
     /**
      * The column <code>doccap.block.pos</code>. 位置

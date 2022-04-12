@@ -1,11 +1,15 @@
 package com.sunnymix.doccap.repo;
 
 import com.sunnymix.doccap.dao.jooq.tables.pojos.Block;
+import com.sunnymix.doccap.dao.jooq.tables.records.BlockRecord;
+import com.sunnymix.doccap.data.form.BlockUpdateForm;
 import com.sunnymix.doccap.data.info.BlockInfo;
 import com.sunnymix.doccap.data.io.Out;
 import com.sunnymix.doccap.data.io.Page;
 import lombok.Getter;
 import org.jooq.DSLContext;
+import org.jooq.UpdateSetFirstStep;
+import org.jooq.UpdateSetMoreStep;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -44,6 +48,21 @@ public class BlockRepo {
                 .fetchOneInto(Block.class);
         BlockInfo blockInfo = BlockInfo.__(block);
         return Out.ok(Page.one(), blockInfo);
+    }
+
+    public Out<BlockInfo> update(String id, BlockUpdateForm form) {
+        UpdateSetFirstStep<BlockRecord> update = getDsl().update(BLOCK);
+        UpdateSetMoreStep<BlockRecord> set = null;
+
+        if (form.getText() != null) {
+            set = update.set(BLOCK.TEXT, form.getText());
+        }
+
+        if (set != null) {
+            int updateResult = set.where(BLOCK.ID.eq(id))
+                    .execute();
+        }
+        return one(id);
     }
 
 }

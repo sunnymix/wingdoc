@@ -9,7 +9,7 @@ const BlockInfo: FC<{
   block
 }) => {
 
-  const [text, setText] = useState(block.source);
+  const [text, setText] = useState(block.text);
 
   const handleChange = (e: any) => {
     const newText = e.target.value;

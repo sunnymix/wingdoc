@@ -52,17 +52,17 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
     }
 
     /**
-     * Setter for <code>doccap.block.source</code>. 内容
+     * Setter for <code>doccap.block.text</code>. 内容
      */
-    public BlockRecord setSource(String value) {
+    public BlockRecord setText(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>doccap.block.source</code>. 内容
+     * Getter for <code>doccap.block.text</code>. 内容
      */
-    public String getSource() {
+    public String getText() {
         return (String) get(2);
     }
 
@@ -116,7 +116,7 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
 
     @Override
     public Field<String> field3() {
-        return Block.BLOCK.SOURCE;
+        return Block.BLOCK.TEXT;
     }
 
     @Override
@@ -136,7 +136,7 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
 
     @Override
     public String component3() {
-        return getSource();
+        return getText();
     }
 
     @Override
@@ -156,7 +156,7 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
 
     @Override
     public String value3() {
-        return getSource();
+        return getText();
     }
 
     @Override
@@ -178,7 +178,7 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
 
     @Override
     public BlockRecord value3(String value) {
-        setSource(value);
+        setText(value);
         return this;
     }
 
@@ -211,12 +211,12 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
     /**
      * Create a detached, initialised BlockRecord
      */
-    public BlockRecord(String id, String docId, String source, Integer pos) {
+    public BlockRecord(String id, String docId, String text, Integer pos) {
         super(Block.BLOCK);
 
         setId(id);
         setDocId(docId);
-        setSource(source);
+        setText(text);
         setPos(pos);
     }
 
@@ -229,7 +229,7 @@ public class BlockRecord extends UpdatableRecordImpl<BlockRecord> implements Rec
         if (value != null) {
             setId(value.getId());
             setDocId(value.getDocId());
-            setSource(value.getSource());
+            setText(value.getText());
             setPos(value.getPos());
         }
     }

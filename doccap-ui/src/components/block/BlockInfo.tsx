@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Input } from 'antd';
+import BlockApi from './BlockApi';
 
 const { TextArea } = Input;
 
@@ -11,8 +12,14 @@ const BlockInfo: FC<{
 
   const [text, setText] = useState(block.text);
 
+  const saveBlockChange = (text: string) => {
+    BlockApi.updateBlock(block.id, { text }, (newBlock: any) => {
+    });
+  };
+
   const handleChange = (e: any) => {
-    const newText = e.target.value;
+    const newText = e.target.value || "";
+    saveBlockChange(newText);
     setText(newText);
   };
   

@@ -30,9 +30,11 @@ const BlockList: FC<{
   
   return <>
   <Spin spinning={loading} indicator={spinIcon}/>
-  <Space direction="vertical" size="middle" style={{width: "100%"}}>
-    {blocks.map((block: any) => <BlockInfo key={block.id} block={block} />)}
-  </Space>
+  <div style={{ padding: 2 }}>
+    <Space direction="vertical" size="middle" style={{width: "100%"}}>
+      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} />)}
+    </Space>
+  </div>
   </>
 };
 

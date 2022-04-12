@@ -2,6 +2,7 @@ import axios from "axios";
 import Constant from "../common/Constant";
 
 const API_DOC_LIST = Constant.API_HOST + '/doc/list';
+const API_DOC_ONE = Constant.API_HOST + '/doc/'
 
 const getDocList = (query: any, cb: Function) => {
   axios.get(`${API_DOC_LIST}`)
@@ -11,8 +12,17 @@ const getDocList = (query: any, cb: Function) => {
     });
 };
 
+const getDoc = (id: string, cb: Function) => {
+  axios.get(`${API_DOC_ONE}${id}`)
+    .then(res => {
+      const data = res.data?.data || null;
+      cb(data);
+    });
+};
+
 const DocApi = {
   getDocList,
+  getDoc,
 }
 
 export default DocApi;

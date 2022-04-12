@@ -20,23 +20,21 @@ export default function Page() {
         <Route
           path="/:module?/:p1?/:p2?"
           render={({ match, history }) => {
-            // console.log(match);
-
             return (
               <div
                 style={{
-                  padding: 5
+                  padding: 10
                 }}>
                 <Tabs
                   size="middle"
                   defaultActiveKey={match.params.module || "home"}
-                  onChange={ key => history.push(`/${key}`)}
+                  onTabClick={ key => history.push(`/${key}`)}
                 >
                   <TabPane tab="Home" key="home">
                     Home
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
-                    <Doc/>
+                    <Doc id={match.params.p1}/>
                   </TabPane>
                 </Tabs>
               </div>

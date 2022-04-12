@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Space, Button } from 'antd';
 import DocApi from './DocApi';
 import TableStyle from '../common/TableStyle.css';
-import { history } from 'umi';
+import { history, Link } from 'umi';
 
 const DocTable: FC<{}> = ({}) => {
   const [docs, setDocs] = useState([]);
@@ -43,7 +43,7 @@ const DocTable: FC<{}> = ({}) => {
           <td>{doc.title}</td>
           <td>{doc.author}</td>
           <td>
-            <Button type="link" onClick={() => handleSee(doc)}>See</Button>
+            <Link to={`/doc/${doc.id}`}>See</Link>
           </td>
         </tr>
       ))}

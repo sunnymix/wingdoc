@@ -16,6 +16,12 @@ const DocTable: FC<{}> = ({}) => {
   useEffect(() => {
     searchDocs();
   }, []);
+
+  const handleAdd = () => {
+    DocApi.addDoc({ title: "Title", author: "Author" }, (newDoc: any) => {
+      searchDocs();
+    });
+  };
   
   return (
   <>
@@ -44,7 +50,7 @@ const DocTable: FC<{}> = ({}) => {
         <tr>
           <td colSpan={4} style={{ border: 0 }}>
             Total: {docs.length}
-            <Button type="link">Add</Button>
+            <Button type="link" onClick={handleAdd}>Add</Button>
           </td>
         </tr>
       </tbody>

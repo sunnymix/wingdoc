@@ -2,6 +2,7 @@ package com.sunnymix.doccap.repo;
 
 import com.sunnymix.doccap.dao.jooq.tables.pojos.Block;
 import com.sunnymix.doccap.dao.jooq.tables.records.BlockRecord;
+import com.sunnymix.doccap.data.form.BlockCreateForm;
 import com.sunnymix.doccap.data.form.BlockUpdateForm;
 import com.sunnymix.doccap.data.info.BlockInfo;
 import com.sunnymix.doccap.data.io.Out;
@@ -63,6 +64,12 @@ public class BlockRepo {
                     .execute();
         }
         return one(id);
+    }
+
+    public Out<BlockInfo> create(String docId, BlockCreateForm form) {
+        BlockRecord record = form.toRecord(docId);
+        int insertResult = dsl.executeInsert(record);
+        return one(record.getId());
     }
 
 }

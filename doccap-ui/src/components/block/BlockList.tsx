@@ -7,9 +7,11 @@ import BlockInfo from './BlockInfo';
 const spinIcon = <LoadingOutlined spin />;
 
 const BlockList: FC<{
-  docId: string
+  docId: string,
+  showBlock?: boolean,
 }> = ({
-  docId
+  docId,
+  showBlock
 }) => {
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,10 +44,10 @@ const BlockList: FC<{
   return <>
   {/* <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/> */}
   <div style={{ padding: 2 }}>
-    <Space direction="vertical" size="middle" style={{width: "100%"}}>
-      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} />)}
+    <Space direction="vertical" size="small" style={{width: "100%"}}>
+      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={showBlock} />)}
+      <Button type="link" onClick={handleAdd}>Add</Button>
     </Space>
-    <Button type="link" onClick={handleAdd}>Add</Button>
   </div>
   </>
 };

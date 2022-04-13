@@ -27,11 +27,11 @@ export default function Page() {
                 }}>
                 <Tabs
                   size="middle"
-                  defaultActiveKey={match.params.module || "index"}
+                  defaultActiveKey={match.params.module || "wing"}
                   onTabClick={ key => history.push(`/${key}`)}
                 >
-                  <TabPane tab="Index" key="index">
-                    Index
+                  <TabPane tab="Wing" key="wing">
+                    Wing
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
                     <Doc id={match.params.p1}/>

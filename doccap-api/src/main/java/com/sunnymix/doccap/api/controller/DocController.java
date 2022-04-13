@@ -1,6 +1,7 @@
 package com.sunnymix.doccap.api.controller;
 
 import com.sunnymix.doccap.data.form.DocCreateForm;
+import com.sunnymix.doccap.data.form.DocUpdateForm;
 import com.sunnymix.doccap.data.info.DocInfo;
 import com.sunnymix.doccap.data.io.Out;
 import com.sunnymix.doccap.repo.DocRepo;
@@ -32,6 +33,12 @@ public class DocController {
     @GetMapping("/doc/{id}")
     public Out<DocInfo> one(@PathVariable("id") String id) {
         return docRepo.one(id);
+    }
+
+    @PostMapping("/doc/{id}")
+    public Out<Boolean> update(@PathVariable("id") String id,
+                               @RequestBody DocUpdateForm form) {
+        return docRepo.update(id, form);
     }
 
 }

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import DocApi from './DocApi';
-import { Space, Spin } from 'antd';
+import { Space, Spin, Input } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BlockList from '../block/BlockList';
 
@@ -16,11 +16,17 @@ const DocInfo: FC<{
 
   const [doc, setDoc] = useState<any>(null);
 
+  const [title, setTitle] = useState<string>("");
+
+  const [author, setAuthor] = useState<string>("");
+
   const searchDoc = () => {
     setLoading(true);
     DocApi.getDoc(id, (doc: any) => {
       setLoading(false);
       setDoc(doc);
+      setTitle(doc.title);
+      setAuthor(doc.author);
     });
   };
 
@@ -28,20 +34,35 @@ const DocInfo: FC<{
     searchDoc();
   }, []);
 
+  const changeTitle = (e: any) => {
+    const newTitle = e.target.value || "";
+    setTitle(newTitle);
+    DocApi.updateDoc(id, { title: newTitle }, (newDoc: any) => {
+      console.log(newDoc);
+    });
+  };
+
+  const changeAuthor = (e: any) => {
+    const newAuthor = e.target.value || "";
+    setAuthor(newAuthor);
+    DocApi.updateDoc(id, { author: newAuthor }, (newDoc: any) => {
+    });
+  };
+
   if (!doc) {
     return <>
     <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
-    Doc not found.
     </>
   }
 
   return <>
-  <h1>{doc.title}</h1>
-  <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}></Spin>
-  <Space direction="vertical" size="middle" style={{width: "100%"}}>
-    <div>{doc.author}</div>
-    <BlockList docId={doc.id}/>
-  </Space>
+  <div style={{ padding: 2 }}>
+    <Input value={title} onChange={changeTitle} bordered={false} style={{ fontSize: 28, fontWeight: 500 }}/>
+    <Space direction="vertical" size="middle" style={{width: "100%"}}>
+      <Input value={author} onChange={changeAuthor} bordered={false}/>
+      <BlockList docId={doc.id}/>
+    </Space>
+  </div>
   </>;
 };
 

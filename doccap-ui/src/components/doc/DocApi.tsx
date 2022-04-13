@@ -28,10 +28,19 @@ const getDoc = (id: string, cb: Function) => {
     });
 };
 
+const updateDoc = (id: string, form: any, cb: Function) => {
+  axios.post(`${API_DOC_ONE}${id}`, form)
+    .then(res => {
+      const data = res.data?.data || false;
+      cb(data);
+    });
+};
+
 const DocApi = {
   getDocList,
   addDoc,
   getDoc,
+  updateDoc,
 }
 
 export default DocApi;

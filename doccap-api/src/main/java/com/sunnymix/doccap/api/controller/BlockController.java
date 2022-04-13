@@ -31,7 +31,7 @@ public class BlockController {
     }
 
     @PostMapping("/block/{id}")
-    public Out<BlockInfo> update(@PathVariable("id") String id,
+    public Out<Boolean> update(@PathVariable("id") String id,
                                  @RequestBody BlockUpdateForm form) {
         return blockRepo.update(id, form);
     }

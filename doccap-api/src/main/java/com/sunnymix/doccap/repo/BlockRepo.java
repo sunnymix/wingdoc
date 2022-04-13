@@ -51,7 +51,7 @@ public class BlockRepo {
         return Out.ok(Page.one(), blockInfo);
     }
 
-    public Out<BlockInfo> update(String id, BlockUpdateForm form) {
+    public Out<Boolean> update(String id, BlockUpdateForm form) {
         UpdateSetFirstStep<BlockRecord> update = getDsl().update(BLOCK);
         UpdateSetMoreStep<BlockRecord> set = null;
 
@@ -63,7 +63,7 @@ public class BlockRepo {
             int updateResult = set.where(BLOCK.ID.eq(id))
                     .execute();
         }
-        return one(id);
+        return Out.ok(true);
     }
 
     public Out<BlockInfo> create(String docId, BlockCreateForm form) {

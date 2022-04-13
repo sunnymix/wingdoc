@@ -13,6 +13,14 @@ const getBlockListOfDoc = (docId: string, cb: Function) => {
     });
 };
 
+const addBlockToDoc = (docId: String, form: any, cb: Function) => {
+  axios.post(`${API_BLOCK_LIST}${docId}`, form)
+    .then(res => {
+      const data = res.data?.data;
+      cb(data);
+    });
+};
+
 const updateBlock = (id: String, form: any, cb: Function) => {
   axios.post(`${API_BLOCK}${id}`, form)
     .then(res => {
@@ -23,6 +31,7 @@ const updateBlock = (id: String, form: any, cb: Function) => {
 
 const BlockApi = {
   getBlockListOfDoc,
+  addBlockToDoc,
   updateBlock,
 };
 

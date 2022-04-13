@@ -27,6 +27,17 @@ const BlockList: FC<{
   useEffect(() => {
     searchBlocks();
   }, []);
+
+  const handleAdd = () => {
+    BlockApi.addBlockToDoc(docId, { text: "..." }, (newBlock: any) => {
+      const newBlocks: any[] = [];
+      blocks.forEach((block: any) => {
+        newBlocks.push(block);
+      });
+      newBlocks.push(newBlock);
+      setBlocks(newBlocks);
+    });
+  };
   
   return <>
   <Spin spinning={loading} indicator={spinIcon}/>
@@ -34,7 +45,7 @@ const BlockList: FC<{
     <Space direction="vertical" size="middle" style={{width: "100%"}}>
       {blocks.map((block: any) => <BlockInfo key={block.id} block={block} />)}
     </Space>
-    <Button type="link">Add</Button>
+    <Button type="link" onClick={handleAdd}>Add</Button>
   </div>
   </>
 };

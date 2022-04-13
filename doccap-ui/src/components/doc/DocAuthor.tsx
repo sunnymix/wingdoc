@@ -27,9 +27,7 @@ const DocAuthor: FC<{
 
   const menu = (
     <Menu>
-      <Menu.Item>item1</Menu.Item>
-      <Menu.Item>item2</Menu.Item>
-      <Menu.Item>item3</Menu.Item>
+      <Menu.Item key={`${id}-docs`}>docs</Menu.Item>
     </Menu>
   );
   

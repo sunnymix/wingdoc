@@ -31,9 +31,8 @@ const BlockInfo: FC<{
 
   const menu = (
     <Menu>
-      <Menu.Item>item1</Menu.Item>
-      <Menu.Item>item2</Menu.Item>
-      <Menu.Item>item3</Menu.Item>
+      <Menu.Item key={`${block.id}-moveup`}>up</Menu.Item>
+      <Menu.Item key={`${block.id}-movedown`}>down</Menu.Item>
     </Menu>
   );
   

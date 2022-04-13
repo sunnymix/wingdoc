@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import DocApi from './DocApi';
 import { Space, Spin, Input, Checkbox, Switch, Menu, Dropdown, Button, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -33,6 +33,14 @@ const DocInfo: FC<{
     searchDoc();
   }, []);
 
+  const blockListRef: any = useRef();
+
+  const handleAdd = () => {
+    if (blockListRef && blockListRef.current) {
+      blockListRef.current.add();
+    }
+  };
+
   if (!doc) {
     return <>
     <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
@@ -46,10 +54,12 @@ const DocInfo: FC<{
         <DocTitle id={doc.id} value={doc.title} showBlock={showBlock}/>
         <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock}/>
       </Space>
-      <div>
-        <BlockList docId={doc.id} showBlock={showBlock}/>
+      <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
+      <Space direction="horizontal" size="small">
+        <Button type="link" onClick={handleAdd}>Add Block</Button>
+        <Divider type="vertical" />
         <Checkbox checked={showBlock} onChange={(e) => { setShowBlock(e.target.checked) }}>Show Block</Checkbox>
-      </div>
+      </Space>
     </Space>
   </div>
   </>;

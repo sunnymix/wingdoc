@@ -1,18 +1,14 @@
-import { FC, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from './BlockApi';
-import { Space, Spin, Button, Divider } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Space, Button, Divider } from 'antd';
 import BlockInfo from './BlockInfo';
 
-const spinIcon = <LoadingOutlined spin />;
-
-const BlockList: FC<{
+interface BlockListProps {
   docId: string,
   showBlock?: boolean,
-}> = ({
-  docId,
-  showBlock
-}) => {
+}
+
+const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -20,7 +16,7 @@ const BlockList: FC<{
 
   const searchBlocks = () => {
     setLoading(true);
-    BlockApi.getBlockListOfDoc(docId, (blocks: any) => {
+    BlockApi.getBlockListOfDoc(props.docId, (blocks: any) => {
       setLoading(false);
       setBlocks(blocks);
     });
@@ -31,7 +27,7 @@ const BlockList: FC<{
   }, []);
 
   const handleAdd = () => {
-    BlockApi.addBlockToDoc(docId, { text: "" }, (newBlock: any) => {
+    BlockApi.addBlockToDoc(props.docId, { text: "" }, (newBlock: any) => {
       const newBlocks: any[] = [];
       blocks.forEach((block: any) => {
         newBlocks.push(block);
@@ -40,17 +36,18 @@ const BlockList: FC<{
       setBlocks(newBlocks);
     });
   };
+
+  useImperativeHandle(ref, () => ({
+    add: handleAdd,
+  }));
   
   return <>
-  {/* <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/> */}
   <div style={{ padding: 2 }}>
     <Space direction="vertical" size="small" style={{width: "100%"}}>
-      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={showBlock} />)}
-      <Divider/>
-      <Button type="link" onClick={handleAdd}>Add</Button>
+      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={props.showBlock} />)}
     </Space>
   </div>
   </>
-};
+});
 
 export default BlockList;

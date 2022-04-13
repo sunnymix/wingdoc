@@ -37,12 +37,15 @@ const DocTable: FC<{}> = ({}) => {
           <td>{doc.title}</td>
           <td>{doc.author}</td>
           <td>
-            <Link to={`/doc/${doc.id}`}>See</Link>
+            <Link to={`/doc/${doc.id}`}>Edit</Link>
           </td>
         </tr>
       ))}
         <tr>
-          <td colSpan={4} style={{ border: 0 }}>Total: {docs.length}</td>
+          <td colSpan={4} style={{ border: 0 }}>
+            Total: {docs.length}
+            <Button type="link">Add</Button>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -4,7 +4,7 @@ import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BlockList from '../block/BlockList';
 
-const spinIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const spinIcon = <LoadingOutlined spin />;
 
 const DocInfo: FC<{
   id: string
@@ -30,14 +30,14 @@ const DocInfo: FC<{
 
   if (!doc) {
     return <>
-    <Spin spinning={loading} indicator={spinIcon}/>
+    <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
     Doc not found.
     </>
   }
 
   return <>
   <h1>{doc.title}</h1>
-  <Spin spinning={loading} indicator={spinIcon}/>
+  <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}></Spin>
   <Space direction="vertical" size="middle" style={{width: "100%"}}>
     <div>{doc.author}</div>
     <BlockList docId={doc.id}/>

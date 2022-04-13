@@ -4,7 +4,7 @@ import { Space, Spin, Button } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BlockInfo from './BlockInfo';
 
-const spinIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+const spinIcon = <LoadingOutlined spin />;
 
 const BlockList: FC<{
   docId: string
@@ -29,7 +29,7 @@ const BlockList: FC<{
   }, []);
 
   const handleAdd = () => {
-    BlockApi.addBlockToDoc(docId, { text: "..." }, (newBlock: any) => {
+    BlockApi.addBlockToDoc(docId, { text: "" }, (newBlock: any) => {
       const newBlocks: any[] = [];
       blocks.forEach((block: any) => {
         newBlocks.push(block);
@@ -40,7 +40,7 @@ const BlockList: FC<{
   };
   
   return <>
-  <Spin spinning={loading} indicator={spinIcon}/>
+  <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
   <div style={{ padding: 2 }}>
     <Space direction="vertical" size="middle" style={{width: "100%"}}>
       {blocks.map((block: any) => <BlockInfo key={block.id} block={block} />)}

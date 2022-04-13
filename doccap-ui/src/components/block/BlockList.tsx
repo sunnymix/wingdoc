@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import BlockApi from './BlockApi';
-import { Space, Spin, Button } from 'antd';
+import { Space, Spin, Button, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BlockInfo from './BlockInfo';
 
@@ -46,6 +46,7 @@ const BlockList: FC<{
   <div style={{ padding: 2 }}>
     <Space direction="vertical" size="small" style={{width: "100%"}}>
       {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={showBlock} />)}
+      <Divider/>
       <Button type="link" onClick={handleAdd}>Add</Button>
     </Space>
   </div>

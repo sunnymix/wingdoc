@@ -1,32 +1,27 @@
 import { FC, useState } from 'react';
-import { Menu, Dropdown, Button, Space, Input } from 'antd';
-import BlockApi from './BlockApi';
+import { Input, Menu, Dropdown, Button } from 'antd';
+import DocApi from './DocApi';
 import { MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
 
-
-const { TextArea } = Input;
-
-const BlockInfo: FC<{
-  block: any,
-  showBlock?: boolean
+const DocTitle: FC<{
+  id: string,
+  value: string,
+  showBlock: boolean,
 }> = ({
-  block,
-  showBlock
+  id,
+  value,
+  showBlock,
 }) => {
 
-  const [text, setText] = useState(block.text);
+  const [title, setTitle] = useState<string>(value);
 
   const [hover, setHover] = useState<boolean>(false);
 
-  const saveBlockChange = (text: string) => {
-    BlockApi.updateBlock(block.id, { text }, (newBlock: any) => {
+  const changeTitle = (e: any) => {
+    const newTitle = e.target.value || "";
+    setTitle(newTitle);
+    DocApi.updateDoc(id, { title: newTitle }, (newDoc: any) => {
     });
-  };
-
-  const handleChange = (e: any) => {
-    const newText = e.target.value || "";
-    saveBlockChange(newText);
-    setText(newText);
   };
 
   const menu = (
@@ -43,6 +38,7 @@ const BlockInfo: FC<{
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
+      alignItems: "center",
     }}>
     <div
       style={{
@@ -52,17 +48,15 @@ const BlockInfo: FC<{
         <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
       </Dropdown>
     </div>
-    <TextArea 
-      placeholder="Input" 
-      autoSize 
-      value={text}
-      size="middle"
+    <Input
+      value={title}
+      onChange={changeTitle}
+      onBlur={changeTitle}
       bordered={showBlock}
-      onChange={handleChange}
-      onBlur={handleChange}
-      />
+      size="middle"
+      style={{ fontSize: 28, fontWeight: 500 }}/>
   </div>
   </>
 };
 
-export default BlockInfo;
+export default DocTitle;

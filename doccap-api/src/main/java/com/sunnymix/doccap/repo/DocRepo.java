@@ -1,6 +1,8 @@
 package com.sunnymix.doccap.repo;
 
 import com.sunnymix.doccap.dao.jooq.tables.pojos.Doc;
+import com.sunnymix.doccap.dao.jooq.tables.records.DocRecord;
+import com.sunnymix.doccap.data.form.DocCreateForm;
 import com.sunnymix.doccap.data.info.DocInfo;
 import com.sunnymix.doccap.data.io.Out;
 import com.sunnymix.doccap.data.io.Page;
@@ -34,6 +36,12 @@ public class DocRepo {
                 .map(DocInfo::__)
                 .collect(Collectors.toList());
         return Out.ok(Page.list(docInfoList.size()), docInfoList);
+    }
+
+    public Out<DocInfo> create(DocCreateForm form) {
+        DocRecord record = form.toRecord();
+        int insertResult = dsl.executeInsert(record);
+        return one(record.getId());
     }
 
     public Out<DocInfo> one(String id) {

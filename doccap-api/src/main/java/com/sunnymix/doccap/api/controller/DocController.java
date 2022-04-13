@@ -1,12 +1,11 @@
 package com.sunnymix.doccap.api.controller;
 
+import com.sunnymix.doccap.data.form.DocCreateForm;
 import com.sunnymix.doccap.data.info.DocInfo;
 import com.sunnymix.doccap.data.io.Out;
 import com.sunnymix.doccap.repo.DocRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +22,11 @@ public class DocController {
     @GetMapping("/doc/list")
     public Out<List<DocInfo>> list() {
         return docRepo.list();
+    }
+
+    @PostMapping("/doc/list")
+    public Out<DocInfo> add(@RequestBody DocCreateForm form) {
+        return docRepo.create(form);
     }
 
     @GetMapping("/doc/{id}")

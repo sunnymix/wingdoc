@@ -1,16 +1,18 @@
 import { FC, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
-import { MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
+import { DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
 
 const DocTitle: FC<{
   id: string,
   value: string,
   showBlock: boolean,
+  onEnter?: Function,
 }> = ({
   id,
   value,
   showBlock,
+  onEnter,
 }) => {
 
   const [title, setTitle] = useState<string>(value);
@@ -29,6 +31,12 @@ const DocTitle: FC<{
       <Menu.Item key={`${id}-tags`}>tags</Menu.Item>
     </Menu>
   );
+
+  const handleEnter = () => {
+    if (onEnter) {
+      onEnter();
+    }
+  };
   
   return <>
   <div
@@ -51,6 +59,7 @@ const DocTitle: FC<{
       onChange={changeTitle}
       onBlur={changeTitle}
       bordered={showBlock}
+      onPressEnter={handleEnter}
       size="middle"
       style={{ fontSize: 28, fontWeight: 500 }}/>
   </div>

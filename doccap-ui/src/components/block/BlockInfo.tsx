@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Menu, Dropdown, Button, Space, Input } from 'antd';
 import BlockApi from './BlockApi';
-import { MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined, MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
 
 
 const { TextArea } = Input;
@@ -31,8 +31,8 @@ const BlockInfo: FC<{
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${block.id}-moveup`}>up</Menu.Item>
-      <Menu.Item key={`${block.id}-movedown`}>down</Menu.Item>
+      <Menu.Item key={`${block.id}-moveup`}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${block.id}-movedown`}><ArrowDownOutlined/></Menu.Item>
     </Menu>
   );
   
@@ -48,7 +48,7 @@ const BlockInfo: FC<{
         visibility: hover ? "visible" : "hidden",
       }}>
       <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
+        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
       </Dropdown>
     </div>
     <TextArea 

@@ -1,25 +1,24 @@
-import { FC, useState } from 'react';
+import { FC, forwardRef, useState } from 'react';
 import { Menu, Dropdown, Button, Space, Input } from 'antd';
 import BlockApi from './BlockApi';
-import { ArrowUpOutlined, ArrowDownOutlined, MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
-
+import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
-const BlockInfo: FC<{
+interface BlockInfoProps {
   block: any,
-  showBlock?: boolean
-}> = ({
-  block,
-  showBlock
-}) => {
+  showBlock?: boolean,
+  onEnter?: Function,
+}
 
-  const [text, setText] = useState(block.text);
+const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
+
+  const [text, setText] = useState(props.block.text);
 
   const [hover, setHover] = useState<boolean>(false);
 
   const saveBlockChange = (text: string) => {
-    BlockApi.updateBlock(block.id, { text }, (newBlock: any) => {
+    BlockApi.updateBlock(props.block.id, { text }, (newBlock: any) => {
     });
   };
 
@@ -31,10 +30,16 @@ const BlockInfo: FC<{
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${block.id}-moveup`}><ArrowUpOutlined/></Menu.Item>
-      <Menu.Item key={`${block.id}-movedown`}><ArrowDownOutlined/></Menu.Item>
+      <Menu.Item key={`${props.block.id}-moveup`}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${props.block.id}-movedown`}><ArrowDownOutlined/></Menu.Item>
     </Menu>
   );
+
+  const handleEnter = (e: any) => {
+    if (e.metaKey) {
+      props.onEnter?.call(null, props.block);
+    }
+  };
   
   return <>
   <div
@@ -56,12 +61,13 @@ const BlockInfo: FC<{
       autoSize 
       value={text}
       size="middle"
-      bordered={showBlock}
+      bordered={props.showBlock}
       onChange={handleChange}
       onBlur={handleChange}
+      onPressEnter={handleEnter}
       />
   </div>
   </>
-};
+});
 
 export default BlockInfo;

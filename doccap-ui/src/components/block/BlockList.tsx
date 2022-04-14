@@ -42,11 +42,15 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
       setBlocks(newBlocks);
     });
   };
+
+  const handleBlockEnter = (block: any) => {
+    handleAdd(block.pos + 1);
+  };
   
   return <>
   <div style={{ padding: 2 }}>
     <Space direction="vertical" size="small" style={{width: "100%"}}>
-      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={props.showBlock} />)}
+      {blocks.map((block: any) => <BlockInfo key={block.id} block={block} showBlock={props.showBlock} onEnter={handleBlockEnter} />)}
     </Space>
   </div>
   </>

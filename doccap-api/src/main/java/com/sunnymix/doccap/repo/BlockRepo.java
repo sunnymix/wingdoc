@@ -68,9 +68,21 @@ public class BlockRepo {
 
     public Out<BlockInfo> create(String docId, BlockCreateForm form) {
         BlockRecord record = form.toRecord(docId);
-        record.setPos(_docBlocksCount(docId));
+        if (record.getPos() == null) {
+            record.setPos(_docBlocksCount(docId));
+        } else {
+            moveDownFromPos(docId, record.getPos());
+        }
         int insertResult = dsl.executeInsert(record);
         return one(record.getId());
+    }
+
+    private void moveDownFromPos(String docId, Integer pos) {
+        int updateResult = dsl
+                .update(BLOCK)
+                .set(BLOCK.POS, BLOCK.POS.add(1))
+                .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.ge(pos)))
+                .execute();
     }
 
     private int _docBlocksCount(String docId) {

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 /**
  * @author sunnymix
@@ -20,12 +21,15 @@ public class BlockCreateForm {
 
     private String text;
 
+    @Nullable
+    private Integer pos;
+
     public BlockRecord toRecord() {
         return new BlockRecord(
                 Id.newId(),
-                this.docId,
-                this.text,
-                0
+                docId,
+                text,
+                pos
         );
     }
 
@@ -33,8 +37,8 @@ public class BlockCreateForm {
         return new BlockRecord(
                 Id.newId(),
                 docId,
-                this.text,
-                0
+                text,
+                pos
         );
     }
 

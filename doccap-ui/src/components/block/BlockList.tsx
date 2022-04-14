@@ -10,6 +10,10 @@ interface BlockListProps {
 
 const BlockList = forwardRef((props: BlockListProps, ref) => {
 
+  useImperativeHandle(ref, () => ({
+    add: handleAdd,
+  }));
+
   const [loading, setLoading] = useState<boolean>(true);
 
   const [blocks, setBlocks] = useState<any[]>([]);
@@ -26,8 +30,10 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     searchBlocks();
   }, []);
 
-  const handleAdd = () => {
-    BlockApi.addBlockToDoc(props.docId, { text: "" }, (newBlock: any) => {
+  const handleAdd = (pos?: number) => {
+    BlockApi.addBlockToDoc(props.docId, { text: "", pos: pos || 0 }, (newBlock: any) => {
+      searchBlocks();
+      return;
       const newBlocks: any[] = [];
       blocks.forEach((block: any) => {
         newBlocks.push(block);
@@ -36,10 +42,6 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
       setBlocks(newBlocks);
     });
   };
-
-  useImperativeHandle(ref, () => ({
-    add: handleAdd,
-  }));
   
   return <>
   <div style={{ padding: 2 }}>

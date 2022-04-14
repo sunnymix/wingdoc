@@ -56,7 +56,7 @@ const DocInfo: FC<{
       </Space>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
       <Space direction="horizontal" size="small">
-        <ExperimentOutlined />
+        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><ExperimentOutlined/></Button>
         <Button type="link" onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Hide Block</> : <>Show Block</>}</Button>
       </Space>
     </Space>

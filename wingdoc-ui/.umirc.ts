@@ -1,6 +1,6 @@
 import { defineConfig } from 'umi';
 
-const basePath = '/doccap-ui/';
+const basePath = '/wingdoc-ui/';
 
 export default defineConfig({
   nodeModulesTransform: {

@@ -15,7 +15,7 @@ const { Option } = Select;
 export default function Page() {
 
   return (
-    <Router basename='/doccap-ui/'>
+    <Router basename='/wingdoc-ui/'>
       <Switch>
         <Route
           path="/:module?/:p1?/:p2?"

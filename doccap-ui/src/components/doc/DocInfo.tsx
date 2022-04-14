@@ -3,7 +3,7 @@ import DocApi from './DocApi';
 import { Space, Spin, Input, Checkbox, Switch, Menu, Dropdown, Button, Divider } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BlockList from '../block/BlockList';
-import { ExperimentOutlined, InfoCircleOutlined, BulbOutlined, EllipsisOutlined } from '@ant-design/icons';
+import { ExperimentOutlined, MinusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
 
@@ -55,9 +55,9 @@ const DocInfo: FC<{
         <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock}/>
       </Space>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
-      <Space direction="horizontal" size="large">
+      <Space direction="horizontal" size="small">
         <ExperimentOutlined />
-        <Checkbox checked={showBlock} onChange={(e) => { setShowBlock(e.target.checked) }}>Show Block</Checkbox>
+        <Button type="link" onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Hide Block</> : <>Show Block</>}</Button>
       </Space>
     </Space>
   </div>

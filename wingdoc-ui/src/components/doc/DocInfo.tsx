@@ -62,7 +62,7 @@ const DocInfo: FC<{
     <Space direction="vertical" size="large" style={{width: "100%"}}>
       <Space direction="vertical" size="small" style={{width: "100%"}}>
         <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd}/>
-        <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock}/>
+        <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock} onEnter={handleAdd}/>
       </Space>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
       <div style={{paddingLeft:24}}>

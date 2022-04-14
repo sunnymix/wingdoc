@@ -49,6 +49,18 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   const handleBlockDelete = (block: any) => {
     deleteBlock(block.id);
   };
+
+  const handleBlockMoveUp = (block: any) => {
+    BlockApi.moveUp(block.id, (ok: any) => {
+      searchBlocks();
+    });
+  };
+
+  const handleBlockMoveDown = (block: any) => {
+    BlockApi.moveDown(block.id, (ok: any) => {
+      searchBlocks();
+    });
+  };
   
   return <>
   <div style={{ padding: 2 }}>
@@ -59,7 +71,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           block={block}
           showBlock={props.showBlock}
           onEnter={handleBlockEnter}
-          onDelete={handleBlockDelete}/>)
+          onDelete={handleBlockDelete}
+          onMoveUp={handleBlockMoveUp}
+          onMoveDown={handleBlockMoveDown}/>)
       }
     </Space>
   </div>

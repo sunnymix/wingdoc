@@ -1,10 +1,10 @@
 package com.sunnymix.wingdoc.api.controller;
 
+import com.sunnymix.wingdoc.data.form.BlockCreateForm;
 import com.sunnymix.wingdoc.data.form.BlockUpdateForm;
 import com.sunnymix.wingdoc.data.info.BlockInfo;
-import com.sunnymix.wingdoc.repo.BlockRepo;
-import com.sunnymix.wingdoc.data.form.BlockCreateForm;
 import com.sunnymix.wingdoc.data.io.Out;
+import com.sunnymix.wingdoc.repo.BlockRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +39,16 @@ public class BlockController {
     @DeleteMapping("/block/{id}")
     public Out<Boolean> delete(@PathVariable("id") String id) {
         return blockRepo.delete(id);
+    }
+
+    @PostMapping("/block/{id}/move-up")
+    public Out<Boolean> moveUp(@PathVariable("id") String id) {
+        return blockRepo.moveUp(id);
+    }
+
+    @PostMapping("/block/{id}/move-down")
+    public Out<Boolean> moveDown(@PathVariable("id") String id) {
+        return blockRepo.moveDown(id);
     }
 
 }

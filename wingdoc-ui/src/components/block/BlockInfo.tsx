@@ -13,6 +13,8 @@ interface BlockInfoProps {
   showBlock?: boolean,
   onEnter?: Function,
   onDelete?: Function,
+  onMoveUp?: Function,
+  onMoveDown?: Function,
 }
 
 const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
@@ -34,10 +36,18 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
     setText(newText);
   };
 
+  const handleMoveUp = () => {
+    props.onMoveUp?.call(null, props.block);
+  };
+
+  const handleMoveDown = () => {
+    props.onMoveDown?.call(null, props.block);
+  };
+
   const menu = (
     <Menu>
-      <Menu.Item key={`${props.block.id}-moveup`}><ArrowUpOutlined/></Menu.Item>
-      <Menu.Item key={`${props.block.id}-movedown`}><ArrowDownOutlined/></Menu.Item>
+      <Menu.Item key={`${props.block.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${props.block.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
   );
 

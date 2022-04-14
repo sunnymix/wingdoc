@@ -37,11 +37,29 @@ const deleteBlock = (id: String, cb: Function) => {
     });
 };
 
+const moveUp = (id: String, cb: Function) => {
+  axios.post(`${API_BLOCK}${id}/move-up`)
+    .then(res => {
+      const data = res.data?.data || false;
+      cb(data);
+    });
+};
+
+const moveDown = (id: String, cb: Function) => {
+  axios.post(`${API_BLOCK}${id}/move-down`)
+    .then(res => {
+      const data = res.data?.data || false;
+      cb(data);
+    });
+};
+
 const BlockApi = {
   getBlockListOfDoc,
   addBlockToDoc,
   updateBlock,
   deleteBlock,
+  moveUp,
+  moveDown,
 };
 
 export default BlockApi;

@@ -2,8 +2,8 @@ package com.sunnymix.wingdoc.repo;
 
 import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Block;
 import com.sunnymix.wingdoc.dao.jooq.tables.records.BlockRecord;
-import com.sunnymix.wingdoc.data.form.BlockUpdateForm;
 import com.sunnymix.wingdoc.data.form.BlockCreateForm;
+import com.sunnymix.wingdoc.data.form.BlockUpdateForm;
 import com.sunnymix.wingdoc.data.info.BlockInfo;
 import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.io.Page;
@@ -42,13 +42,13 @@ public class BlockRepo {
         return Out.ok(Page.list(blockInfoList.size()), blockInfoList);
     }
 
-    public Out<BlockInfo> one(String id) {
-        Block block = _one(id);
+    public Out<BlockInfo> findOne(String id) {
+        Block block = _findOne(id);
         BlockInfo blockInfo = BlockInfo.__(block);
         return Out.ok(Page.one(), blockInfo);
     }
 
-    private Block _one(String id) {
+    private Block _findOne(String id) {
         return getDsl()
                 .selectFrom(BLOCK)
                 .where(BLOCK.ID.eq(id))
@@ -71,7 +71,7 @@ public class BlockRepo {
     }
 
     public Out<Boolean> delete(String id) {
-        Block block = _one(id);
+        Block block = _findOne(id);
         if (block != null) {
             int deleteResult = dsl
                     .deleteFrom(BLOCK)
@@ -90,7 +90,7 @@ public class BlockRepo {
             moveDownFromPos(docId, record.getPos());
         }
         int insertResult = dsl.executeInsert(record);
-        return one(record.getId());
+        return findOne(record.getId());
     }
 
     private void moveUpFromPos(String docId, Integer pos) {
@@ -106,6 +106,58 @@ public class BlockRepo {
                 .update(BLOCK)
                 .set(BLOCK.POS, BLOCK.POS.add(1))
                 .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.ge(pos)))
+                .execute();
+    }
+
+    public Out<Boolean> moveUp(String id) {
+        Block block = _findOne(id);
+        if (block != null) {
+            Block upOne = _findUpOne(block.getDocId(), block.getPos());
+            if (upOne != null) {
+                // 交换上下两个段落的位置：
+                _updateOnePos(block.getId(), upOne.getPos());
+                _updateOnePos(upOne.getId(), block.getPos());
+                return Out.ok(true);
+            }
+        }
+        return Out.ok(false);
+    }
+
+    private Block _findUpOne(String docId, Integer pos) {
+        return dsl
+                .selectFrom(BLOCK)
+                .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.lessThan(pos)))
+                .limit(1)
+                .fetchOneInto(Block.class);
+    }
+
+    public Out<Boolean> moveDown(String id) {
+        Block block = _findOne(id);
+        if (block != null) {
+            Block downOne = _findDownOne(block.getDocId(), block.getPos());
+            if (downOne != null) {
+                // 交换上下两个段落的位置：
+                _updateOnePos(downOne.getId(), block.getPos());
+                _updateOnePos(block.getId(), downOne.getPos());
+                return Out.ok(true);
+            }
+        }
+        return Out.ok(false);
+    }
+
+    private Block _findDownOne(String docId, Integer pos) {
+        return dsl
+                .selectFrom(BLOCK)
+                .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.greaterThan(pos)))
+                .limit(1)
+                .fetchOneInto(Block.class);
+    }
+
+    private void _updateOnePos(String id, Integer pos) {
+        int updateResult = dsl
+                .update(BLOCK)
+                .set(BLOCK.POS, pos)
+                .where(BLOCK.ID.eq(id))
                 .execute();
     }
 

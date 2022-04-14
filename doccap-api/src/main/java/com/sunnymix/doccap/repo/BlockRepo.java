@@ -43,12 +43,16 @@ public class BlockRepo {
     }
 
     public Out<BlockInfo> one(String id) {
-        Block block = getDsl()
+        Block block = _one(id);
+        BlockInfo blockInfo = BlockInfo.__(block);
+        return Out.ok(Page.one(), blockInfo);
+    }
+
+    private Block _one(String id) {
+        return getDsl()
                 .selectFrom(BLOCK)
                 .where(BLOCK.ID.eq(id))
                 .fetchOneInto(Block.class);
-        BlockInfo blockInfo = BlockInfo.__(block);
-        return Out.ok(Page.one(), blockInfo);
     }
 
     public Out<Boolean> update(String id, BlockUpdateForm form) {
@@ -66,6 +70,18 @@ public class BlockRepo {
         return Out.ok(true);
     }
 
+    public Out<Boolean> delete(String id) {
+        Block block = _one(id);
+        if (block != null) {
+            int deleteResult = dsl
+                    .deleteFrom(BLOCK)
+                    .where(BLOCK.ID.eq(id))
+                    .execute();
+            moveUpFromPos(block.getDocId(), block.getPos() + 1);
+        }
+        return Out.ok(true);
+    }
+
     public Out<BlockInfo> create(String docId, BlockCreateForm form) {
         BlockRecord record = form.toRecord(docId);
         if (record.getPos() == null) {
@@ -75,6 +91,14 @@ public class BlockRepo {
         }
         int insertResult = dsl.executeInsert(record);
         return one(record.getId());
+    }
+
+    private void moveUpFromPos(String docId, Integer pos) {
+        int updateResult = dsl
+                .update(BLOCK)
+                .set(BLOCK.POS, BLOCK.POS.minus(1))
+                .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.ge(pos)))
+                .execute();
     }
 
     private void moveDownFromPos(String docId, Integer pos) {

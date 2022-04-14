@@ -29,10 +29,19 @@ const updateBlock = (id: String, form: any, cb: Function) => {
     });
 };
 
+const deleteBlock = (id: String, cb: Function) => {
+  axios.delete(`${API_BLOCK}${id}`)
+    .then(res => {
+      const data = res.data?.data || false;
+      cb(data);
+    });
+};
+
 const BlockApi = {
   getBlockListOfDoc,
   addBlockToDoc,
   updateBlock,
+  deleteBlock,
 };
 
 export default BlockApi;

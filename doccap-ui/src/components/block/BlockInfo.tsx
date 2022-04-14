@@ -1,17 +1,22 @@
 import { FC, forwardRef, useState } from 'react';
-import { Menu, Dropdown, Button, Space, Input } from 'antd';
+import { Menu, Dropdown, Button, Space, Input, Spin } from 'antd';
 import BlockApi from './BlockApi';
-import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined, LoadingOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
+
+const spinIcon = <LoadingOutlined spin />;
 
 interface BlockInfoProps {
   block: any,
   showBlock?: boolean,
   onEnter?: Function,
+  onDelete?: Function,
 }
 
 const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [text, setText] = useState(props.block.text);
 
@@ -40,6 +45,13 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
       props.onEnter?.call(null, props.block);
     }
   };
+
+  const handlePress = (e: any) => {
+    if (e.key == "Backspace" && e.metaKey) {
+      setLoading(true);
+      props.onDelete?.call(null, props.block); 
+    }
+  };
   
   return <>
   <div
@@ -50,8 +62,10 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
     }}>
     <div
       style={{
+        position: "relative",
         visibility: hover ? "visible" : "hidden",
       }}>
+      <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft">
         <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
       </Dropdown>
@@ -65,6 +79,7 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
       onChange={handleChange}
       onBlur={handleChange}
       onPressEnter={handleEnter}
+      onKeyDown={handlePress}
       />
   </div>
   </>

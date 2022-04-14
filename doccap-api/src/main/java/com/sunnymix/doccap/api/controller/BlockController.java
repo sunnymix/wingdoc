@@ -32,8 +32,13 @@ public class BlockController {
 
     @PostMapping("/block/{id}")
     public Out<Boolean> update(@PathVariable("id") String id,
-                                 @RequestBody BlockUpdateForm form) {
+                               @RequestBody BlockUpdateForm form) {
         return blockRepo.update(id, form);
+    }
+
+    @DeleteMapping("/block/{id}")
+    public Out<Boolean> delete(@PathVariable("id") String id) {
+        return blockRepo.delete(id);
     }
 
 }

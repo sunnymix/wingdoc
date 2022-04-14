@@ -54,7 +54,6 @@ const DocAuthor: FC<{
       bordered={showBlock}
       size="middle"
       style={{
-        color: "#888",
       }}/>
   </div>
   </>

@@ -23,6 +23,8 @@ const DocInfo: FC<{
 
   const [showBlock, setShowBlock] = useState<any>(false);
 
+  const [showControl, setShowControl] = useState<any>(false);
+
   const searchDoc = () => {
     setLoading(true);
     DocApi.getDoc(id, (doc: any) => {
@@ -45,9 +47,8 @@ const DocInfo: FC<{
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${id}-block`}>
-        <Button size="small" type="link" onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Block : On</> : <>Block : Off</>}</Button>
-      </Menu.Item>
+      <Menu.Item key={`${id}-block`} onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Block : On</> : <>Block : Off</>}</Menu.Item>
+      <Menu.Item key={`${id}-control`} onClick={() => setShowControl(!showControl)}>{showControl ? <>Control : On</> : <>Control : Off</>}</Menu.Item>
     </Menu>
   );
 

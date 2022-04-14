@@ -6,6 +6,7 @@ import BlockList from '../block/BlockList';
 import { ExperimentOutlined, MinusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
+import ToolIcon from '../icon/ToolIcon';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -56,7 +57,7 @@ const DocInfo: FC<{
       </Space>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
       <Space direction="horizontal" size="small">
-        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><ExperimentOutlined/></Button>
+        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><ToolIcon/></Button>
         <Button type="link" onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Hide Block</> : <>Show Block</>}</Button>
       </Space>
     </Space>

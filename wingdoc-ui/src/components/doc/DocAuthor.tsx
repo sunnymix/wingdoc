@@ -52,7 +52,10 @@ const DocAuthor: FC<{
       onChange={changeAuthor}
       onBlur={changeAuthor}
       bordered={showBlock}
-      size="middle"/>
+      size="middle"
+      style={{
+        color: "#888",
+      }}/>
   </div>
   </>
 };

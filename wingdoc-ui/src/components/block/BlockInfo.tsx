@@ -1,4 +1,4 @@
-import { FC, forwardRef, useState } from 'react';
+import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Button, Space, Input, Spin } from 'antd';
 import BlockApi from './BlockApi';
 import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined, LoadingOutlined } from '@ant-design/icons';
@@ -11,6 +11,7 @@ const spinIcon = <LoadingOutlined spin />;
 interface BlockInfoProps {
   block: any,
   showBlock?: boolean,
+  focus?: boolean,
   onEnter?: Function,
   onDelete?: Function,
   onMoveUp?: Function,
@@ -44,13 +45,6 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
     props.onMoveDown?.call(null, props.block);
   };
 
-  const menu = (
-    <Menu>
-      <Menu.Item key={`${props.block.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
-      <Menu.Item key={`${props.block.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
-    </Menu>
-  );
-
   const handleEnter = (e: any) => {
     e.preventDefault();
     props.onEnter?.call(null, props.block);
@@ -62,6 +56,23 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
       props.onDelete?.call(null, props.block); 
     }
   };
+
+  const inputRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (props.focus && inputRef.current) {
+      inputRef.current.focus({
+        cursor: "start",
+      });
+    }
+  }, [props.focus]);
+
+  const menu = (
+    <Menu>
+      <Menu.Item key={`${props.block.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${props.block.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
+    </Menu>
+  );
   
   return <>
   <div
@@ -89,6 +100,7 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
         flexGrow: 1,
       }}>
       <TextArea 
+        ref={inputRef}
         placeholder="Input" 
         autoSize 
         value={text}

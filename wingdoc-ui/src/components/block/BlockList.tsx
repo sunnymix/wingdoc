@@ -18,6 +18,8 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const [blocks, setBlocks] = useState<any[]>([]);
 
+  const [focusPos, setFocusPos] = useState<Number>(0);
+
   const searchBlocks = () => {
     setLoading(true);
     BlockApi.getBlockListOfDoc(props.docId, (blocks: any) => {
@@ -31,7 +33,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   }, []);
 
   const handleAdd = (pos?: number) => {
-    BlockApi.addBlockToDoc(props.docId, { text: "", pos: pos || 0 }, (newBlock: any) => {
+    const addAtPos = pos || 0;
+    setFocusPos(addAtPos);
+    BlockApi.addBlockToDoc(props.docId, { text: "", pos: addAtPos }, (newBlock: any) => {
       searchBlocks();
     });
   };
@@ -40,14 +44,15 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     handleAdd(block.pos + 1);
   };
 
-  const deleteBlock = (id: string) => {
-    BlockApi.deleteBlock(id, (ok: any) => {
+  const deleteBlock = (block: any) => {
+    setFocusPos( block.pos == 0 ? 0 : block.pos - 1);
+    BlockApi.deleteBlock(block.id, (ok: any) => {
       searchBlocks();
     });
   };
 
   const handleBlockDelete = (block: any) => {
-    deleteBlock(block.id);
+    deleteBlock(block);
   };
 
   const handleBlockMoveUp = (block: any) => {
@@ -65,11 +70,12 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   return <>
   <div>
     <Space direction="vertical" size="small" style={{width: "100%"}}>
-      {blocks.map((block: any) => 
+      {blocks.map((block: any, index: number) => 
         <BlockInfo
           key={block.id}
           block={block}
           showBlock={props.showBlock}
+          focus={index == focusPos}
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}
           onMoveUp={handleBlockMoveUp}

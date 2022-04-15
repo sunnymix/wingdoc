@@ -52,9 +52,8 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
   );
 
   const handleEnter = (e: any) => {
-    if (e.metaKey) {
-      props.onEnter?.call(null, props.block);
-    }
+    e.preventDefault();
+    props.onEnter?.call(null, props.block);
   };
 
   const handlePress = (e: any) => {
@@ -81,17 +80,26 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
         <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
       </Dropdown>
     </div>
-    <TextArea 
-      placeholder="Input" 
-      autoSize 
-      value={text}
-      size="middle"
-      bordered={props.showBlock}
-      onChange={handleChange}
-      onBlur={handleChange}
-      onPressEnter={handleEnter}
-      onKeyDown={handlePress}
-      />
+    <div
+      style={{
+        borderRadius: 1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: props.showBlock ? "#ddd" : "transparent",
+        flexGrow: 1,
+      }}>
+      <TextArea 
+        placeholder="Input" 
+        autoSize 
+        value={text}
+        size="middle"
+        bordered={false}
+        onChange={handleChange}
+        onBlur={handleChange}
+        onPressEnter={handleEnter}
+        onKeyDown={handlePress}
+        />
+    </div>
   </div>
   </>
 });

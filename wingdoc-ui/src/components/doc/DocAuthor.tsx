@@ -52,15 +52,24 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
         <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
       </Dropdown>
     </div>
-    <Input
-      value={author}
-      onChange={changeAuthor}
-      onBlur={changeAuthor}
-      bordered={props.showBlock}
-      size="middle"
-      onPressEnter={handleEnter}
+    <div
       style={{
-      }}/>
+        flexGrow: 1,
+        borderRadius: 1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: props.showBlock ? "#ddd" : "transparent",
+      }}>
+      <Input
+        value={author}
+        onChange={changeAuthor}
+        onBlur={changeAuthor}
+        bordered={false}
+        size="middle"
+        onPressEnter={handleEnter}
+        style={{
+        }}/>
+    </div>
   </div>
   </>
 });

@@ -54,14 +54,23 @@ const DocTitle: FC<{
         <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
       </Dropdown>
     </div>
-    <Input
-      value={title}
-      onChange={changeTitle}
-      onBlur={changeTitle}
-      bordered={showBlock}
-      onPressEnter={handleEnter}
-      size="middle"
-      style={{ fontSize: 28, fontWeight: 500 }}/>
+    <div
+      style={{
+        flexGrow: 1,
+        borderRadius: 1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: showBlock ? "#ddd" : "transparent",
+      }}>
+      <Input
+        value={title}
+        onChange={changeTitle}
+        onBlur={changeTitle}
+        bordered={false}
+        onPressEnter={handleEnter}
+        size="middle"
+        style={{ fontSize: 28, fontWeight: 500 }}/>
+    </div>
   </div>
   </>
 };

@@ -59,14 +59,14 @@ const DocInfo: FC<{
   }
 
   return <>
-  <div style={{ padding: 2 }}>
+  <div>
     <Space direction="vertical" size="large" style={{width: "100%"}}>
       <Space direction="vertical" size="small" style={{width: "100%"}}>
         <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd}/>
         <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock} onEnter={handleAdd}/>
       </Space>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
-      <div style={{paddingLeft:24}}>
+      <div style={{paddingLeft:20}}>
         <Dropdown overlay={menu} placement="bottomLeft">
           <Button type="text"><MenuIcon /></Button>
         </Dropdown>

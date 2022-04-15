@@ -63,7 +63,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   };
   
   return <>
-  <div style={{ padding: 2 }}>
+  <div>
     <Space direction="vertical" size="small" style={{width: "100%"}}>
       {blocks.map((block: any) => 
         <BlockInfo

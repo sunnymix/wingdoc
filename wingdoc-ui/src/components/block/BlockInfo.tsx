@@ -101,7 +101,7 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
       }}>
       <TextArea 
         ref={inputRef}
-        placeholder="Input" 
+        placeholder="" 
         autoSize 
         value={text}
         size="middle"

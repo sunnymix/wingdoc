@@ -69,7 +69,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   
   return <>
   <div>
-    <Space direction="vertical" size="small" style={{width: "100%"}}>
+    <div>
       {blocks.map((block: any, index: number) => 
         <BlockInfo
           key={block.id}
@@ -81,7 +81,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onMoveUp={handleBlockMoveUp}
           onMoveDown={handleBlockMoveDown}/>)
       }
-    </Space>
+    </div>
   </div>
   </>
 });

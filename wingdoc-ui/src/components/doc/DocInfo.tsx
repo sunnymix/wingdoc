@@ -8,6 +8,7 @@ import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
 import ToolIcon from '../icon/ToolIcon';
 import MenuIcon from '../icon/MenuIcon';
+import MoreIcon from '../icon/MoreIcon';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -68,7 +69,7 @@ const DocInfo: FC<{
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
       <div style={{paddingLeft:20}}>
         <Dropdown overlay={menu} placement="bottomLeft">
-          <Button type="text"><MenuIcon /></Button>
+          <Button type="text"><MoreIcon/></Button>
         </Dropdown>
       </div>
     </Space>

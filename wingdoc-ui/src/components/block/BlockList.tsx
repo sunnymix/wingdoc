@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from './BlockApi';
 import { Space, Button, Divider } from 'antd';
-import BlockInfo from './BlockInfo';
+import Block from './Block';
 
 interface BlockListProps {
   docId: string,
@@ -71,9 +71,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   <div>
     <div>
       {blocks.map((block: any, index: number) => 
-        <BlockInfo
+        <Block
           key={block.id}
-          block={block}
+          data={block}
           showBlock={props.showBlock}
           focus={index == focusPos}
           onEnter={handleBlockEnter}

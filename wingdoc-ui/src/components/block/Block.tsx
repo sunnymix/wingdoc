@@ -8,8 +8,8 @@ const { TextArea } = Input;
 
 const spinIcon = <LoadingOutlined spin />;
 
-interface BlockInfoProps {
-  block: any,
+interface BlockProps {
+  data: any,
   showBlock?: boolean,
   focus?: boolean,
   onEnter?: Function,
@@ -18,16 +18,16 @@ interface BlockInfoProps {
   onMoveDown?: Function,
 }
 
-const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
+const Block = forwardRef((props: BlockProps, ref) => {
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [text, setText] = useState(props.block.text);
+  const [text, setText] = useState(props.data.text);
 
   const [hover, setHover] = useState<boolean>(false);
 
   const saveBlockChange = (text: string) => {
-    BlockApi.updateBlock(props.block.id, { text }, (newBlock: any) => {
+    BlockApi.updateBlock(props.data.id, { text }, (newBlock: any) => {
     });
   };
 
@@ -38,23 +38,23 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
   };
 
   const handleMoveUp = () => {
-    props.onMoveUp?.call(null, props.block);
+    props.onMoveUp?.call(null, props.data);
   };
 
   const handleMoveDown = () => {
-    props.onMoveDown?.call(null, props.block);
+    props.onMoveDown?.call(null, props.data);
   };
 
   const handleEnter = (e: any) => {
     e.preventDefault();
-    props.onEnter?.call(null, props.block);
+    props.onEnter?.call(null, props.data);
   };
 
   const handlePress = (e: any) => {
     setHover(false);
     if (e.key == "Backspace" && e.metaKey) {
       setLoading(true);
-      props.onDelete?.call(null, props.block); 
+      props.onDelete?.call(null, props.data); 
     }
   };
 
@@ -70,9 +70,9 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${props.block.id}-edit`}><LinkOutlined /></Menu.Item>
-      <Menu.Item key={`${props.block.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
-      <Menu.Item key={`${props.block.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
+      <Menu.Item key={`${props.data.id}-edit`}><LinkOutlined /></Menu.Item>
+      <Menu.Item key={`${props.data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${props.data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
   );
   
@@ -118,4 +118,4 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
   </>
 });
 
-export default BlockInfo;
+export default Block;

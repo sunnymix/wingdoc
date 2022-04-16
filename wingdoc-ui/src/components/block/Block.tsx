@@ -64,14 +64,19 @@ const Block = forwardRef((props: BlockProps, ref) => {
     }
   };
 
+  const isDelete = (e: any) => {
+    if (e.key == "Backspace") {
+      if (e.metaKey || e.target.value.length == 0) {
+        props.onDelete?.call(null, props.data)  
+      }
+    }
+  };
+
   const handlePress = (e: any) => {
+    setHover(false);
     isFocusUp(e);
     isFocusDown(e);
-    setHover(false);
-    if (e.key == "Backspace" && e.metaKey) {
-      setLoading(true);
-      props.onDelete?.call(null, props.data); 
-    }
+    isDelete(e);
   };
 
   const inputRef = useRef<any>(null);

@@ -1,7 +1,7 @@
 import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Button, Space, Input, Spin } from 'antd';
 import BlockApi from './BlockApi';
-import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined, LoadingOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined, LoadingOutlined, LinkOutlined } from '@ant-design/icons';
 import MenuIcon from '../icon/MenuIcon';
 
 const { TextArea } = Input;
@@ -51,6 +51,7 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
   };
 
   const handlePress = (e: any) => {
+    setHover(false);
     if (e.key == "Backspace" && e.metaKey) {
       setLoading(true);
       props.onDelete?.call(null, props.block); 
@@ -69,6 +70,7 @@ const BlockInfo = forwardRef((props: BlockInfoProps, ref) => {
 
   const menu = (
     <Menu>
+      <Menu.Item key={`${props.block.id}-edit`}><LinkOutlined /></Menu.Item>
       <Menu.Item key={`${props.block.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
       <Menu.Item key={`${props.block.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>

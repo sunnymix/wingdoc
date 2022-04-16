@@ -25,9 +25,8 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
   };
 
   const handleEnter = () => {
-    if (props.onEnter) {
-      props.onEnter?.call(null);
-    }
+    setHover(false);
+    props.onEnter?.call(null);
   };
 
   const menu = (

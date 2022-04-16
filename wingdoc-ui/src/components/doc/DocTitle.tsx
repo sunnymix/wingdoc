@@ -33,9 +33,8 @@ const DocTitle: FC<{
   );
 
   const handleEnter = () => {
-    if (onEnter) {
-      onEnter();
-    }
+    setHover(false);
+    onEnter?.call(null);
   };
   
   return <>

@@ -66,6 +66,14 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
       searchBlocks();
     });
   };
+
+  const handleFocusUp = (blockData: any) => {
+    setFocusPos(blockData.pos == 0 ? 0 : blockData.pos - 1);
+  };
+
+  const handleFocusDown = (blockData: any) => {
+    setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
+  };
   
   return <>
   <div>
@@ -79,7 +87,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}
           onMoveUp={handleBlockMoveUp}
-          onMoveDown={handleBlockMoveDown}/>)
+          onMoveDown={handleBlockMoveDown}
+          onFocusUp={handleFocusUp}
+          onFocusDown={handleFocusDown}/>)
       }
     </div>
   </div>

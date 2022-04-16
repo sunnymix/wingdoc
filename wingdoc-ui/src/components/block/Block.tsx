@@ -16,6 +16,8 @@ interface BlockProps {
   onDelete?: Function,
   onMoveUp?: Function,
   onMoveDown?: Function,
+  onFocusUp?: Function,
+  onFocusDown?: Function,
 }
 
 const Block = forwardRef((props: BlockProps, ref) => {
@@ -50,7 +52,21 @@ const Block = forwardRef((props: BlockProps, ref) => {
     props.onEnter?.call(null, props.data);
   };
 
+  const isFocusUp = (e: any) => {
+    if (e.key == "ArrowUp" && e.target.selectionStart == 0) {
+      props.onFocusUp?.call(null, props.data);
+    }
+  };
+
+  const isFocusDown = (e: any) => {
+    if (e.key == "ArrowDown" && e.target.selectionStart == e.target.value.length) {
+      props.onFocusDown?.call(null, props.data);
+    }
+  };
+
   const handlePress = (e: any) => {
+    isFocusUp(e);
+    isFocusDown(e);
     setHover(false);
     if (e.key == "Backspace" && e.metaKey) {
       setLoading(true);

@@ -127,6 +127,7 @@ public class BlockRepo {
         return dsl
                 .selectFrom(BLOCK)
                 .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.lessThan(pos)))
+                .orderBy(BLOCK.POS.desc())
                 .limit(1)
                 .fetchOneInto(Block.class);
     }
@@ -149,6 +150,7 @@ public class BlockRepo {
         return dsl
                 .selectFrom(BLOCK)
                 .where(BLOCK.DOC_ID.eq(docId).and(BLOCK.POS.greaterThan(pos)))
+                .orderBy(BLOCK.POS.asc())
                 .limit(1)
                 .fetchOneInto(Block.class);
     }

@@ -68,6 +68,7 @@ const DocTitle: FC<{
         bordered={false}
         onPressEnter={handleEnter}
         size="middle"
+        placeholder="Title"
         style={{ fontSize: 28, fontWeight: 500 }}/>
     </div>
   </div>

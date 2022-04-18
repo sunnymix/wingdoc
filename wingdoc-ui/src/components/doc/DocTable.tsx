@@ -18,7 +18,7 @@ const DocTable: FC<{}> = ({}) => {
   }, []);
 
   const handleAdd = () => {
-    DocApi.addDoc({ title: "Title", author: "Author" }, (newDoc: any) => {
+    DocApi.addDoc({ title: "", author: "" }, (newDoc: any) => {
       searchDocs();
     });
   };

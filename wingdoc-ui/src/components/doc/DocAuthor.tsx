@@ -66,6 +66,7 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
         bordered={false}
         size="middle"
         onPressEnter={handleEnter}
+        placeholder="Author"
         style={{
         }}/>
     </div>

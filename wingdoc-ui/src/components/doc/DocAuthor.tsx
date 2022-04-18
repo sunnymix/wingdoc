@@ -41,11 +41,11 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
-      alignItems: "center",
+      alignItems: "center"
     }}>
     <div
       style={{
-        borderRadius: 2,
+        borderRadius: 0,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",

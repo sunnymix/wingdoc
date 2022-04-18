@@ -17,6 +17,8 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const [hover, setHover] = useState<boolean>(false);
 
+  const [showLink, setShowLink] = useState<boolean>(false);
+
   const saveBlockChange = (text: string) => {
     BlockApi.updateBlock(props.data.id, { text }, (newBlock: any) => {
     });
@@ -80,7 +82,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${props.data.id}-edit`}><LinkOutlined /></Menu.Item>
+      <Menu.Item key={`${props.data.id}-edit`} onClick={() => setShowLink(!showLink)}><LinkOutlined /></Menu.Item>
       <Menu.Item key={`${props.data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
       <Menu.Item key={`${props.data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
@@ -92,16 +94,17 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
-      alignItems: "center"
+      alignItems: "flex-start"
     }}>
     <div
       style={{
-        borderRadius: 2,
+        borderRadius: 0,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
+        marginTop: 4,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft">
@@ -126,8 +129,15 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         onChange={handleChange}
         onBlur={handleChange}
         onPressEnter={handleEnter}
-        onKeyDown={handlePress}
-        />
+        onKeyDown={handlePress}/>
+      <TextArea 
+        placeholder="link" 
+        autoSize 
+        size="middle"
+        bordered={false}
+        style={{
+          display: showLink ? "block" : "none",
+        }}/>
     </div>
   </div>
   </>

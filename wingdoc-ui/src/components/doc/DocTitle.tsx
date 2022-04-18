@@ -47,16 +47,20 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     }}>
     <div
       style={{
+        borderRadius: 2,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
       }}>
       <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
+        <Button type="text" size="small" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
       </Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        borderRadius: 1,
+        borderRadius: 0,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: showBlock ? "#ddd" : "transparent",

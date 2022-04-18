@@ -92,20 +92,25 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
+      alignItems: "center"
     }}>
     <div
       style={{
+        borderRadius: 2,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: props.showBlock ? "#ddd" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
+        <Button type="text" size="small" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
       </Dropdown>
     </div>
     <div
       style={{
-        borderRadius: 1,
+        borderRadius: 0,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",

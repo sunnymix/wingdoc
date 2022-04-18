@@ -52,7 +52,7 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
         visibility: hover ? "visible" : "hidden",
       }}>
       <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" size="small" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined /></Button>
+        <Button type="text" size="small" style={{paddingLeft: 4, paddingRight: 4,}}>∷</Button>
       </Dropdown>
     </div>
     <div

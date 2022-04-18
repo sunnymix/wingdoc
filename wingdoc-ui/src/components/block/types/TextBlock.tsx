@@ -104,11 +104,11 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         borderColor: props.showBlock ? "#ddd" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
-        marginTop: 4,
+        marginTop: 3,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" size="small" style={{paddingLeft: 3, paddingRight: 3,}}><HolderOutlined/></Button>
+        <Button type="text" size="small" style={{paddingLeft: 4, paddingRight: 4,}}>∷</Button>
       </Dropdown>
     </div>
     <div

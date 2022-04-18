@@ -46,13 +46,6 @@ const DocInfo: FC<{
     }
   };
 
-  const menu = (
-    <Menu>
-      <Menu.Item key={`${id}-block`} onClick={() => setShowBlock(!showBlock)}>{showBlock ? <>Block : On</> : <>Block : Off</>}</Menu.Item>
-      <Menu.Item key={`${id}-control`} onClick={() => setShowControl(!showControl)}>{showControl ? <>Control : On</> : <>Control : Off</>}</Menu.Item>
-    </Menu>
-  );
-
   if (!doc) {
     return <>
     <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
@@ -63,15 +56,10 @@ const DocInfo: FC<{
   <div>
     <Space direction="vertical" size="large" style={{width: "100%"}}>
       <div>
-        <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd}/>
+        <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd} onShowBlock={() => setShowBlock(!showBlock)}/>
         <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock} onEnter={handleAdd}/>
       </div>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
-      <div style={{paddingLeft:20}}>
-        <Dropdown overlay={menu} placement="bottomLeft">
-          <Button type="text"><MoreIcon/></Button>
-        </Dropdown>
-      </div>
     </Space>
   </div>
   </>;

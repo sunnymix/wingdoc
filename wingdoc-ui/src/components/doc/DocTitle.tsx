@@ -8,11 +8,12 @@ interface DocTitleProps {
   value: string,
   showBlock: boolean,
   onEnter?: Function,
+  onShowBlock?: Function,
 };
 
 const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
-  const {id, value, showBlock, onEnter} = props;
+  const {id, value, showBlock, onEnter, onShowBlock} = props;
 
   const [title, setTitle] = useState<string>(value);
 
@@ -27,7 +28,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${id}-tags`}>tags</Menu.Item>
+      <Menu.Item key={`${id}--show-block`} onClick={() => onShowBlock?.call(null)}>Block : {showBlock ? "on" : "off"}</Menu.Item>
     </Menu>
   );
 

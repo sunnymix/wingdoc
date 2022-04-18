@@ -1,19 +1,18 @@
-import { FC, useState } from 'react';
+import { FC, forwardRef, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
 import { DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
 
-const DocTitle: FC<{
+interface DocTitleProps {
   id: string,
   value: string,
   showBlock: boolean,
   onEnter?: Function,
-}> = ({
-  id,
-  value,
-  showBlock,
-  onEnter,
-}) => {
+};
+
+const DocTitle = forwardRef((props: DocTitleProps, ref) => {
+
+  const {id, value, showBlock, onEnter} = props;
 
   const [title, setTitle] = useState<string>(value);
 
@@ -73,6 +72,6 @@ const DocTitle: FC<{
     </div>
   </div>
   </>
-};
+});
 
 export default DocTitle;

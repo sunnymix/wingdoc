@@ -1,9 +1,10 @@
 import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Input, Spin } from 'antd';
-import BlockApi from './../BlockApi';
+import BlockApi from '../BlockApi';
 import { ArrowUpOutlined, ArrowDownOutlined, LoadingOutlined, LinkOutlined } from '@ant-design/icons';
 import { BlockProps } from '@/components/block/BlockInterfaces';
 import OptionButton from '@/components/common/OptionButton';
+import Link from './Link';
 
 const { TextArea } = Input;
 
@@ -11,9 +12,13 @@ const spinIcon = <LoadingOutlined spin />;
 
 const TextBlock = forwardRef((props: BlockProps, ref) => {
 
+  const {data} = props;
+
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [text, setText] = useState(props.data.text);
+  const [text, setText] = useState(data.text);
+
+  const [link, setLink] = useState(data.link);
 
   const [hover, setHover] = useState<boolean>(false);
 
@@ -63,11 +68,27 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
+  const isShowLink = (e: any) => {
+    if (e.key == "k" && e.metaKey) {
+      setShowLink(!showLink);
+    }
+  };
+
   const handlePress = (e: any) => {
     setHover(false);
     isFocusUp(e);
     isFocusDown(e);
     isDelete(e);
+    isShowLink(e);
+  };
+
+  const handleSaveLink = (link: any) => {
+    setShowLink(false);
+  };
+
+  const handleCancelLink = () => {
+    setShowLink(false);
+    setLink(link);
   };
 
   const inputRef = useRef<any>(null);
@@ -128,14 +149,11 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         onBlur={handleChange}
         onPressEnter={handleEnter}
         onKeyDown={handlePress}/>
-      <TextArea 
-        placeholder="link" 
-        autoSize 
-        size="middle"
-        bordered={false}
-        style={{
-          display: showLink ? "block" : "none",
-        }}/>
+      <Link
+        open={showLink}
+        value={link}
+        onSave={handleSaveLink}
+        onCancel={handleCancelLink}/>
     </div>
   </div>
   </>

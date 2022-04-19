@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import TextBlock from '@/components/block/types/TextBlock';
+import TextBlock from '@/components/block/components/TextBlock';
 import { BlockProps } from '@/components/block/BlockInterfaces';
 
 const Block = forwardRef((props: BlockProps, ref) => {

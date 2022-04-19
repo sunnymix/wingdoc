@@ -1,8 +1,7 @@
-
 import { FC, forwardRef, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
-import { MoreOutlined, DownOutlined, HolderOutlined, EllipsisOutlined, MenuOutlined } from '@ant-design/icons';
+import OptionButton from '../common/OptionButton';
 
 interface DocAuthorProps {
   id: string,
@@ -51,9 +50,7 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
         borderColor: props.showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
       }}>
-      <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" size="small" style={{paddingLeft: 4, paddingRight: 4,}}>∷</Button>
-      </Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{

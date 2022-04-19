@@ -1,9 +1,9 @@
 import { FC, forwardRef, useEffect, useRef, useState } from 'react';
-import { Menu, Dropdown, Button, Space, Input, Spin } from 'antd';
+import { Menu, Dropdown, Input, Spin } from 'antd';
 import BlockApi from './../BlockApi';
-import { ArrowUpOutlined, ArrowDownOutlined, HolderOutlined, LoadingOutlined, LinkOutlined } from '@ant-design/icons';
-import MenuIcon from '../../icon/MenuIcon';
+import { ArrowUpOutlined, ArrowDownOutlined, LoadingOutlined, LinkOutlined } from '@ant-design/icons';
 import { BlockProps } from '@/components/block/BlockInterfaces';
+import OptionButton from '@/components/common/OptionButton';
 
 const { TextArea } = Input;
 
@@ -107,9 +107,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         marginTop: 3,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
-      <Dropdown overlay={menu} placement="bottomLeft">
-        <Button type="text" size="small" style={{paddingLeft: 4, paddingRight: 4,}}>∷</Button>
-      </Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{

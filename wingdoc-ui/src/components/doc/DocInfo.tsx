@@ -1,14 +1,10 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import DocApi from './DocApi';
-import { Space, Spin, Input, Checkbox, Switch, Menu, Dropdown, Button, Divider } from 'antd';
-import { LoadingOutlined, HolderOutlined, CaretUpOutlined } from '@ant-design/icons';
+import { Space, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import BlockList from '../block/BlockList';
-import { ExperimentOutlined, MinusCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
-import ToolIcon from '../icon/ToolIcon';
-import MenuIcon from '../icon/MenuIcon';
-import MoreIcon from '../icon/MoreIcon';
 
 const spinIcon = <LoadingOutlined spin />;
 

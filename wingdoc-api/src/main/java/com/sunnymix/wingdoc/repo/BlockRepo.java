@@ -63,6 +63,10 @@ public class BlockRepo {
             set = update.set(BLOCK.TEXT, form.getText());
         }
 
+        if (form.getLink() != null) {
+            set = update.set(BLOCK.LINK, form.getLink());
+        }
+
         if (set != null) {
             int updateResult = set.where(BLOCK.ID.eq(id))
                     .execute();

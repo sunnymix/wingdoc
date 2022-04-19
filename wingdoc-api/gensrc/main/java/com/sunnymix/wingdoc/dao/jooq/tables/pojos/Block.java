@@ -17,26 +17,34 @@ public class Block implements Serializable {
 
     private final String  id;
     private final String  docId;
-    private final String  text;
     private final Integer pos;
+    private final String  type;
+    private final String  text;
+    private final String  link;
 
     public Block(Block value) {
         this.id = value.id;
         this.docId = value.docId;
-        this.text = value.text;
         this.pos = value.pos;
+        this.type = value.type;
+        this.text = value.text;
+        this.link = value.link;
     }
 
     public Block(
         String  id,
         String  docId,
+        Integer pos,
+        String  type,
         String  text,
-        Integer pos
+        String  link
     ) {
         this.id = id;
         this.docId = docId;
-        this.text = text;
         this.pos = pos;
+        this.type = type;
+        this.text = text;
+        this.link = link;
     }
 
     /**
@@ -54,6 +62,20 @@ public class Block implements Serializable {
     }
 
     /**
+     * Getter for <code>wingdoc.block.pos</code>. 位置
+     */
+    public Integer getPos() {
+        return this.pos;
+    }
+
+    /**
+     * Getter for <code>wingdoc.block.type</code>. 类型
+     */
+    public String getType() {
+        return this.type;
+    }
+
+    /**
      * Getter for <code>wingdoc.block.text</code>. 内容
      */
     public String getText() {
@@ -61,10 +83,10 @@ public class Block implements Serializable {
     }
 
     /**
-     * Getter for <code>wingdoc.block.pos</code>. 位置
+     * Getter for <code>wingdoc.block.link</code>. 链接
      */
-    public Integer getPos() {
-        return this.pos;
+    public String getLink() {
+        return this.link;
     }
 
     @Override
@@ -73,8 +95,10 @@ public class Block implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(docId);
-        sb.append(", ").append(text);
         sb.append(", ").append(pos);
+        sb.append(", ").append(type);
+        sb.append(", ").append(text);
+        sb.append(", ").append(link);
 
         sb.append(")");
         return sb.toString();

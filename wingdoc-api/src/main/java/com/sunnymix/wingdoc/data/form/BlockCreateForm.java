@@ -28,8 +28,10 @@ public class BlockCreateForm {
         return new BlockRecord(
                 Id.newId(),
                 docId,
+                pos,
+                "TEXT",
                 text,
-                pos
+                ""
         );
     }
 
@@ -37,8 +39,10 @@ public class BlockCreateForm {
         return new BlockRecord(
                 Id.newId(),
                 docId,
+                pos,
+                "TEXT",
                 text,
-                pos
+                ""
         );
     }
 

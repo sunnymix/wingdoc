@@ -15,7 +15,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row6;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,14 +58,24 @@ public class Block extends TableImpl<BlockRecord> {
     public final TableField<BlockRecord, String> DOC_ID = createField(DSL.name("doc_id"), SQLDataType.VARCHAR(50).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "文档ID");
 
     /**
+     * The column <code>wingdoc.block.pos</code>. 位置
+     */
+    public final TableField<BlockRecord, Integer> POS = createField(DSL.name("pos"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.inline("0", SQLDataType.INTEGER)), this, "位置");
+
+    /**
+     * The column <code>wingdoc.block.type</code>. 类型
+     */
+    public final TableField<BlockRecord, String> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(20).nullable(false).defaultValue(DSL.inline("TEXT", SQLDataType.VARCHAR)), this, "类型");
+
+    /**
      * The column <code>wingdoc.block.text</code>. 内容
      */
     public final TableField<BlockRecord, String> TEXT = createField(DSL.name("text"), SQLDataType.CLOB.nullable(false), this, "内容");
 
     /**
-     * The column <code>wingdoc.block.pos</code>. 位置
+     * The column <code>wingdoc.block.link</code>. 链接
      */
-    public final TableField<BlockRecord, Integer> POS = createField(DSL.name("pos"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.inline("0", SQLDataType.INTEGER)), this, "位置");
+    public final TableField<BlockRecord, String> LINK = createField(DSL.name("link"), SQLDataType.VARCHAR(200).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "链接");
 
     private Block(Name alias, Table<BlockRecord> aliased) {
         this(alias, aliased, null);
@@ -142,11 +152,11 @@ public class Block extends TableImpl<BlockRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row6 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<String, String, String, Integer> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row6<String, String, Integer, String, String, String> fieldsRow() {
+        return (Row6) super.fieldsRow();
     }
 }

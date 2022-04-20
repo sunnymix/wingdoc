@@ -3,6 +3,8 @@ import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
 
+const {TextArea} = Input;
+
 interface DocAuthorProps {
   id: string,
   value: string,
@@ -17,13 +19,14 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
   const [hover, setHover] = useState<boolean>(false);
 
   const changeAuthor = (e: any) => {
-    const newAuthor = e.target.value || "";
+    const newAuthor = (e.target.value || "").trim();
     setAuthor(newAuthor);
     DocApi.updateDoc(props.id, { author: newAuthor }, (newDoc: any) => {
     });
   };
 
-  const handleEnter = () => {
+  const handleEnter = (e: any) => {
+    e.preventDefault();
     setHover(false);
     props.onEnter?.call(null);
   };
@@ -60,12 +63,13 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
       }}>
-      <Input
+      <TextArea
         value={author}
         onChange={changeAuthor}
         onBlur={changeAuthor}
         bordered={false}
         size="middle"
+        autoSize={true}
         onPressEnter={handleEnter}
         placeholder="Author"
         style={{

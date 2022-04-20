@@ -8,11 +8,23 @@ interface MediaTableProps {
 
 const MediaTable = forwardRef((props: MediaTableProps, ref) => {
 
-  const [medias, setMedias] = useState([{
-    id: "sampleid",
-    name: "sample name",
-    url: MockImage.img50,
-  }])
+  const [medias, setMedias] = useState([
+    {
+      id: "sampleid1",
+      name: "sample name1",
+      url: MockImage.img50,
+    },
+    {
+      id: "sampleid2",
+      name: "sample name2",
+      url: MockImage.img50,
+    },
+    {
+      id: "sampleid3",
+      name: "sample name3",
+      url: MockImage.img50,
+    },
+  ]);
 
   return <>
   <Space>
@@ -24,7 +36,7 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
         <tr>
           <th>ID</th>
           <th>Name</th>
-          <th>Url</th>
+          <th>Preview</th>
         </tr>
       </thead>
       <tbody>

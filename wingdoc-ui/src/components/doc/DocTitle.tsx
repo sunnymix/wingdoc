@@ -1,7 +1,9 @@
-import { FC, forwardRef, useState } from 'react';
-import { Input, Menu, Dropdown, Button } from 'antd';
+import {forwardRef, useState} from 'react';
+import {Input, Menu, Dropdown} from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
+
+const {TextArea} = Input;
 
 interface DocTitleProps {
   id: string,
@@ -32,7 +34,8 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     </Menu>
   );
 
-  const handleEnter = () => {
+  const handleEnter = (e: any) => {
+    e.preventDefault();
     setHover(false);
     onEnter?.call(null);
   };
@@ -63,7 +66,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         borderWidth: 1,
         borderColor: showBlock ? "#ddd" : "transparent",
       }}>
-      <Input
+      <TextArea
         value={title}
         onChange={changeTitle}
         onBlur={changeTitle}
@@ -71,7 +74,11 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         onPressEnter={handleEnter}
         size="middle"
         placeholder="Title"
-        style={{ fontSize: 28, fontWeight: 500 }}/>
+        autoSize={true}
+        style={{ 
+          fontSize: 28,
+          fontWeight: 700,
+        }}/>
     </div>
   </div>
   </>

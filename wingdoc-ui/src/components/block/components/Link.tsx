@@ -22,6 +22,7 @@ const Link = forwardRef((props: LinkProps, ref) => {
 
   const handleCancel = () => {
     onCancel?.call(null);
+    setLink(value);
   };
 
   useEffect(() => {
@@ -40,9 +41,9 @@ const Link = forwardRef((props: LinkProps, ref) => {
       bordered={false}
       value={link}
       onChange={(e: any) => setLink(e.target.value)}/>
-    <Space direction="horizontal">
-      <Button onClick={handleSave}>Save</Button>
-      <Button onClick={handleCancel}>Cancel</Button>
+    <Space direction="horizontal" style={{marginLeft: 10}}>
+      <Button size="small" onClick={handleSave}>Save</Button>
+      <Button size="small" onClick={handleCancel}>Cancel</Button>
     </Space>
   </div>
   </>

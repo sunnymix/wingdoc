@@ -17,7 +17,11 @@ public class BlockInfo {
 
     private Integer pos;
 
+    private String type;
+
     private String text;
+
+    private String link;
 
     public static BlockInfo __(Block block) {
         if (block == null) {
@@ -27,7 +31,9 @@ public class BlockInfo {
                 block.getId(),
                 block.getDocId(),
                 block.getPos(),
-                block.getText()
+                block.getType(),
+                block.getText(),
+                block.getLink()
         );
     }
 

@@ -20,6 +20,16 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const [link, setLink] = useState(data.link);
 
+  const [linking, setLinking] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (link && link.length > 0) {
+      setLinking(true);
+    } else {
+      setLinking(false);
+    }
+  }, [link]);
+
   const [hover, setHover] = useState<boolean>(false);
 
   const [showLink, setShowLink] = useState<boolean>(false);
@@ -84,6 +94,13 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const handleSaveLink = (link: any) => {
     setShowLink(false);
+    BlockApi.updateBlock(data.id, { link }, (ok: any) => {
+      if (ok) {
+        setLink(link);
+      } else {
+        setLink(data.link);
+      }
+    });
   };
 
   const handleCancelLink = () => {
@@ -148,7 +165,10 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         onChange={handleChange}
         onBlur={handleChange}
         onPressEnter={handleEnter}
-        onKeyDown={handlePress}/>
+        onKeyDown={handlePress}
+        style={{
+          color: linking ? "#1890ff" : "inherit",
+        }}/>
       <Link
         open={showLink}
         value={link}

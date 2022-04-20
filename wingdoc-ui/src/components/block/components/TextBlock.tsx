@@ -109,12 +109,14 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const handleSaveLink = (link: any) => {
     openLink(false);
-    BlockApi.updateBlock(data.id, { link }, (ok: any) => {
+    const type = (link && link.length > 0) ? "LINK" : "TEXT";
+    BlockApi.updateBlock(data.id, { type, link }, (ok: any) => {
       if (ok) {
         setLink(link);
       } else {
         setLink(data.link);
       }
+      focusInput();
     });
   };
 

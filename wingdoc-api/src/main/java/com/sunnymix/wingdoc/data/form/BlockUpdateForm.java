@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BlockUpdateForm {
 
+    private String type;
+
     private String text;
 
     private String link;

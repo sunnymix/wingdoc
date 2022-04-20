@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import Doc from '@/components/doc/Doc';
+import MediaFacade from '@/components/media/MediaFacade';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -15,7 +16,7 @@ const { Option } = Select;
 export default function Page() {
 
   return (
-    <Router basename='/wingdoc-ui/'>
+    <Router basename="/wingdoc-ui/">
       <Switch>
         <Route
           path="/:module?/:p1?/:p2?"
@@ -35,6 +36,9 @@ export default function Page() {
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
                     <Doc id={match.params.p1}/>
+                  </TabPane>
+                  <TabPane tab="Media" key="media">
+                    <MediaFacade id={match.params.p1}/>
                   </TabPane>
                 </Tabs>
               </div>

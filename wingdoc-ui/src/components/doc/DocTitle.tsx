@@ -76,7 +76,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         placeholder="Title"
         autoSize={true}
         style={{ 
-          fontSize: 28,
+          fontSize: 24,
           fontWeight: 700,
         }}/>
     </div>

@@ -57,12 +57,12 @@ public class Doc extends TableImpl<DocRecord> {
     /**
      * The column <code>wingdoc.doc.title</code>. 标题
      */
-    public final TableField<DocRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(50).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "标题");
+    public final TableField<DocRecord, String> TITLE = createField(DSL.name("title"), SQLDataType.VARCHAR(100).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "标题");
 
     /**
      * The column <code>wingdoc.doc.author</code>. 作者
      */
-    public final TableField<DocRecord, String> AUTHOR = createField(DSL.name("author"), SQLDataType.VARCHAR(20).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "作者");
+    public final TableField<DocRecord, String> AUTHOR = createField(DSL.name("author"), SQLDataType.VARCHAR(50).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "作者");
 
     private Doc(Name alias, Table<DocRecord> aliased) {
         this(alias, aliased, null);

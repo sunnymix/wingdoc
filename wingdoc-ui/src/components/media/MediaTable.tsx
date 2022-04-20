@@ -1,6 +1,7 @@
 import TableStyle from '@/components/common/TableStyle.css';
 import { forwardRef, useState } from "react";
 import { Space } from "antd";
+import MockImage from "@/components/mock/MockImg";
 
 interface MediaTableProps {
 }
@@ -10,7 +11,7 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
   const [medias, setMedias] = useState([{
     id: "sampleid",
     name: "sample name",
-    url: "https://via.placeholder.com/50"
+    url: MockImage.img50,
   }])
 
   return <>

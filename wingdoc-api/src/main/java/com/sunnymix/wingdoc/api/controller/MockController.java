@@ -27,10 +27,10 @@ public class MockController {
         public static byte[] create(Integer width, Integer height) throws Throwable {
             BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             Graphics2D g = _g(img);
-            g.setBackground(new Color(200, 200, 200));
+            g.setPaint(new Color(240, 240, 240));
             g.fillRect(0, 0, width, height);
-            g.setColor(new Color(100, 100, 100));
 
+            g.setPaint(new Color(80, 80, 80));
             Font font = new Font(null, Font.PLAIN, 9);
             g.setFont(font);
 

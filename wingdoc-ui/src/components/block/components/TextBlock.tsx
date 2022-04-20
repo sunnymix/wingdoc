@@ -32,8 +32,6 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const [hover, setHover] = useState<boolean>(false);
 
-  const [showLink, setShowLink] = useState<boolean>(false);
-
   const saveBlockChange = (text: string) => {
     BlockApi.updateBlock(props.data.id, { text }, (newBlock: any) => {
     });
@@ -92,22 +90,25 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  const isShowLink = (e: any) => {
-    if (e.key == "k" && e.metaKey) {
-      setShowLink(!showLink);
+
+  // ### link ###
+
+  const linkRef = useRef<any>(null);
+
+  const openLink = (show: boolean) => {
+    if (linkRef.current) {
+      linkRef.current.open(show);
     }
   };
 
-  const handlePress = (e: any) => {
-    setHover(false);
-    isFocusUp(e);
-    isFocusDown(e);
-    isDelete(e);
-    isShowLink(e);
+  const isShowLink = (e: any) => {
+    if (e.key == "k" && e.metaKey) {
+      openLink(true);
+    }
   };
 
   const handleSaveLink = (link: any) => {
-    setShowLink(false);
+    openLink(false);
     BlockApi.updateBlock(data.id, { link }, (ok: any) => {
       if (ok) {
         setLink(link);
@@ -118,23 +119,42 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
   };
 
   const handleCancelLink = () => {
-    setShowLink(false);
+    openLink(false);
     setLink(link);
+    focusInput();
   };
+
+  // ### focus input ###
 
   const inputRef = useRef<any>(null);
 
-  useEffect(() => {
-    if (props.focus && inputRef.current) {
+  const focusInput = () => {
+    if (inputRef.current) {
       inputRef.current.focus({
         cursor: "start",
       });
     }
+  };
+
+  useEffect(() => {
+    if (props.focus) {
+      focusInput();
+    }
   }, [props.focus]);
+
+  // ### key press ###
+
+  const handlePress = (e: any) => {
+    setHover(false);
+    isFocusUp(e);
+    isFocusDown(e);
+    isDelete(e);
+    isShowLink(e);
+  };
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${props.data.id}-edit`} onClick={() => setShowLink(!showLink)}><LinkOutlined /></Menu.Item>
+      <Menu.Item key={`${props.data.id}-edit`} onClick={() => openLink(true)}><LinkOutlined /></Menu.Item>
       <Menu.Item key={`${props.data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
       <Menu.Item key={`${props.data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
@@ -185,7 +205,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
           color: linking ? "#1890ff" : "inherit",
         }}/>
       <Link
-        open={showLink}
+        ref={linkRef}
         value={link}
         onSave={handleSaveLink}
         onCancel={handleCancelLink}/>

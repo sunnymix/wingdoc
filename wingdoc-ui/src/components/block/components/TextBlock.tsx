@@ -58,6 +58,20 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     props.onEnter?.call(null, props.data);
   };
 
+  const isRedirectLink = (e: any) => {
+    if (linking) {
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+      if (start == end && start > 0 && start < text.length) {
+        window.open(link, "_blank");
+      }
+    }
+  };
+
+  const handleClick = (e: any) => {
+    isRedirectLink(e);
+  };
+
   const isFocusUp = (e: any) => {
     if (e.key == "ArrowUp" && e.target.selectionStart == 0) {
       props.onFocusUp?.call(null, props.data);
@@ -162,6 +176,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         value={text}
         size="middle"
         bordered={false}
+        onClick={handleClick}
         onChange={handleChange}
         onBlur={handleChange}
         onPressEnter={handleEnter}

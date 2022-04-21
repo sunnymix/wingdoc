@@ -121,7 +121,10 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     const selectBlocks = blocks.filter((block: any, index: number) => block.selectAll);
     if (selectBlocks.length > 0) {
       const all = selectBlocks.map((block: any, index: number) => block.text).join("\n");
-      console.log(all);
+      console.log("copy:", all);
+      // TODO：自定义复制组件
+      // navigator.clipboard 只能在 localhost 或 https 中使用
+      navigator.clipboard.writeText(all);
     }
   };
 

@@ -1,11 +1,6 @@
 import styles from './index.less';
-import { Row, Col, Tabs, Select, Space, Typography } from 'antd';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from "react-router-dom";
+import { Tabs, Select } from 'antd';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import DocRoutes from '@/components/doc/DocRoutes';
 import MediaFacade from '@/components/media/MediaFacade';
@@ -16,7 +11,7 @@ const { Option } = Select;
 export default function Page() {
 
   return (
-    <Router basename="/wingdoc-ui/">
+    <BrowserRouter basename="/wingdoc-ui/">
       <Switch>
         <Route
           path="/:module?/:p1?/:p2?"
@@ -46,6 +41,6 @@ export default function Page() {
           }}
         />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 };

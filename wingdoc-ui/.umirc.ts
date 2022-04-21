@@ -14,7 +14,4 @@ export default defineConfig({
   favicon: `${basePath}img/favicon.ico`,
   publicPath: basePath,
   outputPath: `dist${basePath}`,
-  devServer: {
-    port: 8020,
-  }
 });

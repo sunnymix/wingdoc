@@ -33,7 +33,7 @@ const DocTable: FC<{}> = ({}) => {
       <thead>
         <tr>
           <th>Title</th>
-          <th>Author</th>
+          <th>Task</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -41,14 +41,14 @@ const DocTable: FC<{}> = ({}) => {
       {docs.map((doc: any, index: number) => (
         <tr key={doc.id}>
           <td>{doc.title}</td>
-          <td>{doc.author}</td>
+          <td>0</td>
           <td>
             <Link to={`/doc/${doc.id}`}>Edit</Link>
           </td>
         </tr>
       ))}
         <tr>
-          <td colSpan={4} style={{ border: 0 }}>
+          <td colSpan={3} style={{ border: 0 }}>
             Total: {docs.length}
             <Button type="link" onClick={handleAdd}>Add</Button>
           </td>

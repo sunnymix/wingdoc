@@ -3,6 +3,7 @@ import { Tabs, Select } from 'antd';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import DocRoutes from '@/components/doc/DocRoutes';
+import TaskRoutes from '@/components/task/TaskRoutes';
 import MediaFacade from '@/components/media/MediaFacade';
 
 const { TabPane } = Tabs;
@@ -31,6 +32,9 @@ export default function Page() {
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
                     <DocRoutes id={match.params.p1}/>
+                  </TabPane>
+                  <TabPane tab="Task" key="task">
+                    <TaskRoutes/>
                   </TabPane>
                   <TabPane tab="Media" key="media">
                     <MediaFacade id={match.params.p1}/>

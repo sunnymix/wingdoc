@@ -11,4 +11,5 @@ export interface BlockProps {
   onFocusDown?: Function,
   onSelectStart?: Function,
   onSelectStop?: Function,
+  onCopy?: Function
 };

@@ -115,6 +115,16 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     }
   }, [selectStopPos])
 
+  // --- copy ---
+
+  const handleCopy = (block: any) => {
+    const selectBlocks = blocks.filter((block: any, index: number) => block.selectAll);
+    if (selectBlocks.length > 0) {
+      const all = selectBlocks.map((block: any, index: number) => block.text).join("\n");
+      console.log(all);
+    }
+  };
+
   // --- ui ---
   
   return <>
@@ -133,7 +143,8 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onFocusUp={handleFocusUp}
           onFocusDown={handleFocusDown}
           onSelectStart={handleSelectStart}
-          onSelectStop={handleSelectStop}/>)
+          onSelectStop={handleSelectStop}
+          onCopy={handleCopy}/>)
       }
     </div>
   </div>

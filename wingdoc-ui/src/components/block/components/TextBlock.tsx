@@ -13,7 +13,7 @@ const spinIcon = <LoadingOutlined spin />;
 
 const TextBlock = forwardRef((props: BlockProps, ref) => {
 
-  const {data, onSelectStart, onSelectStop} = props;
+  const {data, onSelectStart, onSelectStop, onCopy} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -199,6 +199,16 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
       focusInput();
     }
   }, [data.selectAll]);
+
+  // --- copy ---
+
+  const isPressCopy = (e: any) => {
+    if (e.key == "c" && e.metaKey) {
+      onCopy?.call(null, data);
+      return true;
+    }
+    return false;
+  };
   
   // --- click ---
 
@@ -219,6 +229,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     isDelete(e);
     isShowLink(e);
     isPressTask(e);
+    isPressCopy(e);
   };
 
   const menu = (

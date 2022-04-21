@@ -5,6 +5,7 @@ import { ArrowUpOutlined, ArrowDownOutlined, LoadingOutlined, LinkOutlined } fro
 import { BlockProps } from '@/components/block/BlockInterfaces';
 import OptionButton from '@/components/common/OptionButton';
 import Link from './Link';
+import Task from './Task';
 
 const { TextArea } = Input;
 
@@ -12,7 +13,7 @@ const spinIcon = <LoadingOutlined spin />;
 
 const TextBlock = forwardRef((props: BlockProps, ref) => {
 
-  const {data} = props;
+  const { data } = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -90,7 +91,6 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-
   // ### link ###
 
   const linkRef = useRef<any>(null);
@@ -144,6 +144,29 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   }, [props.focus]);
 
+  // --- task ---
+
+  const taskRef = useRef<any>(null);
+
+  const [taskShow, setTaskShow] = useState<boolean>(data.type == "TASK")
+
+  const [taskStatus, setTaskStatus] = useState<any>(data.taskStatus);
+
+  const openTask = () => {
+    setTaskShow(true);
+    setTaskStatus(null);
+  };
+
+  const isPressTask = (e: any) => {
+    if (e.key == "u" && e.metaKey) {
+      openTask();
+    }
+  };
+
+  const handleTaskChange = (status: string) => {
+    setTaskStatus(status);
+  };
+
   // ### key press ###
 
   const handlePress = (e: any) => {
@@ -152,6 +175,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     isFocusDown(e);
     isDelete(e);
     isShowLink(e);
+    isPressTask(e);
   };
 
   const menu = (
@@ -190,7 +214,14 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
         flexGrow: 1,
+        display: "flex",
       }}>
+      <Task 
+        ref={taskRef}
+        id={data.id}
+        show={taskShow}
+        status={taskStatus}
+        onChange={handleTaskChange}/>
       <TextArea 
         ref={inputRef}
         placeholder="" 
@@ -205,6 +236,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         onKeyDown={handlePress}
         style={{
           color: linking ? "#1890ff" : "inherit",
+          flexGrow: "1",
         }}/>
       <Link
         ref={linkRef}

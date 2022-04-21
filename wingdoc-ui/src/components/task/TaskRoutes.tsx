@@ -1,7 +1,11 @@
-import { FC, forwardRef } from 'react';
+import { forwardRef } from 'react';
+
+import TaskTable from './TaskTable';
 
 const TaskRoutes = forwardRef((props, ref) => {
-  return <>Task</>
+  return <>
+  <TaskTable/>
+  </>
 });
 
 export default TaskRoutes;

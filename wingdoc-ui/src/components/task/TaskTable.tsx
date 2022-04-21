@@ -1,28 +1,27 @@
-import TableStyle from '@/components/common/TableStyle.css';
 import { forwardRef, useState } from "react";
+import TableStyle from '@/components/common/TableStyle.css';
 import { Space, Input, Button } from "antd";
-import MockImage from "@/components/mock/MockImg";
 
-interface MediaTableProps {
-}
-
-const MediaTable = forwardRef((props: MediaTableProps, ref) => {
+const TaskTable = forwardRef((props, ref) => {
 
   const [datas, setDatas] = useState([
     {
-      id: "sampleid1",
-      name: "sample name1",
-      url: MockImage.img50,
+      id: "blockid1",
+      text: "task1",
+      status: "NEW",
+      docTitle: "00M04W4D21",
     },
     {
-      id: "sampleid2",
-      name: "sample name2",
-      url: MockImage.img50,
+      id: "blockid2",
+      text: "task2",
+      status: "WIP",
+      docTitle: "00M04W4D21",
     },
     {
-      id: "sampleid3",
-      name: "sample name3",
-      url: MockImage.img50,
+      id: "blockid3",
+      text: "task3",
+      status: "BREAK",
+      docTitle: "00M04W4D21",
     },
   ]);
 
@@ -32,25 +31,23 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
       <Input placeholder="Search"/>
       <Button type="default">Search</Button>
     </Space>
-    <table 
+    <table
       className={TableStyle.simple}
       style={{width: "auto"}}
       >
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Preview</th>
+          <th>Task</th>
+          <th>Status</th>
+          <th>Doc</th>
         </tr>
       </thead>
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
-          <td>{data.id}</td>
-          <td>{data.name}</td>
-          <td>
-            <img src={data.url} height="50"></img>
-          </td>
+          <td>{data.text}</td>
+          <td>{data.status}</td>
+          <td>{data.docTitle}</td>
         </tr>
       ))}
       </tbody>
@@ -62,4 +59,4 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
   </>;
 });
 
-export default MediaTable;
+export default TaskTable;

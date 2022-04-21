@@ -43,22 +43,23 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
     }}>
     <div
       style={{
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
+        marginRight: 2,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",

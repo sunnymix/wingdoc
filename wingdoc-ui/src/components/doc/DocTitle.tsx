@@ -46,22 +46,24 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
-      alignItems: "center"
+      alignItems: "center",
+      marginBottom: 2,
     }}>
     <div
       style={{
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
+        marginRight: 2,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: showBlock ? "#ddd" : "transparent",
@@ -76,7 +78,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         placeholder="Title"
         autoSize={true}
         style={{ 
-          fontSize: 24,
+          fontSize: 28,
           fontWeight: 700,
         }}/>
     </div>

@@ -13,7 +13,7 @@ const spinIcon = <LoadingOutlined spin />;
 
 const TextBlock = forwardRef((props: BlockProps, ref) => {
 
-  const { data } = props;
+  const {data, onSelect} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -65,10 +65,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         window.open(link, "_blank");
       }
     }
-  };
-
-  const handleClick = (e: any) => {
-    isRedirectLink(e);
+    return false;
   };
 
   const isFocusUp = (e: any) => {
@@ -91,7 +88,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  // ### link ###
+  // --- link ---
 
   const linkRef = useRef<any>(null);
 
@@ -125,7 +122,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     focusInput();
   };
 
-  // ### focus input ###
+  // --- focus input ---
 
   const inputRef = useRef<any>(null);
 
@@ -178,7 +175,34 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  // ### key press ###
+  // --- select ---
+
+  const isClickSelect = (e: any) => {
+    if (e.metaKey) {
+      onSelect?.call(null, data);
+      return true;
+    }
+    return false;
+  };
+
+  const handleSelect = (e: any) => {
+    console.log(e);
+  };
+
+  const handleSelectCapture = (e: any) => {
+    console.log(e);
+  };
+  
+  // --- click ---
+
+  const handleClick = (e: any) => {
+    if (isClickSelect(e)) {
+    } else {
+      isRedirectLink(e);
+    }
+  };
+
+  // --- key press ---
 
   const handlePress = (e: any) => {
     setHover(false);
@@ -203,24 +227,26 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       display: "flex",
-      alignItems: "flex-start"
+      alignItems: "flex-start",
+      marginBottom: 2,
     }}>
     <div
       style={{
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
         marginTop: 3,
+        marginRight: 2,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
-        borderRadius: 0,
+        borderRadius: 2,
         borderStyle: "solid",
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
@@ -249,6 +275,8 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
           onBlur={handleChange}
           onPressEnter={handleEnter}
           onKeyDown={handlePress}
+          onSelect={handleSelect}
+          onSelectCapture={handleSelect}
           style={{
             color: linking ? "#1890ff" : "inherit",
             flexGrow: "1",

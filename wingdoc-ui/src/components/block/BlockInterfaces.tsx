@@ -9,4 +9,5 @@ export interface BlockProps {
   onMoveDown?: Function,
   onFocusUp?: Function,
   onFocusDown?: Function,
+  onSelect?: Function,
 };

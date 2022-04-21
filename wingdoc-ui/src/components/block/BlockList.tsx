@@ -73,6 +73,12 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   const handleFocusDown = (blockData: any) => {
     setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
   };
+
+  // --- select ---
+
+  const handleSelect = (blockData: any) => {
+    console.log(blockData);
+  };
   
   return <>
   <div>
@@ -88,7 +94,8 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onMoveUp={handleBlockMoveUp}
           onMoveDown={handleBlockMoveDown}
           onFocusUp={handleFocusUp}
-          onFocusDown={handleFocusDown}/>)
+          onFocusDown={handleFocusDown}
+          onSelect={handleSelect}/>)
       }
     </div>
   </div>

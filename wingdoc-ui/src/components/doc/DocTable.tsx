@@ -48,7 +48,10 @@ const DocTable: FC<{}> = ({}) => {
           <td>{data.title}</td>
           <td>0</td>
           <td>
-            <Link to={`/doc/${data.id}`}>Edit</Link>
+            <Space direction="horizontal" size="middle">
+              <Link to={`/doc/${data.id}`}>Edit</Link>
+              <Button type="link" size="small">Plus</Button>
+            </Space>
           </td>
         </tr>
       ))}

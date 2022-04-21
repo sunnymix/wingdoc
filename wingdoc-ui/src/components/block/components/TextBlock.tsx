@@ -109,8 +109,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const handleSaveLink = (link: any) => {
     openLink(false);
-    const type = (link && link.length > 0) ? "LINK" : "TEXT";
-    BlockApi.updateBlock(data.id, { type, link }, (ok: any) => {
+    BlockApi.updateBlock(data.id, { link }, (ok: any) => {
       if (ok) {
         setLink(link);
       } else {
@@ -144,17 +143,25 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   }, [props.focus]);
 
+  // --- type ---
+
+  const [type, setType] = useState<string>(data.type || "TEXT");
+
   // --- task ---
 
   const taskRef = useRef<any>(null);
 
-  const [taskShow, setTaskShow] = useState<boolean>(data.type == "TASK")
+  const [taskShow, setTaskShow] = useState<boolean>(type == "TASK")
 
   const [taskStatus, setTaskStatus] = useState<any>(data.taskStatus);
 
   const openTask = () => {
-    setTaskShow(true);
-    setTaskStatus(null);
+    if (!taskShow) {
+      BlockApi.updateBlock(data.id, { type: "TASK" }, (ok: any) => {
+        setTaskShow(true);
+        setTaskStatus(null);
+      });
+    }
   };
 
   const isPressTask = (e: any) => {
@@ -222,27 +229,32 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         show={taskShow}
         status={taskStatus}
         onChange={handleTaskChange}/>
-      <TextArea 
-        ref={inputRef}
-        placeholder="" 
-        autoSize 
-        value={text}
-        size="middle"
-        bordered={false}
-        onClick={handleClick}
-        onChange={handleChange}
-        onBlur={handleChange}
-        onPressEnter={handleEnter}
-        onKeyDown={handlePress}
+      <div
         style={{
-          color: linking ? "#1890ff" : "inherit",
-          flexGrow: "1",
-        }}/>
-      <Link
-        ref={linkRef}
-        value={link}
-        onSave={handleSaveLink}
-        onCancel={handleCancelLink}/>
+          flexGrow: 1,
+        }}>
+        <TextArea 
+          ref={inputRef}
+          placeholder="" 
+          autoSize 
+          value={text}
+          size="middle"
+          bordered={false}
+          onClick={handleClick}
+          onChange={handleChange}
+          onBlur={handleChange}
+          onPressEnter={handleEnter}
+          onKeyDown={handlePress}
+          style={{
+            color: linking ? "#1890ff" : "inherit",
+            flexGrow: "1",
+          }}/>
+        <Link
+          ref={linkRef}
+          value={link}
+          onSave={handleSaveLink}
+          onCancel={handleCancelLink}/>
+      </div>
     </div>
   </div>
   </>

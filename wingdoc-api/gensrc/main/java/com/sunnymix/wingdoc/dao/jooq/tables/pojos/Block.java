@@ -19,6 +19,7 @@ public class Block implements Serializable {
     private final String  docId;
     private final Integer pos;
     private final String  type;
+    private final String  status;
     private final String  text;
     private final String  link;
 
@@ -27,6 +28,7 @@ public class Block implements Serializable {
         this.docId = value.docId;
         this.pos = value.pos;
         this.type = value.type;
+        this.status = value.status;
         this.text = value.text;
         this.link = value.link;
     }
@@ -36,6 +38,7 @@ public class Block implements Serializable {
         String  docId,
         Integer pos,
         String  type,
+        String  status,
         String  text,
         String  link
     ) {
@@ -43,6 +46,7 @@ public class Block implements Serializable {
         this.docId = docId;
         this.pos = pos;
         this.type = type;
+        this.status = status;
         this.text = text;
         this.link = link;
     }
@@ -76,6 +80,13 @@ public class Block implements Serializable {
     }
 
     /**
+     * Getter for <code>wingdoc.block.status</code>. 状态
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    /**
      * Getter for <code>wingdoc.block.text</code>. 内容
      */
     public String getText() {
@@ -97,6 +108,7 @@ public class Block implements Serializable {
         sb.append(", ").append(docId);
         sb.append(", ").append(pos);
         sb.append(", ").append(type);
+        sb.append(", ").append(status);
         sb.append(", ").append(text);
         sb.append(", ").append(link);
 

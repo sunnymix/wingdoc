@@ -153,13 +153,13 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const [taskShow, setTaskShow] = useState<boolean>(type == "TASK")
 
-  const [taskStatus, setTaskStatus] = useState<any>(data.taskStatus);
+  const [status, setStatus] = useState<any>(data.status);
 
   const openTask = () => {
     if (!taskShow) {
       BlockApi.updateBlock(data.id, { type: "TASK" }, (ok: any) => {
         setTaskShow(true);
-        setTaskStatus(null);
+        setStatus(null);
       });
     }
   };
@@ -170,8 +170,12 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  const handleTaskChange = (status: string) => {
-    setTaskStatus(status);
+  const handleTaskChange = (newStatus: string) => {
+    if (newStatus && newStatus != status) {
+      BlockApi.updateBlock(data.id, {status: newStatus}, (ok: any) => {
+        setStatus(newStatus);
+      });
+    }
   };
 
   // ### key press ###
@@ -227,7 +231,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         ref={taskRef}
         id={data.id}
         show={taskShow}
-        status={taskStatus}
+        status={status}
         onChange={handleTaskChange}/>
       <div
         style={{

@@ -16,6 +16,8 @@ public class BlockUpdateForm {
 
     private String type;
 
+    private String status;
+
     private String text;
 
     private String link;

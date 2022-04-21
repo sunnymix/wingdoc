@@ -30,6 +30,7 @@ public class BlockCreateForm {
                 docId,
                 pos,
                 "TEXT",
+                "",
                 text,
                 ""
         );
@@ -41,6 +42,7 @@ public class BlockCreateForm {
                 docId,
                 pos,
                 "TEXT",
+                "",
                 text,
                 ""
         );

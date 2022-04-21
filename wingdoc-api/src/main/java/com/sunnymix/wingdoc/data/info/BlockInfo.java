@@ -19,6 +19,8 @@ public class BlockInfo {
 
     private String type;
 
+    private String status;
+
     private String text;
 
     private String link;
@@ -32,6 +34,7 @@ public class BlockInfo {
                 block.getDocId(),
                 block.getPos(),
                 block.getType(),
+                block.getStatus(),
                 block.getText(),
                 block.getLink()
         );

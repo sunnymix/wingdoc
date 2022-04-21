@@ -15,7 +15,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row6;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -66,6 +66,11 @@ public class Block extends TableImpl<BlockRecord> {
      * The column <code>wingdoc.block.type</code>. 类型
      */
     public final TableField<BlockRecord, String> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR(20).nullable(false).defaultValue(DSL.inline("TEXT", SQLDataType.VARCHAR)), this, "类型");
+
+    /**
+     * The column <code>wingdoc.block.status</code>. 状态
+     */
+    public final TableField<BlockRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.VARCHAR(20).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "状态");
 
     /**
      * The column <code>wingdoc.block.text</code>. 内容
@@ -152,11 +157,11 @@ public class Block extends TableImpl<BlockRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row6 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<String, String, Integer, String, String, String> fieldsRow() {
-        return (Row6) super.fieldsRow();
+    public Row7<String, String, Integer, String, String, String, String> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

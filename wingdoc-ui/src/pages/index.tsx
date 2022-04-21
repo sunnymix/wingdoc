@@ -7,7 +7,7 @@ import {
   Switch
 } from "react-router-dom";
 
-import Doc from '@/components/doc/Doc';
+import DocRoutes from '@/components/doc/DocRoutes';
 import MediaFacade from '@/components/media/MediaFacade';
 
 const { TabPane } = Tabs;
@@ -35,7 +35,7 @@ export default function Page() {
                     Wing
                   </TabPane>
                   <TabPane tab="Doc" key="doc">
-                    <Doc id={match.params.p1}/>
+                    <DocRoutes id={match.params.p1}/>
                   </TabPane>
                   <TabPane tab="Media" key="media">
                     <MediaFacade id={match.params.p1}/>

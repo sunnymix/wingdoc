@@ -47,7 +47,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     style={{
       display: "flex",
       alignItems: "center",
-      marginBottom: 2,
+      marginBottom: 1,
     }}>
     <div
       style={{
@@ -56,7 +56,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         borderWidth: 1,
         borderColor: showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
-        marginRight: 2,
+        marginRight: 1,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>

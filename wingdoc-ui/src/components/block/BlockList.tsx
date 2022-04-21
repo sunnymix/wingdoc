@@ -76,9 +76,46 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   // --- select ---
 
-  const handleSelect = (blockData: any) => {
-    console.log(blockData);
+  const [selectStartPos, setSelectStartPos] = useState<number>(0);
+
+  const [selectStopPos, setSelectStopPos] = useState<number>(0);
+
+  const handleSelectStart = (blockData: any) => {
+    setSelectStartPos(blockData.pos);
+    setSelectStopPos(-1);
   };
+
+  const handleSelectStop = (block: any) => {
+    setSelectStopPos(block.pos);
+  };
+
+  const clearSelections = () => {
+    const newBlocks = blocks.map((block: any, index: number) => {
+      block.selectAll = false;
+      return block;
+    });
+    setBlocks(newBlocks);
+  };
+
+  const updateSelections = () => {
+    const start = selectStartPos < selectStopPos ? selectStartPos : selectStopPos;
+    const stop = selectStopPos > selectStartPos ? selectStopPos : selectStartPos;
+    const newBlocks = blocks.map((block: any, index: number) => {
+      block.selectAll = index >= start && index <= stop;
+      return block;
+    });
+    setBlocks(newBlocks);
+  };
+
+  useEffect(() => {
+    if (selectStopPos == -1) {
+      clearSelections();
+    } else {
+      updateSelections();
+    }
+  }, [selectStopPos])
+
+  // --- ui ---
   
   return <>
   <div>
@@ -95,7 +132,8 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onMoveDown={handleBlockMoveDown}
           onFocusUp={handleFocusUp}
           onFocusDown={handleFocusDown}
-          onSelect={handleSelect}/>)
+          onSelectStart={handleSelectStart}
+          onSelectStop={handleSelectStop}/>)
       }
     </div>
   </div>

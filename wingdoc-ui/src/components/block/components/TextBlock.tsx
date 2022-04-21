@@ -13,7 +13,7 @@ const spinIcon = <LoadingOutlined spin />;
 
 const TextBlock = forwardRef((props: BlockProps, ref) => {
 
-  const {data, onSelect} = props;
+  const {data, onSelectStart, onSelectStop} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -177,27 +177,35 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   // --- select ---
 
-  const isClickSelect = (e: any) => {
-    if (e.metaKey) {
-      onSelect?.call(null, data);
+  const isClickSelectStop = (e: any) => {
+    if (e.shiftKey) {
+      onSelectStop?.call(null, data);
       return true;
     }
     return false;
   };
 
   const handleSelect = (e: any) => {
-    console.log(e);
+    // TODO
   };
 
   const handleSelectCapture = (e: any) => {
-    console.log(e);
+    // TODO
   };
+
+  useEffect(() => {
+    if (data.selectAll) {
+      // TODO：修正聚焦逻辑
+      focusInput();
+    }
+  }, [data.selectAll]);
   
   // --- click ---
 
   const handleClick = (e: any) => {
-    if (isClickSelect(e)) {
+    if (isClickSelectStop(e)) {
     } else {
+      onSelectStart?.call(null, data);
       isRedirectLink(e);
     }
   };
@@ -228,7 +236,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     style={{
       display: "flex",
       alignItems: "flex-start",
-      marginBottom: 2,
+      marginBottom: 1,
     }}>
     <div
       style={{
@@ -238,8 +246,8 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         borderColor: props.showBlock ? "#ddd" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
-        marginTop: 3,
-        marginRight: 2,
+        marginTop: 4,
+        marginRight: 1,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
@@ -252,6 +260,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         borderColor: props.showBlock ? "#ddd" : "transparent",
         flexGrow: 1,
         display: "flex",
+        backgroundColor: data.selectAll ? "#e6f7ff" : "white",
       }}>
       <Task 
         ref={taskRef}
@@ -276,7 +285,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
           onPressEnter={handleEnter}
           onKeyDown={handlePress}
           onSelect={handleSelect}
-          onSelectCapture={handleSelect}
+          onSelectCapture={handleSelectCapture}
           style={{
             color: linking ? "#1890ff" : "inherit",
             flexGrow: "1",

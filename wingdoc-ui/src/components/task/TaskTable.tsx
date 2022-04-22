@@ -1,8 +1,11 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import TableStyle from '@/components/common/TableStyle.css';
 import { Space, Input, Button } from "antd";
+import TaskApi from "./TaskApi";
 
 const TaskTable = forwardRef((props, ref) => {
+
+  
 
   const [datas, setDatas] = useState([
     {
@@ -25,6 +28,16 @@ const TaskTable = forwardRef((props, ref) => {
     },
   ]);
 
+  const refreshDatas = () => {
+    TaskApi.getTaskList({}, (newDatas: any) => {
+      setDatas(newDatas || []);
+    });
+  };
+
+  useEffect(() => {
+    refreshDatas();
+  }, []);
+
   return <>
   <Space direction="vertical" size="middle" style={{width: "100%", padding: 2,}}>
     <Space direction="horizontal" size="small">
@@ -37,17 +50,17 @@ const TaskTable = forwardRef((props, ref) => {
       >
       <thead>
         <tr>
+          <th>Doc</th>
           <th>Task</th>
           <th>Status</th>
-          <th>Doc</th>
         </tr>
       </thead>
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
-          <td>{data.text}</td>
-          <td>{data.status}</td>
           <td>{data.docTitle}</td>
+          <td>{data.task}</td>
+          <td>{data.status}</td>
         </tr>
       ))}
       </tbody>

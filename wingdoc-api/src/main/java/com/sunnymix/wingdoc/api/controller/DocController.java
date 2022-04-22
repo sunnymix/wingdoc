@@ -25,6 +25,8 @@ public class DocController {
         return docRepo.list();
     }
 
+    // TODO: /doc/list 改成 /doc/list/add
+
     @PostMapping("/doc/list")
     public Out<DocInfo> add(@RequestBody DocCreateForm form) {
         return docRepo.create(form);
@@ -34,6 +36,8 @@ public class DocController {
     public Out<DocInfo> one(@PathVariable("id") String id) {
         return docRepo.one(id);
     }
+
+    // TODO: /doc/{id} 改成 /doc/{id}/update
 
     @PostMapping("/doc/{id}")
     public Out<Boolean> update(@PathVariable("id") String id,

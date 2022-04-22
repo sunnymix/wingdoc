@@ -4,6 +4,8 @@ import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Doc;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+// TODO：改用 builder 模式
+
 /**
  * @author sunnymix
  */

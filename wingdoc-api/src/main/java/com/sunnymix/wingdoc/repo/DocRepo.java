@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.sunnymix.wingdoc.dao.jooq.Tables.DOC;
@@ -74,6 +75,15 @@ public class DocRepo {
                 .fetchOneInto(Doc.class);
         DocInfo docInfo = DocInfo.__(doc);
         return Out.ok(Page.one(), docInfo);
+    }
+
+    public Map<String, Doc> queryDocMap(List<String> docIdList) {
+        List<Doc> docList = dsl
+                .selectFrom(DOC)
+                .where(DOC.ID.in(docIdList))
+                .fetchStreamInto(Doc.class)
+                .collect(Collectors.toList());
+        return docList.stream().collect(Collectors.toMap(Doc::getId, doc -> doc));
     }
 
 }

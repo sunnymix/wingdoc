@@ -179,4 +179,14 @@ public class BlockRepo {
         return dsl.fetchCount(BLOCK, BLOCK.DOC_ID.eq(docId));
     }
 
+    public Out<List<Block>> queryTask() {
+        List<Block> taskBlockList = dsl
+                .selectFrom(BLOCK)
+                .where(BLOCK.TYPE.eq("TASK"))
+                .orderBy(BLOCK.DOC_ID, BLOCK.POS)
+                .fetchStreamInto(Block.class)
+                .collect(Collectors.toList());
+        return Out.ok(taskBlockList);
+    }
+
 }

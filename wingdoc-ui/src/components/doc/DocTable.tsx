@@ -39,7 +39,7 @@ const DocTable: FC<{}> = ({}) => {
         <tr>
           <th>Doc</th>
           <th>Task</th>
-          <th>Actions</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

@@ -69,14 +69,15 @@ const Task = forwardRef((props: TaskProps, ref) => {
     <Dropdown overlay={menu}>
       <Button
         size="small"
-        type="text"
+        type="default"
+        shape="default"
         style={{
           fontSize: "75%",
-          color: "white",
-          width: 35,
-          paddingLeft: 0,
-          paddingRight: 0,
-          backgroundColor: displayColor(status),
+          color: displayColor(status),
+          width: 30,
+          padding: 0,
+          borderColor: displayColor(status),
+          textTransform: "lowercase",
         }}>{displayName(status)}</Button>
     </Dropdown>
   </div>

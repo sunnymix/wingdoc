@@ -50,7 +50,7 @@ const DocTable: FC<{}> = ({}) => {
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
-          <td><Link to={`/doc/${data.id}`} style={{color: "#444"}}>{data.title}</Link></td>
+          <td><Link to={`/doc/${data.id}`} style={{color: "#444", paddingRight: 10,}}>{data.title}</Link></td>
           <td>0</td>
         </tr>
       ))}

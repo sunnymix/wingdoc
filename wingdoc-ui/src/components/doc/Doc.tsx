@@ -49,7 +49,9 @@ const Doc: FC<{
   }
 
   return <>
-  <div>
+  <div
+    style={{
+    }}>
     <Space direction="vertical" size="large" style={{width: "100%"}}>
       <div>
         <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd} onShowBlock={() => setShowBlock(!showBlock)}/>

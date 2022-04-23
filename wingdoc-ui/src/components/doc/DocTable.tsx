@@ -25,7 +25,12 @@ const DocTable: FC<{}> = ({}) => {
   
   return (
   <>
-  <Space direction="vertical" size="middle" style={{width: "100%", padding: 2,}}>
+  <Space 
+    direction="vertical"
+    size="middle"
+    style={{
+      width: "100%",
+    }}>
     <Space direction="horizontal" size="small">
       <Input placeholder="Search"/>
       <Button type="default">Search</Button>
@@ -39,20 +44,13 @@ const DocTable: FC<{}> = ({}) => {
         <tr>
           <th>Doc</th>
           <th>Task</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
-          <td>{data.title}</td>
+          <td><Link to={`/doc/${data.id}`}>{data.title}</Link></td>
           <td>0</td>
-          <td>
-            <Space direction="horizontal" size="middle">
-              <Link to={`/doc/${data.id}`}>Edit</Link>
-              <Button type="link" size="small">Plus</Button>
-            </Space>
-          </td>
         </tr>
       ))}
       </tbody>

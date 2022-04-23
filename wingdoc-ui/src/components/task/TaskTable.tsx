@@ -38,8 +38,8 @@ const TaskTable = forwardRef((props, ref) => {
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
-          <td><Link to={`/doc/${data.docId}`} style={{color: "black"}}>{data.docTitle}</Link></td>
-          <td><Link to={`/doc/${data.docId}`} style={{color: "black"}}>{data.task}</Link></td>
+          <td><Link to={`/doc/${data.docId}`}>{data.docTitle}</Link></td>
+          <td><Link to={`/doc/${data.docId}`}>{data.task}</Link></td>
           <td>{data.status}</td>
         </tr>
       ))}

@@ -30,6 +30,7 @@ const DocTable: FC<{}> = ({}) => {
     size="middle"
     style={{
       width: "100%",
+      padding: 0,
     }}>
     <Space direction="horizontal" size="small">
       <Input placeholder="Search"/>

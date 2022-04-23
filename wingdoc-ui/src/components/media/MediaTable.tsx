@@ -27,7 +27,13 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
   ]);
 
   return <>
-  <Space direction="vertical" size="middle" style={{width: "100%", padding: 2,}}>
+  <Space
+    direction="vertical"
+    size="middle"
+    style={{
+      width: "100%",
+      padding: 0,
+    }}>
     <Space direction="horizontal" size="small">
       <Input placeholder="Search"/>
       <Button type="default">Search</Button>

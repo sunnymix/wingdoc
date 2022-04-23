@@ -5,7 +5,7 @@ export default (props: any) => {
   <div style={{
     padding: 10,
   }}>
-    <Nav defaultActiveKey="wing"/>
+    <Nav/>
     <div>{props.children}</div>
   </div>
   </>

@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from './BlockApi';
 import Block from './Block';
+import { useLocation } from 'umi';
 
 interface BlockListProps {
   docId: string,
@@ -9,27 +10,61 @@ interface BlockListProps {
 
 const BlockList = forwardRef((props: BlockListProps, ref) => {
 
+  // --- method bind ---
+
   useImperativeHandle(ref, () => ({
     add: handleAdd,
   }));
 
+  // --- loading ---
+
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [blocks, setBlocks] = useState<any[]>([]);
+  // --- active block ---
 
-  const [focusPos, setFocusPos] = useState<Number>(0);
+  const location: any = useLocation();
+  const queryBlock = location.query?.block || null;
+  const findBlockPos = (blocks: any[]) => {
+    const findBlocks = blocks.filter((block: any) => block.id == queryBlock);
+    if (findBlocks.length > 0) {
+      return findBlocks[0].pos || 0;
+    }
+    return 0;
+  };
+
+  // --- blocks ---
+
+  const [blocks, setBlocks] = useState<any[]>([]);
 
   const searchBlocks = () => {
     setLoading(true);
     BlockApi.getBlockListOfDoc(props.docId, (blocks: any) => {
       setLoading(false);
       setBlocks(blocks);
+      const newFocusPos = findBlockPos(blocks);
+      setFocusPos(newFocusPos);
     });
   };
+
+  // --- loaded ---
 
   useEffect(() => {
     searchBlocks();
   }, []);
+
+  // --- focus ---
+
+  const [focusPos, setFocusPos] = useState<Number>(0);
+
+  const handleFocusUp = (blockData: any) => {
+    setFocusPos(blockData.pos == 0 ? 0 : blockData.pos - 1);
+  };
+
+  const handleFocusDown = (blockData: any) => {
+    setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
+  };
+
+  // --- add ---
 
   const handleAdd = (pos?: number) => {
     const addAtPos = pos || 0;
@@ -39,9 +74,13 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     });
   };
 
+  // --- enter, add block ---
+
   const handleBlockEnter = (block: any) => {
     handleAdd(block.pos + 1);
   };
+
+  // --- delete ---
 
   const deleteBlock = (block: any) => {
     setFocusPos( block.pos == 0 ? 0 : block.pos - 1);
@@ -54,24 +93,20 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     deleteBlock(block);
   };
 
+  // --- move up ---
+
   const handleBlockMoveUp = (block: any) => {
     BlockApi.moveUp(block.id, (ok: any) => {
       searchBlocks();
     });
   };
 
+  // --- move down ---
+
   const handleBlockMoveDown = (block: any) => {
     BlockApi.moveDown(block.id, (ok: any) => {
       searchBlocks();
     });
-  };
-
-  const handleFocusUp = (blockData: any) => {
-    setFocusPos(blockData.pos == 0 ? 0 : blockData.pos - 1);
-  };
-
-  const handleFocusDown = (blockData: any) => {
-    setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
   };
 
   // --- select ---

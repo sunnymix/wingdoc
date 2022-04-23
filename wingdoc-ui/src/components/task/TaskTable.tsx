@@ -45,7 +45,7 @@ const TaskTable = forwardRef((props, ref) => {
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
           <td><Link to={`/doc/${data.docId}`} style={{color: "#444"}}>{data.docTitle}</Link></td>
-          <td><Link to={`/doc/${data.docId}`} style={{color: "#444"}}>{data.task}</Link></td>
+          <td><Link to={`/doc/${data.docId}?block=${data.id}`} style={{color: "#444"}}>{data.task}</Link></td>
           <td>{data.status}</td>
         </tr>
       ))}

@@ -20,7 +20,7 @@ const Doc: FC<{
 
   const [showBlock, setShowBlock] = useState<any>(false);
 
-  const [showControl, setShowControl] = useState<any>(false);
+  // --- search ---
 
   const searchDoc = () => {
     setLoading(true);
@@ -30,9 +30,13 @@ const Doc: FC<{
     });
   };
 
+  // --- loaded ---
+
   useEffect(() => {
     searchDoc();
   }, []);
+
+  // --- block list ---
 
   const blockListRef: any = useRef();
 

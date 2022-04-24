@@ -7,13 +7,14 @@ interface TaskProps {
   show?: boolean,
   status?: any,
   onChange?: Function,
+  style?: any,
 }
 
 const Task = forwardRef((props: TaskProps, ref) => {
 
   // --- props ---
 
-  const {id, show, status, onChange} = props;
+  const {id, show, status, onChange, style} = props;
 
   // --- ref ---
 
@@ -62,9 +63,8 @@ const Task = forwardRef((props: TaskProps, ref) => {
   return <>
   <div
     style={{
-      marginTop: 4,
-      marginLeft: 10,
       display: show ? "block" : "none",
+      ...style,
     }}>
     <Dropdown overlay={menu}>
       <Button

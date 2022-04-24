@@ -3,6 +3,7 @@ import TableStyle from '@/components/common/TableStyle.css';
 import { Space, Input, Button } from "antd";
 import TaskApi from "./TaskApi";
 import { Link } from 'umi';
+import Task from "@/components/block/components/Task";
 
 const TaskTable = forwardRef((props, ref) => {
 
@@ -38,15 +39,18 @@ const TaskTable = forwardRef((props, ref) => {
         <tr>
           <th>Doc</th>
           <th>Task</th>
-          <th>Status</th>
         </tr>
       </thead>
       <tbody>
       {datas.map((data: any, index: number) => (
         <tr key={data.id}>
           <td><Link to={`/doc/${data.docId}`} style={{color: "#444"}}>{data.docTitle}</Link></td>
-          <td><Link to={`/doc/${data.docId}?block=${data.id}`} style={{color: "#444"}}>{data.task}</Link></td>
-          <td>{data.status}</td>
+          <td>
+            <Space direction="horizontal" size="small">
+              <Task id={data.id} status={data.status} show={true}/>
+              <Link to={`/doc/${data.docId}?block=${data.id}`} style={{color: "#444"}}>{data.task}</Link>
+            </Space>
+          </td>
         </tr>
       ))}
       </tbody>

@@ -278,7 +278,11 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         id={data.id}
         show={taskShow}
         status={status}
-        onChange={handleTaskChange}/>
+        onChange={handleTaskChange}
+        style={{
+          marginTop: 4,
+          marginLeft: 10,
+        }}/>
       <div
         style={{
           flexGrow: 1,

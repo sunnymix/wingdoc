@@ -154,7 +154,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const openTask = () => {
     if (!taskShow) {
-      BlockApi.updateBlock(data.id, { type: "TASK" }, (ok: any) => {
+      BlockApi.updateBlock(data.id, { type: "TASK", status: "NEW", }, (ok: any) => {
         setTaskShow(true);
         setStatus(null);
       });

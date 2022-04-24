@@ -16,6 +16,10 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     add: handleAdd,
   }));
 
+  // -- props ---
+
+  const { docId, showBlock } = props;
+
   // --- loading ---
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,7 +42,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const searchBlocks = (focusPos: any) => {
     setLoading(true);
-    BlockApi.getBlockListOfDoc(props.docId, (blocks: any) => {
+    BlockApi.getBlockListOfDoc(docId, (blocks: any) => {
       setLoading(false);
       setBlocks(blocks);
       if (focusPos) {
@@ -54,7 +58,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   useEffect(() => {
     searchBlocks(null);
-  }, []);
+  }, [docId]);
 
   // --- focus ---
 
@@ -72,7 +76,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const handleAdd = (pos?: number) => {
     const addAtPos = pos || 0;
-    BlockApi.addBlockToDoc(props.docId, { text: "", pos: addAtPos }, (newBlock: any) => {
+    BlockApi.addBlockToDoc(docId, { text: "", pos: addAtPos }, (newBlock: any) => {
       // TODO：由接口返回段落位置
       searchBlocks(addAtPos);
     });
@@ -181,7 +185,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
         <Block
           key={block.id}
           data={block}
-          showBlock={props.showBlock}
+          showBlock={showBlock}
           focus={index == focusPos}
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}

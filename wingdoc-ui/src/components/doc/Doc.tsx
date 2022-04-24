@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import DocApi from './DocApi';
 import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -8,11 +8,20 @@ import DocAuthor from './DocAuthor';
 
 const spinIcon = <LoadingOutlined spin />;
 
-const Doc: FC<{
-  id: string
-}> = ({
-  id
-}) => {
+interface DocProps {
+  id: string,
+}
+
+const Doc = forwardRef((props: DocProps, ref) => {
+
+  // --- bind ---
+
+  useImperativeHandle(ref, () => ({
+  }));
+
+  // --- props ---
+
+  const { id } = props;
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -34,7 +43,7 @@ const Doc: FC<{
 
   useEffect(() => {
     searchDoc();
-  }, []);
+  }, [id]);
 
   // --- block list ---
 
@@ -65,6 +74,6 @@ const Doc: FC<{
     </Space>
   </div>
   </>;
-};
+});
 
 export default Doc;

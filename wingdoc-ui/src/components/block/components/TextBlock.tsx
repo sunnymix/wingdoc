@@ -7,6 +7,7 @@ import OptionButton from '@/components/common/OptionButton';
 import Link from './Link';
 import Task from './Task';
 import { Status } from './Task';
+import { history } from 'umi';
 
 const { TextArea } = Input;
 
@@ -58,12 +59,28 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     props.onEnter?.call(null, props.data);
   };
 
+  const isRedirectToLocalDoc = () => {
+    const routeStart = "/doc/";
+    const index = link.indexOf(routeStart);
+    if (index >= 0) {
+      const docLink = link.substr(index);
+      if (docLink.length > 0) {
+        history.push(docLink);
+        return true;
+      }
+    }
+    return false;
+  };
+
   const isRedirectLink = (e: any) => {
     if (linking) {
       const start = e.target.selectionStart;
       const end = e.target.selectionEnd;
       if (start == end && start > 0 && start < text.length) {
-        window.open(link, "_blank");
+        if (isRedirectToLocalDoc()) {
+        } else {
+          window.open(link, "_blank");
+        }
       }
     }
     return false;

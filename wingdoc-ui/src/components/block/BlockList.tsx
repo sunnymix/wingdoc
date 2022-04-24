@@ -36,20 +36,24 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const [blocks, setBlocks] = useState<any[]>([]);
 
-  const searchBlocks = () => {
+  const searchBlocks = (focusPos: any) => {
     setLoading(true);
     BlockApi.getBlockListOfDoc(props.docId, (blocks: any) => {
       setLoading(false);
       setBlocks(blocks);
-      const newFocusPos = findBlockPos(blocks);
-      setFocusPos(newFocusPos);
+      if (focusPos) {
+        setFocusPos(focusPos);
+      } else {
+        const newFocusPos = findBlockPos(blocks);
+        setFocusPos(newFocusPos);
+      }
     });
   };
 
   // --- loaded ---
 
   useEffect(() => {
-    searchBlocks();
+    searchBlocks(null);
   }, []);
 
   // --- focus ---
@@ -68,9 +72,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const handleAdd = (pos?: number) => {
     const addAtPos = pos || 0;
-    setFocusPos(addAtPos);
     BlockApi.addBlockToDoc(props.docId, { text: "", pos: addAtPos }, (newBlock: any) => {
-      searchBlocks();
+      // TODO：由接口返回段落位置
+      searchBlocks(addAtPos);
     });
   };
 
@@ -83,9 +87,10 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   // --- delete ---
 
   const deleteBlock = (block: any) => {
-    setFocusPos( block.pos == 0 ? 0 : block.pos - 1);
     BlockApi.deleteBlock(block.id, (ok: any) => {
-      searchBlocks();
+      // TODO：由接口返回段落位置
+      const newFocusPos = block.pos == 0 ? 0 : block.pos - 1;
+      searchBlocks(newFocusPos);
     });
   };
 
@@ -97,7 +102,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const handleBlockMoveUp = (block: any) => {
     BlockApi.moveUp(block.id, (ok: any) => {
-      searchBlocks();
+      // TODO：由接口返回段落位置
+      const newFocusPos = block.pos == 0 ? 0 : block.pos - 1;
+      searchBlocks(newFocusPos);
     });
   };
 
@@ -105,7 +112,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   const handleBlockMoveDown = (block: any) => {
     BlockApi.moveDown(block.id, (ok: any) => {
-      searchBlocks();
+      // TODO：确保后面有段落才能下移
+      const newFocusPos = block.pos + 1;
+      searchBlocks(newFocusPos);
     });
   };
 

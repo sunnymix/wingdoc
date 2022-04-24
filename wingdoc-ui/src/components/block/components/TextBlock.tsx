@@ -225,11 +225,14 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
   const handlePress = (e: any) => {
     setHover(false);
     isFocusUp(e);
-    isFocusDown(e);
     isDelete(e);
     isShowLink(e);
     isPressTask(e);
     isPressCopy(e);
+  };
+
+  const handleKeyUp = (e: any) => {
+    isFocusDown(e);
   };
 
   const menu = (
@@ -299,6 +302,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
           onBlur={handleChange}
           onPressEnter={handleEnter}
           onKeyDown={handlePress}
+          onKeyUp={handleKeyUp}
           onSelect={handleSelect}
           onSelectCapture={handleSelectCapture}
           style={{

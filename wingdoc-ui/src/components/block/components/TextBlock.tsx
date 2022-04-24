@@ -6,6 +6,7 @@ import { BlockProps } from '@/components/block/BlockInterfaces';
 import OptionButton from '@/components/common/OptionButton';
 import Link from './Link';
 import Task from './Task';
+import { Status } from './Task';
 
 const { TextArea } = Input;
 
@@ -154,7 +155,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const openTask = () => {
     if (!taskShow) {
-      BlockApi.updateBlock(data.id, { type: "TASK", status: "NEW", }, (ok: any) => {
+      BlockApi.updateBlock(data.id, { type: "TASK", status: Status.UN, }, (ok: any) => {
         setTaskShow(true);
         setStatus(null);
       });
@@ -167,7 +168,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  const handleTaskChange = (newStatus: string) => {
+  const handleTaskChange = (newStatus: Status) => {
     if (newStatus && newStatus != status) {
       BlockApi.updateBlock(data.id, {status: newStatus}, (ok: any) => {
         setStatus(newStatus);

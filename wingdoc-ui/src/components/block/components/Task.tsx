@@ -2,12 +2,62 @@ import { forwardRef, useImperativeHandle, useState } from "react";
 import { Dropdown, Button, Menu } from "antd";
 import TaskIcon from "@/components/icon/TaskIcon";
 
-interface TaskProps {
+export interface TaskProps {
   id: any,
   show?: boolean,
   status?: any,
   onChange?: Function,
   style?: any,
+}
+
+export enum Status { 
+  UN = "UN", 
+  ON = "ON", 
+  UP = "UP", 
+  OK = "OK", 
+  NO = "NO" 
+};
+
+export namespace Status {
+  export function all() {
+    return [
+      Status.UN,
+      Status.ON,
+      Status.OK,
+      Status.UP,
+      Status.NO,
+    ];
+  }
+
+  export function of(str: string) {
+    switch (str) {
+      case "ON":
+        return Status.ON;
+      case "OK":
+        return Status.OK;
+      case "UP":
+        return Status.UP;
+      case "NO":
+        return Status.NO;
+      default: 
+        return Status.UN;
+    }
+  }
+
+  export function color(status: Status) {
+    switch (status) {
+      case Status.ON:
+        return "#40a9ff";
+      case Status.OK:
+        return "#52c41a";
+      case Status.UP:
+        return "#ff4d4f";
+      case Status.NO:
+        return "#ccc";
+      default: 
+        return "#faad14";
+    }
+  }
 }
 
 const Task = forwardRef((props: TaskProps, ref) => {
@@ -23,7 +73,7 @@ const Task = forwardRef((props: TaskProps, ref) => {
 
   // --- change ---
 
-  const handleChange = (status: string) => {
+  const handleChange = (status: Status) => {
     onChange?.call(null, status);
   };
   
@@ -31,33 +81,20 @@ const Task = forwardRef((props: TaskProps, ref) => {
   
   const menu = (
     <Menu>
-      <Menu.Item key={`${id}-NEW`} onClick={() => handleChange("NEW")}>NEW</Menu.Item>
-      <Menu.Item key={`${id}-ON`} onClick={() => handleChange("ON")}>ON</Menu.Item>
-      <Menu.Item key={`${id}-OFF`} onClick={() => handleChange("OFF")}>OFF</Menu.Item>
-      <Menu.Item key={`${id}-OK`}  onClick={() => handleChange("OK")}>OK</Menu.Item>
-      <Menu.Item key={`${id}-DEL`}  onClick={() => handleChange("DEL")}>DEL</Menu.Item>
+      {Status.all().map((status: Status) => 
+        <Menu.Item key={`${id}-${status.toString}`} onClick={() => handleChange(status)}>{status}</Menu.Item>  
+      )}
     </Menu>
   );
 
   // --- display ---
 
-  const displayColor = (status: any) => {
-    status = status || "NEW";
-    var color = "#ccc";
-    if (status == "NEW") {
-      color = "#faad14";
-    } else if (status == "ON") {
-      color = "#40a9ff";
-    } else if (status == "OFF") {
-      color = "#ff4d4f";
-    } else if (status == "OK") {
-      color = "#52c41a";
-    }
-    return color;
+  const displayColor = (status: Status) => {
+    return Status.color(status);
   };
 
-  const displayName = (status: any) => {
-    return status || "NEW";
+  const displayName = (str: any) => {
+    return Status.of(str);
   };
   
   return <>
@@ -77,7 +114,6 @@ const Task = forwardRef((props: TaskProps, ref) => {
           width: 30,
           padding: 0,
           borderColor: displayColor(status),
-          textTransform: "lowercase",
         }}>{displayName(status)}</Button>
     </Dropdown>
   </div>

@@ -226,6 +226,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
   const handlePress = (e: any) => {
     setHover(false);
     isFocusUp(e);
+    isFocusDown(e);
     isDelete(e);
     isShowLink(e);
     isPressTask(e);
@@ -233,7 +234,6 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
   };
 
   const handleKeyUp = (e: any) => {
-    isFocusDown(e);
   };
 
   const menu = (

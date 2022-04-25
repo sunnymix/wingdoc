@@ -7,6 +7,7 @@ import com.sunnymix.wingdoc.data.form.BlockUpdateForm;
 import com.sunnymix.wingdoc.data.info.BlockInfo;
 import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.io.Page;
+import com.sunnymix.wingdoc.data.query.TaskQuery;
 import lombok.Getter;
 import org.jooq.DSLContext;
 import org.jooq.UpdateSetFirstStep;
@@ -179,10 +180,10 @@ public class BlockRepo {
         return dsl.fetchCount(BLOCK, BLOCK.DOC_ID.eq(docId));
     }
 
-    public Out<List<Block>> queryTask() {
+    public Out<List<Block>> queryTask(TaskQuery query) {
         List<Block> taskBlockList = dsl
                 .selectFrom(BLOCK)
-                .where(BLOCK.TYPE.eq("TASK"))
+                .where(query.toCondition())
                 .orderBy(BLOCK.DOC_ID, BLOCK.POS)
                 .fetchStreamInto(Block.class)
                 .collect(Collectors.toList());

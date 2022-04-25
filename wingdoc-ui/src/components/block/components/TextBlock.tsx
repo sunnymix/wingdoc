@@ -268,7 +268,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     style={{
       display: "flex",
       alignItems: "flex-start",
-      marginBottom: 1,
+      marginBottom: 0,
     }}>
     <div
       style={{
@@ -279,7 +279,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         position: "relative",
         visibility: hover ? "visible" : "hidden",
         marginTop: 4,
-        marginRight: 1,
+        marginRight: 0,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>

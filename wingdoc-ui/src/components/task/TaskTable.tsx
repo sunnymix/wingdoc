@@ -10,7 +10,7 @@ const TaskTable = forwardRef((props, ref) => {
   const [datas, setDatas] = useState([]);
 
   const refreshDatas = () => {
-    TaskApi.getTaskList({}, (newDatas: any) => {
+    TaskApi.queryTaskList({}, (newDatas: any) => {
       setDatas(newDatas || []);
     });
   };

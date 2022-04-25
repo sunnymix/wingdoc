@@ -72,7 +72,7 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         borderWidth: 1,
         borderColor: props.showBlock ? "#ddd" : "transparent",
         visibility: hover ? "visible" : "hidden",
-        marginRight: 1,
+        marginRight: 0,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>

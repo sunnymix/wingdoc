@@ -3,8 +3,8 @@ import Constant from "../common/Constant";
 
 const API_TASK_LIST = Constant.API_HOST + "/task/list";
 
-const getTaskList = (query: any, cb: Function) => {
-  axios.get(API_TASK_LIST)
+const queryTaskList = (query: any, cb: Function) => {
+  axios.post(API_TASK_LIST, query)
     .then(res => {
       const data = res.data?.data;
       cb(data);
@@ -12,7 +12,7 @@ const getTaskList = (query: any, cb: Function) => {
 };
 
 const TaskApi = {
-  getTaskList,
+  queryTaskList,
 };
 
 export default TaskApi;

@@ -4,6 +4,7 @@ import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Block;
 import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Doc;
 import com.sunnymix.wingdoc.data.info.TaskInfo;
 import com.sunnymix.wingdoc.data.io.Out;
+import com.sunnymix.wingdoc.data.query.TaskQuery;
 import com.sunnymix.wingdoc.repo.BlockRepo;
 import com.sunnymix.wingdoc.repo.DocRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class TaskQueryService {
     @Autowired
     private DocRepo docRepo;
 
-    public Out<List<TaskInfo>> query() {
-        Out<List<Block>> blockOut = blockRepo.queryTask();
+    public Out<List<TaskInfo>> query(TaskQuery query) {
+        Out<List<Block>> blockOut = blockRepo.queryTask(query);
         List<Block> blockList = blockOut.getData();
         Map<String, Doc> docMap = _getDocMap(blockList);
         List<TaskInfo> taskList = blockList.stream()

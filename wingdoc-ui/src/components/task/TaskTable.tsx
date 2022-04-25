@@ -4,20 +4,40 @@ import { Space, Input, Button } from "antd";
 import TaskApi from "./TaskApi";
 import { Link } from 'umi';
 import Task from "@/components/block/components/Task";
+import TaskStatusSelect from "./TaskStatusSelect";
+import { Status } from "@/components/block/components/Task";
 
 const TaskTable = forwardRef((props, ref) => {
 
-  const [datas, setDatas] = useState([]);
+  // --- tasks
 
-  const refreshDatas = () => {
-    TaskApi.queryTaskList({}, (newDatas: any) => {
-      setDatas(newDatas || []);
+  const [tasks, setTasks] = useState([]);
+
+  // --- statusIn
+
+  const defaultStatusIn = [Status.UN, Status.ON, Status.UP];
+
+  const [statusIn, setStatusIn] = useState<Status[]>(defaultStatusIn);
+
+  const handleStatusSelectChange = (value: Status[]) => {
+    setStatusIn(value);
+  };
+
+  // --- query
+
+  const queryTasks = () => {
+    TaskApi.queryTaskList({ statusIn }, (newDatas: any) => {
+      setTasks(newDatas || []);
     });
   };
 
+  // --- effect
+
   useEffect(() => {
-    refreshDatas();
-  }, []);
+    queryTasks();
+  }, [statusIn]);
+
+  // --- ui
 
   return <>
   <Space
@@ -28,6 +48,7 @@ const TaskTable = forwardRef((props, ref) => {
       padding: 0,
     }}>
     <Space direction="horizontal" size="small">
+      <TaskStatusSelect onChange={handleStatusSelectChange}/>
       <Input placeholder="Search"/>
       <Button type="default">Search</Button>
     </Space>
@@ -42,13 +63,13 @@ const TaskTable = forwardRef((props, ref) => {
         </tr>
       </thead>
       <tbody>
-      {datas.map((data: any, index: number) => (
-        <tr key={data.id}>
-          <td><Link to={`/doc/${data.docId}`} style={{color: "#444"}}>{data.docTitle}</Link></td>
+      {tasks.map((task: any, index: number) => (
+        <tr key={task.id}>
+          <td><Link to={`/doc/${task.docId}`} style={{color: "#444"}}>{task.docTitle}</Link></td>
           <td>
             <Space direction="horizontal" size="small">
-              <Task id={data.id} defaultStatus={data.status} show={true}/>
-              <Link to={`/doc/${data.docId}?block=${data.id}`} style={{color: "#444"}}>{data.task}</Link>
+              <Task id={task.id} defaultStatus={task.status} show={true}/>
+              <Link to={`/doc/${task.docId}?block=${task.id}`} style={{color: "#444"}}>{task.task}</Link>
             </Space>
           </td>
         </tr>
@@ -56,7 +77,7 @@ const TaskTable = forwardRef((props, ref) => {
       </tbody>
     </table>
     <Space direction="horizontal" size="small">
-      <div className={TableStyle.simple_tail}>Total: {datas.length}</div>
+      <div className={TableStyle.simple_tail}>Total: {tasks.length}</div>
     </Space>
   </Space>
   </>;

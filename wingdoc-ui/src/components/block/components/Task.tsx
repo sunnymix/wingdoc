@@ -94,7 +94,7 @@ const Task = forwardRef((props: TaskProps, ref) => {
   };
 
   const displayName = (str: any) => {
-    return Status.of(str);
+    return Status.of(str).toString().toUpperCase();
   };
   
   return <>
@@ -109,10 +109,11 @@ const Task = forwardRef((props: TaskProps, ref) => {
         type="default"
         shape="default"
         style={{
-          fontSize: "80%",
+          fontSize: "75%",
           color: displayColor(status),
           width: 24,
           padding: 0,
+          borderWidth: 1,
           borderColor: displayColor(status),
         }}>{displayName(status)}</Button>
     </Dropdown>

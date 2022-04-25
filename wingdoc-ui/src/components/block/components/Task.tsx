@@ -109,9 +109,9 @@ const Task = forwardRef((props: TaskProps, ref) => {
         type="default"
         shape="default"
         style={{
-          fontSize: "75%",
+          fontSize: "80%",
           color: displayColor(status),
-          width: 30,
+          width: 24,
           padding: 0,
           borderColor: displayColor(status),
         }}>{displayName(status)}</Button>

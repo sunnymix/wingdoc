@@ -1,11 +1,11 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Dropdown, Button, Menu } from "antd";
-import TaskIcon from "@/components/icon/TaskIcon";
+import BlockApi from "../BlockApi";
 
 export interface TaskProps {
   id: any,
   show?: boolean,
-  status?: any,
+  defaultStatus?: Status,
   onChange?: Function,
   style?: any,
 }
@@ -60,24 +60,32 @@ export namespace Status {
   }
 }
 
-const Task = forwardRef((props: TaskProps, ref) => {
+// --- component
 
-  // --- props ---
+export default forwardRef((props: TaskProps, ref) => {
 
-  const {id, show, status, onChange, style} = props;
+  // --- props
 
-  // --- ref ---
+  const { id, show, defaultStatus, onChange, style } = props;
+
+  // --- status
+
+  const [ status, setStatus ] = useState<Status>(defaultStatus || Status.UN);
+
+  // --- ref handle
 
   useImperativeHandle(ref, () => ({
   }));
 
-  // --- change ---
+  // --- change
 
   const handleChange = (status: Status) => {
-    onChange?.call(null, status);
+    BlockApi.updateBlock(id, { status }, (ok: any) => {
+      setStatus(status);
+    });
   };
   
-  // --- menu ---
+  // --- menu
   
   const menu = (
     <Menu>
@@ -87,7 +95,7 @@ const Task = forwardRef((props: TaskProps, ref) => {
     </Menu>
   );
 
-  // --- display ---
+  // --- display
 
   const displayColor = (status: Status) => {
     return Status.color(status);
@@ -96,6 +104,8 @@ const Task = forwardRef((props: TaskProps, ref) => {
   const displayName = (str: any) => {
     return Status.of(str).toString().toUpperCase();
   };
+
+  // --- ui
   
   return <>
   <div
@@ -120,5 +130,3 @@ const Task = forwardRef((props: TaskProps, ref) => {
   </div>
   </>
 });
-
-export default Task;

@@ -47,7 +47,7 @@ const TaskTable = forwardRef((props, ref) => {
           <td><Link to={`/doc/${data.docId}`} style={{color: "#444"}}>{data.docTitle}</Link></td>
           <td>
             <Space direction="horizontal" size="small">
-              <Task id={data.id} status={data.status} show={true}/>
+              <Task id={data.id} defaultStatus={data.status} show={true}/>
               <Link to={`/doc/${data.docId}?block=${data.id}`} style={{color: "#444"}}>{data.task}</Link>
             </Space>
           </td>

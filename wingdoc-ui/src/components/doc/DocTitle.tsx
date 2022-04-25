@@ -1,4 +1,4 @@
-import {forwardRef, useState} from 'react';
+import {forwardRef, useEffect, useState} from 'react';
 import {Input, Menu, Dropdown} from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
@@ -15,11 +15,13 @@ interface DocTitleProps {
 
 const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
+  // --- props ---
+
   const {id, value, showBlock, onEnter, onShowBlock} = props;
 
-  const [title, setTitle] = useState<string>(value);
+  // --- title ---
 
-  const [hover, setHover] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>(value);
 
   const changeTitle = (e: any) => {
     const newTitle = e.target.value || "";
@@ -28,18 +30,34 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     });
   };
 
+  // --- hover ---
+
+  const [hover, setHover] = useState<boolean>(false);
+
+  // --- menu ---
+
   const menu = (
     <Menu>
       <Menu.Item key={`${id}--show-block`} onClick={() => onShowBlock?.call(null)}>Block : {showBlock ? "on" : "off"}</Menu.Item>
     </Menu>
   );
 
+  // --- enter ---
+
   const handleEnter = (e: any) => {
     e.preventDefault();
     setHover(false);
     onEnter?.call(null);
   };
+
+  // --- effect ---
+
+  useEffect(() => {
+    setTitle(value);
+  }, [value]);
   
+  // --- ui ---
+
   return <>
   <div
     onMouseMove={() => setHover(true)}

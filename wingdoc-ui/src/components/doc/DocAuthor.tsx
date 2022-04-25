@@ -1,22 +1,26 @@
-import { FC, forwardRef, useState } from 'react';
+import { FC, forwardRef, useEffect, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
 
 const {TextArea} = Input;
 
-interface DocAuthorProps {
+export interface DocAuthorProps {
   id: string,
   value: string,
   showBlock: boolean,
   onEnter?: Function,
 };
 
-const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
+export default forwardRef((props: DocAuthorProps, ref) => {
+
+  // --- props
+
+  const { id, value, showBlock, onEnter } = props;
+
+  // --- author
 
   const [author, setAuthor] = useState<string>(props.value);
-
-  const [hover, setHover] = useState<boolean>(false);
 
   const changeAuthor = (e: any) => {
     const newAuthor = (e.target.value || "").trim();
@@ -25,17 +29,33 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
     });
   };
 
+  // --- hover
+
+  const [hover, setHover] = useState<boolean>(false);
+
+  // --- enter
+
   const handleEnter = (e: any) => {
     e.preventDefault();
     setHover(false);
     props.onEnter?.call(null);
   };
 
+  // --- menu
+
   const menu = (
     <Menu>
       <Menu.Item key={`${props.id}-docs`}>docs</Menu.Item>
     </Menu>
   );
+
+  // --- effect
+
+  useEffect(() => {
+    setAuthor(value);
+  }, [value]);
+
+  // --- ui
   
   return <>
   <div
@@ -79,5 +99,3 @@ const DocAuthor = forwardRef((props: DocAuthorProps, ref) => {
   </div>
   </>
 });
-
-export default DocAuthor;

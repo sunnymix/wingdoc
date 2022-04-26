@@ -9,10 +9,10 @@ table.auto {
 
 table.simple th,
 table.simple td {
-  height: 32px;
-  padding: 4px 20px;
+  padding: 6px 20px;
   vertical-align: middle;
-  border: 1px solid #dedede;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
 }
 
 table.simple th {
@@ -24,6 +24,6 @@ table.simple th {
 .simple_tail {
   background-color: #fff;
   border: 1px solid #dedede;
-  padding: 4px 20px;
+  padding: 6px 20px;
   border-radius: 2px;
 }

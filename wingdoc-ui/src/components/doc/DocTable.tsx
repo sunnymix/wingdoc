@@ -32,7 +32,7 @@ const DocTable: FC<{}> = ({}) => {
       width: "100%",
       padding: 0,
     }}>
-    <Space direction="horizontal" size="small">
+    <Space direction="horizontal" size="middle">
       <Input placeholder="Search"/>
       <Button type="default">Search</Button>
       <Button type="default" onClick={handleAdd}>Add</Button>
@@ -41,17 +41,13 @@ const DocTable: FC<{}> = ({}) => {
       className={TableStyle.simple}
       style={{width: "auto"}}
       >
-      <thead>
-        <tr>
-          <th>Doc</th>
-          <th>Task</th>
-        </tr>
-      </thead>
       <tbody>
       {datas.map((data: any, index: number) => (
-        <tr key={data.id}>
-          <td><Link to={`/doc/${data.id}`} style={{color: "#444", paddingRight: 10,}}>{data.title}</Link></td>
-          <td>0</td>
+        <tr
+          key={data.id}
+          onClick={() => history.push(`/doc/${data.id}`)}>
+          <td>{data.title}</td>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;0</td>
         </tr>
       ))}
       </tbody>

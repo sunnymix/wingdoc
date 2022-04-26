@@ -26,7 +26,7 @@ const DocTable: FC<{}> = ({}) => {
 
   // -- search width
 
-  const searchWidthDefault = 100;
+  const searchWidthDefault = 75;
   const searchWidthLarge = 200;
   const [searchWidth, setSearchWidth] = useState<any>(searchWidthDefault)
 
@@ -51,7 +51,7 @@ const DocTable: FC<{}> = ({}) => {
         allowClear
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
-        style={{width: searchWidth}}/>
+        style={{width: searchWidth, paddingLeft: 5, paddingRight: 5,}}/>
       <Button type="default"><SearchOutlined/></Button>
       <Button type="default" onClick={handleAdd}><PlusOutlined/></Button>
     </Space>

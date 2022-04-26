@@ -2,6 +2,7 @@ import TableStyle from '@/components/common/TableStyle.css';
 import { forwardRef, useState } from "react";
 import { Space, Input, Button } from "antd";
 import MockImage from "@/components/mock/MockImg";
+import { SearchOutlined } from "@ant-design/icons";
 
 interface MediaTableProps {
 }
@@ -26,6 +27,18 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
     },
   ]);
 
+  // -- search width
+
+  const searchWidthDefault = 75;
+  const searchWidthLarge = 200;
+  const [searchWidth, setSearchWidth] = useState<any>(searchWidthDefault)
+
+  const handleSearchFocus = () => setSearchWidth(searchWidthLarge);
+
+  const handleSearchBlur = () => setSearchWidth(searchWidthDefault);
+
+  // --- ui
+
   return <>
   <Space
     direction="vertical"
@@ -34,9 +47,14 @@ const MediaTable = forwardRef((props: MediaTableProps, ref) => {
       width: "100%",
       padding: 0,
     }}>
-    <Space direction="horizontal" size="small">
-      <Input placeholder="Search"/>
-      <Button type="default">Search</Button>
+    <Space direction="horizontal" size="middle">
+      <Input
+        placeholder="Search"
+        allowClear
+        onFocus={handleSearchFocus}
+        onBlur={handleSearchBlur}
+        style={{width: searchWidth, paddingLeft: 5, paddingRight: 5,}}/>
+      <Button type="default"><SearchOutlined/></Button>
     </Space>
     <table 
       className={TableStyle.simple}

@@ -41,7 +41,7 @@ const TaskTable = forwardRef((props, ref) => {
 
   // -- search width
 
-  const searchWidthDefault = 85;
+  const searchWidthDefault = 75;
   const searchWidthLarge = 200;
   const [searchWidth, setSearchWidth] = useState<any>(searchWidthDefault)
 
@@ -59,14 +59,14 @@ const TaskTable = forwardRef((props, ref) => {
       width: "100%",
       padding: 0,
     }}>
-    <Space direction="horizontal" size="small">
+    <Space direction="horizontal" size="middle">
       <TaskStatusSelect onChange={handleStatusSelectChange}/>
       <Input
         placeholder="Search"
         allowClear
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
-        style={{width: searchWidth}}/>
+        style={{width: searchWidth, paddingLeft: 5, paddingRight: 5,}}/>
       <Button type="default"><SearchOutlined/></Button>
     </Space>
     <table

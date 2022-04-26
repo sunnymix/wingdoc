@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from "react";
 import TableStyle from '@/components/common/TableStyle.css';
 import { Space, Input, Button } from "antd";
 import TaskApi from "./TaskApi";
-import { Link } from 'umi';
+import { Link, history } from 'umi';
 import Task from "@/components/block/components/Task";
 import TaskStatusSelect from "./TaskStatusSelect";
 import { Status } from "@/components/block/components/Task";
@@ -75,11 +75,11 @@ const TaskTable = forwardRef((props, ref) => {
       >
       <tbody>
       {tasks.map((task: any, index: number) => (
-        <tr key={task.id}>
+        <tr key={task.id} onClick={() => history.push(`/doc/${task.docId}?block=${task.id}`)}>
           <td>
             <Space direction="horizontal" size="small">
               <Task id={task.id} defaultStatus={task.status} show={true}/>
-              <Link to={`/doc/${task.docId}?block=${task.id}`} style={{color: "#444"}}>{task.task}</Link>
+              <div>{task.task}</div>
             </Space>
           </td>
         </tr>

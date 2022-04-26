@@ -6,6 +6,7 @@ import { Link } from 'umi';
 import Task from "@/components/block/components/Task";
 import TaskStatusSelect from "./TaskStatusSelect";
 import { Status } from "@/components/block/components/Task";
+import { SearchOutlined } from "@ant-design/icons";
 
 const TaskTable = forwardRef((props, ref) => {
 
@@ -37,6 +38,17 @@ const TaskTable = forwardRef((props, ref) => {
     queryTasks();
   }, [statusIn]);
 
+
+  // -- search width
+
+  const searchWidthDefault = 85;
+  const searchWidthLarge = 200;
+  const [searchWidth, setSearchWidth] = useState<any>(searchWidthDefault)
+
+  const handleSearchFocus = () => setSearchWidth(searchWidthLarge);
+
+  const handleSearchBlur = () => setSearchWidth(searchWidthDefault);
+
   // --- ui
 
   return <>
@@ -49,23 +61,21 @@ const TaskTable = forwardRef((props, ref) => {
     }}>
     <Space direction="horizontal" size="small">
       <TaskStatusSelect onChange={handleStatusSelectChange}/>
-      <Input placeholder="Search"/>
-      <Button type="default">Search</Button>
+      <Input
+        placeholder="Search"
+        allowClear
+        onFocus={handleSearchFocus}
+        onBlur={handleSearchBlur}
+        style={{width: searchWidth}}/>
+      <Button type="default"><SearchOutlined/></Button>
     </Space>
     <table
       className={TableStyle.simple}
       style={{width: "auto"}}
       >
-      <thead>
-        <tr>
-          <th>Doc</th>
-          <th>Task</th>
-        </tr>
-      </thead>
       <tbody>
       {tasks.map((task: any, index: number) => (
         <tr key={task.id}>
-          <td><Link to={`/doc/${task.docId}`} style={{color: "#444"}}>{task.docTitle}</Link></td>
           <td>
             <Space direction="horizontal" size="small">
               <Task id={task.id} defaultStatus={task.status} show={true}/>
@@ -76,9 +86,6 @@ const TaskTable = forwardRef((props, ref) => {
       ))}
       </tbody>
     </table>
-    <Space direction="horizontal" size="small">
-      <div className={TableStyle.simple_tail}>Total: {tasks.length}</div>
-    </Space>
   </Space>
   </>;
 });

@@ -3,6 +3,7 @@ import { Space, Input, Button } from 'antd';
 import DocApi from './DocApi';
 import TableStyle from '../common/TableStyle.css';
 import { history, Link } from 'umi';
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 
 const DocTable: FC<{}> = ({}) => {
   const [datas, setDatas] = useState([]);
@@ -22,6 +23,18 @@ const DocTable: FC<{}> = ({}) => {
       searchDocs();
     });
   };
+
+  // -- search width
+
+  const searchWidthDefault = 100;
+  const searchWidthLarge = 200;
+  const [searchWidth, setSearchWidth] = useState<any>(searchWidthDefault)
+
+  const handleSearchFocus = () => setSearchWidth(searchWidthLarge);
+
+  const handleSearchBlur = () => setSearchWidth(searchWidthDefault);
+
+  // --- ui
   
   return (
   <>
@@ -33,9 +46,14 @@ const DocTable: FC<{}> = ({}) => {
       padding: 0,
     }}>
     <Space direction="horizontal" size="middle">
-      <Input placeholder="Search"/>
-      <Button type="default">Search</Button>
-      <Button type="default" onClick={handleAdd}>Add</Button>
+      <Input
+        placeholder="Search"
+        allowClear
+        onFocus={handleSearchFocus}
+        onBlur={handleSearchBlur}
+        style={{width: searchWidth}}/>
+      <Button type="default"><SearchOutlined/></Button>
+      <Button type="default" onClick={handleAdd}><PlusOutlined/></Button>
     </Space>
     <table 
       className={TableStyle.simple}
@@ -52,9 +70,6 @@ const DocTable: FC<{}> = ({}) => {
       ))}
       </tbody>
     </table>
-    <Space direction="horizontal" size="small">
-      <div className={TableStyle.simple_tail}>Total: {datas.length}</div>
-    </Space>
   </Space>
   </>
   );

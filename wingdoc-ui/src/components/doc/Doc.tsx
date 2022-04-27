@@ -14,12 +14,12 @@ interface DocProps {
 
 const Doc = forwardRef((props: DocProps, ref) => {
 
-  // --- bind ---
+  // --- bind
 
   useImperativeHandle(ref, () => ({
   }));
 
-  // --- props ---
+  // --- props
 
   const { id } = props;
 
@@ -33,7 +33,7 @@ const Doc = forwardRef((props: DocProps, ref) => {
 
   const [focusAuthor, setFocusAuthor] = useState<boolean>(false);
 
-  // --- search ---
+  // --- search
 
   const searchDoc = () => {
     setLoading(true);
@@ -43,13 +43,13 @@ const Doc = forwardRef((props: DocProps, ref) => {
     });
   };
 
-  // --- loaded ---
+  // --- loaded
 
   useEffect(() => {
     searchDoc();
   }, [id]);
 
-  // --- block list ---
+  // --- block list
 
   const blockListRef: any = useRef();
 

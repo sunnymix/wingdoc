@@ -1,4 +1,4 @@
-import { FC, forwardRef, useEffect, useState } from 'react';
+import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
@@ -9,14 +9,28 @@ export interface DocAuthorProps {
   id: string,
   value: string,
   showBlock: boolean,
+  focus?: boolean,
   onEnter?: Function,
+  onBlur?: Function,
 };
 
 export default forwardRef((props: DocAuthorProps, ref) => {
 
   // --- props
 
-  const { id, value, showBlock, onEnter } = props;
+  const {id, value, showBlock, focus, onEnter, onBlur} = props;
+
+  // --- focus
+
+  useEffect(() => {
+    if (textRef.current) {
+      if (focus) {
+        textRef.current.focus({
+          cursor: "start",
+        });
+      }
+    }
+  }, [focus]);
 
   // --- author
 
@@ -28,6 +42,10 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     DocApi.updateDoc(props.id, { author: newAuthor }, (newDoc: any) => {
     });
   };
+
+  useEffect(() => {
+    setAuthor(value);
+  }, [value]);
 
   // --- hover
 
@@ -41,6 +59,17 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     props.onEnter?.call(null);
   };
 
+  // --- blur
+
+  const handleBlur = (e: any) => {
+    changeAuthor(e);
+    onBlur?.call(null);
+  };
+
+  // --- text ref
+
+  const textRef = useRef<any>(null);
+
   // --- menu
 
   const menu = (
@@ -48,12 +77,6 @@ export default forwardRef((props: DocAuthorProps, ref) => {
       <Menu.Item key={`${props.id}-docs`}>docs</Menu.Item>
     </Menu>
   );
-
-  // --- effect
-
-  useEffect(() => {
-    setAuthor(value);
-  }, [value]);
 
   // --- ui
   
@@ -85,9 +108,10 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         borderColor: props.showBlock ? "#ddd" : "transparent",
       }}>
       <TextArea
+        ref={textRef}
         value={author}
         onChange={changeAuthor}
-        onBlur={changeAuthor}
+        onBlur={handleBlur}
         bordered={false}
         size="middle"
         autoSize={true}

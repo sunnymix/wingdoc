@@ -11,13 +11,14 @@ interface DocTitleProps {
   showBlock: boolean,
   onEnter?: Function,
   onShowBlock?: Function,
+  onFocusDown?: Function,
 };
 
 const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
   // --- props ---
 
-  const {id, value, showBlock, onEnter, onShowBlock} = props;
+  const {id, value, showBlock, onEnter, onShowBlock, onFocusDown} = props;
 
   // --- title ---
 
@@ -48,6 +49,14 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     e.preventDefault();
     setHover(false);
     onEnter?.call(null);
+  };
+
+  // --- press ---
+
+  const handleKeyDown = (e: any) => {
+    if (e.key == "ArrowDown") {
+      onFocusDown?.call(null);
+    }
   };
 
   // --- effect ---
@@ -92,6 +101,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         onBlur={changeTitle}
         bordered={false}
         onPressEnter={handleEnter}
+        onKeyDown={handleKeyDown}
         size="middle"
         placeholder="Title"
         autoSize={true}

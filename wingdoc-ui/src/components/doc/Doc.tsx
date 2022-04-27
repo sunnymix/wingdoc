@@ -29,6 +29,10 @@ const Doc = forwardRef((props: DocProps, ref) => {
 
   const [showBlock, setShowBlock] = useState<any>(false);
 
+  // --- author
+
+  const [focusAuthor, setFocusAuthor] = useState<boolean>(false);
+
   // --- search ---
 
   const searchDoc = () => {
@@ -55,11 +59,21 @@ const Doc = forwardRef((props: DocProps, ref) => {
     }
   };
 
+  // --- focus down
+
+  const handleFocusDown = () => {
+    setFocusAuthor(true);
+  };
+
+  // --- ui empty
+
   if (!doc) {
     return <>
     <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
     </>
   }
+
+  // --- ui
 
   return <>
   <div
@@ -67,8 +81,20 @@ const Doc = forwardRef((props: DocProps, ref) => {
     }}>
     <Space direction="vertical" size="large" style={{width: "100%"}}>
       <div>
-        <DocTitle id={doc.id} value={doc.title} showBlock={showBlock} onEnter={handleAdd} onShowBlock={() => setShowBlock(!showBlock)}/>
-        <DocAuthor id={doc.id} value={doc.author} showBlock={showBlock} onEnter={handleAdd}/>
+        <DocTitle
+          id={doc.id}
+          value={doc.title}
+          showBlock={showBlock}
+          onEnter={handleAdd}
+          onFocusDown={handleFocusDown}
+          onShowBlock={() => setShowBlock(!showBlock)}/>
+        <DocAuthor
+          id={doc.id}
+          value={doc.author}
+          showBlock={showBlock}
+          focus={focusAuthor}
+          onEnter={handleAdd}
+          onBlur={() => setFocusAuthor(false)}/>
       </div>
       <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
     </Space>

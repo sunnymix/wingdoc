@@ -29,9 +29,35 @@ const Doc = forwardRef((props: DocProps, ref) => {
 
   const [showBlock, setShowBlock] = useState<any>(false);
 
+  // --- title
+
+  const [focusTitle, setFocusTitle] = useState<boolean>(false);
+
+  const handleTitleFocus = () => {
+    focusBlockPos(-1);
+  };
+
+  const handleTitleFocusDown = () => {
+    setFocusAuthor(true);
+  };
+
   // --- author
 
   const [focusAuthor, setFocusAuthor] = useState<boolean>(false);
+
+  const handleAuthorFocus = () => {
+    focusBlockPos(-1);
+  };
+
+  const handleAuthorFocusUp = () => {
+    setFocusTitle(true);
+    setFocusAuthor(false);
+  };
+
+  const handleAuthorFocusDown = () => {
+    setFocusAuthor(false);
+    focusBlockPos(0);
+  };
 
   // --- search
 
@@ -59,10 +85,12 @@ const Doc = forwardRef((props: DocProps, ref) => {
     }
   };
 
-  // --- focus down
+  // --- block focus
 
-  const handleFocusDown = () => {
-    setFocusAuthor(true);
+  const focusBlockPos = (pos: number) => {
+    if (blockListRef.current) {
+      blockListRef.current.focusPos(pos);
+    }
   };
 
   // --- ui empty
@@ -85,8 +113,10 @@ const Doc = forwardRef((props: DocProps, ref) => {
           id={doc.id}
           value={doc.title}
           showBlock={showBlock}
+          focus={focusTitle}
+          onFocus={handleTitleFocus}
           onEnter={handleAdd}
-          onFocusDown={handleFocusDown}
+          onFocusDown={handleTitleFocusDown}
           onShowBlock={() => setShowBlock(!showBlock)}/>
         <DocAuthor
           id={doc.id}
@@ -94,9 +124,15 @@ const Doc = forwardRef((props: DocProps, ref) => {
           showBlock={showBlock}
           focus={focusAuthor}
           onEnter={handleAdd}
+          onFocus={handleAuthorFocus}
+          onFocusUp={handleAuthorFocusUp}
+          onFocusDown={handleAuthorFocusDown}
           onBlur={() => setFocusAuthor(false)}/>
       </div>
-      <BlockList docId={doc.id} showBlock={showBlock} ref={blockListRef}/>
+      <BlockList
+        docId={doc.id}
+        showBlock={showBlock}
+        ref={blockListRef}/>
     </Space>
   </div>
   </>;

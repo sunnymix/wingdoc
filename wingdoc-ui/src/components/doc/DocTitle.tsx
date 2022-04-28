@@ -9,18 +9,20 @@ interface DocTitleProps {
   id: string,
   value: string,
   showBlock: boolean,
+  focus?: boolean,
   onEnter?: Function,
   onShowBlock?: Function,
+  onFocus?: Function,
   onFocusDown?: Function,
 };
 
 const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
-  // --- props ---
+  // --- props
 
-  const {id, value, showBlock, onEnter, onShowBlock, onFocusDown} = props;
+  const {id, value, showBlock, onEnter, onShowBlock, onFocus, onFocusDown} = props;
 
-  // --- title ---
+  // --- title
 
   const [title, setTitle] = useState<string>(value);
 
@@ -31,11 +33,11 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     });
   };
 
-  // --- hover ---
+  // --- hover
 
   const [hover, setHover] = useState<boolean>(false);
 
-  // --- menu ---
+  // --- menu
 
   const menu = (
     <Menu>
@@ -43,7 +45,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     </Menu>
   );
 
-  // --- enter ---
+  // --- enter
 
   const handleEnter = (e: any) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     onEnter?.call(null);
   };
 
-  // --- press ---
+  // --- key down
 
   const handleKeyDown = (e: any) => {
     if (e.key == "ArrowDown") {
@@ -59,13 +61,19 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     }
   };
 
-  // --- effect ---
+  // --- effect
 
   useEffect(() => {
     setTitle(value);
   }, [value]);
+
+  // --- text focus
+
+  const handleTextFocus = (e: any) => {
+    onFocus?.call(null);
+  };
   
-  // --- ui ---
+  // --- ui
 
   return <>
   <div
@@ -105,6 +113,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         size="middle"
         placeholder="Title"
         autoSize={true}
+        onFocus={handleTextFocus}
         style={{ 
           fontSize: 28,
           fontWeight: 700,

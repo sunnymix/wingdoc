@@ -10,21 +10,24 @@ interface BlockListProps {
 
 const BlockList = forwardRef((props: BlockListProps, ref) => {
 
-  // --- method bind ---
+  // --- method bind
 
   useImperativeHandle(ref, () => ({
     add: handleAdd,
+    focusPos: (pos: number) => {
+      setFocusPos(pos);
+    },
   }));
 
-  // -- props ---
+  // -- props
 
   const { docId, showBlock } = props;
 
-  // --- loading ---
+  // --- loading
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  // --- active block ---
+  // --- active block
 
   const location: any = useLocation();
   const queryBlock = location.query?.block || null;
@@ -36,7 +39,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     return 0;
   };
 
-  // --- blocks ---
+  // --- blocks
 
   const [blocks, setBlocks] = useState<any[]>([]);
 
@@ -54,15 +57,19 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     });
   };
 
-  // --- loaded ---
+  // --- loaded
 
   useEffect(() => {
     searchBlocks(null);
   }, [docId]);
 
-  // --- focus ---
+  // --- focus
 
   const [focusPos, setFocusPos] = useState<Number>(0);
+
+  const handleFocus = (block: any) => {
+    // TODO
+  };
 
   const handleFocusUp = (blockData: any) => {
     setFocusPos(blockData.pos == 0 ? 0 : blockData.pos - 1);
@@ -72,7 +79,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
   };
 
-  // --- add ---
+  // --- add
 
   const handleAdd = (pos?: number) => {
     const addAtPos = pos || 0;
@@ -82,13 +89,13 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     });
   };
 
-  // --- enter, add block ---
+  // --- enter, add block
 
   const handleBlockEnter = (block: any) => {
     handleAdd(block.pos + 1);
   };
 
-  // --- delete ---
+  // --- delete
 
   const deleteBlock = (block: any) => {
     BlockApi.deleteBlock(block.id, (ok: any) => {
@@ -102,7 +109,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     deleteBlock(block);
   };
 
-  // --- move up ---
+  // --- move up
 
   const handleBlockMoveUp = (block: any) => {
     BlockApi.moveUp(block.id, (ok: any) => {
@@ -112,7 +119,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     });
   };
 
-  // --- move down ---
+  // --- move down
 
   const handleBlockMoveDown = (block: any) => {
     BlockApi.moveDown(block.id, (ok: any) => {
@@ -122,7 +129,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     });
   };
 
-  // --- select ---
+  // --- select
 
   const [selectStartPos, setSelectStartPos] = useState<number>(0);
 
@@ -163,7 +170,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     }
   }, [selectStopPos])
 
-  // --- copy ---
+  // --- copy
 
   const handleCopy = (block: any) => {
     const selectBlocks = blocks.filter((block: any, index: number) => block.selectAll);
@@ -176,7 +183,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
     }
   };
 
-  // --- ui ---
+  // --- ui
   
   return <>
   <div>
@@ -191,6 +198,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onDelete={handleBlockDelete}
           onMoveUp={handleBlockMoveUp}
           onMoveDown={handleBlockMoveDown}
+          onFocus={handleFocus}
           onFocusUp={handleFocusUp}
           onFocusDown={handleFocusDown}
           onSelectStart={handleSelectStart}

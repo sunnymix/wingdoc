@@ -12,13 +12,16 @@ export interface DocAuthorProps {
   focus?: boolean,
   onEnter?: Function,
   onBlur?: Function,
+  onFocusUp?: Function,
+  onFocusDown?: Function,
+  onFocus?: Function,
 };
 
 export default forwardRef((props: DocAuthorProps, ref) => {
 
   // --- props
 
-  const {id, value, showBlock, focus, onEnter, onBlur} = props;
+  const {id, value, showBlock, focus, onEnter, onBlur, onFocusUp, onFocusDown, onFocus} = props;
 
   // --- focus
 
@@ -31,6 +34,10 @@ export default forwardRef((props: DocAuthorProps, ref) => {
       }
     }
   }, [focus]);
+
+  const handleTextFocused = (e: any) => {
+    onFocus?.call(null);
+  };
 
   // --- author
 
@@ -57,6 +64,22 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     e.preventDefault();
     setHover(false);
     props.onEnter?.call(null);
+  };
+
+  // --- key up
+
+  const handleKeyUp = (e: any) => {
+    if (e.key == "ArrowUp") {
+      onFocusUp?.call(null);
+    }
+  };
+
+  // --- key down
+
+  const handleKeyDown = (e: any) => {
+    if (e.key == "ArrowDown") {
+      onFocusDown?.call(null);
+    }
   };
 
   // --- blur
@@ -112,11 +135,14 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         value={author}
         onChange={changeAuthor}
         onBlur={handleBlur}
+        onKeyUp={handleKeyUp}
+        onKeyDown={handleKeyDown}
         bordered={false}
         size="middle"
         autoSize={true}
         onPressEnter={handleEnter}
         placeholder="Author"
+        onFocus={handleTextFocused}
         style={{
         }}/>
     </div>

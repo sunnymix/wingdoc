@@ -2,20 +2,20 @@ import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Input, Spin } from 'antd';
 import BlockApi from '../BlockApi';
 import { ArrowUpOutlined, ArrowDownOutlined, LoadingOutlined, LinkOutlined } from '@ant-design/icons';
-import { BlockProps } from '@/components/block/BlockInterfaces';
 import OptionButton from '@/components/common/OptionButton';
 import Link from './Link';
 import Task from './Task';
 import { Status } from './Task';
 import { history } from 'umi';
+import { BlockProps } from '../Block';
 
 const { TextArea } = Input;
 
 const spinIcon = <LoadingOutlined spin />;
 
-const TextBlock = forwardRef((props: BlockProps, ref) => {
+export default forwardRef((props: BlockProps, ref) => {
 
-  const {data, onSelectStart, onSelectStop, onCopy} = props;
+  const {data, onFocus, onSelectStart, onSelectStop, onCopy} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -106,7 +106,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  // --- link ---
+  // --- link
 
   const linkRef = useRef<any>(null);
 
@@ -140,7 +140,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     focusInput();
   };
 
-  // --- focus input ---
+  // --- focus
 
   const inputRef = useRef<any>(null);
 
@@ -158,11 +158,15 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   }, [props.focus]);
 
-  // --- type ---
+  const handleTextFocus = (e: any) => {
+    onFocus?.call(null, data);
+  };
+
+  // --- type
 
   const [type, setType] = useState<string>(data.type || "TEXT");
 
-  // --- task ---
+  // --- task
 
   const taskRef = useRef<any>(null);
 
@@ -193,7 +197,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  // --- select ---
+  // --- select
 
   const isClickSelectStop = (e: any) => {
     if (e.shiftKey) {
@@ -218,7 +222,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   }, [data.selectAll]);
 
-  // --- copy ---
+  // --- copy
 
   const isPressCopy = (e: any) => {
     if (e.key == "c" && e.metaKey) {
@@ -228,7 +232,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     return false;
   };
   
-  // --- click ---
+  // --- click
 
   const handleClick = (e: any) => {
     if (isClickSelectStop(e)) {
@@ -238,9 +242,9 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
     }
   };
 
-  // --- key press ---
+  // --- key down
 
-  const handlePress = (e: any) => {
+  const handleKeyDown = (e: any) => {
     setHover(false);
     isFocusUp(e);
     isFocusDown(e);
@@ -252,6 +256,8 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
 
   const handleKeyUp = (e: any) => {
   };
+
+  // --- menu
 
   const menu = (
     <Menu>
@@ -311,6 +317,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
         <TextArea 
           ref={inputRef}
           placeholder="" 
+          onFocus={handleTextFocus}
           autoSize 
           value={text}
           size="middle"
@@ -319,7 +326,7 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
           onChange={handleChange}
           onBlur={handleChange}
           onPressEnter={handleEnter}
-          onKeyDown={handlePress}
+          onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           onSelect={handleSelect}
           onSelectCapture={handleSelectCapture}
@@ -337,5 +344,3 @@ const TextBlock = forwardRef((props: BlockProps, ref) => {
   </div>
   </>
 });
-
-export default TextBlock;

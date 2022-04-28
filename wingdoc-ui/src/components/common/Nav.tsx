@@ -17,6 +17,8 @@ export default (props: any) => {
       key = "doc";
     } else if (pathname.startsWith("/task")) {
       key = "task";
+    } else if (pathname.startsWith("/calendar")) {
+      key = "calendar";
     } else if (pathname.startsWith("/media")) {
       key = "media";
     }
@@ -32,6 +34,7 @@ export default (props: any) => {
     <TabPane tab="Home" key=""></TabPane>
     <TabPane tab="Doc" key="doc"></TabPane>
     <TabPane tab="Task" key="task"></TabPane>
+    <TabPane tab="Calendar" key="calendar"></TabPane>
     <TabPane tab="Media" key="media"></TabPane>
   </Tabs>
   </>

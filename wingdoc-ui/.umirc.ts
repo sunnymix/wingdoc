@@ -18,6 +18,7 @@ export default defineConfig({
         { path: "/doc", exact: true, component: "@/pages/doc/docs" },
         { path: "/doc/:docId", exact: true, component: "@/pages/doc/doc" },
         { path: "/task", exact: true, component: "@/pages/task/tasks" },
+        { path: "/calendar", exact: true, component: "@/pages/calendar/calendar" },
         { path: "/media", exact: true, component: "@/pages/media/medias" },
       ],
     },

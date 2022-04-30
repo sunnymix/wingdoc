@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import CalendarWeekDay from "./CalendarWeekDay";
+import WeekDay from "./WeekDay";
 import moment from "moment";
 
 export enum Weekday {
@@ -38,11 +38,11 @@ export namespace Weekday {
   }
 }
 
-export interface CalendarWeekProps {};
+export interface WeekProps {};
 
-export default forwardRef((props: CalendarWeekProps, ref) => {
+export default forwardRef((props: WeekProps, ref) => {
 
-  console.log(moment().format('dddd'));
+  console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
   // --- ui
 
@@ -51,10 +51,13 @@ export default forwardRef((props: CalendarWeekProps, ref) => {
     display: "flex",
     borderStyle: "solid",
     borderColor: "#ddd",
-    borderWidth: "1px 1px 0 1px",
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
   }}>
     {Weekday.all().map((weekday: Weekday) => 
-      <CalendarWeekDay key={weekday} weekday={weekday}/>)}
+      <WeekDay key={weekday} weekday={weekday}/>)}
   </div>
-  </>;
+  </>
 });

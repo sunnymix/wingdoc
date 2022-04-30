@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import { Radio, Space } from "antd";
-import CalendarWeek from "./CalendarWeek";
+import CalendarWeek from "./Week";
 
 export enum CalendarView { 
   DAY = "DAY",

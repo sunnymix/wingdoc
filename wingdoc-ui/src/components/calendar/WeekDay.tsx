@@ -1,11 +1,13 @@
 import { forwardRef } from "react";
 import { Weekday } from "./Week";
+import { Space } from "antd";
 
-export interface CalendarWeekDayProps {
+
+export interface WeekDayProps {
   weekday: Weekday,
 };
 
-export default forwardRef((props: CalendarWeekDayProps, ref) => {
+export default forwardRef((props: WeekDayProps, ref) => {
 
   // --- props
 
@@ -27,7 +29,12 @@ export default forwardRef((props: CalendarWeekDayProps, ref) => {
         borderBottomWidth: 0,
         padding: 5,
         textAlign: "center",
-      }}>{Weekday.title(weekday)}</div>
+      }}>
+        <Space direction="horizontal" size="small">
+          <div>{Weekday.monthDay(weekday)}</div>
+          <div>{Weekday.title(weekday)}</div>
+        </Space>
+      </div>
     <div
       style={{
         borderStyle: "solid",

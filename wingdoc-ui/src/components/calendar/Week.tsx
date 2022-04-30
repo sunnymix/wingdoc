@@ -36,13 +36,15 @@ export namespace Weekday {
       "周日",
     ][weekday]
   }
+
+  export function monthDay(weekday: Weekday) {
+    return moment().isoWeekday(weekday + 1).format("M.D");
+  }
 }
 
 export interface WeekProps {};
 
 export default forwardRef((props: WeekProps, ref) => {
-
-  console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
   // --- ui
 

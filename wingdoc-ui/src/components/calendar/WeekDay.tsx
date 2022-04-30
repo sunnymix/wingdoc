@@ -1,6 +1,8 @@
 import { forwardRef } from "react";
 import moment from "moment";
 import { Space } from "antd";
+import { Link } from "umi";
+import { FileOutlined } from "@ant-design/icons";
 
 export enum Weekday {
   MON = 0,
@@ -37,8 +39,16 @@ export namespace Weekday {
     ][weekday]
   }
 
+  export function momt(weekday: Weekday) {
+    return moment().isoWeekday(weekday + 1);
+  }
+
   export function monthDay(weekday: Weekday) {
-    return moment().isoWeekday(weekday + 1).format("M.D");
+    return momt(weekday).format("M.D");
+  }
+
+  export function shortDate(weekday: Weekday) {
+    return momt(weekday).format("YYYYMMDD");
   }
 }
 
@@ -51,6 +61,10 @@ export default forwardRef((props: WeekDayProps, ref) => {
   // --- props
 
   const {weekday} = props;
+
+  const momt = Weekday.momt(weekday);
+
+  const shortDate = Weekday.shortDate(weekday);
 
   // --- ui
 
@@ -84,7 +98,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderBottomWidth: 0,
         padding: 5,
       }}>
-        <div>Tasks</div>
+        <div><Link to={`/doc?title=${shortDate}`}><FileOutlined/></Link></div>
       </div>
   </div>
   </>

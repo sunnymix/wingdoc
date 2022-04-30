@@ -1,7 +1,46 @@
 import { forwardRef } from "react";
-import { Weekday } from "./Week";
+import moment from "moment";
 import { Space } from "antd";
 
+export enum Weekday {
+  MON = 0,
+  TUES,
+  WED,
+  THUS,
+  FRI,
+  SAT,
+  SUN,
+};
+
+export namespace Weekday {
+  export function all() {
+    return [
+      Weekday.MON,
+      Weekday.TUES,
+      Weekday.WED,
+      Weekday.THUS,
+      Weekday.FRI,
+      Weekday.SAT,
+      Weekday.SUN,
+    ];
+  }
+
+  export function title(weekday: Weekday) {
+    return [
+      "周一",
+      "周二",
+      "周三",
+      "周四",
+      "周五",
+      "周六",
+      "周日",
+    ][weekday]
+  }
+
+  export function monthDay(weekday: Weekday) {
+    return moment().isoWeekday(weekday + 1).format("M.D");
+  }
+}
 
 export interface WeekDayProps {
   weekday: Weekday,

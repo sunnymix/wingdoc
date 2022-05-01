@@ -1,8 +1,10 @@
 import { forwardRef } from "react";
 import moment from "moment";
-import { Space } from "antd";
+import { Space, Button } from "antd";
 import { Link } from "umi";
 import { FileOutlined } from "@ant-design/icons";
+import { history } from "umi";
+import DocApi from "@/components/doc/DocApi";
 
 export enum Weekday {
   MON = 0,
@@ -66,6 +68,16 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   const shortDate = Weekday.shortDate(weekday);
 
+  // --- redirect to doc
+
+  const redirectToDoc = () => {
+    DocApi.getDocByTitle(shortDate, (doc: any) => {
+      if (doc) {
+        history.push(`/doc/${doc.id}`);
+      }
+    });
+  };
+
   // --- ui
 
   return <>
@@ -98,7 +110,9 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderBottomWidth: 0,
         padding: 5,
       }}>
-        <div><Link to={`/doc?title=${shortDate}`}><FileOutlined/></Link></div>
+        <div>
+          <Button type="link" block size="small" onClick={redirectToDoc}>{shortDate}</Button>
+        </div>
       </div>
   </div>
   </>

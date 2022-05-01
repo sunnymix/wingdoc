@@ -92,13 +92,15 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
         borderTopWidth: 0,
         borderBottomWidth: 0,
-        padding: 5,
+        padding: 0,
         textAlign: "center",
       }}>
-        <Space direction="horizontal" size="small">
-          <div>{Weekday.monthDay(weekday)}</div>
-          <div>{Weekday.title(weekday)}</div>
-        </Space>
+        <Button type="text" block size="middle" onClick={redirectToDoc}>
+          <Space direction="horizontal" size="small">
+            <div>{Weekday.monthDay(weekday)}</div>
+            <div>{Weekday.title(weekday)}</div>
+          </Space>
+        </Button>
       </div>
     <div
       style={{
@@ -110,9 +112,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderBottomWidth: 0,
         padding: 5,
       }}>
-        <div>
-          <Button type="link" block size="small" onClick={redirectToDoc}>{shortDate}</Button>
-        </div>
+        <div></div>
       </div>
   </div>
   </>

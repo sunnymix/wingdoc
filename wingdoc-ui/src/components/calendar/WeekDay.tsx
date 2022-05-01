@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
-import { Space, Button, Popconfirm } from "antd";
+import { Space, Button, Popconfirm, Tag } from "antd";
 import { Link } from "umi";
 import { FileOutlined } from "@ant-design/icons";
 import { history } from "umi";
@@ -52,6 +52,10 @@ export namespace Weekday {
   export function shortDate(week: number, weekday: Weekday) {
     return momt(week, weekday).format("YYYYMMDD");
   }
+
+  export function isToday(week: number, weekday: Weekday) {
+    return moment().format("YYYYMMDD") == shortDate(week, weekday);
+  }
 }
 
 export interface WeekDayProps {
@@ -70,6 +74,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
   const momt = Weekday.momt(week, weekday);
 
   const shortDate = Weekday.shortDate(week, weekday);
+
+  const isToday = Weekday.isToday(week, weekday);
 
   // --- docId
 
@@ -101,18 +107,21 @@ export default forwardRef((props: WeekDayProps, ref) => {
     });
   };
 
-  // --- ui
+  // --- ui: title link
 
   const titleLink = (
     <Button type="text" block size="middle" onClick={redirectToDoc}>
       <Space direction="horizontal" size="small">
         <div>{Weekday.monthDay(week, weekday)}</div>
         <div>{Weekday.title(weekday)}</div>
+        <div>{isToday && <Tag color="blue">今天</Tag>}</div>
       </Space>
     </Button>
   );
 
-  const titleLinkOfNewDoc = (
+  // --- ui: title link of new doc confirm
+
+  const titleLinkAndNewDocConfirm = (
     <Popconfirm
       title={`Create: ${shortDate} ?`}
       onConfirm={createDocOfShortDate}>{titleLink}</Popconfirm>
@@ -136,7 +145,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         textAlign: "center",
       }}>
         {docId && titleLink}
-        {!docId && titleLinkOfNewDoc}
+        {!docId && titleLinkAndNewDocConfirm}
       </div>
     <div
       style={{

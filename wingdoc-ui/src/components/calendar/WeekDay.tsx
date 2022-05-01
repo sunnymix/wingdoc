@@ -84,6 +84,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
   return <>
   <div style={{
     flexGrow: 1,
+    flexShrink: 0,
+    width: "14%",
   }}>
     <div
       style={{

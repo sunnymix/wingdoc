@@ -1,6 +1,6 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
-import { Space, Button } from "antd";
+import { Space, Button, Popconfirm } from "antd";
 import { Link } from "umi";
 import { FileOutlined } from "@ant-design/icons";
 import { history } from "umi";
@@ -65,21 +65,58 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   const {week, weekday} = props;
 
+  // --- moment
+
   const momt = Weekday.momt(week, weekday);
 
   const shortDate = Weekday.shortDate(week, weekday);
 
+  // --- docId
+
+  const [docId, setDocId] = useState<any>(null);
+
+  useEffect(() => {
+    DocApi.getDocByTitle(shortDate, (doc: any) => {
+      if (doc) {
+        setDocId(doc.id);
+      }
+    });
+  }, [shortDate]);
+
   // --- redirect to doc
 
   const redirectToDoc = () => {
-    DocApi.getDocByTitle(shortDate, (doc: any) => {
+    if (docId) {
+      history.push(`/doc/${docId}`);
+    }
+  };
+
+  // --- create doc of shortDate
+
+  const createDocOfShortDate = () => {
+    DocApi.addDoc({title: shortDate, author: ""}, (doc: any) => {
       if (doc) {
-        history.push(`/doc/${doc.id}`);
+        setDocId(doc.id);
       }
     });
   };
 
   // --- ui
+
+  const titleLink = (
+    <Button type="text" block size="middle" onClick={redirectToDoc}>
+      <Space direction="horizontal" size="small">
+        <div>{Weekday.monthDay(week, weekday)}</div>
+        <div>{Weekday.title(weekday)}</div>
+      </Space>
+    </Button>
+  );
+
+  const titleLinkOfNewDoc = (
+    <Popconfirm
+      title={`Create: ${shortDate} ?`}
+      onConfirm={createDocOfShortDate}>{titleLink}</Popconfirm>
+  );
 
   return <>
   <div style={{
@@ -98,12 +135,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
         padding: 0,
         textAlign: "center",
       }}>
-        <Button type="text" block size="middle" onClick={redirectToDoc}>
-          <Space direction="horizontal" size="small">
-            <div>{Weekday.monthDay(week, weekday)}</div>
-            <div>{Weekday.title(weekday)}</div>
-          </Space>
-        </Button>
+        {docId && titleLink}
+        {!docId && titleLinkOfNewDoc}
       </div>
     <div
       style={{

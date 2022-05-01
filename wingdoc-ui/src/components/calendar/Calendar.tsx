@@ -1,6 +1,6 @@
 import { forwardRef, useState } from "react";
 import { Radio, Space } from "antd";
-import CalendarWeek from "./Week";
+import WeekList from "./WeekList";
 
 export enum CalendarView { 
   DAY = "DAY",
@@ -32,7 +32,7 @@ export default forwardRef((props: CalendarProps, ref) => {
       </Radio.Group>
     </Space>
     {focusingView == CalendarView.WEEK &&
-      <CalendarWeek/>
+      <WeekList/>
     }
   </Space>
   </>

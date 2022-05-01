@@ -41,20 +41,21 @@ export namespace Weekday {
     ][weekday]
   }
 
-  export function momt(weekday: Weekday) {
-    return moment().isoWeekday(weekday + 1);
+  export function momt(week: number, weekday: Weekday) {
+    return moment().isoWeekday(weekday + 1 + (week * 7));
   }
 
-  export function monthDay(weekday: Weekday) {
-    return momt(weekday).format("M.D");
+  export function monthDay(week: number, weekday: Weekday) {
+    return momt(week, weekday).format("M.D");
   }
 
-  export function shortDate(weekday: Weekday) {
-    return momt(weekday).format("YYYYMMDD");
+  export function shortDate(week: number, weekday: Weekday) {
+    return momt(week, weekday).format("YYYYMMDD");
   }
 }
 
 export interface WeekDayProps {
+  week: number,
   weekday: Weekday,
 };
 
@@ -62,11 +63,11 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   // --- props
 
-  const {weekday} = props;
+  const {week, weekday} = props;
 
-  const momt = Weekday.momt(weekday);
+  const momt = Weekday.momt(week, weekday);
 
-  const shortDate = Weekday.shortDate(weekday);
+  const shortDate = Weekday.shortDate(week, weekday);
 
   // --- redirect to doc
 
@@ -97,7 +98,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       }}>
         <Button type="text" block size="middle" onClick={redirectToDoc}>
           <Space direction="horizontal" size="small">
-            <div>{Weekday.monthDay(weekday)}</div>
+            <div>{Weekday.monthDay(week, weekday)}</div>
             <div>{Weekday.title(weekday)}</div>
           </Space>
         </Button>
@@ -110,7 +111,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
         borderTopWidth: 1,
         borderBottomWidth: 0,
-        padding: 5,
+        padding: 0,
       }}>
         <div></div>
       </div>

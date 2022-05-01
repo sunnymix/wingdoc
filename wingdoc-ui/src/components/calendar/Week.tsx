@@ -3,9 +3,14 @@ import WeekDay from "./WeekDay";
 import moment from "moment";
 import { Weekday } from "./WeekDay";
 
-export interface WeekProps {};
+export interface WeekProps {
+  week: number,
+  style?: any,
+};
 
 export default forwardRef((props: WeekProps, ref) => {
+
+  const {week} = props;
 
   // --- ui
 
@@ -18,9 +23,14 @@ export default forwardRef((props: WeekProps, ref) => {
     borderRightWidth: 0,
     borderTopWidth: 0,
     borderBottomWidth: 0,
+    ...props.style,
   }}>
     {Weekday.all().map((weekday: Weekday) => 
-      <WeekDay key={weekday} weekday={weekday}/>)}
+      <WeekDay
+        key={`${week}-${weekday}`}
+        week={week}
+        weekday={weekday}/>
+    )}
   </div>
   </>
 });

@@ -1,5 +1,6 @@
 package com.sunnymix.wingdoc.repo;
 
+import com.sunnymix.wingdoc.common.Strings;
 import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Doc;
 import com.sunnymix.wingdoc.dao.jooq.tables.records.DocRecord;
 import com.sunnymix.wingdoc.data.form.DocCreateForm;
@@ -8,6 +9,7 @@ import com.sunnymix.wingdoc.data.info.DocInfo;
 import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.io.Page;
 import lombok.Getter;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.UpdateSetFirstStep;
 import org.jooq.UpdateSetMoreStep;
@@ -20,6 +22,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.sunnymix.wingdoc.dao.jooq.Tables.DOC;
+import static org.jooq.impl.DSL.trueCondition;
 
 /**
  * @author sunnymix
@@ -32,9 +35,14 @@ public class DocRepo {
     @Qualifier("dslContext")
     private DSLContext dsl;
 
-    public Out<List<DocInfo>> list() {
+    public Out<List<DocInfo>> list(String title) {
+        Condition cond = trueCondition();
+        if (Strings.isNotEmpty(title)) {
+            cond = cond.and(DOC.TITLE.eq(title.trim()));
+        }
         List<DocInfo> docInfoList = getDsl()
                 .selectFrom(DOC)
+                .where(cond)
                 .orderBy(DOC.TITLE)
                 .fetchStreamInto(Doc.class)
                 .map(DocInfo::__)

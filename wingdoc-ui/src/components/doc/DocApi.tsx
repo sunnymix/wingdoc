@@ -28,6 +28,18 @@ const getDoc = (id: string, cb: Function) => {
     });
 };
 
+const getDocByTitle = (title: string, cb: Function) => {
+  axios.get(`${API_DOC_LIST}?title=${title}`)
+    .then(res => {
+      const data = res.data?.data || [];
+      var doc = null;
+      if (data.length > 0) {
+        doc = data[0];
+      }
+      cb(doc);
+    });
+};
+
 const updateDoc = (id: string, form: any, cb: Function) => {
   axios.post(`${API_DOC_ONE}${id}`, form)
     .then(res => {
@@ -40,6 +52,7 @@ const DocApi = {
   getDocList,
   addDoc,
   getDoc,
+  getDocByTitle,
   updateDoc,
 }
 

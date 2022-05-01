@@ -21,8 +21,8 @@ public class DocController {
     private DocRepo docRepo;
 
     @GetMapping("/doc/list")
-    public Out<List<DocInfo>> list() {
-        return docRepo.list();
+    public Out<List<DocInfo>> list(@RequestParam(value = "title", required = false) String title) {
+        return docRepo.list(title);
     }
 
     // TODO: /doc/list 改成 /doc/list/add

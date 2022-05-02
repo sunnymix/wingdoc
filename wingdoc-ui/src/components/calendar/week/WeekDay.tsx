@@ -161,7 +161,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       </div>
     <div
       style={{
-        padding: 2,
+        padding: 0,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

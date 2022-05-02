@@ -3,6 +3,7 @@ import { Space } from "antd";
 import Task, { Status } from "@/components/block/components/Task";
 import DocApi from "@/components/doc/DocApi";
 import TaskApi from "@/components/task/TaskApi";
+import { Link } from "umi";
 
 export interface WeekDayTasksProps {
   shortDate: string,
@@ -12,6 +13,7 @@ interface TaskProps {
   id: string,
   task: string,
   status: Status,
+  docId: String,
 };
 
 export default forwardRef((props: WeekDayTasksProps, ref) => {
@@ -39,13 +41,13 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
     }
   }, [shortDate]);
 
-  // --- ui: task
+  // --- task ui
   
   const TaskUi = (task: TaskProps) => (
     <div 
       key={task.id}
       style={{
-        margin: 2,
+        margin: 4,
         display: "flex",
         alignItems: "flex-start",
       }}>
@@ -54,11 +56,11 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
         style={{
           marginLeft: 2,
           padding: 2,
-        }}>{task.task}</div>
+        }}><Link to={`/doc/${task.docId}?block=${task.id}`} style={{color: "#333"}}>{task.task}</Link></div>
     </div>
   );
 
-  // --- ui
+  // --- tasks ui
 
   return <>
   <div>

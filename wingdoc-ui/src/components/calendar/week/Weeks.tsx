@@ -14,6 +14,7 @@ export default forwardRef((props: WeekListProps, ref) => {
     }}>
     <div
       style={{
+        borderBottom: "1px solid #ddd",
       }}>
         {weeks.map((week: number) => 
         <Week

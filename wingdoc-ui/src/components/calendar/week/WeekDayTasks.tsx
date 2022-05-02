@@ -47,16 +47,22 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
     <div 
       key={task.id}
       style={{
-        margin: 4,
+        margin: 5,
         display: "flex",
         alignItems: "flex-start",
       }}>
       <Task id={task.id} show={true} defaultStatus={task.status}/>
       <div
         style={{
-          marginLeft: 2,
-          padding: 2,
-        }}><Link to={`/doc/${task.docId}?block=${task.id}`} style={{color: "#333"}}>{task.task}</Link></div>
+          marginLeft: 5,
+        }}>
+        <Link
+          to={`/doc/${task.docId}?block=${task.id}`}
+          style={{
+            color: "#333",
+            fontSize: "80%",
+          }}>{task.task}</Link>
+      </div>
     </div>
   );
 

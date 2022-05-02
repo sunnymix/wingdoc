@@ -121,10 +121,11 @@ export default forwardRef((props: WeekDayProps, ref) => {
         padding: 2,
         cursor: "pointer",
         backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
+        fontWeight: isToday ? "bold" : "normal",
       }}>
       <Space direction="horizontal" size="small">
-        <div style={{fontSize: "120%",}}>{Weekday.monthDay(week, weekday)}</div>
-        <div style={{fontSize: "120%",}}>{Weekday.title(weekday)}</div>
+        <div>{Weekday.monthDay(week, weekday)}</div>
+        <div>{Weekday.title(weekday)}</div>
         <div>{isToday && <Badge color="blue" />}</div>
       </Space>
     </div>
@@ -162,6 +163,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
     <div
       style={{
         padding: 0,
+        overflow: "auto",
+        height: 240,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

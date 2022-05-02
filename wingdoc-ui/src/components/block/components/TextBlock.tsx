@@ -333,6 +333,7 @@ export default forwardRef((props: BlockProps, ref) => {
           style={{
             color: linking ? "#1890ff" : "inherit",
             flexGrow: "1",
+            fontFamily: '"Helvetica Neue", Helvetica, Arial, "PingFang SC"',
           }}/>
         <Link
           ref={linkRef}

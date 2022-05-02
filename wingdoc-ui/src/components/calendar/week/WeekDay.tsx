@@ -140,18 +140,19 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   return <>
   <div style={{
+    borderStyle: "solid",
+    borderColor: "#ddd",
+    borderLeftWidth: 0,
+    borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
+    borderTopWidth: 1,
+    borderBottomWidth: 0,
     flexGrow: 1,
     flexShrink: 0,
     width: "14%",
   }}>
     <div
       style={{
-        borderStyle: "solid",
-        borderColor: "#ddd",
-        borderLeftWidth: 0,
-        borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
-        borderTopWidth: 1,
-        borderBottomWidth: 0,
+        borderBottom: "1px solid #ddd",
         padding: 0,
         textAlign: "center",
       }}>
@@ -160,16 +161,10 @@ export default forwardRef((props: WeekDayProps, ref) => {
       </div>
     <div
       style={{
-        borderStyle: "solid",
-        borderColor: "#ddd",
-        borderLeftWidth: 0,
-        borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
-        borderTopWidth: 1,
-        borderBottomWidth: 0,
-        padding: 0,
+        padding: 2,
       }}>
         <div>
-          <WeekDayTasks/>
+          <WeekDayTasks shortDate={shortDate}/>
         </div>
       </div>
   </div>

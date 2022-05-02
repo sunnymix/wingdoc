@@ -32,9 +32,9 @@ export default (props: any) => {
   return <>
   <Tabs activeKey={activeKey} defaultActiveKey="" onTabClick={handleTabClick}>
     <TabPane tab="Home" key=""></TabPane>
+    <TabPane tab="Calendar" key="calendar"></TabPane>
     <TabPane tab="Doc" key="doc"></TabPane>
     <TabPane tab="Task" key="task"></TabPane>
-    <TabPane tab="Calendar" key="calendar"></TabPane>
     <TabPane tab="Media" key="media"></TabPane>
   </Tabs>
   </>

@@ -17,6 +17,7 @@ export default forwardRef((props: WeekProps, ref) => {
   return <>
   <div style={{
     display: "flex",
+    alignItems: "stretch",
     borderStyle: "solid",
     borderColor: "#ddd",
     borderLeftWidth: 0,

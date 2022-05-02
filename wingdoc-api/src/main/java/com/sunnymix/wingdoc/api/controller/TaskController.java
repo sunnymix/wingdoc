@@ -5,10 +5,7 @@ import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.query.TaskQuery;
 import com.sunnymix.wingdoc.service.TaskQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +20,11 @@ public class TaskController {
     private TaskQueryService taskQueryService;
 
     @GetMapping("/task/list")
-    public Out<List<TaskInfo>> list() {
-        return taskQueryService.query(new TaskQuery());
+    public Out<List<TaskInfo>> list(@RequestParam(value = "docId", required = false) String docId) {
+        TaskQuery query = TaskQuery.builder()
+                .docId(docId)
+                .build();
+        return taskQueryService.query(query);
     }
 
     @PostMapping("/task/list")

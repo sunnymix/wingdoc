@@ -20,7 +20,7 @@ export default forwardRef((props: WeekListProps, ref) => {
           key={week}
           week={week}
           style={{
-            marginBottom: 20,
+            marginBottom: 0,
           }}/>
         )}
     </div>

@@ -1,5 +1,6 @@
 package com.sunnymix.wingdoc.data.query;
 
+import com.sunnymix.wingdoc.common.Strings;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,10 +24,15 @@ public class TaskQuery {
     @Builder.Default
     List<String> statusIn = new ArrayList<>();
 
+    String docId;
+
     public Condition toCondition() {
         Condition cond = BLOCK.TYPE.eq("TASK");
         if (!statusIn.isEmpty()) {
             cond = cond.and(BLOCK.STATUS.in(statusIn));
+        }
+        if (Strings.isNotEmpty(docId)) {
+            cond = cond.and(BLOCK.DOC_ID.eq(docId));
         }
         return cond;
     }

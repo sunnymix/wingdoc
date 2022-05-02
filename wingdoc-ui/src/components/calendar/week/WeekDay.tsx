@@ -1,10 +1,11 @@
 import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
-import { Space, Button, Popconfirm, Tag } from "antd";
+import { Space, Button, Popconfirm, Tag, Badge } from "antd";
 import { Link } from "umi";
 import { FileOutlined } from "@ant-design/icons";
 import { history } from "umi";
 import DocApi from "@/components/doc/DocApi";
+import WeekDayTasks from "./WeekDayTasks";
 
 export enum Weekday {
   MON = 0,
@@ -110,13 +111,19 @@ export default forwardRef((props: WeekDayProps, ref) => {
   // --- ui: title link
 
   const titleLink = (
-    <Button type="text" block size="middle" onClick={redirectToDoc}>
+    <div
+      onClick={redirectToDoc}
+      style={{
+        padding: 2,
+        cursor: "pointer",
+        backgroundColor: "#f8f8f8",
+      }}>
       <Space direction="horizontal" size="small">
-        <div>{Weekday.monthDay(week, weekday)}</div>
-        <div>{Weekday.title(weekday)}</div>
-        <div>{isToday && <Tag color="blue">今天</Tag>}</div>
+        <div style={{fontSize: "120%",}}>{Weekday.monthDay(week, weekday)}</div>
+        <div style={{fontSize: "120%",}}>{Weekday.title(weekday)}</div>
+        <div>{isToday && <Badge color="blue" />}</div>
       </Space>
-    </Button>
+    </div>
   );
 
   // --- ui: title link of new doc confirm
@@ -139,7 +146,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderColor: "#ddd",
         borderLeftWidth: 0,
         borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
-        borderTopWidth: 0,
+        borderTopWidth: 1,
         borderBottomWidth: 0,
         padding: 0,
         textAlign: "center",
@@ -157,7 +164,9 @@ export default forwardRef((props: WeekDayProps, ref) => {
         borderBottomWidth: 0,
         padding: 0,
       }}>
-        <div></div>
+        <div>
+          <WeekDayTasks/>
+        </div>
       </div>
   </div>
   </>

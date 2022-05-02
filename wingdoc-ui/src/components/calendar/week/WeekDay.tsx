@@ -57,6 +57,10 @@ export namespace Weekday {
   export function isToday(week: number, weekday: Weekday) {
     return moment().format("YYYYMMDD") == shortDate(week, weekday);
   }
+
+  export function isWeekend(weekday: Weekday) {
+    return weekday == Weekday.SAT || weekday == Weekday.SUN;
+  }
 }
 
 export interface WeekDayProps {
@@ -116,7 +120,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 2,
         cursor: "pointer",
-        backgroundColor: "#f8f8f8",
+        backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
       }}>
       <Space direction="horizontal" size="small">
         <div style={{fontSize: "120%",}}>{Weekday.monthDay(week, weekday)}</div>

@@ -1,13 +1,19 @@
-import { Tabs, Menu, MenuProps } from "antd";
+import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
-import { history, useLocation, Link } from "umi";
-const { TabPane } = Tabs;
+import { history, useLocation } from "umi";
+import { PlusOutlined } from "@ant-design/icons"
 
 interface NavItemProps {
   label: ReactNode,
-  path: string,
-  key: string,
+  path?: string,
+  key?: string,
 };
+
+const createMenu = (
+  <Menu>
+    <Menu.Item key="create-doc" >New doc</Menu.Item>
+  </Menu>
+);
 
 const items: NavItemProps[] = [
   {
@@ -34,8 +40,8 @@ const items: NavItemProps[] = [
     label: "Media",
     path: "/media",
     key: "media",
-  },
-]
+  }
+];
 
 export default (props: any) => {
 
@@ -59,8 +65,10 @@ export default (props: any) => {
     setActiveKey(key);
   }, [pathname]);
 
-  const handleTabClick = (key: any) => {
-    history.push(`/${key}`);
+  const handleTabClick = (path: any) => {
+    if (path) {
+      history.push(path);
+    }
   };
 
   return <>
@@ -70,9 +78,10 @@ export default (props: any) => {
       display: "flex",
       borderBottom: "1px solid #eee",
     }}>
-      {items.map((item: NavItemProps) => (
+      {items.map((item: NavItemProps, index: number) => (
         <div
-          onClick={() => handleTabClick(item.key)}
+          key={index}
+          onClick={() => handleTabClick(item.path)}
           style={{
             cursor: "pointer",
             paddingTop: 10,
@@ -84,6 +93,13 @@ export default (props: any) => {
             borderWidth: "0 0 2px 0",
           }}>{item.label}</div>
       ))}
+      <Dropdown overlay={createMenu} placement="bottomLeft">
+        <div
+          style={{
+            cursor: "pointer",
+            padding: 10,
+          }}><PlusOutlined /></div>
+      </Dropdown>
     </div>
   </>
 };

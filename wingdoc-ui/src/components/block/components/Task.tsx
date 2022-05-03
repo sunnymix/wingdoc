@@ -90,7 +90,7 @@ export default forwardRef((props: TaskProps, ref) => {
   const menu = (
     <Menu>
       {Status.all().map((status: Status) => 
-        <Menu.Item key={`${id}-${status}`} onClick={() => handleChange(status)}>{status}</Menu.Item>  
+        <Menu.Item key={`${id}-${status}`} onClick={() => handleChange(status)}>{status}</Menu.Item>
       )}
     </Menu>
   );

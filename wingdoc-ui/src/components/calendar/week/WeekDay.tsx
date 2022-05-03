@@ -107,7 +107,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
   const createDocOfShortDate = () => {
     DocApi.addDoc({title: shortDate, author: ""}, (doc: any) => {
       if (doc) {
-        setDocId(doc.id);
+        history.push(`/doc/${doc.id}`);
       }
     });
   };

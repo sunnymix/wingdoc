@@ -1,7 +1,8 @@
 import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
 import { history, useLocation } from "umi";
-import { PlusOutlined } from "@ant-design/icons"
+import { PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
+import DocApi from "@/components/doc/DocApi";
 
 interface NavItemProps {
   label: ReactNode,
@@ -9,9 +10,17 @@ interface NavItemProps {
   key?: string,
 };
 
+const handleNewDoc = () => {
+  DocApi.addDoc({ title: "", author: "" }, (newDoc: any) => {
+    if (newDoc) {
+      history.push(`/doc/${newDoc.id}`);
+    }
+  });
+};
+
 const createMenu = (
   <Menu>
-    <Menu.Item key="create-doc" >New doc</Menu.Item>
+    <Menu.Item key="create-doc" onClick={handleNewDoc}>New doc</Menu.Item>
   </Menu>
 );
 
@@ -98,7 +107,7 @@ export default (props: any) => {
           style={{
             cursor: "pointer",
             padding: 10,
-          }}><PlusOutlined /></div>
+          }}><PlusOutlined/>&nbsp;<CaretDownOutlined/></div>
       </Dropdown>
     </div>
   </>

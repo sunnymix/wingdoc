@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Space, Input, Button } from 'antd';
 import DocApi from './DocApi';
 import TableStyle from '../common/TableStyle.css';
-import { history, Link } from 'umi';
+import { history } from 'umi';
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 
 const DocTable: FC<{}> = ({}) => {
@@ -20,7 +20,9 @@ const DocTable: FC<{}> = ({}) => {
 
   const handleAdd = () => {
     DocApi.addDoc({ title: "", author: "" }, (newDoc: any) => {
-      searchDocs();
+      if (newDoc) {
+        history.push(`/doc/${newDoc.id}`);
+      }
     });
   };
 

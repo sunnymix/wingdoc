@@ -1,7 +1,41 @@
-import { Tabs } from "antd";
-import { useEffect, useState } from "react";
-import { history, useLocation } from "umi";
+import { Tabs, Menu, MenuProps } from "antd";
+import { ReactNode, useEffect, useState } from "react";
+import { history, useLocation, Link } from "umi";
 const { TabPane } = Tabs;
+
+interface NavItemProps {
+  label: ReactNode,
+  path: string,
+  key: string,
+};
+
+const items: NavItemProps[] = [
+  {
+    label: "Home",
+    path: "/",
+    key: "",
+  },
+  {
+    label: "Doc",
+    path: "/doc",
+    key: "doc",
+  },
+  {
+    label: "Task",
+    path: "/task",
+    key: "task",
+  },
+  {
+    label: "Calendar",
+    path: "/calendar",
+    key: "calendar",
+  },
+  {
+    label: "Media",
+    path: "/media",
+    key: "media",
+  },
+]
 
 export default (props: any) => {
 
@@ -30,12 +64,26 @@ export default (props: any) => {
   };
 
   return <>
-  <Tabs activeKey={activeKey} defaultActiveKey="" onTabClick={handleTabClick}>
-    <TabPane tab="Home" key=""></TabPane>
-    <TabPane tab="Calendar" key="calendar"></TabPane>
-    <TabPane tab="Doc" key="doc"></TabPane>
-    <TabPane tab="Task" key="task"></TabPane>
-    <TabPane tab="Media" key="media"></TabPane>
-  </Tabs>
+  <div
+    style={{
+      marginBottom: 20,
+      display: "flex",
+      borderBottom: "1px solid #eee",
+    }}>
+      {items.map((item: NavItemProps) => (
+        <div
+          onClick={() => handleTabClick(item.key)}
+          style={{
+            cursor: "pointer",
+            paddingTop: 10,
+            paddingBottom: 10,
+            marginRight: 30,
+            borderStyle: "solid",
+            color: item.key == activeKey ? "#1890ff" : "#333",
+            borderColor: item.key == activeKey ? "#1890ff" : "transparent",
+            borderWidth: "0 0 2px 0",
+          }}>{item.label}</div>
+      ))}
+    </div>
   </>
 };

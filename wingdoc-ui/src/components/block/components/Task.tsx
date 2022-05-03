@@ -114,19 +114,19 @@ export default forwardRef((props: TaskProps, ref) => {
       ...style,
     }}>
     <Dropdown overlay={menu}>
-      <Button
-        size="small"
-        type="default"
-        shape="default"
+      <div
         style={{
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          textAlign: "center",
           width: 24,
+          height: 24,
           padding: 0,
-          borderWidth: 0,
-          borderColor: displayColor(status),
           color: displayColor(status),
           fontSize: "75%",
           fontWeight: 500,
-        }}>{displayName(status)}</Button>
+        }}>{displayName(status)}</div>
     </Dropdown>
   </div>
   </>

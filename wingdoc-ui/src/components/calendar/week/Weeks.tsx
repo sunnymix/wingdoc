@@ -18,21 +18,25 @@ export default forwardRef((props: WeekListProps, ref) => {
     }}>
     <Space direction="horizontal" size="middle">
       <InputNumber
+        defaultValue={1}
         addonAfter="周前"
         style={{
           width: 110,
         }}/>
       <InputNumber
+        defaultValue={1}
         addonAfter="周后"
         style={{
           width: 110,
         }}/>
       <InputNumber
-        addonAfter="倍高"
+        defaultValue={1}
+        addonAfter="高度"
         style={{
           width: 110,
         }}/>
-      <Checkbox>周末</Checkbox>
+      <Checkbox
+        defaultChecked={true}>周末</Checkbox>
     </Space>
     <div
       style={{

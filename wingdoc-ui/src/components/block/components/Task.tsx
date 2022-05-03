@@ -119,12 +119,13 @@ export default forwardRef((props: TaskProps, ref) => {
         type="default"
         shape="default"
         style={{
-          fontSize: "75%",
-          color: displayColor(status),
           width: 24,
           padding: 0,
-          borderWidth: 1,
+          borderWidth: 0,
           borderColor: displayColor(status),
+          color: displayColor(status),
+          fontSize: "75%",
+          fontWeight: 500,
         }}>{displayName(status)}</Button>
     </Dropdown>
   </div>

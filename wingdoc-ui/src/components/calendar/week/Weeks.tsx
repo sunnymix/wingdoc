@@ -34,6 +34,14 @@ export default forwardRef((props: WeekListProps, ref) => {
     const checked = e.target.checked;
     setWeekendShow(checked);
   };
+
+  // --- height multiple
+
+  const [heightMultiple, setHeightMultipel] = useState<number>(1);
+
+  const handleHeightMultipleUpdate = (value: number) => {
+    setHeightMultipel(value);
+  };
   
   // --- weeks update
 
@@ -77,7 +85,8 @@ export default forwardRef((props: WeekListProps, ref) => {
           width: 110,
         }}/>
       <InputNumber
-        defaultValue={1}
+        value={heightMultiple}
+        onChange={handleHeightMultipleUpdate}
         addonAfter="高度"
         style={{
           width: 110,
@@ -95,6 +104,7 @@ export default forwardRef((props: WeekListProps, ref) => {
             key={week}
             week={week}
             weekendShow={weekendShow}
+            heightMultiple={heightMultiple}
             style={{
               marginBottom: 0,
             }}/>

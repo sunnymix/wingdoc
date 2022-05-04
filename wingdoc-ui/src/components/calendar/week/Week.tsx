@@ -6,6 +6,7 @@ import { Weekday } from "./WeekDay";
 export interface WeekProps {
   week: number,
   weekendShow: boolean,
+  heightMultiple?: number,
   style?: any,
 };
 
@@ -13,7 +14,7 @@ export default forwardRef((props: WeekProps, ref) => {
 
   // --- props
 
-  const {week, weekendShow, style} = props;
+  const {week, weekendShow, heightMultiple, style} = props;
 
   // --- weekend show
 
@@ -35,7 +36,8 @@ export default forwardRef((props: WeekProps, ref) => {
       <WeekDay
         key={`${week}-${weekday}`}
         week={week}
-        weekday={weekday}/>
+        weekday={weekday}
+        heightMultiple={heightMultiple}/>
     )}
   </div>
   </>

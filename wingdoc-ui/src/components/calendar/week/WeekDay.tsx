@@ -77,13 +77,14 @@ export namespace Weekday {
 export interface WeekDayProps {
   week: number,
   weekday: Weekday,
+  heightMultiple?: number,
 };
 
 export default forwardRef((props: WeekDayProps, ref) => {
 
   // --- props
 
-  const {week, weekday} = props;
+  const {week, weekday, heightMultiple} = props;
 
   // --- moment
 
@@ -176,7 +177,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 0,
         overflow: "auto",
-        height: 200,
+        height: (heightMultiple || 1) * 200,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

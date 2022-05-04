@@ -26,6 +26,15 @@ export default forwardRef((props: WeekListProps, ref) => {
     setWeeksAfter(value);
   };
 
+  // --- weekend show
+
+  const [weekendShow, setWeekendShow] = useState<boolean>(true);
+
+  const handleWeekendShowUpdate = (e: any) => {
+    const checked = e.target.checked;
+    setWeekendShow(checked);
+  };
+  
   // --- weeks update
 
   useEffect(() => {
@@ -38,7 +47,9 @@ export default forwardRef((props: WeekListProps, ref) => {
       weeks.push(today + i);
     }
     setWeeks(weeks);
-  }, [weeksBefore, weeksAfter]);
+  }, [weeksBefore, weeksAfter, weekendShow]);
+
+  // --- ui
 
   return <>
   <Space 
@@ -72,19 +83,21 @@ export default forwardRef((props: WeekListProps, ref) => {
           width: 110,
         }}/>
       <Checkbox
-        defaultChecked={true}>周末</Checkbox>
+        defaultChecked={weekendShow}
+        onChange={handleWeekendShowUpdate}>周末</Checkbox>
     </Space>
     <div
       style={{
         borderBottom: "1px solid #ddd",
       }}>
         {weeks.map((week: number) => 
-        <Week
-          key={week}
-          week={week}
-          style={{
-            marginBottom: 0,
-          }}/>
+          <Week
+            key={week}
+            week={week}
+            weekendShow={weekendShow}
+            style={{
+              marginBottom: 0,
+            }}/>
         )}
     </div>
   </Space>

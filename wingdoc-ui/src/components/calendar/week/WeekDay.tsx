@@ -17,17 +17,28 @@ export enum Weekday {
   SUN,
 };
 
+const allweek = [
+  Weekday.MON,
+  Weekday.TUES,
+  Weekday.WED,
+  Weekday.THUS,
+  Weekday.FRI,
+  Weekday.SAT,
+  Weekday.SUN,];
+
+const workday = [
+    Weekday.MON,
+    Weekday.TUES,
+    Weekday.WED,
+    Weekday.THUS,
+    Weekday.FRI,];
+
 export namespace Weekday {
-  export function all() {
-    return [
-      Weekday.MON,
-      Weekday.TUES,
-      Weekday.WED,
-      Weekday.THUS,
-      Weekday.FRI,
-      Weekday.SAT,
-      Weekday.SUN,
-    ];
+  export function all(weekendShow: boolean) {
+    if (weekendShow) {
+      return allweek;
+    }
+    return workday;
   }
 
   export function title(weekday: Weekday) {

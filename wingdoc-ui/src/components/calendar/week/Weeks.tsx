@@ -12,7 +12,7 @@ export default forwardRef((props: WeekListProps, ref) => {
 
   // --- weeks before
 
-  const [weeksBefore, setWeeksBefore] = useState<number>(1);
+  const [weeksBefore, setWeeksBefore] = useState<number>(2);
 
   const handleWeeksBeforeUpdate = (value: number) => {
     setWeeksBefore(value);
@@ -97,7 +97,12 @@ export default forwardRef((props: WeekListProps, ref) => {
     </Space>
     <div
       style={{
-        borderBottom: "1px solid #ddd",
+        borderStyle: "solid",
+        borderColor: "#ddd",
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderTopWidth: 0,
+        borderBottomWidth: 1,
       }}>
         {weeks.map((week: number) => 
           <Week

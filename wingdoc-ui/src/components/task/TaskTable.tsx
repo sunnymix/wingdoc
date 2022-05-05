@@ -79,7 +79,7 @@ const TaskTable = forwardRef((props, ref) => {
           <td>
             <Space direction="horizontal" size="small">
               <Task id={task.id} defaultStatus={task.status} show={true}/>
-              <div style={{fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',}}>{task.task}</div>
+              <div style={{fontFamily: '"Helvetica Neue", Helvetica, Arial',}}>{task.task}</div>
             </Space>
           </td>
         </tr>

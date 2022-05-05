@@ -16,6 +16,10 @@ export default forwardRef((props: WeekProps, ref) => {
 
   const {week, weekendShow, heightMultiple, style} = props;
 
+  // --- current week
+
+  const currentWeek = week == 0;
+
   // --- weekend show
 
   // --- ui
@@ -25,10 +29,10 @@ export default forwardRef((props: WeekProps, ref) => {
     display: "flex",
     alignItems: "stretch",
     borderStyle: "solid",
-    borderColor: "#ddd",
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 0,
+    borderColor: currentWeek ? "#1890ff" : "#ddd",
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderTopWidth: 1,
     borderBottomWidth: 0,
     ...style,
   }}>

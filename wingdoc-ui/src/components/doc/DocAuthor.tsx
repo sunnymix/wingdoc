@@ -143,7 +143,7 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         onPressEnter={handleEnter}
         placeholder="Author"
         onFocus={handleTextFocused}
-        style={{fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',}}/>
+        style={{fontFamily: '"Helvetica Neue", Helvetica, Arial',}}/>
     </div>
   </div>
   </>

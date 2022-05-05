@@ -133,7 +133,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
         padding: 0,
         cursor: "pointer",
         // backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
-        fontWeight: isToday ? "bold" : "normal",
+        fontWeight: 500,
+        color: isToday ? "#1890ff" : "#333",
       }}>
       <Space direction="horizontal" size="small">
         <div>{Weekday.monthDay(week, weekday)}</div>
@@ -157,7 +158,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
     borderColor: "#ddd",
     borderLeftWidth: 0,
     borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
-    borderTopWidth: 1,
+    borderTopWidth: 0,
     borderBottomWidth: 0,
     flexGrow: 1,
     flexShrink: 0,
@@ -169,7 +170,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         // borderBottom: "1px dashed #eee",
         padding: 0,
         textAlign: "center",
-        fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',
+        fontFamily: '"Helvetica Neue", Helvetica, Arial',
       }}>
         {docId && titleLink}
         {!docId && titleLinkAndNewDocConfirm}
@@ -178,7 +179,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 0,
         overflow: "auto",
-        height: (heightMultiple || 1) * 120,
+        height: (heightMultiple || 1) * 100,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

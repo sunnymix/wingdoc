@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
-import { Space, Button, Popconfirm, Tag, Badge } from "antd";
+import { Space, Button, Popconfirm, Tag, Badge, Progress } from "antd";
 import { Link } from "umi";
 import { FileOutlined } from "@ant-design/icons";
 import { history } from "umi";
@@ -132,14 +132,14 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 0,
         cursor: "pointer",
-        // backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
+        // backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fafafa",
         fontWeight: 500,
         color: isToday ? "#1890ff" : "#333",
       }}>
       <Space direction="horizontal" size="small">
         <div>{Weekday.monthDay(week, weekday)}</div>
         <div>{Weekday.title(weekday)}</div>
-        <div>{isToday && <Badge color="blue" />}</div>
+        <Badge color="red"/>
       </Space>
     </div>
   );
@@ -163,7 +163,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
     flexGrow: 1,
     flexShrink: 0,
     width: "14%",
-    backgroundColor: Weekday.isWeekend(weekday) ? "#f9f9f9" : "#fff",
+    // backgroundColor: Weekday.isWeekend(weekday) ? "#f9f9f9" : "#fff",
   }}>
     <div
       style={{

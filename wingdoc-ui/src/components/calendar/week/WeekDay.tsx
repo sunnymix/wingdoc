@@ -159,7 +159,6 @@ export default forwardRef((props: WeekDayProps, ref) => {
     borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
     borderTopWidth: 1,
     borderBottomWidth: 0,
-    backgroundColor: isToday ? "rgba(230, 247, 255, 0.5)" : "#fff",
     flexGrow: 1,
     flexShrink: 0,
     width: "14%",
@@ -177,7 +176,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 0,
         overflow: "auto",
-        height: (heightMultiple || 1) * 200,
+        height: (heightMultiple || 1) * 120,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

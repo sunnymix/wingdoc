@@ -20,7 +20,7 @@ export default forwardRef((props: WeekListProps, ref) => {
 
   // --- weeks after
 
-  const [weeksAfter, setWeeksAfter] = useState<number>(1);
+  const [weeksAfter, setWeeksAfter] = useState<number>(4);
 
   const handleWeeksAfterUpdate = (value: number) => {
     setWeeksAfter(value);
@@ -87,7 +87,7 @@ export default forwardRef((props: WeekListProps, ref) => {
       <InputNumber
         value={heightMultiple}
         onChange={handleHeightMultipleUpdate}
-        addonAfter="高度"
+        addonAfter="空间"
         style={{
           width: 110,
         }}/>

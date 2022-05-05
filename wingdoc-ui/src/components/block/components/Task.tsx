@@ -124,7 +124,7 @@ export default forwardRef((props: TaskProps, ref) => {
           height: 24,
           padding: 0,
           color: displayColor(status),
-          fontSize: "75%",
+          fontSize: "80%",
           fontWeight: 500,
         }}>{displayName(status)}</div>
     </Dropdown>

@@ -60,7 +60,7 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
           to={`/doc/${task.docId}?block=${task.id}`}
           style={{
             color: "#333",
-            fontSize: "75%",
+            fontSize: "80%",
           }}>{task.task}</Link>
       </div>
     </div>

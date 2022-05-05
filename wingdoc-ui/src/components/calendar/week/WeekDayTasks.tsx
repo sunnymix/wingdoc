@@ -46,7 +46,7 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
     <div 
       key={task.id}
       style={{
-        margin: "2px 2px 0 2px",
+        margin: "0 5px",
         display: "flex",
         alignItems: "flex-start",
         borderBottom: "0 dashed #ddd",
@@ -61,6 +61,7 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
           style={{
             color: "#333",
             fontSize: "80%",
+            fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',
           }}>{task.task}</Link>
       </div>
     </div>

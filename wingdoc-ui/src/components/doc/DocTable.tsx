@@ -66,7 +66,7 @@ const DocTable: FC<{}> = ({}) => {
         <tr
           key={data.id}
           onClick={() => history.push(`/doc/${data.id}`)}>
-          <td>{data.title}</td>
+          <td style={{fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',}}>{data.title}</td>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;0</td>
         </tr>
       ))}

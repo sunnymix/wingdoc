@@ -117,6 +117,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         style={{ 
           fontSize: 28,
           fontWeight: 700,
+          fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',
         }}/>
     </div>
   </div>

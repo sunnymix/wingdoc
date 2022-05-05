@@ -130,9 +130,9 @@ export default forwardRef((props: WeekDayProps, ref) => {
     <div
       onClick={redirectToDoc}
       style={{
-        padding: 2,
+        padding: 0,
         cursor: "pointer",
-        backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
+        // backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fcfcfc",
         fontWeight: isToday ? "bold" : "normal",
       }}>
       <Space direction="horizontal" size="small">
@@ -162,12 +162,14 @@ export default forwardRef((props: WeekDayProps, ref) => {
     flexGrow: 1,
     flexShrink: 0,
     width: "14%",
+    backgroundColor: Weekday.isWeekend(weekday) ? "#f9f9f9" : "#fff",
   }}>
     <div
       style={{
-        borderBottom: "1px solid #ddd",
+        // borderBottom: "1px dashed #eee",
         padding: 0,
         textAlign: "center",
+        fontFamily: '"PingFang SC", "Helvetica Neue", Helvetica, Arial',
       }}>
         {docId && titleLink}
         {!docId && titleLinkAndNewDocConfirm}

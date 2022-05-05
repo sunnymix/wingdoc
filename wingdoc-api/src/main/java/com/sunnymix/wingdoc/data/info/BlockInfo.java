@@ -8,7 +8,7 @@ import lombok.Data;
  * @author sunnymix
  */
 @Data
-@AllArgsConstructor(staticName = "__")
+@AllArgsConstructor(staticName = "of")
 public class BlockInfo {
 
     private String id;
@@ -25,11 +25,11 @@ public class BlockInfo {
 
     private String link;
 
-    public static BlockInfo __(Block block) {
+    public static BlockInfo of(Block block) {
         if (block == null) {
             return null;
         }
-        return __(
+        return BlockInfo.of(
                 block.getId(),
                 block.getDocId(),
                 block.getPos(),

@@ -7,6 +7,7 @@ import com.sunnymix.wingdoc.data.form.BlockUpdateForm;
 import com.sunnymix.wingdoc.data.info.BlockInfo;
 import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.io.Page;
+import com.sunnymix.wingdoc.data.query.DocTaskQuery;
 import com.sunnymix.wingdoc.data.query.TaskQuery;
 import lombok.Getter;
 import org.jooq.DSLContext;
@@ -38,14 +39,14 @@ public class BlockRepo {
                 .where(BLOCK.DOC_ID.eq(docId))
                 .orderBy(BLOCK.POS)
                 .fetchStreamInto(Block.class)
-                .map(BlockInfo::__)
+                .map(BlockInfo::of)
                 .collect(Collectors.toList());
         return Out.ok(Page.list(blockInfoList.size()), blockInfoList);
     }
 
     public Out<BlockInfo> findOne(String id) {
         Block block = _findOne(id);
-        BlockInfo blockInfo = BlockInfo.__(block);
+        BlockInfo blockInfo = BlockInfo.of(block);
         return Out.ok(Page.one(), blockInfo);
     }
 
@@ -185,6 +186,15 @@ public class BlockRepo {
                 .selectFrom(BLOCK)
                 .where(query.toCondition())
                 .orderBy(BLOCK.DOC_ID, BLOCK.POS)
+                .fetchStreamInto(Block.class)
+                .collect(Collectors.toList());
+        return Out.ok(taskBlockList);
+    }
+
+    public Out<List<Block>> queryDocTask(DocTaskQuery query) {
+        List<Block> taskBlockList = dsl
+                .selectFrom(BLOCK)
+                .where(query.toCondition())
                 .fetchStreamInto(Block.class)
                 .collect(Collectors.toList());
         return Out.ok(taskBlockList);

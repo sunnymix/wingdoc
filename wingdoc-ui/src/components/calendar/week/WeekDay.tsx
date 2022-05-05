@@ -167,8 +167,6 @@ export default forwardRef((props: WeekDayProps, ref) => {
   }}>
     <div
       style={{
-        // borderBottom: "1px dashed #eee",
-        padding: 0,
         textAlign: "center",
         fontFamily: '"Helvetica Neue", Helvetica, Arial',
       }}>
@@ -177,9 +175,9 @@ export default forwardRef((props: WeekDayProps, ref) => {
       </div>
     <div
       style={{
-        padding: 0,
+        padding: "0 5px",
         overflow: "auto",
-        height: (heightMultiple || 1) * 100,
+        height: (heightMultiple || 1) * 150,
       }}>
         <div>
           <WeekDayTasks shortDate={shortDate}/>

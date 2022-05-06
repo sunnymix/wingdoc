@@ -6,6 +6,7 @@ import { FileOutlined } from "@ant-design/icons";
 import { history } from "umi";
 import DocApi from "@/components/doc/DocApi";
 import WeekDayTasks from "./WeekDayTasks";
+import TaskApi from "@/components/task/TaskApi";
 
 export enum Weekday {
   MON = 0,
@@ -106,6 +107,20 @@ export default forwardRef((props: WeekDayProps, ref) => {
     });
   }, [shortDate]);
 
+  // --- task stats
+
+  const [unfinished, setUnfinished] = useState<number>(0);
+
+  useEffect(() => {
+    if (docId && docId.length > 0) {
+      TaskApi.fetchTaskStats({docId}, (stats: any) => {
+        if (stats) {
+          setUnfinished(stats.unfinished || 0);
+        }
+      });
+    }
+  }, [docId]);
+
   // --- redirect to doc
 
   const redirectToDoc = () => {
@@ -139,7 +154,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
       <Space direction="horizontal" size="small">
         <div>{Weekday.monthDay(week, weekday)}</div>
         <div>{Weekday.title(weekday)}</div>
-        <Badge color="red"/>
+        {unfinished > 0 && <Badge color="red"/>}
       </Space>
     </div>
   );

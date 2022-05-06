@@ -32,7 +32,7 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
     if (shortDate) {
       DocApi.getDocByTitle(shortDate, (doc: any) => {
         if (doc) {
-          TaskApi.queryTaskList({docId: doc.id}, (tasks: any[]) => {
+          TaskApi.fetchTaskList({docId: doc.id}, (tasks: any[]) => {
             setTasks(tasks);
           });
         }

@@ -2,8 +2,9 @@ import axios from "axios";
 import Constant from "../common/Constant";
 
 const API_TASK_LIST = Constant.API_HOST + "/task/list";
+const API_TASK_STATS = Constant.API_HOST + "/task/stats";
 
-const queryTaskList = (query: any, cb: Function) => {
+const fetchTaskList = (query: any, cb: Function) => {
   axios.post(API_TASK_LIST, query)
     .then(res => {
       const data = res.data?.data;
@@ -11,8 +12,17 @@ const queryTaskList = (query: any, cb: Function) => {
     });
 };
 
+const fetchTaskStats = (query: any, cb: Function) => {
+  axios.post(API_TASK_STATS, query)
+    .then(res => {
+      const data = res.data?.data;
+      cb(data);
+    });
+};
+
 const TaskApi = {
-  queryTaskList,
+  fetchTaskList,
+  fetchTaskStats,
 };
 
 export default TaskApi;

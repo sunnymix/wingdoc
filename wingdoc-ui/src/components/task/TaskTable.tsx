@@ -27,7 +27,7 @@ const TaskTable = forwardRef((props, ref) => {
   // --- query
 
   const queryTasks = () => {
-    TaskApi.queryTaskList({ statusIn }, (newDatas: any) => {
+    TaskApi.fetchTaskList({ statusIn }, (newDatas: any) => {
       setTasks(newDatas || []);
     });
   };

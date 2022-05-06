@@ -67,6 +67,7 @@ public class TaskQueryService {
         Integer finished = ok + no;
         Integer unfinished = all - finished;
         DocTaskStatsInfo stats = DocTaskStatsInfo.builder()
+                .docId(query.getDocId())
                 .all(all)
                 .un(un)
                 .on(on)

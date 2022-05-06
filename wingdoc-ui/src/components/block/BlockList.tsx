@@ -155,6 +155,9 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
   const updateSelections = () => {
     const start = selectStartPos < selectStopPos ? selectStartPos : selectStopPos;
     const stop = selectStopPos > selectStartPos ? selectStopPos : selectStartPos;
+    if (start == stop) {
+      return;
+    }
     const newBlocks = blocks.map((block: any, index: number) => {
       block.selectAll = index >= start && index <= stop;
       return block;

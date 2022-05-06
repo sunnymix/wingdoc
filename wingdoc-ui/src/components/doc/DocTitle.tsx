@@ -86,10 +86,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     }}>
     <div
       style={{
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: showBlock ? "#ddd" : "transparent",
+        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
         visibility: hover ? "visible" : "hidden",
         marginRight: 0,
       }}>
@@ -98,10 +95,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     <div
       style={{
         flexGrow: 1,
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: showBlock ? "#ddd" : "transparent",
+        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
       }}>
       <TextArea
         value={title}

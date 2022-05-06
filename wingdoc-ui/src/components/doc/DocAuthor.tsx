@@ -113,22 +113,15 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     }}>
     <div
       style={{
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: props.showBlock ? "#ddd" : "transparent",
+        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
         visibility: hover ? "visible" : "hidden",
-        marginRight: 0,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: props.showBlock ? "#ddd" : "transparent",
+        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
       }}>
       <TextArea
         ref={textRef}

@@ -15,7 +15,7 @@ const spinIcon = <LoadingOutlined spin />;
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  const {data, onFocus, onSelectStart, onSelectStop, onCopy} = props;
+  const {data, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -261,9 +261,9 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${props.data.id}-edit`} onClick={() => openLink(true)}><LinkOutlined /></Menu.Item>
-      <Menu.Item key={`${props.data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
-      <Menu.Item key={`${props.data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
+      <Menu.Item key={`${data.id}-edit`} onClick={() => openLink(true)}><LinkOutlined /></Menu.Item>
+      <Menu.Item key={`${data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
+      <Menu.Item key={`${data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
   );
   
@@ -274,14 +274,11 @@ export default forwardRef((props: BlockProps, ref) => {
     style={{
       display: "flex",
       alignItems: "flex-start",
-      marginBottom: 0,
+      backgroundColor: props.focus ? "#f4f4f4": "#fff",
     }}>
     <div
       style={{
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: props.showBlock ? "#ddd" : "transparent",
+        backgroundColor: showBlock ? "#f8f8f8" : "transparent",
         position: "relative",
         visibility: hover ? "visible" : "hidden",
         marginTop: 4,
@@ -292,13 +289,9 @@ export default forwardRef((props: BlockProps, ref) => {
     </div>
     <div
       style={{
-        borderRadius: 2,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderColor: props.showBlock ? "#ddd" : "transparent",
         flexGrow: 1,
         display: "flex",
-        backgroundColor: data.selectAll ? "#e6f7ff" : "white",
+        backgroundColor: data.selectAll ? "#e6f7ff" : (showBlock ? "#f8f8f8" : "transparent"),
       }}>
       <Task 
         ref={taskRef}

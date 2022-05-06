@@ -107,7 +107,7 @@ const Doc = forwardRef((props: DocProps, ref) => {
   <div
     style={{
     }}>
-    <Space direction="vertical" size="large" style={{width: "100%"}}>
+    <div>
       <div>
         <DocTitle
           id={doc.id}
@@ -133,7 +133,7 @@ const Doc = forwardRef((props: DocProps, ref) => {
         docId={doc.id}
         showBlock={showBlock}
         ref={blockListRef}/>
-    </Space>
+    </div>
   </div>
   </>;
 });

@@ -15,7 +15,9 @@ const spinIcon = <LoadingOutlined spin />;
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  const {data, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
+  // --- props
+
+  const {data, focus, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -142,6 +144,8 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- focus
 
+  const [innerFocus, setInnerFocus] = useState<boolean>(false);
+
   const inputRef = useRef<any>(null);
 
   const focusInput = () => {
@@ -153,13 +157,22 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   useEffect(() => {
-    if (props.focus) {
-      focusInput();
+    if (focus) {
+      // 当内部未聚焦时，再聚焦到输入框（避免事件循环）
+      if (!innerFocus) {
+        focusInput();
+      }
     }
-  }, [props.focus]);
+  }, [focus]);
 
   const handleTextFocus = (e: any) => {
+    setInnerFocus(true);
     onFocus?.call(null, data);
+  };
+
+  const handleTextBlur = (e: any) => {
+    setInnerFocus(false);
+    handleChange(e);
   };
 
   // --- type
@@ -261,7 +274,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key={`${data.id}-edit`} onClick={() => openLink(true)}><LinkOutlined /></Menu.Item>
+      <Menu.Item key={`${data.id}-edit`} onClick={() => openLink(true)}><LinkOutlined/></Menu.Item>
       <Menu.Item key={`${data.id}-move-up`} onClick={handleMoveUp}><ArrowUpOutlined/></Menu.Item>
       <Menu.Item key={`${data.id}-move-down`} onClick={handleMoveDown}><ArrowDownOutlined/></Menu.Item>
     </Menu>
@@ -274,7 +287,7 @@ export default forwardRef((props: BlockProps, ref) => {
     style={{
       display: "flex",
       alignItems: "flex-start",
-      backgroundColor: props.focus ? "#f4f4f4": "#fff",
+      backgroundColor: innerFocus ? "#f4f4f4": "#fff",
     }}>
     <div
       style={{
@@ -317,7 +330,7 @@ export default forwardRef((props: BlockProps, ref) => {
           bordered={false}
           onClick={handleClick}
           onChange={handleChange}
-          onBlur={handleChange}
+          onBlur={handleTextBlur}
           onPressEnter={handleEnter}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}

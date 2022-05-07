@@ -99,10 +99,10 @@ export default forwardRef((props: WeekListProps, ref) => {
       style={{
         borderStyle: "solid",
         borderColor: "#ddd",
-        borderLeftWidth: 1,
-        borderRightWidth: 1,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
         borderTopWidth: 0,
-        borderBottomWidth: 1,
+        borderBottomWidth: 0,
       }}>
         {weeks.map((week: number) => 
           <Week

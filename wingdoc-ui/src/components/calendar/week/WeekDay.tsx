@@ -73,6 +73,10 @@ export namespace Weekday {
   export function isWeekend(weekday: Weekday) {
     return weekday == Weekday.SAT || weekday == Weekday.SUN;
   }
+
+  export function isLastDay(weekday: Weekday) {
+    return weekday == Weekday.SUN;
+  }
 }
 
 export interface WeekDayProps {
@@ -94,6 +98,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
   const shortDate = Weekday.shortDate(week, weekday);
 
   const isToday = Weekday.isToday(week, weekday);
+
+  const isLastDay = Weekday.isLastDay(weekday);
 
   // --- docId
 
@@ -169,35 +175,48 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   return <>
   <div style={{
-    borderStyle: "solid",
-    borderColor: "#ddd",
-    borderLeftWidth: 0,
-    borderRightWidth: weekday != Weekday.SUN ? 1 : 0,
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
+    position: "relative",
     flexGrow: 1,
     flexShrink: 0,
     width: "14%",
-    // backgroundColor: Weekday.isWeekend(weekday) ? "#f9f9f9" : "#fff",
   }}>
     <div
       style={{
-        textAlign: "center",
-        fontFamily: '"Helvetica Neue", Helvetica, Arial',
-      }}>
-        {docId && titleLink}
-        {!docId && titleLinkAndNewDocConfirm}
-      </div>
+        zIndex: 1,
+        backgroundColor: isToday ? "#fafafa" : "#fff",
+        position: "absolute",
+        left: 0,
+        right: isLastDay ? 0 : -1,
+        top: 0,
+        bottom: -1,
+        borderStyle: "solid",
+        borderColor: "#eee",
+        borderWidth: 1,
+      }}></div>
     <div
       style={{
-        padding: "0 5px",
-        overflow: "auto",
-        height: (heightMultiple || 1) * 150,
+        zIndex: 2,
+        position: "relative",
       }}>
-        <div>
-          <WeekDayTasks shortDate={shortDate}/>
+      <div
+        style={{
+          textAlign: "center",
+          fontFamily: '"Helvetica Neue", Helvetica, Arial',
+        }}>
+          {docId && titleLink}
+          {!docId && titleLinkAndNewDocConfirm}
         </div>
-      </div>
+      <div
+        style={{
+          padding: "0 5px",
+          overflow: "auto",
+          height: (heightMultiple || 1) * 150,
+        }}>
+          <div>
+            <WeekDayTasks shortDate={shortDate}/>
+          </div>
+        </div>
+    </div>
   </div>
   </>
 });

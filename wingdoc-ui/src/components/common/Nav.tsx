@@ -83,7 +83,6 @@ export default (props: any) => {
   return <>
   <div
     style={{
-      marginBottom: 20,
       display: "flex",
       borderBottom: "1px solid #eee",
     }}>
@@ -110,5 +109,11 @@ export default (props: any) => {
           }}><PlusOutlined/>&nbsp;<CaretDownOutlined/></div>
       </Dropdown>
     </div>
+  <div
+    style={{
+      marginBottom: 15,
+      display: "flex",
+      borderBottom: "1px solid #eee",
+    }}>Doc History</div>
   </>
 };

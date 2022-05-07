@@ -28,12 +28,7 @@ export default forwardRef((props: WeekProps, ref) => {
   <div style={{
     display: "flex",
     alignItems: "stretch",
-    borderStyle: "solid",
-    borderColor: currentWeek ? "#1890ff" : "#ddd",
-    borderLeftWidth: 0,
-    borderRightWidth: 0,
-    borderTopWidth: 1,
-    borderBottomWidth: 0,
+    backgroundColor: "#fff",
     ...style,
   }}>
     {Weekday.all(weekendShow).map((weekday: Weekday) => 

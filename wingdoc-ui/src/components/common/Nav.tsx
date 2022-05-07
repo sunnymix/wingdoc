@@ -1,7 +1,7 @@
 import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
 import { history, useLocation } from "umi";
-import { PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
+import { MoreOutlined, ClockCircleOutlined, PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
 import DocApi from "@/components/doc/DocApi";
 
 interface NavItemProps {
@@ -83,37 +83,64 @@ export default (props: any) => {
   return <>
   <div
     style={{
-      display: "flex",
-      borderBottom: "1px solid #eee",
+      zIndex: 100,
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
     }}>
-      {items.map((item: NavItemProps, index: number) => (
-        <div
-          key={index}
-          onClick={() => handleTabClick(item.path)}
-          style={{
-            cursor: "pointer",
-            paddingTop: 10,
-            paddingBottom: 10,
-            marginRight: 30,
-            borderStyle: "solid",
-            color: item.key == activeKey ? "#1890ff" : "#333",
-            borderColor: item.key == activeKey ? "#1890ff" : "transparent",
-            borderWidth: "0 0 2px 0",
-          }}>{item.label}</div>
-      ))}
-      <Dropdown overlay={createMenu} placement="bottomLeft">
-        <div
-          style={{
-            cursor: "pointer",
-            padding: 10,
-          }}><PlusOutlined/>&nbsp;<CaretDownOutlined/></div>
-      </Dropdown>
-    </div>
-  <div
-    style={{
-      marginBottom: 15,
-      display: "flex",
-      borderBottom: "1px solid #eee",
-    }}>Doc History</div>
+    <div
+      style={{
+        display: "flex",
+        backgroundColor: "#333",
+      }}>
+        {items.map((item: NavItemProps, index: number) => (
+          <div
+            key={index}
+            onClick={() => handleTabClick(item.path)}
+            style={{
+              position: "relative",
+              cursor: "pointer",
+              padding: "0 15px",
+              height: "30px",
+              lineHeight: "30px",
+              fontWeight: 500,
+              color: item.key == activeKey ? "#1890ff" : "#fff",
+            }}>
+              {item.key == activeKey && <div style={{
+                zIndex: 1,
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                borderTop: "2px solid #1890ff",
+                backgroundColor: "rgba(255, 255, 255, 0.03)",
+              }}></div>}
+              <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
+        ))}
+        <Dropdown overlay={createMenu} placement="bottomLeft">
+          <div
+            style={{
+              cursor: "pointer",
+              height: "30px",
+              lineHeight: "30px",
+              color: "#fff",
+            }}><PlusOutlined />&nbsp;<CaretDownOutlined /></div>
+        </Dropdown>
+      </div>
+    <div
+      style={{
+        display: "flex",
+        backgroundColor: "#fff",
+        padding: "0 15px",
+        height: "30px",
+        lineHeight: "30px",
+        borderBottom: "1px solid #eee",
+        marginBottom: 15,
+      }}>
+        <div>Today</div>
+      </div>
+  </div>
   </>
 };

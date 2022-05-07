@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 
 export default (props: any) => (<>
   <div style={{
-    padding: 15,
   }}>
     <Nav/>
-    <div>{props.children}</div>
+    <div
+      style={{
+        padding: "75px 15px 15px",
+      }}>{props.children}</div>
   </div>
   </>);

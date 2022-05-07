@@ -74,6 +74,7 @@ const Link = forwardRef((props: LinkProps, ref) => {
   const handleBlur = () => {
     setShow(false);
     setFocusing(false);
+    handleCancel();
   };
 
   return <>

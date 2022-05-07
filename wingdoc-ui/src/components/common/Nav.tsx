@@ -123,6 +123,7 @@ export default (props: any) => {
           <div
             style={{
               cursor: "pointer",
+              padding: "0 15px",
               height: "30px",
               lineHeight: "30px",
               color: "#fff",

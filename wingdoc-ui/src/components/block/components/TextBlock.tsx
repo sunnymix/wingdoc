@@ -287,7 +287,7 @@ export default forwardRef((props: BlockProps, ref) => {
     style={{
       display: "flex",
       alignItems: "flex-start",
-      backgroundColor: innerFocus ? "#f4f4f4": "#fff",
+      backgroundColor: innerFocus ? "#f8f8f8": "#fff",
     }}>
     <div
       style={{

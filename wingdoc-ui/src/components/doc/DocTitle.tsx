@@ -80,22 +80,32 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     onMouseMove={() => setHover(true)}
     onMouseLeave={() => setHover(false)}
     style={{
+      position: "relative",
       display: "flex",
       alignItems: "center",
       marginBottom: 0,
     }}>
     <div
       style={{
-        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: -1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: showBlock ? "#f2f2f2": "transparent",
+      }}></div>
+    <div
+      style={{
         visibility: hover ? "visible" : "hidden",
-        marginRight: 0,
+        marginLeft: 4,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
       }}>
       <TextArea
         value={title}

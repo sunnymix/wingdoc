@@ -108,20 +108,31 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     onMouseMove={() => setHover(true)}
     onMouseLeave={() => setHover(false)}
     style={{
+      position: "relative",
       display: "flex",
       alignItems: "center",
     }}>
     <div
       style={{
-        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: -1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: showBlock ? "#f2f2f2": "transparent",
+      }}></div>
+    <div
+      style={{
         visibility: hover ? "visible" : "hidden",
+        marginLeft: 4,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
         flexGrow: 1,
-        backgroundColor: showBlock ? "#f8f8f8" : "#fff",
       }}>
       <TextArea
         ref={textRef}

@@ -285,17 +285,41 @@ export default forwardRef((props: BlockProps, ref) => {
     onMouseMove={() => setHover(true)}
     onMouseLeave={() => setHover(false)}
     style={{
+      position: "relative",
       display: "flex",
       alignItems: "flex-start",
-      backgroundColor: innerFocus ? "#f8f8f8": "#fff",
     }}>
     <div
       style={{
-        backgroundColor: showBlock ? "#f8f8f8" : "transparent",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        backgroundColor: innerFocus ? "rgba(0, 0, 0, 0.03)": "transparent",
+      }}></div>
+    <div
+      style={{
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        backgroundColor: data.selectAll ? "rgba(24, 144, 255, 0.1)": "transparent",
+      }}></div>
+    <div
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: -1,
+        borderStyle: "solid",
+        borderWidth: 1,
+        borderColor: showBlock ? "#f2f2f2": "transparent",
+      }}></div>
+    <div
+      style={{
         position: "relative",
         visibility: hover ? "visible" : "hidden",
         marginTop: 4,
-        marginRight: 0,
+        marginLeft: 4,
       }}>
       <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
@@ -304,7 +328,6 @@ export default forwardRef((props: BlockProps, ref) => {
       style={{
         flexGrow: 1,
         display: "flex",
-        backgroundColor: data.selectAll ? "#e6f7ff" : (showBlock ? "#f8f8f8" : "transparent"),
       }}>
       <Task 
         ref={taskRef}

@@ -291,6 +291,7 @@ export default forwardRef((props: BlockProps, ref) => {
     }}>
     <div
       style={{
+        zIndex: 1,
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -298,6 +299,7 @@ export default forwardRef((props: BlockProps, ref) => {
       }}></div>
     <div
       style={{
+        zIndex: 2,
         position: "absolute",
         width: "100%",
         height: "100%",
@@ -305,6 +307,7 @@ export default forwardRef((props: BlockProps, ref) => {
       }}></div>
     <div
       style={{
+        zIndex: 3,
         position: "absolute",
         left: 0,
         right: 0,
@@ -316,16 +319,16 @@ export default forwardRef((props: BlockProps, ref) => {
       }}></div>
     <div
       style={{
-        position: "relative",
+        zIndex: 4,
         visibility: hover ? "visible" : "hidden",
         marginTop: 4,
         marginLeft: 4,
       }}>
-      <Spin spinning={loading} indicator={spinIcon} style={{position: "absolute"}}/>
       <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
     </div>
     <div
       style={{
+        zIndex: 4,
         flexGrow: 1,
         display: "flex",
       }}>

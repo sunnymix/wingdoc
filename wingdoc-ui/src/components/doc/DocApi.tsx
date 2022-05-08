@@ -1,5 +1,6 @@
 import axios from "axios";
 import Constant from "../common/Constant";
+import moment from "moment";
 
 const API_DOC_LIST = Constant.API_HOST + '/doc/list';
 const API_DOC_ONE = Constant.API_HOST + '/doc/'
@@ -48,12 +49,26 @@ const updateDoc = (id: string, form: any, cb: Function) => {
     });
 };
 
+const fetchTodayDoc = (cb: Function) => {
+  const todayTitle = moment().format("yyyyMMDD");
+  DocApi.getDocByTitle(todayTitle, (doc: any) => {
+    if (doc) {
+      cb(doc);
+    } else {
+      addDoc({title: todayTitle, author: ""}, (newDoc: any) => {
+        cb(newDoc);
+      });
+    }
+  });
+};
+
 const DocApi = {
   getDocList,
   addDoc,
   getDoc,
   getDocByTitle,
   updateDoc,
+  fetchTodayDoc,
 }
 
 export default DocApi;

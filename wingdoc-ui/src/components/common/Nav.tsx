@@ -1,8 +1,10 @@
 import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
-import { history, useLocation } from "umi";
+import { history, useLocation, Link } from "umi";
 import { MoreOutlined, ClockCircleOutlined, PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
 import DocApi from "@/components/doc/DocApi";
+import Style from "./NavStyle.css";
+import moment from "moment";
 
 interface NavItemProps {
   label: ReactNode,
@@ -54,11 +56,12 @@ const items: NavItemProps[] = [
 
 export default (props: any) => {
 
-  const location = useLocation();
-
-  const pathname = location.pathname;
+  // --- active item
 
   const [activeKey, setActiveKey] = useState<string>("");
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   useEffect(() => {
     var key = "";
@@ -80,68 +83,52 @@ export default (props: any) => {
     }
   };
 
+  // --- marks
+
+  interface Mark {
+    id: number,
+    docId: string,
+    docTitle: string,
+  }
+
+  const [marks, setMarks] = useState<Mark[]>([]);
+
+  useEffect(() => {
+    DocApi.fetchTodayDoc((doc: any) => {
+      if (doc) {
+        setMarks([{
+          id: 0,
+          docId: doc.id,
+          docTitle: "Today"
+        }])
+      }
+    });
+  }, []);
+
+  // --- ui
+
   return <>
-  <div
-    style={{
-      zIndex: 100,
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-    }}>
-    <div
-      style={{
-        display: "flex",
-        backgroundColor: "#333",
-      }}>
+  <div className={Style.nav}>
+    <div className={Style.nav_body}>
         {items.map((item: NavItemProps, index: number) => (
           <div
             key={index}
-            onClick={() => handleTabClick(item.path)}
-            style={{
-              position: "relative",
-              cursor: "pointer",
-              padding: "0 15px",
-              height: "30px",
-              lineHeight: "30px",
-              fontWeight: 500,
-              color: item.key == activeKey ? "#1890ff" : "#fff",
-            }}>
-              {item.key == activeKey && <div style={{
-                zIndex: 1,
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                borderTop: "2px solid #1890ff",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-              }}></div>}
+            className={item.key == activeKey ? Style.nav_body_item_active : Style.nav_body_item}
+            onClick={() => handleTabClick(item.path)}>
+              {item.key == activeKey && <div className={Style.nav_body_item_active_mask}></div>}
               <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
         ))}
         <Dropdown overlay={createMenu} placement="bottomLeft">
-          <div
-            style={{
-              cursor: "pointer",
-              padding: "0 15px",
-              height: "30px",
-              lineHeight: "30px",
-              color: "#fff",
-            }}><PlusOutlined />&nbsp;<CaretDownOutlined /></div>
+          <div className={Style.nav_new_button}><PlusOutlined />&nbsp;<CaretDownOutlined /></div>
         </Dropdown>
       </div>
-    <div
-      style={{
-        display: "flex",
-        backgroundColor: "#fff",
-        padding: "0 15px",
-        height: "30px",
-        lineHeight: "30px",
-        borderBottom: "1px solid #eee",
-        marginBottom: 15,
-      }}>
-        <div>Today</div>
-      </div>
+    <div className={Style.nav_history}>
+      {marks.map((mark: Mark) => 
+        <Link
+          key={mark.id}
+          className={Style.nav_history_link}
+          to={`/doc/${mark.docId}`}>{mark.docTitle}</Link>)}
+    </div>
   </div>
   </>
 };

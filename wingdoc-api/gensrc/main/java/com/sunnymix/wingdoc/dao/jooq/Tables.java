@@ -6,6 +6,7 @@ package com.sunnymix.wingdoc.dao.jooq;
 
 import com.sunnymix.wingdoc.dao.jooq.tables.Block;
 import com.sunnymix.wingdoc.dao.jooq.tables.Doc;
+import com.sunnymix.wingdoc.dao.jooq.tables.Mark;
 
 
 /**
@@ -23,4 +24,9 @@ public class Tables {
      * The table <code>wingdoc.doc</code>.
      */
     public static final Doc DOC = Doc.DOC;
+
+    /**
+     * The table <code>wingdoc.mark</code>.
+     */
+    public static final Mark MARK = Mark.MARK;
 }

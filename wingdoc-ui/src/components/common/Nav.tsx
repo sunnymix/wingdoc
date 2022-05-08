@@ -5,6 +5,7 @@ import { MoreOutlined, ClockCircleOutlined, PlusOutlined, CaretDownOutlined } fr
 import DocApi from "@/components/doc/DocApi";
 import Style from "./NavStyle.css";
 import moment from "moment";
+import MarkTabs from "@/components/mark/MarkTabs";
 
 interface NavItemProps {
   label: ReactNode,
@@ -83,28 +84,6 @@ export default (props: any) => {
     }
   };
 
-  // --- marks
-
-  interface Mark {
-    id: number,
-    docId: string,
-    docTitle: string,
-  }
-
-  const [marks, setMarks] = useState<Mark[]>([]);
-
-  useEffect(() => {
-    DocApi.fetchTodayDoc((doc: any) => {
-      if (doc) {
-        setMarks([{
-          id: 0,
-          docId: doc.id,
-          docTitle: "Today"
-        }])
-      }
-    });
-  }, []);
-
   // --- ui
 
   return <>
@@ -122,13 +101,7 @@ export default (props: any) => {
           <div className={Style.nav_new_button}><PlusOutlined />&nbsp;<CaretDownOutlined /></div>
         </Dropdown>
       </div>
-    <div className={Style.nav_history}>
-      {marks.map((mark: Mark) => 
-        <Link
-          key={mark.id}
-          className={Style.nav_history_link}
-          to={`/doc/${mark.docId}`}>{mark.docTitle}</Link>)}
-    </div>
+    <MarkTabs />
   </div>
   </>
 };

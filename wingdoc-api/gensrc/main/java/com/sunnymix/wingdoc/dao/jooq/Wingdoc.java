@@ -6,6 +6,7 @@ package com.sunnymix.wingdoc.dao.jooq;
 
 import com.sunnymix.wingdoc.dao.jooq.tables.Block;
 import com.sunnymix.wingdoc.dao.jooq.tables.Doc;
+import com.sunnymix.wingdoc.dao.jooq.tables.Mark;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,11 @@ public class Wingdoc extends SchemaImpl {
     public final Doc DOC = Doc.DOC;
 
     /**
+     * The table <code>wingdoc.mark</code>.
+     */
+    public final Mark MARK = Mark.MARK;
+
+    /**
      * No further instances allowed
      */
     private Wingdoc() {
@@ -55,7 +61,8 @@ public class Wingdoc extends SchemaImpl {
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             Block.BLOCK,
-            Doc.DOC
+            Doc.DOC,
+            Mark.MARK
         );
     }
 }

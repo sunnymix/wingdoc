@@ -1,7 +1,7 @@
 import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
 import { history, useLocation, Link } from "umi";
-import { MoreOutlined, ClockCircleOutlined, PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
+import { PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
 import DocApi from "@/components/doc/DocApi";
 import Style from "./NavStyle.css";
 import moment from "moment";
@@ -98,7 +98,9 @@ export default (props: any) => {
               <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
         ))}
         <Dropdown overlay={createMenu} placement="bottomLeft">
-          <div className={Style.nav_new_button}><PlusOutlined />&nbsp;<CaretDownOutlined /></div>
+          <div className={Style.nav_new_button}>
+            <PlusOutlined />
+          </div>
         </Dropdown>
       </div>
     <MarkTabs />

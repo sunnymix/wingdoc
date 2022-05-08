@@ -5,6 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import BlockList from '../block/BlockList';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
+import MarkApi from '../mark/MarkApi';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -66,6 +67,7 @@ const Doc = forwardRef((props: DocProps, ref) => {
     DocApi.getDoc(id, (doc: any) => {
       setLoading(false);
       setDoc(doc);
+      MarkApi.addMark(doc.id)
     });
   };
 

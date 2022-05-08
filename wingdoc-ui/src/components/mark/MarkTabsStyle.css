@@ -2,17 +2,43 @@
 .mark_tabs {
   display: flex;
   background-color: #fff;
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #ddd;
   margin-bottom: 15;
+  overflow: hidden;
+  overflow-x: auto;
 }
 
 .marks_tabs_item {
-  display: inline-block;
-  padding: 0 15px;
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0 0 0 10px;
+}
+
+.marks_tabs_item_divider {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #eee;
+}
+
+.marks_tabs_item_link {
+  display: block;
   height: 30px;
   line-height: 30px;
   font-size: 80%;
   font-weight: 500;
+  white-space: nowrap;
+}
+
+.marks_tabs_item_delete {
+  cursor: pointer;
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  border: 0 none;
+  background-color: transparent;
+  padding: 0 10px;
+  color: #ccc;
 }

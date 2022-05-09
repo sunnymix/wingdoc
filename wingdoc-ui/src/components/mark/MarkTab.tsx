@@ -7,19 +7,22 @@ import MarkApi from "./MarkApi";
 import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
 
 export interface MarkTabProps {
-  mark: Mark
+  mark: Mark,
+  onDelete?: Function,
 };
 
 export default forwardRef((props: MarkTabProps, ref) => {
 
   // --- props
 
-  const {mark} = props;
+  const { mark, onDelete } = props;
 
   // --- delete mark
 
   const handleDeleteMark = () => {
-    MarkApi.deleteMark(mark.docId);
+    MarkApi.deleteMark(mark.docId, () => {
+      onDelete?.call(null, mark);
+    });
   };
 
   const displayTitle = (mark: Mark) => {

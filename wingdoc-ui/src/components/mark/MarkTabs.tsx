@@ -75,7 +75,7 @@ export default forwardRef((props: MarkTabsProps, ref) => {
 
   return (
     <div className={Style.mark_tabs}>
-      {marks.map((mark: Mark) =>  <MarkTab key={mark.id} mark={mark}/>)}
+      {marks.map((mark: Mark) =>  <MarkTab key={mark.id} mark={mark} onDelete={() => refreshMarks()}/>)}
     </div>
   )
 });

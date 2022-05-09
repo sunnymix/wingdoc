@@ -93,13 +93,15 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   const isFocusUp = (e: any) => {
-    if (e.key == "ArrowUp" && e.target.selectionStart == 0) {
+    if (e.key == "ArrowUp") {
+      // e.target.selectionStart == 0
       props.onFocusUp?.call(null, props.data);
     }
   };
 
   const isFocusDown = (e: any) => {
-    if (e.key == "ArrowDown" && e.target.selectionStart == e.target.value.length) {
+    if (e.key == "ArrowDown") {
+      // e.target.selectionStart == e.target.value.length
       props.onFocusDown?.call(null, props.data);
     }
   };
@@ -330,12 +332,12 @@ export default forwardRef((props: BlockProps, ref) => {
     <div
       style={{
         zIndex: 4,
-        visibility: (hover || innerFocus) ? "visible" : "hidden",
+        visibility: innerFocus ? "visible" : "hidden",
         marginTop: 4,
         marginLeft: 4,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
-        <OptionButton color={innerFocus ? "rgba(24, 144, 255, 1)" : "rgba(24, 144, 255, 0.5)"}/>
+        <OptionButton/>
       </Dropdown>
     </div>
     <div

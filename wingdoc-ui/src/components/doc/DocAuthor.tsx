@@ -128,7 +128,9 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         visibility: hover ? "visible" : "hidden",
         marginLeft: 4,
       }}>
-      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton color={"rgb(24, 144, 255)"}/></Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft">
+        <OptionButton />
+      </Dropdown>
     </div>
     <div
       style={{

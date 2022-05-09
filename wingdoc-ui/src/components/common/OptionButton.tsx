@@ -16,7 +16,7 @@ const OptionButton = (props: OptionButtonProps) => {
       width: 6,
       height: 6,
       borderRadius: "50%",
-      backgroundColor: color || "#666",
+      backgroundColor: color || "rgba(24, 144, 255, 1)",
     }}></div>
   </Button>
   </>

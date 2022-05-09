@@ -1,10 +1,11 @@
 import Style from "./MarkTabsStyle.css";
 import { Link, history } from "umi";
 import { RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import DocApi from "@/components/doc/DocApi";
 import MarkApi from "./MarkApi";
 import { Badge } from "antd";
+import { useLocation } from "umi";
 
 interface Mark {
   id: number,
@@ -14,7 +15,7 @@ interface Mark {
 
 export interface MarkTabsProps {}
 
-export default (props: MarkTabsProps) => {
+export default forwardRef((props: MarkTabsProps, ref) => {
 
   // --- marks
 
@@ -30,9 +31,16 @@ export default (props: MarkTabsProps) => {
     });
   };
 
+  const refreshMarksInSeconds = (seconds: number) => {
+    setTimeout(refreshMarks, seconds * 500);
+  };
+
+  // --- location
+
+  const location: any = useLocation();
   useEffect(() => {
-    refreshMarks();
-  }, []);
+    refreshMarksInSeconds(1);
+  }, [location.pathname]);
 
   // --- delete mark
 
@@ -85,4 +93,4 @@ export default (props: MarkTabsProps) => {
       )}
     </div>
   )
-}
+});

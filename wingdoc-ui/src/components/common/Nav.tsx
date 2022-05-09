@@ -88,22 +88,19 @@ export default (props: any) => {
 
   return <>
   <div className={Style.nav}>
-    <div className={Style.nav_body}>
-        {items.map((item: NavItemProps, index: number) => (
-          <div
-            key={index}
-            className={item.key == activeKey ? Style.nav_body_item_active : Style.nav_body_item}
-            onClick={() => handleTabClick(item.path)}>
-              {item.key == activeKey && <div className={Style.nav_body_item_active_mask}></div>}
-              <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
-        ))}
-        <Dropdown overlay={createMenu} placement="bottomLeft">
-          <div className={Style.nav_new_button}>
-            <PlusOutlined />
-          </div>
-        </Dropdown>
+    {items.map((item: NavItemProps, index: number) => (
+      <div
+        key={index}
+        className={item.key == activeKey ? Style.nav_item_active : Style.nav_item}
+        onClick={() => handleTabClick(item.path)}>
+          {item.key == activeKey && <div className={Style.nav_item_active_mask}></div>}
+          <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
+    ))}
+    <Dropdown overlay={createMenu} placement="bottomLeft">
+      <div className={Style.nav_new_button}>
+        <PlusOutlined />
       </div>
-    <MarkTabs />
+    </Dropdown>
   </div>
   </>
 };

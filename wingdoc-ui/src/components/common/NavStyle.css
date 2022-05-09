@@ -1,17 +1,9 @@
 .nav {
-  z-index: 100;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.nav_body {
   display: flex;
   background-color: #333;
 }
 
-.nav_body_item {
+.nav_item {
   position: relative;
   cursor: pointer;
   padding: 0 15px;
@@ -21,7 +13,7 @@
   color: #fff;
 }
 
-.nav_body_item_active {
+.nav_item_active {
   position: relative;
   cursor: pointer;
   padding: 0 15px;
@@ -31,7 +23,7 @@
   color: #1890ff;
 }
 
-.nav_body_item_active_mask {
+.nav_item_active_mask {
   z-index: 1;
   position: absolute;
   left: 0;
@@ -48,22 +40,4 @@
   height: 30px;
   line-height: 30px;
   color: #fff;
-}
-
-.nav_marks {
-  display: flex;
-  background-color: #fff;
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 15;
-}
-
-.nav_marks_item {
-  display: inline-block;
-  padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 80%;
-  font-weight: 500;
 }

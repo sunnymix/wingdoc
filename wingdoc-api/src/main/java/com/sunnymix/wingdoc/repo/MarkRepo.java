@@ -30,22 +30,36 @@ public class MarkRepo {
     public Out<List<Mark>> query() {
         List<Mark> marks = dsl
                 .selectFrom(MARK)
-                .orderBy(MARK.ID.desc())
+                .orderBy(MARK.ID)
                 .fetchStreamInto(Mark.class)
                 .collect(Collectors.toList());
         return Out.ok(Page.list(marks.size()), marks);
     }
 
     public Out<Boolean> add(MarkAddForm form) {
-        _delete(form.getDocId());
+        if (_exist(form.getDocId())) {
+            return Out.ok(true);
+        }
 
         MarkRecord record = form.toRecord();
         dsl.executeInsert(record);
+
         return Out.ok(true);
     }
 
     public Out<Boolean> delete(String docId) {
         return Out.ok(_delete(docId));
+    }
+
+    private Mark _one(String docId) {
+        return dsl
+                .selectFrom(MARK)
+                .where(MARK.DOC_ID.eq(docId))
+                .fetchOneInto(Mark.class);
+    }
+
+    private boolean _exist(String docId) {
+        return _one(docId) != null;
     }
 
     private boolean _delete(String docId) {

@@ -1,16 +1,18 @@
 import Style from "./MarkTabsStyle.css";
 import { Link, history } from "umi";
-import { RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
+import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
 import { useState, useEffect, forwardRef } from "react";
 import DocApi from "@/components/doc/DocApi";
 import MarkApi from "./MarkApi";
-import { Badge } from "antd";
+import { Badge, Dropdown, Menu } from "antd";
 import { useLocation } from "umi";
+import MarkTab from "./MarkTab";
 
-interface Mark {
+export interface Mark {
   id: number,
   docId: string,
   docTitle: string,
+  focus?: boolean,
 }
 
 export interface MarkTabsProps {}
@@ -21,76 +23,59 @@ export default forwardRef((props: MarkTabsProps, ref) => {
 
   const [marks, setMarks] = useState<Mark[]>([]);
 
+  const focusMark = (marks: Mark[], path: string) => {
+    var docId = "";
+    const basePath = "/doc/";
+    const docIndex = path.indexOf(basePath);
+    if (docIndex >= 0) {
+      docId = path.substring(docIndex + basePath.length);
+    }
+    const newMarks = marks.map((mark: Mark) => {
+      mark.focus = mark.docId == docId;
+      return mark;
+    });
+    setMarks(newMarks);
+  };
+
   const refreshMarks = () => {
     const newMarks: Mark[] = [];
     MarkApi.fetchMarks({}, (marks: any) => {
       if (marks && marks.length > 0) {
         marks.forEach((mark: Mark) => newMarks.push(mark));
       }
-      setMarks(newMarks);
+      focusMark(newMarks, location.pathname);
     });
   };
 
-  const refreshMarksInSeconds = (seconds: number) => {
-    setTimeout(refreshMarks, seconds * 500);
+  const refreshMarksInSeconds = (millis: number) => {
+    setTimeout(refreshMarks, millis);
   };
 
   // --- location
 
   const location: any = useLocation();
+
   useEffect(() => {
-    refreshMarksInSeconds(1);
+    focusMark(marks, location.pathname);
   }, [location.pathname]);
 
-  // --- delete mark
+  useEffect(() => {
+    refreshMarks();
+  }, []);
 
-  const redirectToNextMark = (docId: string) => {
-    var deleteIndex = -1;
-    marks.forEach((mark: Mark, index: number) => {
-      if (mark.docId == docId) {
-        deleteIndex = index;
-      }
-    });
-    var redirectToMark = null;
-    if (deleteIndex < 0) {
-      if (marks.length > 0) {
-        redirectToMark = marks[0];
-      }
-    } else if (deleteIndex == 0) {
-      if (marks.length > 1) {
-        redirectToMark = marks[1];
-      }
-    } else if (deleteIndex > 0) {
-      redirectToMark = marks[deleteIndex - 1];
-    }
-    // TODO：删除当前打开的文档时，才处理 redirectToMark
-  };
+  // --- ui more
 
-  const handleDeleteMark = (docId: string) => {
-    MarkApi.deleteMark(docId, () => {
-      refreshMarks();
-      redirectToNextMark(docId);
-    });
-  };
-
-  const displayTitle = (mark: Mark) => {
-    if (mark.docTitle && mark.docTitle.length > 0) {
-      return mark.docTitle;
-    }
-    return "untitled";
-  };
+  const moreMenu = (
+    <Menu>
+      <Menu.Item key="remove-tab">Remove tab</Menu.Item>
+    </Menu>
+  );
 
   // --- ui
 
   return (
     <div className={Style.mark_tabs}>
-      {marks.map((mark: Mark) => 
-        <div className={Style.marks_tabs_item} key={mark.id}>
-          <div className={Style.marks_tabs_item_divider}></div>
-          <Link className={Style.marks_tabs_item_link} to={`/doc/${mark.docId}`}>{displayTitle(mark)}</Link>
-          <button className={Style.marks_tabs_item_delete} onClick={() => handleDeleteMark(mark.docId)}>×</button>
-        </div>
-      )}
+      {marks.map((mark: Mark) =>  <MarkTab key={mark.id} mark={mark}/>)}
     </div>
   )
 });

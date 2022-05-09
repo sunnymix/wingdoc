@@ -101,7 +101,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         visibility: hover ? "visible" : "hidden",
         marginLeft: 4,
       }}>
-      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton style={{color: "rgba(24, 144, 255, 1)"}}/></Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton color={"rgb(24, 144, 255)"}/></Dropdown>
     </div>
     <div
       style={{

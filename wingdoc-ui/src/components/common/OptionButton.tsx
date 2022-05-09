@@ -1,13 +1,24 @@
-import { Button } from 'antd';
+import { Button, Badge } from 'antd';
 import { Children, ReactNode } from 'react';
 import OptionIcon from '../icon/OptionIcon';
-import { MoreOutlined, CaretDownFilled, CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
+import { ExpandOutlined, MenuOutlined, BorderOutlined, BorderlessTableOutlined, ItalicOutlined, RightSquareOutlined, RightCircleOutlined, RightOutlined, EllipsisOutlined, MoreOutlined, CaretDownFilled, CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 
-const OptionButton = (props: any) => {
-  const { } = props;
+interface OptionButtonProps {
+  color?: string
+}
+
+const OptionButton = (props: OptionButtonProps) => {
+  const { color } = props;
 
   return <>
-  <Button type="text" size="small" {...props}><CaretRightOutlined /></Button>
+  <Button type="text" size="small" {...props}>
+    <div style={{
+      width: 6,
+      height: 6,
+      borderRadius: "50%",
+      backgroundColor: color || "#666",
+    }}></div>
+  </Button>
   </>
 }
 

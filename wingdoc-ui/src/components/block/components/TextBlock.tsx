@@ -274,6 +274,12 @@ export default forwardRef((props: BlockProps, ref) => {
   const handleKeyUp = (e: any) => {
   };
 
+  // --- handle option visible change
+
+  const handleOptionVisibleChange = (visible: boolean) => {
+    focusInput();
+  };
+
   // --- menu
 
   const menu = (
@@ -328,7 +334,9 @@ export default forwardRef((props: BlockProps, ref) => {
         marginTop: 4,
         marginLeft: 4,
       }}>
-      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton style={{color: innerFocus ? "rgba(24, 144, 255, 1)" : "rgba(24, 144, 255, 0.5)"}}/></Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
+        <OptionButton color={innerFocus ? "rgba(24, 144, 255, 1)" : "rgba(24, 144, 255, 0.5)"}/>
+      </Dropdown>
     </div>
     <div
       style={{

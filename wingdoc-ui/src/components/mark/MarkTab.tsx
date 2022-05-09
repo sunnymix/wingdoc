@@ -46,7 +46,7 @@ export default forwardRef((props: MarkTabProps, ref) => {
     <div className={Style.marks_tabs_item} key={mark.id}>
       <div className={Style.marks_tabs_item_divider}></div>
       {mark.focus && <div className={Style.marks_tabs_item_focus}></div>}
-      <Link className={Style.marks_tabs_item_link} to={`/doc/${mark.docId}`} style={{color: mark.focus ? "#333" : "#666"}}>{displayTitle(mark)}</Link>
+      <Link className={Style.marks_tabs_item_link} to={`/doc/${mark.docId}`} style={{color: mark.focus ? "#333" : "#333"}}>{displayTitle(mark)}</Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>
         <div className={Style.nav_new_button}>
           <button className={Style.marks_tabs_item_delete}><MoreOutlined /></button>

@@ -1,8 +1,8 @@
 
 .mark_tabs {
   display: flex;
-  background-color: #f4f4f4;
-  border-bottom: 1px solid #eee;
+  background-color: #e2e5e8;
+  border-bottom: 1px solid #ddd;
   margin-bottom: 15;
   overflow: hidden;
   overflow-x: auto;
@@ -43,7 +43,7 @@
   padding-right: 5px;
   height: 30px;
   line-height: 30px;
-  color: #666;
+  color: #333;
   font-weight: 500;
   white-space: nowrap;
   text-align: center;

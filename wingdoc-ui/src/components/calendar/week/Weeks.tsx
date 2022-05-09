@@ -12,7 +12,7 @@ export default forwardRef((props: WeekListProps, ref) => {
 
   // --- weeks before
 
-  const [weeksBefore, setWeeksBefore] = useState<number>(2);
+  const [weeksBefore, setWeeksBefore] = useState<number>(0);
 
   const handleWeeksBeforeUpdate = (value: number) => {
     setWeeksBefore(value);

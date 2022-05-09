@@ -3,6 +3,7 @@ import Constant from "../common/Constant";
 
 const API_MARKS = Constant.API_HOST + '/marks';
 const API_MARKS_ADD = Constant.API_HOST + '/marks/add';
+const API_MARKS_DELETE = Constant.API_HOST + '/marks/';
 
 export interface MarkQuery {};
 
@@ -26,7 +27,16 @@ const addMark = (docId: string, cb?: Function) => {
     });
 };
 
+const deleteMark = (docId: string, cb?: Function) => {
+  axios.delete(API_MARKS_DELETE + docId)
+    .then(res => {
+      const data = res.data?.data || false;
+      cb?.call(null, data);
+    });
+};
+
 export default {
   fetchMarks,
   addMark,
+  deleteMark,
 };

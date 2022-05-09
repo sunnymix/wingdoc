@@ -183,7 +183,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
     <div
       style={{
         zIndex: 1,
-        backgroundColor: isToday ? "#fafafa" : "#fff",
+        backgroundColor: isToday ? "rgba(24, 144, 255, 0.05)" : "#fff",
         position: "absolute",
         left: 0,
         right: isLastDay ? 0 : -1,

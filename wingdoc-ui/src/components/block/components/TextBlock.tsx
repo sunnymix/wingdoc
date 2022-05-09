@@ -295,7 +295,7 @@ export default forwardRef((props: BlockProps, ref) => {
         position: "absolute",
         width: "100%",
         height: "100%",
-        backgroundColor: innerFocus ? "rgba(0, 0, 0, 0.03)": "transparent",
+        backgroundColor: innerFocus ? "rgba(0, 0, 0, 0)": "transparent",
       }}></div>
     <div
       style={{

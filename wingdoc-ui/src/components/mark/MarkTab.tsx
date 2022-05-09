@@ -4,7 +4,7 @@ import { Badge, Dropdown, Menu } from "antd";
 import Style from "./MarkTabsStyle.css";
 import { Link, history } from "umi";
 import MarkApi from "./MarkApi";
-import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
+import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined, CaretDownOutlined } from "@ant-design/icons";
 
 export interface MarkTabProps {
   mark: Mark,

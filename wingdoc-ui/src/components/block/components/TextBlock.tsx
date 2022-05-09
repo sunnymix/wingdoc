@@ -35,7 +35,11 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   }, [link]);
 
+  // --- hover
+
   const [hover, setHover] = useState<boolean>(false);
+
+  // --- change
 
   const saveBlockChange = (text: string) => {
     BlockApi.updateBlock(props.data.id, { text }, (newBlock: any) => {
@@ -320,11 +324,11 @@ export default forwardRef((props: BlockProps, ref) => {
     <div
       style={{
         zIndex: 4,
-        visibility: hover ? "visible" : "hidden",
+        visibility: (hover || innerFocus) ? "visible" : "hidden",
         marginTop: 4,
         marginLeft: 4,
       }}>
-      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton/></Dropdown>
+      <Dropdown overlay={menu} placement="bottomLeft"><OptionButton style={{color: innerFocus ? "rgba(24, 144, 255, 1)" : "rgba(24, 144, 255, 0.5)"}}/></Dropdown>
     </div>
     <div
       style={{

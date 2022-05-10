@@ -7,8 +7,8 @@
   position: relative;
   cursor: pointer;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   font-weight: 500;
   color: #fff;
 }
@@ -17,8 +17,8 @@
   position: relative;
   cursor: pointer;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   font-weight: 500;
   color: #fff;
 }
@@ -26,18 +26,19 @@
 .nav_item_active_mask {
   z-index: 1;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  /* border-top: 2px solid #fff; */
+  left: 4px;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: rgba(24, 144, 255, 0.5); */
 }
 
 .nav_new_button {
   cursor: pointer;
   padding: 0 15px;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   color: #fff;
 }

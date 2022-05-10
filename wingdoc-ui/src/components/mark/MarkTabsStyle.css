@@ -1,8 +1,8 @@
 
 .mark_tabs {
   display: flex;
-  background-color: #e2e5e8;
-  border-bottom: 1px solid #e2e5e8;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
   margin-bottom: 15;
   overflow: hidden;
   overflow-x: auto;
@@ -27,39 +27,38 @@
 .marks_tabs_item_focus {
   z-index: 2;
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: #fff;
-  border-bottom: 0 solid #333;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .marks_tabs_item_link {
   z-index: 3;
   position: relative;
   display: block;
-  padding-left: 15px;
-  padding-right: 5px;
-  height: 30px;
-  line-height: 30px;
+  padding: 0 0 0 15px;
+  height: 40px;
+  line-height: 40px;
   color: #333;
   font-weight: 500;
   white-space: nowrap;
   text-align: center;
-  min-width: 80px;
+  min-width: 50px;
 }
 
-.marks_tabs_item_delete {
+.marks_tabs_item_more {
   z-index: 3;
   position: relative;
   cursor: pointer;
   display: block;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   border: 0 none;
   background-color: transparent;
-  padding: 0 5px;
+  padding: 0 10px 0 0;
   text-align: center;
-  color: #666;
+  color: #999;
 }

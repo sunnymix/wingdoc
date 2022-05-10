@@ -2,7 +2,7 @@
 .mark_tabs {
   display: flex;
   background-color: #e2e5e8;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e2e5e8;
   margin-bottom: 15;
   overflow: hidden;
   overflow-x: auto;

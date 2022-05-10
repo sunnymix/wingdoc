@@ -117,7 +117,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         onPressEnter={handleEnter}
         onKeyDown={handleKeyDown}
         size="middle"
-        placeholder="Title"
+        placeholder="title"
         autoSize={true}
         onFocus={handleTextFocus}
         style={{ 

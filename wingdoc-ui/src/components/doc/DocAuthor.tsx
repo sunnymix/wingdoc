@@ -147,7 +147,7 @@ export default forwardRef((props: DocAuthorProps, ref) => {
         size="middle"
         autoSize={true}
         onPressEnter={handleEnter}
-        placeholder="Author"
+        placeholder="author"
         onFocus={handleTextFocused}
         style={{fontFamily: '"Helvetica Neue", Helvetica, Arial', color: "#888",}}/>
     </div>

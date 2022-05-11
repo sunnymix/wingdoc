@@ -63,19 +63,13 @@ export default forwardRef((props: MarkTabsProps, ref) => {
     refreshMarks();
   }, []);
 
-  // --- ui more
-
-  const moreMenu = (
-    <Menu>
-      <Menu.Item key="remove-tab">Remove tab</Menu.Item>
-    </Menu>
-  );
-
   // --- ui
 
   return (
     <div className={Style.mark_tabs}>
-      {marks.map((mark: Mark) =>  <MarkTab key={mark.id} mark={mark} onDelete={() => refreshMarks()}/>)}
+      {marks.map((mark: Mark) => 
+        <MarkTab key={mark.id} mark={mark} onDelete={() => refreshMarks()} onPin={() => refreshMarks()}/>
+      )}
     </div>
   )
 });

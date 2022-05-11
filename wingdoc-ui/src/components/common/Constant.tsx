@@ -1,4 +1,5 @@
-const API_HOST = "http://localhost:8020"
+
+export const API_HOST = "http://localhost:8020"
 
 const Constant = {
   API_HOST,

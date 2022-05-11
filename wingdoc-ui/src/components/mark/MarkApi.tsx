@@ -1,14 +1,10 @@
 import axios from "axios";
-import Constant from "../common/Constant";
-
-const API_MARKS = Constant.API_HOST + '/marks';
-const API_MARKS_ADD = Constant.API_HOST + '/marks/add';
-const API_MARKS_DELETE = Constant.API_HOST + '/marks/';
+import { API_HOST } from "../common/Constant";
 
 export interface MarkQuery {};
 
 const queryMarks = (query: MarkQuery, cb: Function) => {
-  axios.post(`${Constant.API_HOST}/mark/query`, query)
+  axios.post(`${API_HOST}/mark/query`, query)
     .then(res => {
       const data = res.data?.data || [];
       cb(data);
@@ -16,7 +12,15 @@ const queryMarks = (query: MarkQuery, cb: Function) => {
 };
 
 const addMark = (docId: string, cb?: Function) => {
-  axios.post(`${Constant.API_HOST}/mark/${docId}/add`, {})
+  axios.post(`${API_HOST}/mark/${docId}/add`, {})
+    .then(res => {
+      const data = res.data?.data || false;
+      cb?.call(null, data);
+    });
+};
+
+const pinMark = (docId: string, cb?: Function) => {
+  axios.post(`${API_HOST}/mark/${docId}/pin`, {})
     .then(res => {
       const data = res.data?.data || false;
       cb?.call(null, data);
@@ -24,7 +28,7 @@ const addMark = (docId: string, cb?: Function) => {
 };
 
 const deleteMark = (docId: string, cb?: Function) => {
-  axios.post(`${Constant.API_HOST}/mark/${docId}/delete`, {})
+  axios.post(`${API_HOST}/mark/${docId}/delete`, {})
     .then(res => {
       const data = res.data?.data || false;
       cb?.call(null, data);
@@ -34,5 +38,6 @@ const deleteMark = (docId: string, cb?: Function) => {
 export default {
   queryMarks,
   addMark,
+  pinMark,
   deleteMark,
 };

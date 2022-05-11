@@ -9,13 +9,14 @@ import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, 
 export interface MarkTabProps {
   mark: Mark,
   onDelete?: Function,
+  onPin?: Function,
 };
 
 export default forwardRef((props: MarkTabProps, ref) => {
 
   // --- props
 
-  const { mark, onDelete } = props;
+  const { mark, onDelete, onPin } = props;
 
   // --- delete
 
@@ -34,7 +35,11 @@ export default forwardRef((props: MarkTabProps, ref) => {
 
   // --- pin
 
-  const handlePin = () => {};
+  const handlePin = () => {
+    MarkApi.pinMark(mark.docId, () => {
+      onPin?.call(null, mark);
+    });
+  };
 
   // --- ui more
 

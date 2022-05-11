@@ -7,12 +7,8 @@ const API_MARKS_DELETE = Constant.API_HOST + '/marks/';
 
 export interface MarkQuery {};
 
-export interface MarkAddForm {
-  docId: string,
-};
-
-const fetchMarks = (query: MarkQuery, cb: Function) => {
-  axios.post(API_MARKS, query)
+const queryMarks = (query: MarkQuery, cb: Function) => {
+  axios.post(`${Constant.API_HOST}/mark/query`, query)
     .then(res => {
       const data = res.data?.data || [];
       cb(data);
@@ -20,7 +16,7 @@ const fetchMarks = (query: MarkQuery, cb: Function) => {
 };
 
 const addMark = (docId: string, cb?: Function) => {
-  axios.post(API_MARKS_ADD, { docId })
+  axios.post(`${Constant.API_HOST}/mark/${docId}/add`, {})
     .then(res => {
       const data = res.data?.data || false;
       cb?.call(null, data);
@@ -28,7 +24,7 @@ const addMark = (docId: string, cb?: Function) => {
 };
 
 const deleteMark = (docId: string, cb?: Function) => {
-  axios.delete(API_MARKS_DELETE + docId)
+  axios.post(`${Constant.API_HOST}/mark/${docId}/delete`, {})
     .then(res => {
       const data = res.data?.data || false;
       cb?.call(null, data);
@@ -36,7 +32,7 @@ const deleteMark = (docId: string, cb?: Function) => {
 };
 
 export default {
-  fetchMarks,
+  queryMarks,
   addMark,
   deleteMark,
 };

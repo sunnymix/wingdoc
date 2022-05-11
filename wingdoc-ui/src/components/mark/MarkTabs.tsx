@@ -39,7 +39,7 @@ export default forwardRef((props: MarkTabsProps, ref) => {
 
   const refreshMarks = () => {
     const newMarks: Mark[] = [];
-    MarkApi.fetchMarks({}, (marks: any) => {
+    MarkApi.queryMarks({}, (marks: any) => {
       if (marks && marks.length > 0) {
         marks.forEach((mark: Mark) => newMarks.push(mark));
       }

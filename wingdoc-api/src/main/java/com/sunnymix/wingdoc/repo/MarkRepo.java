@@ -2,7 +2,6 @@ package com.sunnymix.wingdoc.repo;
 
 import com.sunnymix.wingdoc.dao.jooq.tables.pojos.Mark;
 import com.sunnymix.wingdoc.dao.jooq.tables.records.MarkRecord;
-import com.sunnymix.wingdoc.data.form.MarkAddForm;
 import com.sunnymix.wingdoc.data.io.Out;
 import com.sunnymix.wingdoc.data.io.Page;
 import lombok.Getter;
@@ -36,15 +35,25 @@ public class MarkRepo {
         return Out.ok(Page.list(marks.size()), marks);
     }
 
-    public Out<Boolean> add(MarkAddForm form) {
-        if (_exist(form.getDocId())) {
+    public Out<Boolean> add(String docId) {
+        if (_exist(docId)) {
             return Out.ok(true);
         }
 
-        MarkRecord record = form.toRecord();
-        dsl.executeInsert(record);
+        _create(docId);
 
         return Out.ok(true);
+    }
+
+    public Out<Boolean> pin(String docId) {
+        _delete(docId);
+        _create(docId);
+        return Out.ok(true);
+    }
+
+    private void _create(String docId) {
+        MarkRecord record = new MarkRecord(null, docId);
+        dsl.executeInsert(record);
     }
 
     public Out<Boolean> delete(String docId) {

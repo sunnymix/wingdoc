@@ -14,17 +14,8 @@
   flex-wrap: nowrap;
 }
 
-/* 废弃： */
-.marks_tabs_item_divider {
-  z-index: 1;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-right: 1px solid transparent;
-}
-
 .marks_tabs_item_focus {
+  display: none;
   z-index: 2;
   position: absolute;
   left: 4px;
@@ -33,6 +24,10 @@
   bottom: 4px;
   border-radius: 4px;
   background-color: #eee;
+}
+
+.marks_tabs_item.focus .marks_tabs_item_focus {
+  display: block;
 }
 
 .marks_tabs_item_link {

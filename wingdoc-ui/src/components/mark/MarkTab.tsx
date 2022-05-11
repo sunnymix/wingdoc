@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Mark } from "./MarkTabs";
 import { Badge, Dropdown, Menu } from "antd";
-import Style from "./MarkTabsStyle.css";
+import "./MarkTabsStyle.css";
 import { Link, history } from "umi";
 import MarkApi from "./MarkApi";
 import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined, CaretDownOutlined } from "@ant-design/icons";
@@ -48,13 +48,12 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- ui
 
   return (
-    <div className={Style.marks_tabs_item} key={mark.id}>
-      <div className={Style.marks_tabs_item_divider}></div>
-      {mark.focus && <div className={Style.marks_tabs_item_focus}></div>}
-      <Link className={Style.marks_tabs_item_link} to={`/doc/${mark.docId}`}>{displayTitle(mark)}</Link>
+    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""}`} key={mark.id}>
+      <div className="marks_tabs_item_focus"></div>
+      <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>{displayTitle(mark)}</Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>
-        <div className={Style.nav_new_button}>
-          <button className={Style.marks_tabs_item_more}><MoreOutlined /></button>
+        <div className="nav_new_button">
+          <button className="marks_tabs_item_more"><MoreOutlined /></button>
         </div>
       </Dropdown>
     </div>

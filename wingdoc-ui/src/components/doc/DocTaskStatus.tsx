@@ -30,8 +30,8 @@ export default forwardRef((props: DocTaskStatusProps, ref) => {
   // --- ui
 
   return (
-    <>
+    <div className={className}>
       {unfinished > 0 && <Badge color="red" />}
-    </>
+    </div>
   );
 });

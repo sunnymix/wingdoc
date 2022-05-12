@@ -30,6 +30,10 @@
   display: block;
 }
 
+.marks_tabs_item_weekday {
+  margin-left: 4px;
+}
+
 .marks_tabs_item_task_status {
   display: inline-block;
   margin-left: 4px;

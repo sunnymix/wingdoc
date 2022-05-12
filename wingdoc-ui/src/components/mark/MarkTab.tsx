@@ -4,7 +4,8 @@ import { Badge, Dropdown, Menu } from "antd";
 import "./MarkTabsStyle.css";
 import { Link, history } from "umi";
 import MarkApi from "./MarkApi";
-import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined, CaretDownOutlined } from "@ant-design/icons";
+import { MoreOutlined } from "@ant-design/icons";
+import DocTaskStatus from "../doc/DocTaskStatus";
 
 export interface MarkTabProps {
   mark: Mark,
@@ -55,7 +56,10 @@ export default forwardRef((props: MarkTabProps, ref) => {
   return (
     <div className={`marks_tabs_item ${mark.focus ? "focus" : ""}`} key={mark.id}>
       <div className="marks_tabs_item_focus"></div>
-      <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>{displayTitle(mark)}</Link>
+      <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
+        <DocTaskStatus docId={mark.docId} />
+        {displayTitle(mark)}
+      </Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>
         <div className="nav_new_button">
           <button className="marks_tabs_item_more"><MoreOutlined /></button>

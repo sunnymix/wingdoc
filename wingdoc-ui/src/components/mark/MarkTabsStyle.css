@@ -2,7 +2,6 @@
 .mark_tabs {
   display: flex;
   background-color: #fff;
-  /* border-bottom: 1px solid #eee; */
   margin-bottom: 15;
   overflow: hidden;
   overflow-x: scroll;
@@ -12,10 +11,6 @@
   width: 1px;
   height: 1px;
   background-color: rgba(0, 0, 0, 0.1);
-}
-
-.mark_tabs::-webkit-scrollbar-track {
-  background-color: transparent;
 }
 
 .mark_tabs::-webkit-scrollbar-thumb {

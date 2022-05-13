@@ -34,7 +34,6 @@ export default forwardRef((props: WeekDayLabel, ref) => {
     const cleanText = (text || "").trim();
     if (!isNaN(+cleanText)) {
       const weekday = +(moment(cleanText, format).format("E")) - 1;
-      console.log(weekday);
       const name = Weekday.title(weekday);
       setName(name);
       const isToday = moment().format("YYYYMMDD") == cleanText;

@@ -1,0 +1,36 @@
+
+.weekday {
+  position: relative;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 14%;
+}
+
+.weekday_border {
+  z-index: 1;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: -1px;
+  top: 0;
+  bottom: -1px;
+  border-style: solid;
+  border-color: #eee;
+  border-width: 1px;
+}
+
+.weekday_content {
+  z-index: 2;
+  position: relative;
+}
+
+.weekday_content_header {
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+}
+
+.weekday_content_body {
+  padding: 0 5px;
+  overflow: auto;
+  height: 150px;
+}

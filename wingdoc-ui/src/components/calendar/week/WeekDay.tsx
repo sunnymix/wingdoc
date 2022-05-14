@@ -7,6 +7,7 @@ import { history } from "umi";
 import DocApi from "@/components/doc/DocApi";
 import WeekDayTasks from "./WeekDayTasks";
 import TaskApi from "@/components/task/TaskApi";
+import "./WeekDayStyle.css";
 
 export enum Weekday {
   MON = 0,
@@ -174,48 +175,16 @@ export default forwardRef((props: WeekDayProps, ref) => {
   );
 
   return <>
-  <div style={{
-    position: "relative",
-    flexGrow: 1,
-    flexShrink: 0,
-    width: "14%",
-  }}>
-    <div
-      style={{
-        zIndex: 1,
-        backgroundColor: isToday ? "rgba(24, 144, 255, 0.05)" : "#fff",
-        position: "absolute",
-        left: 0,
-        right: isLastDay ? 0 : -1,
-        top: 0,
-        bottom: -1,
-        borderStyle: "solid",
-        borderColor: "#eee",
-        borderWidth: 1,
-      }}></div>
-    <div
-      style={{
-        zIndex: 2,
-        position: "relative",
-      }}>
-      <div
-        style={{
-          textAlign: "center",
-          fontFamily: '"Helvetica Neue", Helvetica, Arial',
-        }}>
-          {docId && titleLink}
-          {!docId && titleLinkAndNewDocConfirm}
-        </div>
-      <div
-        style={{
-          padding: "0 5px",
-          overflow: "auto",
-          height: (heightMultiple || 1) * 150,
-        }}>
-          <div>
-            <WeekDayTasks shortDate={shortDate}/>
-          </div>
-        </div>
+  <div className="weekday">
+    <div className="weekday_border"></div>
+    <div className="weekday_content">
+      <div className="weekday_content_header">
+        {docId && titleLink}
+        {!docId && titleLinkAndNewDocConfirm}
+      </div>
+      <div className="weekday_content_body" style={{ height: (heightMultiple || 1) * 150 }}>
+        <WeekDayTasks shortDate={shortDate}/>
+      </div>
     </div>
   </div>
   </>

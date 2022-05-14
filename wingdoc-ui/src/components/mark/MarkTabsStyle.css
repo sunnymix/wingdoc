@@ -7,17 +7,6 @@
   overflow-x: scroll;
 }
 
-.mark_tabs::-webkit-scrollbar {
-  width: 1px;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.mark_tabs::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 .marks_tabs_item {
   position: relative;
   display: flex;

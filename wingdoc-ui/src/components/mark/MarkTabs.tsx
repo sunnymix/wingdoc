@@ -7,6 +7,7 @@ import MarkApi from "./MarkApi";
 import { Badge, Dropdown, Menu } from "antd";
 import { useLocation } from "umi";
 import MarkTab from "./MarkTab";
+import "@/components/common/CommonStyle.css";
 
 export interface Mark {
   id: number,
@@ -66,7 +67,7 @@ export default forwardRef((props: MarkTabsProps, ref) => {
   // --- ui
 
   return (
-    <div className={Style.mark_tabs}>
+    <div className="mark_tabs scrollbar_small">
       {marks.map((mark: Mark) => 
         <MarkTab key={mark.id} mark={mark} onDelete={() => refreshMarks()} onPin={() => refreshMarks()}/>
       )}

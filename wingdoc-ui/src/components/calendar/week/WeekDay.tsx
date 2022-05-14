@@ -182,7 +182,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
         {docId && titleLink}
         {!docId && titleLinkAndNewDocConfirm}
       </div>
-      <div className="weekday_content_body" style={{ height: (heightMultiple || 1) * 150 }}>
+      <div className="weekday_content_body scrollbar_small" style={{ height: (heightMultiple || 1) * 150 }}>
         <WeekDayTasks shortDate={shortDate}/>
       </div>
     </div>

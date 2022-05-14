@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
 import { Weekday } from "./WeekDay";
-import "./WeekDayLabelStyle.css";
+import "./WeekStyle.css";
 
 export interface WeekDayLabel {
   text: string,

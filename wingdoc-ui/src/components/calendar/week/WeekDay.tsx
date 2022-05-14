@@ -1,13 +1,11 @@
 import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
-import { Space, Button, Popconfirm, Tag, Badge, Progress } from "antd";
-import { Link } from "umi";
-import { FileOutlined } from "@ant-design/icons";
+import { Space, Popconfirm, Badge } from "antd";
 import { history } from "umi";
 import DocApi from "@/components/doc/DocApi";
 import WeekDayTasks from "./WeekDayTasks";
 import TaskApi from "@/components/task/TaskApi";
-import "./WeekDayStyle.css";
+import "./WeekStyle.css";
 
 export enum Weekday {
   MON = 0,

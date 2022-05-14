@@ -34,3 +34,19 @@
   overflow: auto;
   height: 150px;
 }
+
+.weekday_label {
+  display: inline-flex;
+  font-size: 75%;
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 2px 4px;
+  height: 20px;
+  align-items: center;
+}
+
+.weekday_label.today {
+  color: rgba(24, 144, 255, 1);
+  background-color: rgba(24, 144, 255, 0.2);
+}
+

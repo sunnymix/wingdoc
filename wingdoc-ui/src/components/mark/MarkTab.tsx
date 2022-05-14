@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { Mark } from "./MarkTabs";
-import { Badge, Dropdown, Menu } from "antd";
-import "./MarkTabsStyle.css";
-import { Link, history } from "umi";
+import { Dropdown, Menu } from "antd";
+import "./MarkStyle.css";
+import { Link } from "umi";
 import MarkApi from "./MarkApi";
 import { MoreOutlined } from "@ant-design/icons";
 import DocTaskStatus from "../doc/DocTaskStatus";

@@ -1,10 +1,6 @@
-import Style from "./MarkTabsStyle.css";
-import { Link, history } from "umi";
-import { MoreOutlined, RightOutlined, CloseCircleOutlined, MinusCircleOutlined, MinusSquareOutlined, CloseOutlined } from "@ant-design/icons";
+import "./MarkStyle.css";
 import { useState, useEffect, forwardRef } from "react";
-import DocApi from "@/components/doc/DocApi";
 import MarkApi from "./MarkApi";
-import { Badge, Dropdown, Menu } from "antd";
 import { useLocation } from "umi";
 import MarkTab from "./MarkTab";
 import "@/components/common/CommonStyle.css";

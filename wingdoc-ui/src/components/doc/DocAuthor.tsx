@@ -109,7 +109,7 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     onMouseLeave={() => setHover(false)}
     style={{
       position: "relative",
-      display: "flex",
+      display: "none",
       alignItems: "center",
     }}>
     <div

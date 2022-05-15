@@ -86,12 +86,12 @@ public class MarkRepo {
         MarkRecord record = new MarkRecord();
         record.setId(null);
         record.setDocId(docId);
-        record.setPin(pin);
+        record.setPin(pin == null ? 0 : pin);
         dsl.executeInsert(record);
     }
 
     private void _create(String docId) {
-        _create(docId, null);
+        _create(docId, 0);
     }
 
     private void _updatePin(Integer id, Integer pin) {

@@ -27,6 +27,14 @@ const pinMark = (docId: string, cb?: Function) => {
     });
 };
 
+const unpinMark = (docId: string, cb?: Function) => {
+  axios.post(`${API_HOST}/mark/${docId}/unpin`, {})
+    .then(res => {
+      const data = res.data?.data || false;
+      cb?.call(null, data);
+    });
+};
+
 const deleteMark = (docId: string, cb?: Function) => {
   axios.post(`${API_HOST}/mark/${docId}/delete`, {})
     .then(res => {
@@ -39,5 +47,6 @@ export default {
   queryMarks,
   addMark,
   pinMark,
+  unpinMark,
   deleteMark,
 };

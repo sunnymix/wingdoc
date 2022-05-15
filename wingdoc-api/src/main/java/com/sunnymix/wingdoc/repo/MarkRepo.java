@@ -64,6 +64,16 @@ public class MarkRepo {
         return Out.ok(true);
     }
 
+    public Out<Boolean> unpin(String docId) {
+        Mark mark = _one(docId);
+
+        if (mark != null) {
+            _updatePin(mark.getId(), 0);
+        }
+
+        return Out.ok(true);
+    }
+
     private Mark _maxPin() {
         return dsl
                 .selectFrom(MARK)

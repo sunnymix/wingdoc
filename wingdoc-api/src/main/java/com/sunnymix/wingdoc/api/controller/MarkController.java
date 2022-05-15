@@ -39,6 +39,11 @@ public class MarkController {
         return markRepo.pin(docId);
     }
 
+    @PostMapping("/mark/{docId}/unpin")
+    public Out<Boolean> unpin(@PathVariable("docId") String docId) {
+        return markRepo.unpin(docId);
+    }
+
     @PostMapping("/mark/{docId}/delete")
     public Out<Boolean> delete(@PathVariable("docId") String docId) {
         return markRepo.delete(docId);

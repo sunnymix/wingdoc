@@ -61,12 +61,18 @@ export default forwardRef((props: MarkTabsProps, ref) => {
     refreshMarks();
   }, []);
 
+  // --- handle all change
+
+  const handleMarkChange = () => {
+    refreshMarks();
+  }
+
   // --- ui
 
   return (
     <div className="mark_tabs scrollbar_small">
       {marks.map((mark: Mark) => 
-        <MarkTab key={mark.id} mark={mark} onDelete={() => refreshMarks()} onPin={() => refreshMarks()}/>
+        <MarkTab key={mark.id} mark={mark} onChange={handleMarkChange} />
       )}
     </div>
   )

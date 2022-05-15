@@ -29,19 +29,11 @@
   display: block;
 }
 
-.marks_tabs_item_weekday {
-  margin-left: 4px;
-}
-
-.marks_tabs_item_task_status {
-  display: inline-block;
-  margin-left: 4px;
-}
-
 .marks_tabs_item_link {
   z-index: 3;
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0 0 0 20px;
   height: 40px;
   line-height: 40px;
@@ -53,6 +45,18 @@
 
 .marks_tabs_item_link:hover {
   color: #333;
+}
+
+.marks_tabs_item_title {
+  padding: 0 4px;
+}
+
+.marks_tabs_item_weekday {
+}
+
+.marks_tabs_item_task_status {
+  display: inline-block;
+  margin-left: 4px;
 }
 
 .marks_tabs_item_more {

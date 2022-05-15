@@ -18,13 +18,16 @@ public class MarkInfo {
 
     private String docId;
 
+    private Integer pin;
+
     private String docTitle;
 
     public static MarkInfo of(Mark mark,
                               Map<String, Doc> docMap) {
         MarkInfoBuilder builder = MarkInfo.builder()
                 .id(mark.getId())
-                .docId(mark.getDocId());
+                .docId(mark.getDocId())
+                .pin(mark.getPin());
 
         Doc doc = docMap.get(mark.getDocId());
         if (doc != null) {

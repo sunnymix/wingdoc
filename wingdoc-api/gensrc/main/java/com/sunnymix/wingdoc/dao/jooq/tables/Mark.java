@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -54,6 +54,11 @@ public class Mark extends TableImpl<MarkRecord> {
      * The column <code>wingdoc.mark.doc_id</code>. 文档ID
      */
     public final TableField<MarkRecord, String> DOC_ID = createField(DSL.name("doc_id"), SQLDataType.VARCHAR(50).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "文档ID");
+
+    /**
+     * The column <code>wingdoc.mark.pin</code>.
+     */
+    public final TableField<MarkRecord, Integer> PIN = createField(DSL.name("pin"), SQLDataType.INTEGER.nullable(false).defaultValue(DSL.inline("0", SQLDataType.INTEGER)), this, "");
 
     private Mark(Name alias, Table<MarkRecord> aliased) {
         this(alias, aliased, null);
@@ -130,11 +135,11 @@ public class Mark extends TableImpl<MarkRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, String> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Integer, String, Integer> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 }

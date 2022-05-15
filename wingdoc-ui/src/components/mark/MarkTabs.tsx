@@ -8,6 +8,7 @@ import "@/components/common/CommonStyle.css";
 export interface Mark {
   id: number,
   docId: string,
+  pin: number,
   docTitle: string,
   focus?: boolean,
 }

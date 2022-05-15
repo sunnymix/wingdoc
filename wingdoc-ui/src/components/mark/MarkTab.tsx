@@ -67,10 +67,9 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- ui
 
   return (
-    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""}`} key={mark.id}>
+    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""}`} key={mark.id}>
       <div className="marks_tabs_item_focus"></div>
       <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
-        {mark.pin > 0 && <PushpinFilled />}
         <div className="marks_tabs_item_title">{displayTitle(mark)}</div>
         <WeekDayLabel className="marks_tabs_item_weekday" text={mark.docTitle} />
         <DocTaskStatus className="marks_tabs_item_task_status" docId={mark.docId} />

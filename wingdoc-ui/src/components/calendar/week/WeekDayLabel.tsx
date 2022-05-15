@@ -32,7 +32,7 @@ export default forwardRef((props: WeekDayLabel, ref) => {
 
   const dispaly = (text: string) => {
     const cleanText = (text || "").trim();
-    if (!isNaN(+cleanText)) {
+    if (cleanText.length >= format.length && !isNaN(+cleanText)) {
       const weekday = +(moment(cleanText, format).format("E")) - 1;
       const name = Weekday.title(weekday);
       setName(name);

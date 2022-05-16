@@ -54,12 +54,26 @@ export default forwardRef((props: MarkTabProps, ref) => {
     });
   }
 
+  // --- refresh
+
+  const handleRefresh = () => {
+    // TODO
+  };
+
+  // --- clone
+
+  const handleClone = () => {
+    // TODO
+  };
+
   // --- ui more
 
   const moreMenu = (
     <Menu>
-      {mark.pin <= 0 && <Menu.Item key="pin" onClick={handlePin}>Pin</Menu.Item>}
+      <Menu.Item key="refresh" onClick={handleRefresh}>Refresh</Menu.Item>
+      <Menu.Item key="pin" onClick={handlePin}>Pin</Menu.Item>
       {mark.pin > 0 && <Menu.Item key="unpin" onClick={handleUnpin}>Unpin</Menu.Item>}
+      <Menu.Item key="clone" onClick={handleClone}>Clone</Menu.Item>
       <Menu.Item key="delete" onClick={handleDelete}>Delete</Menu.Item>
     </Menu>
   );

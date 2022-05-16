@@ -82,16 +82,13 @@ export default forwardRef((props: MarkTabProps, ref) => {
 
   return (
     <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""}`} key={mark.id}>
-      <div className="marks_tabs_item_focus"></div>
       <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
         <div className="marks_tabs_item_title">{displayTitle(mark)}</div>
         <WeekDayLabel className="marks_tabs_item_weekday" text={mark.docTitle} />
         <DocTaskStatus className="marks_tabs_item_task_status" docId={mark.docId} />
       </Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>
-        <div className="nav_new_button">
-          <button className="marks_tabs_item_more"><MoreOutlined /></button>
-        </div>
+        <button className="marks_tabs_item_more"><MoreOutlined /></button>
       </Dropdown>
     </div>
   )

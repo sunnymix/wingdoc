@@ -11,37 +11,25 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-}
-
-.marks_tabs_item_focus {
-  display: none;
-  z-index: 2;
-  position: absolute;
-  left: 4px;
-  right: 0;
-  top: 4px;
-  bottom: 4px;
   border-radius: 4px;
+  overflow: hidden;
+  height: 30px;
+  border: 1px solid transparent;
+  margin: 4px 0 4px 4px;
 }
 
-.marks_tabs_item.focus .marks_tabs_item_focus {
-  display: block;
+.marks_tabs_item.focus {
   background-color: #eee;
 }
 
-.marks_tabs_item.pin .marks_tabs_item_focus {
-  display: block;
-  border: 1px solid #ddd;
+.marks_tabs_item.pin {
+  border-color: #ddd;
 }
 
 .marks_tabs_item_link {
-  z-index: 3;
-  position: relative;
   display: flex;
   align-items: center;
   padding: 0 0 0 10px;
-  height: 40px;
-  line-height: 40px;
   color: #333;
   font-weight: 400;
   white-space: nowrap;
@@ -70,15 +58,15 @@
 }
 
 .marks_tabs_item_more {
-  z-index: 3;
-  position: relative;
   cursor: pointer;
   display: block;
-  height: 40px;
-  line-height: 40px;
   border: 0 none;
   background-color: transparent;
   padding: 0 5px 0 0;
   text-align: center;
   color: #999;
+}
+
+.marks_tabs_item_more:hover {
+  background-color: #ddd;
 }

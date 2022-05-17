@@ -45,10 +45,6 @@ export default forwardRef((props: MarkTabsProps, ref) => {
     });
   };
 
-  const refreshMarksInSeconds = (millis: number) => {
-    setTimeout(refreshMarks, millis);
-  };
-
   // --- location
 
   const location: any = useLocation();

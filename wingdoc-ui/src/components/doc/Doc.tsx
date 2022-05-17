@@ -13,12 +13,7 @@ interface DocProps {
   id: string,
 }
 
-const Doc = forwardRef((props: DocProps, ref) => {
-
-  // --- bind
-
-  useImperativeHandle(ref, () => ({
-  }));
+export default forwardRef((props: DocProps, ref) => {
 
   // --- props
 
@@ -60,9 +55,9 @@ const Doc = forwardRef((props: DocProps, ref) => {
     focusBlockPos(0);
   };
 
-  // --- search
+  // --- load
 
-  const searchDoc = () => {
+  const loadDoc = () => {
     setLoading(true);
     DocApi.getDoc(id, (doc: any) => {
       setLoading(false);
@@ -71,10 +66,8 @@ const Doc = forwardRef((props: DocProps, ref) => {
     });
   };
 
-  // --- loaded
-
   useEffect(() => {
-    searchDoc();
+    loadDoc();
   }, [id]);
 
   // --- block list
@@ -139,5 +132,3 @@ const Doc = forwardRef((props: DocProps, ref) => {
   </div>
   </>;
 });
-
-export default Doc;

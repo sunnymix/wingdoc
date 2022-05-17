@@ -1,12 +1,9 @@
 import axios from "axios";
-import Constant from "../common/Constant";
+import { API_HOST } from "../common/Constant";
 import moment from "moment";
 
-const API_DOC_LIST = Constant.API_HOST + '/doc/list';
-const API_DOC_ONE = Constant.API_HOST + '/doc/'
-
 const getDocList = (query: any, cb: Function) => {
-  axios.get(`${API_DOC_LIST}`)
+  axios.get(`${API_HOST}/doc/list`)
     .then(res => {
       const data = res.data?.data || [];
       cb(data);
@@ -14,7 +11,7 @@ const getDocList = (query: any, cb: Function) => {
 };
 
 const addDoc = (form: any, cb: Function) => {
-  axios.post(`${API_DOC_LIST}`, form)
+  axios.post(`${API_HOST}/doc/list`, form)
     .then(res => {
       const data = res.data?.data;
       cb(data);
@@ -22,7 +19,7 @@ const addDoc = (form: any, cb: Function) => {
 };
 
 const getDoc = (id: string, cb: Function) => {
-  axios.get(`${API_DOC_ONE}${id}`)
+  axios.get(`${API_HOST}/doc/${id}`)
     .then(res => {
       const data = res.data?.data || null;
       cb(data);
@@ -30,7 +27,7 @@ const getDoc = (id: string, cb: Function) => {
 };
 
 const getDocByTitle = (title: string, cb: Function) => {
-  axios.get(`${API_DOC_LIST}?title=${title}`)
+  axios.get(`${API_HOST}/doc/list?title=${title}`)
     .then(res => {
       const data = res.data?.data || [];
       var doc = null;
@@ -42,7 +39,7 @@ const getDocByTitle = (title: string, cb: Function) => {
 };
 
 const updateDoc = (id: string, form: any, cb: Function) => {
-  axios.post(`${API_DOC_ONE}${id}`, form)
+  axios.post(`${API_HOST}/doc/${id}`, form)
     .then(res => {
       const data = res.data?.data || false;
       cb(data);
@@ -51,7 +48,7 @@ const updateDoc = (id: string, form: any, cb: Function) => {
 
 const fetchTodayDoc = (cb: Function) => {
   const todayTitle = moment().format("yyyyMMDD");
-  DocApi.getDocByTitle(todayTitle, (doc: any) => {
+  getDocByTitle(todayTitle, (doc: any) => {
     if (doc) {
       cb(doc);
     } else {
@@ -62,7 +59,7 @@ const fetchTodayDoc = (cb: Function) => {
   });
 };
 
-const DocApi = {
+export default {
   getDocList,
   addDoc,
   getDoc,
@@ -70,5 +67,3 @@ const DocApi = {
   updateDoc,
   fetchTodayDoc,
 }
-
-export default DocApi;

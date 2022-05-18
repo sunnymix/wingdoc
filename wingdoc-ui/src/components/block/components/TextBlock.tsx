@@ -62,7 +62,12 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const handleEnter = (e: any) => {
     e.preventDefault();
-    props.onEnter?.call(null, props.data);
+    // pos: start, middle, end
+    var pos = 'end';
+    if (e.target.selectionStart == 0) {
+      pos = 'start';
+    }
+    props.onEnter?.call(null, props.data, pos);
   };
 
   const isRedirectToLocalDoc = () => {

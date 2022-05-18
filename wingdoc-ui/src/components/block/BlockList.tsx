@@ -91,8 +91,15 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   // --- enter, add block
 
-  const handleBlockEnter = (block: any) => {
-    handleAdd(block.pos + 1);
+  const handleBlockEnter = (block: any, pos: string) => {
+    // pos: start, middle, end
+    var addBlockAtPos = 0;
+    if (pos == 'start') {
+      addBlockAtPos = block.pos;
+    } else {
+      addBlockAtPos = block.pos + 1;
+    }
+    handleAdd(addBlockAtPos);
   };
 
   // --- delete

@@ -14,13 +14,14 @@ interface DocTitleProps {
   onShowBlock?: Function,
   onFocus?: Function,
   onFocusDown?: Function,
+  onChange?: Function,
 };
 
 const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
   // --- props
 
-  const {id, value, showBlock, onEnter, onShowBlock, onFocus, onFocusDown} = props;
+  const {id, value, showBlock, onEnter, onShowBlock, onFocus, onFocusDown, onChange} = props;
 
   // --- title
 
@@ -30,6 +31,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     const newTitle = e.target.value || "";
     setTitle(newTitle);
     DocApi.updateDoc(id, { title: newTitle }, (newDoc: any) => {
+      onChange?.call(null, newDoc);
     });
   };
 

@@ -15,13 +15,14 @@ export interface DocAuthorProps {
   onFocusUp?: Function,
   onFocusDown?: Function,
   onFocus?: Function,
+  onChange?: Function,
 };
 
 export default forwardRef((props: DocAuthorProps, ref) => {
 
   // --- props
 
-  const {id, value, showBlock, focus, onEnter, onBlur, onFocusUp, onFocusDown, onFocus} = props;
+  const {id, value, showBlock, focus, onEnter, onBlur, onFocusUp, onFocusDown, onFocus, onChange} = props;
 
   // --- focus
 
@@ -47,6 +48,7 @@ export default forwardRef((props: DocAuthorProps, ref) => {
     const newAuthor = (e.target.value || "").trim();
     setAuthor(newAuthor);
     DocApi.updateDoc(props.id, { author: newAuthor }, (newDoc: any) => {
+      onChange?.call(null, newDoc);
     });
   };
 

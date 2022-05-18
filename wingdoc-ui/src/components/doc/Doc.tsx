@@ -38,6 +38,10 @@ export default forwardRef((props: DocProps, ref) => {
     setFocusAuthor(true);
   };
 
+  const handleTitleChange = (newDoc: any) => {
+    refreshMarks(location?.pathname);
+  };
+
   // --- author
 
   const [focusAuthor, setFocusAuthor] = useState<boolean>(false);
@@ -121,7 +125,8 @@ export default forwardRef((props: DocProps, ref) => {
           onFocus={handleTitleFocus}
           onEnter={handleAdd}
           onFocusDown={handleTitleFocusDown}
-          onShowBlock={() => setShowBlock(!showBlock)}/>
+          onShowBlock={() => setShowBlock(!showBlock)}
+          onChange={handleTitleChange}/>
         <DocAuthor
           id={doc.id}
           value={doc.author}

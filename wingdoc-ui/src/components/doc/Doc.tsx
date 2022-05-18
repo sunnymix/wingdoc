@@ -6,6 +6,7 @@ import BlockList from '../block/BlockList';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
 import MarkApi from '../mark/MarkApi';
+import { useModel, useLocation } from 'umi';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -57,12 +58,20 @@ export default forwardRef((props: DocProps, ref) => {
 
   // --- load
 
+  const location: any = useLocation();
+
+  const { refreshMarks } = useModel("marks", (model: any) => ({
+    refreshMarks: model.refreshMarks,
+  }));
+
   const loadDoc = () => {
     setLoading(true);
     DocApi.getDoc(id, (doc: any) => {
       setLoading(false);
       setDoc(doc);
-      MarkApi.addMark(doc.id)
+      MarkApi.addMark(doc.id, () => {
+        refreshMarks(location?.pathname);
+      });
     });
   };
 

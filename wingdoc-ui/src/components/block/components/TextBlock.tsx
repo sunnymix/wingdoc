@@ -64,7 +64,7 @@ export default forwardRef((props: BlockProps, ref) => {
     e.preventDefault();
     // pos: start, middle, end
     var pos = 'end';
-    if (e.target.selectionStart == 0) {
+    if (e.target.selectionStart == 0 && text.length > 0) {
       pos = 'start';
     }
     props.onEnter?.call(null, props.data, pos);

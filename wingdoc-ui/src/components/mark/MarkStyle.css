@@ -8,6 +8,7 @@
 }
 
 .marks_tabs_item {
+  flex-shrink: 0;
   position: relative;
   display: flex;
   flex-wrap: nowrap;
@@ -41,23 +42,28 @@
 }
 
 .marks_tabs_item_pin {
+  flex-shrink: 0;
   margin-right: 4px;
 }
 
 .marks_tabs_item_title {
+  flex-shrink: 0;
   margin-left: 4px;
 }
 
 .marks_tabs_item_weekday {
+  flex-shrink: 0;
   margin-left: 4px;
 }
 
 .marks_tabs_item_task_status {
+  flex-shrink: 0;
   display: inline-block;
   margin-left: 4px;
 }
 
 .marks_tabs_item_more {
+  flex-shrink: 0;
   cursor: pointer;
   display: block;
   border: 0 none;

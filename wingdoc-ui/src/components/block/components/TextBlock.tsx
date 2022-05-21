@@ -335,8 +335,8 @@ export default forwardRef((props: BlockProps, ref) => {
       style={{
         zIndex: 4,
         visibility: innerFocus ? "visible" : "hidden",
-        marginTop: 4,
-        marginLeft: 4,
+        marginTop: 3,
+        marginLeft: 3,
       }}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
         <OptionButton/>

@@ -13,10 +13,11 @@ const OptionButton = (props: OptionButtonProps) => {
   return <>
   <Button type="text" size="small" {...props}>
     <div style={{
-      width: 6,
-      height: 6,
-      borderRadius: "50%",
-      backgroundColor: color || "#666",
+      width: 14,
+      height: 14,
+      borderLeft: '2px solid rgba(24, 144, 255, 0.5)',
+      // borderRadius: "50%",
+      // backgroundColor: 'rgba(24, 144, 255, 1)' || "#666",
     }}></div>
   </Button>
   </>

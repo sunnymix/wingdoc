@@ -295,14 +295,7 @@ export default forwardRef((props: BlockProps, ref) => {
   );
   
   return <>
-  <div
-    onMouseMove={() => setHover(true)}
-    onMouseLeave={() => setHover(false)}
-    style={{
-      position: "relative",
-      display: "flex",
-      alignItems: "flex-start",
-    }}>
+  <div className='block' onMouseMove={() => setHover(true)} onMouseLeave={() => setHover(false)}>
     <div
       style={{
         zIndex: 1,

@@ -29,3 +29,14 @@
   bottom: -1px;
   border: 1px solid #f2f2f2;
 }
+
+.block_options {
+  z-index: 4;
+  visibility: hidden;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.block_options.active {
+  visibility: visible;
+}

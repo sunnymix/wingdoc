@@ -284,6 +284,10 @@ export default forwardRef((props: BlockProps, ref) => {
     focusInput();
   };
 
+  // --- handle move in/out:
+
+  // TODO
+
   // --- menu
 
   const menu = (
@@ -299,13 +303,7 @@ export default forwardRef((props: BlockProps, ref) => {
     {innerFocus && <div className='block_focused'></div>}
     {data.selectAll && <div className='block_selected'></div>}
     {showBlock && <div className='block_indicator'></div>}
-    <div
-      style={{
-        zIndex: 4,
-        visibility: innerFocus ? "visible" : "hidden",
-        marginTop: 3,
-        marginLeft: 3,
-      }}>
+    <div className={`block_options ${innerFocus ? 'active' : ''}`}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
         <OptionButton/>
       </Dropdown>

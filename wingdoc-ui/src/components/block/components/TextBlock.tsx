@@ -296,14 +296,7 @@ export default forwardRef((props: BlockProps, ref) => {
   
   return <>
   <div className='block' onMouseMove={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-    <div
-      style={{
-        zIndex: 1,
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        backgroundColor: innerFocus ? "rgba(0, 0, 0, 0)": "transparent",
-      }}></div>
+    {innerFocus && <div className='block_focused'></div>}
     <div
       style={{
         zIndex: 2,

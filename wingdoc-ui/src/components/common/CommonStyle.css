@@ -6,6 +6,6 @@
 }
 
 .scrollbar_small::-webkit-scrollbar-thumb {
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
 }

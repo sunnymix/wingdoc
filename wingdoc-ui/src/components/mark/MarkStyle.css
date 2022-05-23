@@ -12,10 +12,9 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-  border-radius: 1px;
+  border-radius: 3px;
   overflow: hidden;
   height: 30px;
-  border: 1px solid transparent;
   margin: 4px 0 4px 4px;
 }
 
@@ -23,8 +22,16 @@
   background-color: #ddd;
 }
 
-.marks_tabs_item.pin {
-  border-color: #ccc;
+.marks_tabs_item.pin::after {
+  content: ' ';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 0;
+  height: 0;
+  border: 3px solid transparent;
+  border-radius: 3px;
+  border-color: #aaa transparent transparent #aaa;
 }
 
 .marks_tabs_item_link {
@@ -38,8 +45,7 @@
 }
 
 .marks_tabs_item_link:hover {
-  color: #333;
-  background-color: #eee;
+  color: #000;
 }
 
 .marks_tabs_item_pin {
@@ -75,5 +81,4 @@
 }
 
 .marks_tabs_item_more:hover {
-  background-color: #eee;
 }

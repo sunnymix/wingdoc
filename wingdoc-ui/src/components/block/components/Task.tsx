@@ -8,6 +8,7 @@ export interface TaskProps {
   defaultStatus?: Status,
   onChange?: Function,
   style?: any,
+  className?: string,
 }
 
 export enum Status { 
@@ -66,7 +67,7 @@ export default forwardRef((props: TaskProps, ref) => {
 
   // --- props
 
-  const { id, show, defaultStatus, onChange, style } = props;
+  const { id, show, defaultStatus, onChange, style, className } = props;
 
   // --- status
 
@@ -109,6 +110,7 @@ export default forwardRef((props: TaskProps, ref) => {
   
   return <>
   <div
+    className={className}
     style={{
       display: show ? "block" : "none",
       ...style,

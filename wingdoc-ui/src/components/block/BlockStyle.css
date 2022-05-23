@@ -31,12 +31,25 @@
 }
 
 .block_options {
-  z-index: 4;
-  visibility: hidden;
+  position: absolute;
+  z-index: 5;
+  /* visibility: hidden; */
   margin-top: 3px;
   margin-left: 3px;
 }
 
 .block_options.active {
   visibility: visible;
+}
+
+.block_body {
+  z-index: 4;
+  flex-grow: 1;
+  display: flex;
+  margin-left: 25px;
+}
+
+.block_task {
+  margin-top: 4px;
+  margin-left: 10px;
 }

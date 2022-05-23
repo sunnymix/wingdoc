@@ -309,32 +309,18 @@ export default forwardRef((props: BlockProps, ref) => {
     {innerFocus && <div className='block_focused'></div>}
     {data.selectAll && <div className='block_selected'></div>}
     {showBlock && <div className='block_indicator'></div>}
-    <div className={`block_options ${innerFocus ? 'active' : ''}`}>
+    {innerFocus && <div className={`block_options ${innerFocus ? 'active' : ''}`}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
         <OptionButton/>
       </Dropdown>
-    </div>
-    <div
-      style={{
-        zIndex: 4,
-        flexGrow: 1,
-        display: "flex",
-      }}>
-      <Task 
-        ref={taskRef}
-        id={data.id}
-        show={taskShow}
-        defaultStatus={status}
-        onChange={handleTaskChange}
-        style={{
-          marginTop: 4,
-          marginLeft: 10,
-        }}/>
+    </div>}
+    <div className='block_body'>
+      <Task className='block_task' ref={taskRef} id={data.id} show={taskShow} defaultStatus={status} onChange={handleTaskChange}/>
       <div
         style={{
           flexGrow: 1,
         }}>
-        <TextArea 
+        <TextArea
           ref={inputRef}
           placeholder="" 
           onFocus={handleTextFocus}
@@ -355,11 +341,7 @@ export default forwardRef((props: BlockProps, ref) => {
             flexGrow: "1",
             fontFamily: '"Helvetica Neue", Helvetica, Arial',
           }}/>
-        <Link
-          ref={linkRef}
-          value={link}
-          onSave={handleSaveLink}
-          onCancel={handleCancelLink}/>
+        <Link ref={linkRef} value={link} onSave={handleSaveLink} onCancel={handleCancelLink}/>
       </div>
     </div>
   </div>

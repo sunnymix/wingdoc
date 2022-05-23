@@ -20,17 +20,17 @@
 }
 
 .marks_tabs_item.focus {
-  background-color: #eee;
+  background-color: #ddd;
 }
 
 .marks_tabs_item.pin {
-  border-color: #ddd;
+  border-color: #ccc;
 }
 
 .marks_tabs_item_link {
   display: flex;
   align-items: center;
-  padding: 0 0 0 5px;
+  padding: 0 5px;
   color: #333;
   font-weight: 400;
   white-space: nowrap;
@@ -39,6 +39,7 @@
 
 .marks_tabs_item_link:hover {
   color: #333;
+  background-color: #eee;
 }
 
 .marks_tabs_item_pin {
@@ -74,5 +75,5 @@
 }
 
 .marks_tabs_item_more:hover {
-  background-color: #ddd;
+  background-color: #eee;
 }

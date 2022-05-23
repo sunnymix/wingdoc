@@ -64,6 +64,9 @@ export default forwardRef((props: BlockProps, ref) => {
     if (e.target.selectionStart == 0 && text.length > 0) {
       pos = 'start';
     }
+    if (e.metaKey) {
+      pos = 'end';
+    }
     props.onEnter?.call(null, props.data, pos);
   };
 

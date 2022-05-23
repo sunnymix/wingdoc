@@ -1,4 +1,4 @@
-import { FC, forwardRef, useEffect, useRef, useState } from 'react';
+import { FC, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Input, Spin } from 'antd';
 import BlockApi from '../BlockApi';
 import { ArrowUpOutlined, ArrowDownOutlined, LinkOutlined } from '@ant-design/icons';
@@ -286,7 +286,13 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- handle move in/out:
 
-  // TODO
+  const handleMouseMove = useCallback(() => {
+    setHover(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setHover(false);
+  }, []);
 
   // --- menu
 
@@ -299,7 +305,7 @@ export default forwardRef((props: BlockProps, ref) => {
   );
   
   return <>
-  <div className='block' onMouseMove={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+  <div className='block' onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
     {innerFocus && <div className='block_focused'></div>}
     {data.selectAll && <div className='block_selected'></div>}
     {showBlock && <div className='block_indicator'></div>}

@@ -316,15 +316,11 @@ export default forwardRef((props: BlockProps, ref) => {
     </div>}
     <div className='block_body'>
       <Task className='block_task' ref={taskRef} id={data.id} show={taskShow} defaultStatus={status} onChange={handleTaskChange}/>
-      <div
-        style={{
-          flexGrow: 1,
-        }}>
-        <TextArea
+      <div className='block_content'>
+        <TextArea className={`block_textarea ${linking ? 'linking' : ''}`}
           ref={inputRef}
-          placeholder="" 
           onFocus={handleTextFocus}
-          autoSize 
+          autoSize
           value={text}
           size="middle"
           bordered={false}
@@ -335,12 +331,7 @@ export default forwardRef((props: BlockProps, ref) => {
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           onSelect={handleSelect}
-          onSelectCapture={handleSelectCapture}
-          style={{
-            color: linking ? "#1890ff" : "inherit",
-            flexGrow: "1",
-            fontFamily: '"Helvetica Neue", Helvetica, Arial',
-          }}/>
+          onSelectCapture={handleSelectCapture}/>
         <Link ref={linkRef} value={link} onSave={handleSaveLink} onCancel={handleCancelLink}/>
       </div>
     </div>

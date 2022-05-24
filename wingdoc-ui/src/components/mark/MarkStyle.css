@@ -5,6 +5,7 @@
   margin-bottom: 15;
   overflow: hidden;
   overflow-x: scroll;
+  padding: 0 4px;
 }
 
 .marks_tabs_item {
@@ -15,7 +16,7 @@
   border-radius: 3px;
   overflow: hidden;
   height: 30px;
-  margin: 4px 0 4px 4px;
+  margin: 4px 4px 4px 0;
 }
 
 .marks_tabs_item.focus {

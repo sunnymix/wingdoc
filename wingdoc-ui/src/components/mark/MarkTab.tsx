@@ -22,9 +22,9 @@ export default forwardRef((props: MarkTabProps, ref) => {
 
   const { mark, onDelete, onPin, onUnpin, onChange } = props;
 
-  // --- delete
+  // --- close
 
-  const handleDelete = () => {
+  const handleClose = () => {
     MarkApi.deleteMark(mark.docId, () => {
       onDelete?.call(null, mark);
       onChange?.call(null, mark);
@@ -70,11 +70,11 @@ export default forwardRef((props: MarkTabProps, ref) => {
 
   const moreMenu = (
     <Menu>
-      <Menu.Item key="refresh" onClick={handleRefresh}>Refresh</Menu.Item>
       <Menu.Item key="pin" onClick={handlePin}>Pin</Menu.Item>
       {mark.pin > 0 && <Menu.Item key="unpin" onClick={handleUnpin}>Unpin</Menu.Item>}
       <Menu.Item key="clone" onClick={handleClone}>Clone</Menu.Item>
-      <Menu.Item key="delete" onClick={handleDelete}>Delete</Menu.Item>
+      <Menu.Item key="close" onClick={handleClose}>Close</Menu.Item>
+      <Menu.Item key="refresh" onClick={handleRefresh}>Refresh</Menu.Item>
     </Menu>
   );
 

@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { history, useLocation, Link } from "umi";
 import { PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
 import DocApi from "@/components/doc/DocApi";
-import Style from "./NavStyle.css";
+import "./NavStyle.css";
 import moment from "moment";
 import MarkTabs from "@/components/mark/MarkTabs";
 
@@ -93,21 +93,18 @@ export default (props: any) => {
 
   // --- ui
 
-  return <>
-  <div className={Style.nav}>
+  return (
+  <div className='nav'>
     {items.map((item: NavItemProps, index: number) => (
-      <div
-        key={index}
-        className={item.key == activeKey ? Style.nav_item_active : Style.nav_item}
-        onClick={() => handleTabClick(item.path)}>
-          {item.key == activeKey && <div className={Style.nav_item_active_mask}></div>}
-          <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
+      <div key={index} className={`nav_item ${item.key == activeKey ? 'active' : ''}`} onClick={() => handleTabClick(item.path)}>
+        <div className='nav_item_active_mask'></div>
+        <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
     ))}
     <Dropdown overlay={createMenu} placement="bottomLeft">
-      <div className={Style.nav_new_button}>
+      <div className='nav_new_button'>
         <PlusOutlined />
       </div>
     </Dropdown>
   </div>
-  </>
+  )
 };

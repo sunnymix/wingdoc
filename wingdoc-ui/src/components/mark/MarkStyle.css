@@ -2,10 +2,10 @@
 .mark_tabs {
   display: flex;
   background-color: #fff;
-  margin-bottom: 15;
+  margin-bottom: 15px;
   overflow: hidden;
   overflow-x: scroll;
-  padding: 0 4px;
+  padding: 0 2px;
 }
 
 .marks_tabs_item {
@@ -13,10 +13,10 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
   height: 30px;
-  margin: 4px 4px 4px 0;
+  margin: 2px 2px 2px 0;
 }
 
 .marks_tabs_item.focus {
@@ -79,7 +79,4 @@
   padding: 0 2px;
   text-align: center;
   color: #999;
-}
-
-.marks_tabs_item_more:hover {
 }

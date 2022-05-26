@@ -1,18 +1,16 @@
 import Nav from '@/components/common/Nav';
-import { useEffect } from "react";
-import { useLocation } from "umi";
-import Style from "./style.css";
+import "./style.css";
 import MarkTabs from "@/components/mark/MarkTabs";
 
 export default (props: any) => {
 
-  return (<>
+  return (
   <div>
-    <div className={Style.header}>
+    <div className='header'>
       <Nav />
       <MarkTabs />
     </div>
-    <div className={Style.body}>{props.children}</div>
+    <div className='body'>{props.children}</div>
   </div>
-  </>);
+  );
 }

@@ -33,13 +33,13 @@
 .block_options {
   position: absolute;
   z-index: 5;
-  /* visibility: hidden; */
+  opacity: 0;
   margin-top: 4px;
   margin-left: 4px;
 }
 
 .block_options.active {
-  visibility: visible;
+  opacity: 1;
 }
 
 .block_body {

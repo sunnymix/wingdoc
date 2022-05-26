@@ -312,11 +312,11 @@ export default forwardRef((props: BlockProps, ref) => {
     {innerFocus && <div className='block_focused'></div>}
     {data.selectAll && <div className='block_selected'></div>}
     {showBlock && <div className='block_indicator'></div>}
-    {innerFocus && <div className={`block_options ${innerFocus ? 'active' : ''}`}>
+    <div className={`block_options ${innerFocus ? 'active' : ''}`}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
         <OptionButton/>
       </Dropdown>
-    </div>}
+    </div>
     <div className='block_body'>
       <Task className='block_task' ref={taskRef} id={data.id} show={taskShow} defaultStatus={status} onChange={handleTaskChange}/>
       <div className='block_content'>

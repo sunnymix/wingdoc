@@ -8,7 +8,7 @@ interface BlockListProps {
   showBlock?: boolean,
 }
 
-const BlockList = forwardRef((props: BlockListProps, ref) => {
+export default forwardRef((props: BlockListProps, ref) => {
 
   // --- method bind
 
@@ -195,8 +195,7 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
 
   // --- ui
   
-  return <>
-  <div>
+  return (
     <div>
       {blocks.map((block: any, index: number) => 
         <Block
@@ -216,8 +215,5 @@ const BlockList = forwardRef((props: BlockListProps, ref) => {
           onCopy={handleCopy}/>)
       }
     </div>
-  </div>
-  </>
+  );
 });
-
-export default BlockList;

@@ -1,6 +1,5 @@
 import "./MarkStyle.css";
-import { useState, useEffect, forwardRef } from "react";
-import MarkApi from "./MarkApi";
+import { useEffect, forwardRef } from "react";
 import { useLocation, useModel } from "umi";
 import MarkTab from "./MarkTab";
 import "@/components/common/CommonStyle.css";

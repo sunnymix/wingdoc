@@ -1,27 +1,30 @@
 import { Mark } from "@/components/mark/MarkTabs";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import MarkApi from "@/components/mark/MarkApi";
-import { useLocation } from "umi";
+
+const getDocId = (path: any) => {
+  var docId = "";
+  if (path && path.length > 0) {
+    const basePath = "/doc/";
+    const docIndex = path.indexOf(basePath);
+    if (docIndex >= 0) {
+      docId = path.substring(docIndex + basePath.length);
+    }
+  }
+  return docId;
+};
 
 export default () => {
+
+  // --- current path
+  var currentPath = '';
 
   // --- marks
   const [marks, setMarks] = useState<Mark[]>([]);
 
-  const getDocId = (path: any) => {
-    var docId = "";
-    if (path && path.length > 0) {
-      const basePath = "/doc/";
-      const docIndex = path.indexOf(basePath);
-      if (docIndex >= 0) {
-        docId = path.substring(docIndex + basePath.length);
-      }
-    }
-    return docId;
-  };
-
   // --- refresh
   const refreshMarks = useCallback((path: any) => {
+    currentPath = path;
     MarkApi.queryMarks({}, (marks: any) => {
       const newMarks: Mark[] = [];
       if (marks && marks.length > 0) {
@@ -32,6 +35,13 @@ export default () => {
       }
       setMarks(newMarks);
     });
+  }, []);
+
+  // --- auto refresh
+  useEffect(() => {
+    setInterval(() => {
+      refreshMarks(currentPath)
+    }, 10 * 1000);
   }, []);
 
   return { marks, refreshMarks };

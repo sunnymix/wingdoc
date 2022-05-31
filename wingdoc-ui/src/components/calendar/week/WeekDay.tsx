@@ -152,7 +152,6 @@ export default forwardRef((props: WeekDayProps, ref) => {
       style={{
         padding: 0,
         cursor: "pointer",
-        // backgroundColor: Weekday.isWeekend(weekday) ? "#f3f3f3" : "#fafafa",
         fontWeight: 500,
         color: isToday ? "#1890ff" : "#333",
       }}>

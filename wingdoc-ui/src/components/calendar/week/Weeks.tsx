@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useState } from "react";
 import Week from "./Week";
 import { Space, InputNumber, Checkbox } from "antd";
+import "./WeekStyle.css";
 
 export interface WeekListProps {};
 
@@ -68,14 +69,7 @@ export default forwardRef((props: WeekListProps, ref) => {
       padding: 0,
     }}>
     <Space direction="horizontal" size="middle">
-      <InputNumber
-        min={0}
-        value={weeksBefore}
-        onChange={handleWeeksBeforeUpdate}
-        addonAfter="周前"
-        style={{
-          width: 110,
-        }}/>
+      <InputNumber className='weeks_input' min={0} value={weeksBefore} onChange={handleWeeksBeforeUpdate} addonAfter="周前"/>
       <InputNumber
         min={0}
         value={weeksAfter}

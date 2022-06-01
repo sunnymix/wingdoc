@@ -75,16 +75,9 @@ export default forwardRef((props: WeekListProps, ref) => {
       <Checkbox defaultChecked={weekendShow} onChange={handleWeekendShowUpdate}>周末</Checkbox>
     </Space>
     <div className="weeks_body">
-        {weeks.map((week: number) => 
-          <Week
-            key={week}
-            week={week}
-            weekendShow={weekendShow}
-            heightMultiple={heightMultiple}
-            style={{
-              marginBottom: 0,
-            }}/>
-        )}
+      {weeks.map((week: number) => 
+      <Week key={week} week={week} weekendShow={weekendShow} heightMultiple={heightMultiple} />
+      )}
     </div>
   </Space>
   </>

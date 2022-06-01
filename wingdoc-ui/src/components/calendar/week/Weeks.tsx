@@ -69,15 +69,8 @@ export default forwardRef((props: WeekListProps, ref) => {
       padding: 0,
     }}>
     <Space direction="horizontal" size="middle">
-      <InputNumber className='weeks_input' min={0} value={weeksBefore} onChange={handleWeeksBeforeUpdate} addonAfter="周前"/>
-      <InputNumber
-        min={0}
-        value={weeksAfter}
-        onChange={handleWeeksAfterUpdate}
-        addonAfter="周后"
-        style={{
-          width: 110,
-        }}/>
+      <InputNumber className='weeks_input' min={0} value={weeksBefore} onChange={handleWeeksBeforeUpdate} addonAfter="周前" />
+      <InputNumber className='weeks_input' min={0} value={weeksAfter} onChange={handleWeeksAfterUpdate} addonAfter="周后" />
       <InputNumber
         value={heightMultiple}
         onChange={handleHeightMultipleUpdate}

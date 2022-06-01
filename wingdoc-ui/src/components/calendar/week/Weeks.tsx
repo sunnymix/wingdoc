@@ -74,15 +74,7 @@ export default forwardRef((props: WeekListProps, ref) => {
       <InputNumber className='weeks_input' value={heightMultiple} onChange={handleHeightMultipleUpdate} addonAfter="空间" />
       <Checkbox defaultChecked={weekendShow} onChange={handleWeekendShowUpdate}>周末</Checkbox>
     </Space>
-    <div
-      style={{
-        borderStyle: "solid",
-        borderColor: "#ddd",
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        borderTopWidth: 0,
-        borderBottomWidth: 0,
-      }}>
+    <div className="weeks_body">
         {weeks.map((week: number) => 
           <Week
             key={week}

@@ -71,16 +71,8 @@ export default forwardRef((props: WeekListProps, ref) => {
     <Space direction="horizontal" size="middle">
       <InputNumber className='weeks_input' min={0} value={weeksBefore} onChange={handleWeeksBeforeUpdate} addonAfter="周前" />
       <InputNumber className='weeks_input' min={0} value={weeksAfter} onChange={handleWeeksAfterUpdate} addonAfter="周后" />
-      <InputNumber
-        value={heightMultiple}
-        onChange={handleHeightMultipleUpdate}
-        addonAfter="空间"
-        style={{
-          width: 110,
-        }}/>
-      <Checkbox
-        defaultChecked={weekendShow}
-        onChange={handleWeekendShowUpdate}>周末</Checkbox>
+      <InputNumber className='weeks_input' value={heightMultiple} onChange={handleHeightMultipleUpdate} addonAfter="空间" />
+      <Checkbox defaultChecked={weekendShow} onChange={handleWeekendShowUpdate}>周末</Checkbox>
     </Space>
     <div
       style={{

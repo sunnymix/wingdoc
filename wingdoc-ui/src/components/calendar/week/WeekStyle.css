@@ -50,6 +50,13 @@
   background-color: rgba(24, 144, 255, 0.2);
 }
 
+/* weeks */
+
+.weeks {
+  width: 100%;
+  padding: 0;
+}
+
 .weeks_input {
   width: 110px;
 }

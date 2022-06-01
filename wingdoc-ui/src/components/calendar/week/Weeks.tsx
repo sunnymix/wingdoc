@@ -61,13 +61,7 @@ export default forwardRef((props: WeekListProps, ref) => {
   // --- ui
 
   return <>
-  <Space 
-    direction="vertical"
-    size="middle"
-    style={{
-      width: "100%",
-      padding: 0,
-    }}>
+  <Space className="weeks" direction="vertical" size="middle">
     <Space direction="horizontal" size="middle">
       <InputNumber className='weeks_input' min={0} value={weeksBefore} onChange={handleWeeksBeforeUpdate} addonAfter="周前" />
       <InputNumber className='weeks_input' min={0} value={weeksAfter} onChange={handleWeeksAfterUpdate} addonAfter="周后" />
@@ -76,7 +70,7 @@ export default forwardRef((props: WeekListProps, ref) => {
     </Space>
     <div className="weeks_body">
       {weeks.map((week: number) => 
-      <Week key={week} week={week} weekendShow={weekendShow} heightMultiple={heightMultiple} />
+        <Week key={week} week={week} weekendShow={weekendShow} heightMultiple={heightMultiple} />
       )}
     </div>
   </Space>

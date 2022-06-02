@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useState } from "react";
 import Week from "./Week";
 import { Space, InputNumber, Checkbox } from "antd";
 import "./WeekStyle.css";
+import { useModel } from "umi";
 
 export interface WeekListProps {};
 
@@ -11,34 +12,31 @@ export default forwardRef((props: WeekListProps, ref) => {
 
   const [weeks, setWeeks] = useState<number[]>([]);
 
-  // --- weeks before
+  // --- model
 
-  const [weeksBefore, setWeeksBefore] = useState<number>(1);
+  const { 
+    weeksBefore,
+    setWeeksBefore,
+    weeksAfter,
+    setWeeksAfter,
+    weekendShow,
+    setWeekendShow,
+    heightMultiple,
+    setHeightMultipel,
+  } = useModel("weeks");
 
   const handleWeeksBeforeUpdate = (value: number) => {
     setWeeksBefore(value);
   };
 
-  // --- weeks after
-
-  const [weeksAfter, setWeeksAfter] = useState<number>(4);
-
   const handleWeeksAfterUpdate = (value: number) => {
     setWeeksAfter(value);
   };
-
-  // --- weekend show
-
-  const [weekendShow, setWeekendShow] = useState<boolean>(true);
 
   const handleWeekendShowUpdate = (e: any) => {
     const checked = e.target.checked;
     setWeekendShow(checked);
   };
-
-  // --- height multiple
-
-  const [heightMultiple, setHeightMultipel] = useState<number>(1);
 
   const handleHeightMultipleUpdate = (value: number) => {
     setHeightMultipel(value);

@@ -44,11 +44,6 @@ const items: NavItemProps[] = [
     key: "task",
   },
   {
-    label: "Board",
-    path: "/board",
-    key: "board",
-  },
-  {
     label: "Calendar",
     path: "/calendar",
     key: "calendar",
@@ -75,8 +70,6 @@ export default (props: any) => {
       key = "doc";
     } else if (pathname.startsWith("/task")) {
       key = "task";
-    } else if (pathname.startsWith("/board")) {
-      key = "board";
     } else if (pathname.startsWith("/calendar")) {
       key = "calendar";
     } else if (pathname.startsWith("/media")) {

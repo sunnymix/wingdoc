@@ -1,4 +1,4 @@
-import {forwardRef, useEffect, useState} from 'react';
+import {forwardRef, useEffect, useRef, useState} from 'react';
 import {Input, Menu, Dropdown} from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
@@ -21,7 +21,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
 
   // --- props
 
-  const {id, value, showBlock, onEnter, onShowBlock, onFocus, onFocusDown, onChange} = props;
+  const {id, value, focus, showBlock, onEnter, onShowBlock, onFocus, onFocusDown, onChange} = props;
 
   // --- title
 
@@ -63,11 +63,31 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
     }
   };
 
-  // --- effect
+  // --- effect: value
 
   useEffect(() => {
     setTitle(value);
   }, [value]);
+
+  // --- effect: focus
+
+  useEffect(() => {
+    if (focus) {
+      focusText();
+    }
+  }, [focus]);
+
+  // --- text
+
+  const textRef = useRef<any>(null);
+
+  const focusText = () => {
+    if (textRef.current) {
+      textRef.current.focus({
+        cursor: "start",
+      });
+    }
+  };
 
   // --- text focus
 
@@ -113,6 +133,7 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
         flexGrow: 1,
       }}>
       <TextArea
+        ref={textRef}
         value={title}
         onChange={changeTitle}
         onBlur={changeTitle}

@@ -88,6 +88,7 @@ export default forwardRef((props: DocProps, ref) => {
   const blockListRef: any = useRef();
 
   const handleAdd = () => {
+    setFocusTitle(false);
     if (blockListRef && blockListRef.current) {
       blockListRef.current.add();
     }
@@ -99,6 +100,12 @@ export default forwardRef((props: DocProps, ref) => {
     if (blockListRef.current) {
       blockListRef.current.focusPos(pos);
     }
+  };
+
+  // --- blocklist empty focus
+
+  const handleBlockListEmptyFocus = () => {
+    setFocusTitle(true);
   };
 
   // --- ui empty
@@ -117,8 +124,7 @@ export default forwardRef((props: DocProps, ref) => {
     }}>
     <div>
       <div>
-        <DocTitle
-          id={doc.id}
+        <DocTitle id={doc.id}
           value={doc.title}
           showBlock={showBlock}
           focus={focusTitle}
@@ -141,6 +147,7 @@ export default forwardRef((props: DocProps, ref) => {
       <BlockList
         docId={doc.id}
         showBlock={showBlock}
+        onEmptyFocus={handleBlockListEmptyFocus}
         ref={blockListRef}/>
     </div>
   </div>

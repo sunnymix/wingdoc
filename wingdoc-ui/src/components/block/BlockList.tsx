@@ -6,6 +6,7 @@ import { useLocation } from 'umi';
 interface BlockListProps {
   docId: string,
   showBlock?: boolean,
+  onEmptyFocus?: Function,
 }
 
 export default forwardRef((props: BlockListProps, ref) => {
@@ -21,7 +22,7 @@ export default forwardRef((props: BlockListProps, ref) => {
 
   // -- props
 
-  const { docId, showBlock } = props;
+  const { docId, showBlock, onEmptyFocus } = props;
 
   // --- loading
 
@@ -31,28 +32,39 @@ export default forwardRef((props: BlockListProps, ref) => {
 
   const location: any = useLocation();
   const queryBlock = location.query?.block || null;
+
   const findBlockPos = (blocks: any[]) => {
     const findBlocks = blocks.filter((block: any) => block.id == queryBlock);
     if (findBlocks.length > 0) {
-      return findBlocks[0].pos || 0;
+      return findBlocks[0].pos || -1;
     }
-    return 0;
+    return -1;
   };
 
   // --- blocks
 
   const [blocks, setBlocks] = useState<any[]>([]);
 
-  const searchBlocks = (focusPos: any) => {
+  const searchBlocks = (focusPos: any) => {    
     setLoading(true);
     BlockApi.getBlockListOfDoc(docId, (blocks: any) => {
       setLoading(false);
       setBlocks(blocks);
-      if (focusPos) {
-        setFocusPos(focusPos);
-      } else {
-        const newFocusPos = findBlockPos(blocks);
+
+      var newFocusPos = -1;
+
+      if (blocks && blocks.length > 0) {
+        if (focusPos != null && focusPos >= 0 && focusPos < blocks.length) {
+          newFocusPos = focusPos;
+        } else {
+          newFocusPos = findBlockPos(blocks);
+        }
+      }
+
+      if (newFocusPos >= 0) {
         setFocusPos(newFocusPos);
+      } else {
+        onEmptyFocus?.call(null);
       }
     });
   };

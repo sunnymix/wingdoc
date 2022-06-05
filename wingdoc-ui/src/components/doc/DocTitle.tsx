@@ -2,6 +2,7 @@ import {forwardRef, useEffect, useRef, useState} from 'react';
 import {Input, Menu, Dropdown} from 'antd';
 import DocApi from './DocApi';
 import OptionButton from '../common/OptionButton';
+import './DocStyle.css';
 
 const {TextArea} = Input;
 
@@ -98,15 +99,9 @@ const DocTitle = forwardRef((props: DocTitleProps, ref) => {
   // --- ui
 
   return <>
-  <div
+  <div className='doc_title'
     onMouseMove={() => setHover(true)}
-    onMouseLeave={() => setHover(false)}
-    style={{
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      marginBottom: 0,
-    }}>
+    onMouseLeave={() => setHover(false)}>
     <div
       style={{
         position: "absolute",

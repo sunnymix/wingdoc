@@ -61,7 +61,9 @@ export default forwardRef((props: BlockProps, ref) => {
     e.preventDefault();
     // pos: start, middle, end
     var pos = 'end';
-    if (e.target.selectionStart == 0 && text.length > 0) {
+    const isCursorAtBlockStart = e.target.selectionStart == 0 && text.length > 0;
+    const isShift = e.shiftKey;
+    if (isShift || isCursorAtBlockStart) {
       pos = 'start';
     }
     if (e.metaKey) {

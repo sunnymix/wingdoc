@@ -35,7 +35,7 @@ export default forwardRef((props: DocProps, ref) => {
   };
 
   const handleTitleFocusDown = () => {
-    setFocusAuthor(true);
+    focusBlockPos(0);
   };
 
   const handleTitleChange = (newDoc: any) => {

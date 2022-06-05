@@ -108,6 +108,17 @@ export default forwardRef((props: DocProps, ref) => {
     setFocusTitle(true);
   };
 
+  // --- blocklist focus change
+
+  const handleBlockListFocusChange = (focusPos: number) => {
+    // console.log('Doc: BlockList: onFocusChange: focusPos: ', focusPos);
+    if (focusPos >= 0) {
+      setFocusTitle(false); 
+    } else {
+      setFocusTitle(true);
+    }
+  };
+
   // --- ui empty
 
   if (!doc) {
@@ -148,6 +159,7 @@ export default forwardRef((props: DocProps, ref) => {
         docId={doc.id}
         showBlock={showBlock}
         onEmptyFocus={handleBlockListEmptyFocus}
+        onFocusChange={handleBlockListFocusChange}
         ref={blockListRef}/>
     </div>
   </div>

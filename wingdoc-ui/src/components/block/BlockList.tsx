@@ -7,6 +7,7 @@ interface BlockListProps {
   docId: string,
   showBlock?: boolean,
   onEmptyFocus?: Function,
+  onFocusChange?: Function,
 }
 
 export default forwardRef((props: BlockListProps, ref) => {
@@ -22,7 +23,7 @@ export default forwardRef((props: BlockListProps, ref) => {
 
   // -- props
 
-  const { docId, showBlock, onEmptyFocus } = props;
+  const { docId, showBlock, onEmptyFocus, onFocusChange } = props;
 
   // --- loading
 
@@ -36,7 +37,7 @@ export default forwardRef((props: BlockListProps, ref) => {
   const findBlockPos = (blocks: any[]) => {
     const findBlocks = blocks.filter((block: any) => block.id == queryBlock);
     if (findBlocks.length > 0) {
-      return findBlocks[0].pos || -1;
+      return findBlocks[0].pos;
     }
     return -1;
   };
@@ -79,12 +80,18 @@ export default forwardRef((props: BlockListProps, ref) => {
 
   const [focusPos, setFocusPos] = useState<Number>(0);
 
-  const handleFocus = (block: any) => {
-    // TODO
+  useEffect(() => {
+    // console.log('BlockList: focusPos: changed to: ', focusPos);
+    onFocusChange?.call(null, focusPos);
+  }, [focusPos]);
+
+  const handleFocus = (blockData: any) => {
+    setFocusPos(blockData.pos);
   };
 
   const handleFocusUp = (blockData: any) => {
-    setFocusPos(blockData.pos == 0 ? 0 : blockData.pos - 1);
+    const newFocusPos = blockData.pos - 1;
+    setFocusPos(newFocusPos);
   };
 
   const handleFocusDown = (blockData: any) => {

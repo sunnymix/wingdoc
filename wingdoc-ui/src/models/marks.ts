@@ -41,7 +41,7 @@ export default () => {
   useEffect(() => {
     setInterval(() => {
       refreshMarks(currentPath)
-    }, 10 * 1000);
+    }, 10 * 60 * 1000);
   }, []);
 
   return { marks, refreshMarks };

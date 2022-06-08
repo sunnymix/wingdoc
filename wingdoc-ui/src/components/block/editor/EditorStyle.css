@@ -1,6 +1,7 @@
 .editor {
   display: flex;
   border: 1px solid #eee;
+  border-radius: 2px;
   background-color: #f8f8f8;
   position: relative;
 }

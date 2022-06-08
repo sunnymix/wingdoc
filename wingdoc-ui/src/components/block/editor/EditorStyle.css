@@ -1,74 +1,65 @@
 .editor {
   display: flex;
-  position: relative;
-}
-
-.editor_indicator {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-  border: 1px solid transparent;
+  border: 1px solid #eee;
   background-color: #f8f8f8;
 }
 
 .editor_side {
-  position: relative;
-  z-index: 2;
   flex-shrink: 0;
   flex-grow: 0;
-  margin-right: 4px;
 }
 
-.editor_sidebar {
-  cursor: pointer;
-  display: flex;
-  height: 24px;
-  width: 24px;
-  margin: 0;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background-color: transparent;
-  align-items: center;
-  justify-content: center;
-}
-
-.editor_sidebar_icon {
-  content: ' ';
-  display: block;
-  height: 10px;
-  width: 10px;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-.editor_sidebar:hover {
-  border-color: #ddd;
+.editor_controls {
+  position: absolute;
   background-color: #fff;
-}
-
-.editor_sidebar:hover .editor_sidebar_icon{
-  border-color: rgba(24, 144, 255, 1);
+  z-index: 100;
 }
 
 .editor_body {
-  position: relative;
-  z-index: 2;
   flex-grow: 1;
 }
 
 .editor_content {
-  border: 0 none;
-  border: 0 none;
+  border: 1px solid #eee;
   background-color: transparent;
-  line-height: 24px;
+  line-height: 26px;
   padding: 0 4px;
 }
 
 .editor_content:focus,
 .editor_content:active {
   outline: 0;
+  background-color: #fff;
+}
+
+/* Commons */
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  height: 28px;
+  min-width: 28px;
+  border: 1px solid #eee;
+  background-color: #f8f8f8;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_border_icon {
+  content: ' ';
+  display: block;
+  height: 10px;
+  width: 10px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.btn:hover {
+  border-color: #ddd;
+  background-color: #fff;
+}
+
+.btn:hover .btn_border_icon {
+  border-color: rgba(24, 144, 255, 1);
 }

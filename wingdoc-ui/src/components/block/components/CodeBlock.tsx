@@ -1,6 +1,7 @@
 import { forwardRef, useState } from "react";
 import { BlockProps } from "../Block";
 import './CodeBlockStyle.css';
+import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -8,9 +9,11 @@ export default forwardRef((props: BlockProps, ref) => {
 
   return (
   <div className='codeblock'>
-    <div className="codeblock_body">
-      <div
-        className="codeblock_text">{text}</div>
+    <div className="codeblock_body" data-color-mode='light'>
+      <CodeEditor
+        className='codeblock_textarea'
+        language='plaintext'
+        value={text} />
     </div>
   </div>
   );

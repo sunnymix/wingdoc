@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import TextBlock from '@/components/block/components/TextBlock';
 import CodeBlock from './components/CodeBlock';
+import Editor from './editor/Editor';
 
 export interface BlockProps {
   data: any,
@@ -22,9 +23,9 @@ const Block = forwardRef((props: BlockProps, ref) => {
   const { data } = props;
 
   if (data.type == 'CODE') {
-    return <CodeBlock {... props}/>;
+    return <Editor {... props}/>;
   }
-  
+
   return <TextBlock {... props}/>;
 });
 

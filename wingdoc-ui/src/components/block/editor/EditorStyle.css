@@ -17,13 +17,14 @@
 
 .editor_controls {
   position: absolute;
-  background-color: #fff;
-  display: none;
+  display: block;
 }
 
 .editor_controls.open {
   display: block;
   z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .editor_body {

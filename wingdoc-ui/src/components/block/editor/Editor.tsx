@@ -4,7 +4,7 @@ import './EditorStyle.css';
 import { useEditor } from "./EditorHook";
 import { Input } from "antd";
 const { TextArea } = Input;
-import { ArrowUpOutlined, ArrowDownOutlined, LinkOutlined } from '@ant-design/icons';
+import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined } from '@ant-design/icons';
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -44,9 +44,10 @@ export default forwardRef((props: BlockProps, ref) => {
         <span className='btn_border_icon'></span>
       </button>
       <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
-        <button className='btn'><LinkOutlined /></button>
-        <button className='btn'><ArrowUpOutlined /></button>
-        <button className='btn'><ArrowDownOutlined /></button>
+        <button className='btn ghost'><CaretUpOutlined /></button>
+        <button className='btn ghost'><CaretDownOutlined /></button>
+        <button className='btn ghost'><LinkOutlined /></button>
+        <button className='btn ghost'><PictureOutlined /></button>
       </div>
     </div>
     <div className='editor_body'>

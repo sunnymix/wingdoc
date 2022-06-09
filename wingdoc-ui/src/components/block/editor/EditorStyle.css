@@ -14,8 +14,12 @@
 .editor_controls {
   position: absolute;
   background-color: #fff;
-  z-index: 100;
   display: block;
+}
+
+.editor_controls.open {
+  display: block;
+  z-index: 100;
 }
 
 .editor_body {

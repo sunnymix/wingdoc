@@ -40,7 +40,7 @@ export default forwardRef((props: BlockProps, ref) => {
   <>
   <div className={`editor ${focused ? 'focused' : ''}`}>
     <div className='editor_side'>
-      <button className='editor_sidebar btn' onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
+      <button className='editor_sidebar btn ghost' onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
         <span className='btn_border_icon'></span>
       </button>
       <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>

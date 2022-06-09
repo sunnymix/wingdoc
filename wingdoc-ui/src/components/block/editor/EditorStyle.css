@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.editor.focused {
+  background-color: #fff;
+}
+
 .editor_side {
   flex-shrink: 0;
   flex-grow: 0;
@@ -14,7 +18,7 @@
 .editor_controls {
   position: absolute;
   background-color: #fff;
-  display: block;
+  display: none;
 }
 
 .editor_controls.open {
@@ -53,6 +57,11 @@
   background-color: #f8f8f8;
   align-items: center;
   justify-content: center;
+}
+
+.btn.ghost {
+  border-color: transparent;
+  background-color: transparent;
 }
 
 .btn_border_icon {

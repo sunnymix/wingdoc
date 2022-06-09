@@ -34,6 +34,16 @@ export const useEditor = (initialText: string) => {
     editorRef.current.innerHTML = '';
   }, []);
 
+  const focusEditor = useCallback(() => {
+    var range = document.createRange();
+    range.setStart(editorRef.current, 0);
+    range.setEnd(editorRef.current, 0);
+    
+    var selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  }, []);
+
   const text2HTML = useCallback((text: string): string => {
     return text
       .split('\n')
@@ -60,6 +70,7 @@ export const useEditor = (initialText: string) => {
     editorProps,
     editorText: text,
     editorRef,
+    focusEditor,
     clearEditor,
   }
 };

@@ -39,6 +39,8 @@
   background-color: #fff;
 }
 
+
+
 /* Commons */
 
 .btn {
@@ -68,6 +70,6 @@
   background-color: #fff;
 }
 
-.btn:hover .btn_border_icon {
+.focused .btn_border_icon {
   border-color: rgba(24, 144, 255, 1);
 }

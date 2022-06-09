@@ -8,20 +8,37 @@ import { ArrowUpOutlined, ArrowDownOutlined, LinkOutlined } from '@ant-design/ic
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  const { editorProps, editorText, clearEditor } = useEditor(props.data.text);
+  const { editorProps, editorText, focusEditor } = useEditor(props.data.text);
 
   // --- editorText:
 
   useEffect(() => {
+    // TODO
   }, [editorText]);
 
-  // --- sidebar:
+  // --- controlsOpen:
 
   const [controlsOpen, setControlsOpen] = useState<boolean>(false);
 
+  // --- focus:
+
+  useEffect(() => {
+    // TODO
+    if (props.focus) {
+      if (!focused) {
+        // console.log(`Editor, try focus, props.focus=${props.focus}, focused=${focused}, pos=${props.data.pos}`);
+        focusEditor();
+      }
+    }
+  }, [props.focus]);
+
+  // --- focused:
+
+  const [focused, setFocused] = useState<boolean>(false);
+
   return (
   <>
-  <div className='editor'>
+  <div className={`editor ${focused ? 'focused' : ''}`}>
     <div className='editor_side'>
       <button className='editor_sidebar btn' onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
         <span className='btn_border_icon'></span>
@@ -33,7 +50,7 @@ export default forwardRef((props: BlockProps, ref) => {
       </div>
     </div>
     <div className='editor_body'>
-      <div className='editor_content' {...editorProps} />
+      <div className='editor_content' {...editorProps} onBlur={() => setFocused(false)} onFocus={() => setFocused(true)} />
     </div>
   </div>
   <div>

@@ -22,7 +22,7 @@ export interface BlockProps {
 const Block = forwardRef((props: BlockProps, ref) => {
   const { data } = props;
 
-  if (data.type == 'CODE') {
+  if (data.type == 'TEXTX') {
     return <Editor {... props}/>;
   }
 

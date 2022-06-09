@@ -8,22 +8,23 @@ import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined } fro
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  const { editorProps, editorText, focusEditor } = useEditor(props.data.text);
+  // --- editor:
 
-  // --- editorText:
+  const { editorProps, editorText, focusEditor, editorFocused } = useEditor(props.data.text);
+
+  // --- text:
 
   useEffect(() => {
-    // TODO
+    // TODO: save changes
   }, [editorText]);
 
-  // --- controlsOpen:
+  // --- controls:
 
   const [controlsOpen, setControlsOpen] = useState<boolean>(false);
 
   // --- focus:
 
   useEffect(() => {
-    // TODO
     if (props.focus) {
       if (!focused) {
         // console.log(`Editor, try focus, props.focus=${props.focus}, focused=${focused}, pos=${props.data.pos}`);
@@ -32,9 +33,13 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   }, [props.focus]);
 
-  // --- focused:
-
   const [focused, setFocused] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFocused(editorFocused);
+  }, [editorFocused]);
+
+  // --- ui:
 
   return (
   <>
@@ -51,7 +56,7 @@ export default forwardRef((props: BlockProps, ref) => {
       </div>
     </div>
     <div className='editor_body'>
-      <div className='editor_content' {...editorProps} onBlur={() => setFocused(false)} onFocus={() => setFocused(true)} />
+      <div className='editor_content' {...editorProps} />
     </div>
   </div>
   <div>

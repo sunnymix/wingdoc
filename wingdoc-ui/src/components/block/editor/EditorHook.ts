@@ -4,6 +4,8 @@ export const useEditor = (initialText: string) => {
   
   const [text, setText] = useState<string>(initialText);
 
+  const [focused, setFocused] = useState<boolean>(false);
+
   const editorRef = useRef<any>(null);
 
   const handleInput = useCallback((e) => {
@@ -27,6 +29,14 @@ export const useEditor = (initialText: string) => {
   const handlePaste = useCallback((e) => {
     e.preventDefault();
     document.execCommand('insertText', false, e.clipboardData.getData('text'));
+  }, []);
+
+  const handleFocus = useCallback((e) => {
+    setFocused(true);
+  }, []);
+
+  const handleBlur = useCallback((e) => {
+    setFocused(false);
   }, []);
 
   const clearEditor = useCallback(() => {
@@ -60,6 +70,8 @@ export const useEditor = (initialText: string) => {
     contentEditable: true,
     onInput: handleInput,
     onPaste: handlePaste,
+    onFocus: handleFocus,
+    onBlur: handleBlur,
     ref: editorRef,
     dangerouslySetInnerHTML: {
       __html: text2HTML(initialText)
@@ -69,6 +81,7 @@ export const useEditor = (initialText: string) => {
   return {
     editorProps,
     editorText: text,
+    editorFocused: focused,
     editorRef,
     focusEditor,
     clearEditor,

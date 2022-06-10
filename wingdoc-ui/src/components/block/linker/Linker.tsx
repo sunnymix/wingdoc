@@ -1,8 +1,10 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Input, Space, Button } from "antd";
 const { TextArea } = Input;
+import BlockApi from "../BlockApi";
 
 export interface LinkerProps {
+  blockId: string,
   link: string | undefined,
   onSave?: Function,
   onCancel?: Function,
@@ -27,7 +29,9 @@ export default forwardRef((props: LinkerProps, ref) => {
   // --- save:
 
   const handleSave = () => {
-    console.log(link);
+    BlockApi.updateBlock(props.blockId, { link }, () => {
+      props.onSave?.call(null, link);
+    });
   };
 
   // --- cancel:

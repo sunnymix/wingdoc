@@ -58,7 +58,11 @@ export default forwardRef((props: BlockProps, ref) => {
   const [link, setLink] = useState<string>(props.data.link || '');
   const [linked, setLinked] = useState<boolean>(false);
   useEffect(() => setLinked(link.length > 0), [link]);
-
+  const handleLinkerCancel = () => focusEditor();
+  const handleLinkerSave = (link: string) => {
+    setLink(link);
+    focusEditor();
+  };
 
   // --- ui:
 
@@ -79,7 +83,7 @@ export default forwardRef((props: BlockProps, ref) => {
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} />
       <div className='editor_link'>
-        <Linker link={link} onCancel={() => focusEditor()}/>
+        <Linker blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
         </div>
     </div>
   </div>

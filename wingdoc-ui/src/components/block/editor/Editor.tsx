@@ -83,7 +83,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
         <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
-        <button className='btn ghost'><LinkOutlined /></button>
+        <button className='btn ghost' onClick={openLinker}><LinkOutlined /></button>
         <button className='btn ghost'><PictureOutlined /></button>
       </div>
     </div>

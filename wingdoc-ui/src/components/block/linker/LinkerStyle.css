@@ -1,1 +1,7 @@
+.linker {
+  display: none;
+}
 
+.linker.opened {
+  display: block;
+}

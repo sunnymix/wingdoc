@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { BlockProps } from "../Block";
 import './EditorStyle.css';
 import useEditor from "./EditorHook";
@@ -18,7 +18,10 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
     initialText: props.data.text,
-    onEnter,
+    onEnter: (pos: string) => {
+      props.onEnter?.call(null, props.data, pos);
+    },
+    onLink: () => openLinker(),
   });
 
   // --- text:
@@ -63,6 +66,10 @@ export default forwardRef((props: BlockProps, ref) => {
     setLink(link);
     focusEditor();
   };
+  const linkerRef = useRef<any>(null);
+  const openLinker = () => {
+    linkerRef.current.open();
+  };
 
   // --- ui:
 
@@ -83,8 +90,8 @@ export default forwardRef((props: BlockProps, ref) => {
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} />
       <div className='editor_link'>
-        <Linker blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
-        </div>
+        <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
+      </div>
     </div>
   </div>
   </>

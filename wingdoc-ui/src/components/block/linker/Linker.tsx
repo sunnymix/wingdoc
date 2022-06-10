@@ -1,7 +1,8 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Input, Space, Button } from "antd";
 const { TextArea } = Input;
 import BlockApi from "../BlockApi";
+import "./LinkerStyle.css";
 
 export interface LinkerProps {
   blockId: string,
@@ -15,7 +16,10 @@ export default forwardRef((props: LinkerProps, ref) => {
   // --- ref:
 
   useImperativeHandle(ref, () => ({
-    open: open,
+    open: () => {
+      setOpened(true);
+      focusTextarea();
+    },
   }));
 
   // --- link:
@@ -25,12 +29,13 @@ export default forwardRef((props: LinkerProps, ref) => {
   // --- opened:
   
   const [opened, setOpened] = useState<boolean>(false);
+  useEffect(() => { opened && focusTextarea() }, [opened]);
 
   // --- save:
 
   const handleSave = (e: any) => {
-    e.preventDefault();
     BlockApi.updateBlock(props.blockId, { link }, () => {
+      setOpened(false);
       props.onSave?.call(null, link);
     });
   };
@@ -39,6 +44,7 @@ export default forwardRef((props: LinkerProps, ref) => {
 
   const handleCancel = () => {
     setLink(props.link || '');
+    setOpened(false);
     props.onCancel?.call(null);
   };
 
@@ -46,8 +52,16 @@ export default forwardRef((props: LinkerProps, ref) => {
 
   const handleKeyDown = (e: any) => {
     if (e.key == "Escape") {
+      e.preventDefault();
       handleCancel();
     }
+  };
+
+  // --- textarea:
+
+  const textareaRef = useRef<any>(null);
+  const focusTextarea = () => {
+    textareaRef.current.focus({ cursor: "start" });
   };
 
   // --- ui:
@@ -55,16 +69,18 @@ export default forwardRef((props: LinkerProps, ref) => {
   return (
   <>
   <div className={`linker ${opened && 'opened'}`}>
-    <TextArea 
+    <TextArea
+      ref={textareaRef}
       value={link} 
       autoSize
       bordered={false}
       onChange={(e) => setLink(e.target.value)}
+      onBlur={() => handleCancel()}
       onPressEnter={handleSave}
       onKeyDown={handleKeyDown}></TextArea>
     <div>
       <Button type='link' size='small' onClick={handleSave}>Save</Button>
-      <Button type='link' size='small' onClick={handleCancel}>Cancel</Button>
+      <Button type='link' size='small' onClick={() => handleCancel()}>Cancel</Button>
     </div>
   </div>
   </>

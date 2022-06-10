@@ -9,9 +9,18 @@ import BlockApi from "../BlockApi";
 
 export default forwardRef((props: BlockProps, ref) => {
 
+  // --- key:
+
+  const onEnter = (pos: string) => {
+    props.onEnter?.call(null, props.data, pos);
+  };
+
   // --- editor:
 
-  const { editorProps, editorText, focusEditor, editorFocused } = useEditor(props.data.text);
+  const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
+    initialText: props.data.text,
+    onEnter,
+  });
 
   // --- text:
 

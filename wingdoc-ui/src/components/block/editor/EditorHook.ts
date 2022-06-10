@@ -1,8 +1,13 @@
 import { useCallback, useMemo, useRef, useState } from "react"
 
-export const useEditor = (initialText: string) => {
+export interface EditorProps {
+  initialText: string,
+  onEnter?: Function,
+};
+
+export const useEditor = (props: EditorProps) => {
   
-  const [text, setText] = useState<string>(initialText);
+  const [text, setText] = useState<string>(props.initialText);
 
   const [focused, setFocused] = useState<boolean>(false);
 
@@ -31,12 +36,19 @@ export const useEditor = (initialText: string) => {
     document.execCommand('insertText', false, e.clipboardData.getData('text'));
   }, []);
 
-  const handleFocus = useCallback((e) => {
-    setFocused(true);
-  }, []);
+  const handleFocus = useCallback((e) => setFocused(true), []);
+  const handleBlur = useCallback((e) => setFocused(false), []);
 
-  const handleBlur = useCallback((e) => {
-    setFocused(false);
+  const handleKeyDown = useCallback((e) => {
+    if (e.key == 'Enter') {
+      if (e.metaKey) {
+        e.preventDefault();
+        props.onEnter?.call(null, 'end');
+      } else if (e.shiftKey) {
+        e.preventDefault();
+        props.onEnter?.call(null, 'start');
+      }
+    }
   }, []);
 
   const clearEditor = useCallback(() => {
@@ -72,11 +84,12 @@ export const useEditor = (initialText: string) => {
     onPaste: handlePaste,
     onFocus: handleFocus,
     onBlur: handleBlur,
+    onKeyDown: handleKeyDown,
     ref: editorRef,
     dangerouslySetInnerHTML: {
-      __html: text2HTML(initialText)
+      __html: text2HTML(props.initialText)
     }
-  }), [initialText, handleInput, handlePaste]);
+  }), [props.initialText, handleInput, handlePaste]);
 
   return {
     editorProps,

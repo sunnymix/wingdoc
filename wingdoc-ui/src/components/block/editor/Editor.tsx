@@ -78,7 +78,9 @@ export default forwardRef((props: BlockProps, ref) => {
     </div>
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} />
-      <div className='editor_link'><Linker link={link} /></div>
+      <div className='editor_link'>
+        <Linker link={link} onCancel={() => focusEditor()}/>
+        </div>
     </div>
   </div>
   </>

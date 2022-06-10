@@ -27,19 +27,22 @@ export default forwardRef((props: LinkerProps, ref) => {
   // --- save:
 
   const handleSave = () => {
-    
+    console.log(link);
   };
 
   // --- cancel:
 
-  const handleCancel = () => {};
+  const handleCancel = () => {
+    setLink(props.link || '');
+    props.onCancel?.call(null);
+  };
 
   // --- ui:
 
   return (
   <>
   <div className={`linker ${opened && 'opened'}`}>
-    <TextArea value={link} autoSize bordered={false} onChange={(e)}></TextArea>
+    <TextArea value={link} autoSize bordered={false} onChange={(e) => setLink(e.target.value)}></TextArea>
     <div>
       <Button type='link' size='small' onClick={handleSave}>Save</Button>
       <Button type='link' size='small' onClick={handleCancel}>Cancel</Button>

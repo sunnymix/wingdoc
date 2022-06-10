@@ -28,7 +28,8 @@ export default forwardRef((props: LinkerProps, ref) => {
 
   // --- save:
 
-  const handleSave = () => {
+  const handleSave = (e: any) => {
+    e.preventDefault();
     BlockApi.updateBlock(props.blockId, { link }, () => {
       props.onSave?.call(null, link);
     });
@@ -41,12 +42,26 @@ export default forwardRef((props: LinkerProps, ref) => {
     props.onCancel?.call(null);
   };
 
+  // --- key:
+
+  const handleKeyDown = (e: any) => {
+    if (e.key == "Escape") {
+      handleCancel();
+    }
+  };
+
   // --- ui:
 
   return (
   <>
   <div className={`linker ${opened && 'opened'}`}>
-    <TextArea value={link} autoSize bordered={false} onChange={(e) => setLink(e.target.value)}></TextArea>
+    <TextArea 
+      value={link} 
+      autoSize
+      bordered={false}
+      onChange={(e) => setLink(e.target.value)}
+      onPressEnter={handleSave}
+      onKeyDown={handleKeyDown}></TextArea>
     <div>
       <Button type='link' size='small' onClick={handleSave}>Save</Button>
       <Button type='link' size='small' onClick={handleCancel}>Cancel</Button>

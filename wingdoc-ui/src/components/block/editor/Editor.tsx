@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { BlockProps } from "../Block";
 import './EditorStyle.css';
 import useEditor from "./EditorHook";
-import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined } from '@ant-design/icons';
+import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import BlockApi from "../BlockApi";
 import Linker from "../linker/Linker";
 
@@ -83,6 +83,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
         <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
+        <button className='btn ghost' onClick={moveDown}><CheckCircleOutlined /></button>
         <button className='btn ghost' onClick={openLinker}><LinkOutlined /></button>
         <button className='btn ghost'><PictureOutlined /></button>
       </div>

@@ -20,15 +20,18 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- sidebar:
 
-  // TODO: events
+  const hoverSidebar = useCallback(() => setControlsOpen(true), []);
+  const unhoverSidebar = useCallback(() => setControlsOpen(false), []);
 
   // --- controls:
 
   const [controlsOpen, setControlsOpen] = useState<boolean>(false);
-
-  // TODO: events
+  const hoverControls = useCallback(() => setControlsOpen(true), []);
+  const unhoverControls = useCallback(() => setControlsOpen(false), []);
 
   // --- focus:
+
+  const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.focus) {
@@ -38,11 +41,7 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   }, [props.focus]);
 
-  const [focused, setFocused] = useState<boolean>(false);
-
-  useEffect(() => {
-    setFocused(editorFocused);
-  }, [editorFocused]);
+  useEffect(() => setFocused(editorFocused), [editorFocused]);
 
   // --- move:
 
@@ -55,10 +54,10 @@ export default forwardRef((props: BlockProps, ref) => {
   <>
   <div className={`editor ${focused ? 'focused' : ''}`}>
     <div className='editor_side'>
-      <button className='editor_sidebar btn ghost' onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
+      <button className='editor_sidebar btn ghost' onMouseEnter={hoverSidebar} onMouseLeave={unhoverSidebar}>
         <span className='btn_border_icon'></span>
       </button>
-      <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
+      <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
         <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
         <button className='btn ghost'><LinkOutlined /></button>

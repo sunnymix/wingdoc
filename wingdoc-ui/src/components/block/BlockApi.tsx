@@ -21,11 +21,11 @@ const addBlockToDoc = (docId: String, form: any, cb: Function) => {
     });
 };
 
-const updateBlock = (id: String, form: any, cb: Function) => {
+const updateBlock = (id: String, form: any, cb?: Function) => {
   axios.post(`${API_BLOCK}${id}`, form)
     .then(res => {
       const data = res.data?.data || false;
-      cb(data);
+      cb?.call(null, data);
     });
 };
 

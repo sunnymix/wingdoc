@@ -5,6 +5,7 @@ import { useEditor } from "./EditorHook";
 import { Input } from "antd";
 const { TextArea } = Input;
 import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined } from '@ant-design/icons';
+import BlockApi from "../BlockApi";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -15,7 +16,7 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- text:
 
   useEffect(() => {
-    // TODO: save changes
+    (editorText !== props.data.text) && BlockApi.updateBlock(props.data.id, { text: editorText });
   }, [editorText]);
 
   // --- sidebar:
@@ -34,11 +35,7 @@ export default forwardRef((props: BlockProps, ref) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    if (props.focus) {
-      if (!focused) {
-        focusEditor();
-      }
-    }
+    (props.focus && !focused) && focusEditor();
   }, [props.focus]);
 
   useEffect(() => setFocused(editorFocused), [editorFocused]);

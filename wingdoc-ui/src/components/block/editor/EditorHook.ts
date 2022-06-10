@@ -5,7 +5,7 @@ export interface EditorProps {
   onEnter?: Function,
 };
 
-export const useEditor = (props: EditorProps) => {
+export default (props: EditorProps) => {
   
   const [text, setText] = useState<string>(props.initialText);
 

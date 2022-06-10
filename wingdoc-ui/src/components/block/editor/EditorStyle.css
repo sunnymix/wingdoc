@@ -20,7 +20,7 @@
   display: block;
 }
 
-.editor_controls.open {
+.editor_controls.opened {
   display: block;
   z-index: 100;
   background-color: #fff;
@@ -44,7 +44,9 @@
   background-color: #fff;
 }
 
-
+.linked .editor_content {
+  color: #1890ff;
+}
 
 /* Commons */
 

@@ -1,11 +1,10 @@
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import { BlockProps } from "../Block";
 import './EditorStyle.css';
-import { useEditor } from "./EditorHook";
-import { Input } from "antd";
-const { TextArea } = Input;
+import useEditor from "./EditorHook";
 import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined } from '@ant-design/icons';
 import BlockApi from "../BlockApi";
+import Linker from "../linker/Linker";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -30,14 +29,14 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- sidebar:
 
-  const hoverSidebar = useCallback(() => setControlsOpen(true), []);
-  const unhoverSidebar = useCallback(() => setControlsOpen(false), []);
+  const hoverSidebar = useCallback(() => setControlsOpened(true), []);
+  const unhoverSidebar = useCallback(() => setControlsOpened(false), []);
 
   // --- controls:
 
-  const [controlsOpen, setControlsOpen] = useState<boolean>(false);
-  const hoverControls = useCallback(() => setControlsOpen(true), []);
-  const unhoverControls = useCallback(() => setControlsOpen(false), []);
+  const [controlsOpened, setControlsOpened] = useState<boolean>(false);
+  const hoverControls = useCallback(() => setControlsOpened(true), []);
+  const unhoverControls = useCallback(() => setControlsOpened(false), []);
 
   // --- focus:
 
@@ -54,16 +53,23 @@ export default forwardRef((props: BlockProps, ref) => {
   const moveUp = useCallback(() => props.onMoveUp?.call(null, props.data) , [props.data.pos]);
   const moveDown = useCallback(() => props.onMoveDown?.call(null, props.data), [props.data.pos]);
 
+  // --- linker:
+
+  const [link, setLink] = useState<string>(props.data.link || '');
+  const [linked, setLinked] = useState<boolean>(false);
+  useEffect(() => setLinked(link.length > 0), [link]);
+
+
   // --- ui:
 
   return (
   <>
-  <div className={`editor ${focused ? 'focused' : ''}`}>
+  <div className={`editor ${focused && 'focused'} ${linked && 'linked'}`}>
     <div className='editor_side'>
       <button className='editor_sidebar btn ghost' onMouseEnter={hoverSidebar} onMouseLeave={unhoverSidebar}>
         <span className='btn_border_icon'></span>
       </button>
-      <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
+      <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
         <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
         <button className='btn ghost'><LinkOutlined /></button>
@@ -72,10 +78,8 @@ export default forwardRef((props: BlockProps, ref) => {
     </div>
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} />
+      <div className='editor_link'><Linker link={link} /></div>
     </div>
-  </div>
-  <div>
-    {/* <TextArea value={editorText} autoSize></TextArea> */}
   </div>
   </>
   );

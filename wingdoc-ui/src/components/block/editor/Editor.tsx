@@ -46,13 +46,8 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- move:
 
-  const moveUp = useCallback(() => {
-    props.onMoveUp?.call(null, props.data);
-  }, [props.data.pos]);
-
-  const moveDown = useCallback(() => {
-    props.onMoveDown?.call(null, props.data);
-  }, [props.data.pos]);
+  const moveUp = useCallback(() => props.onMoveUp?.call(null, props.data) , [props.data.pos]);
+  const moveDown = useCallback(() => props.onMoveDown?.call(null, props.data), [props.data.pos]);
 
   // --- ui:
 

@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import { BlockProps } from "../Block";
 import './EditorStyle.css';
 import { useEditor } from "./EditorHook";
@@ -18,16 +18,21 @@ export default forwardRef((props: BlockProps, ref) => {
     // TODO: save changes
   }, [editorText]);
 
+  // --- sidebar:
+
+  // TODO: events
+
   // --- controls:
 
   const [controlsOpen, setControlsOpen] = useState<boolean>(false);
+
+  // TODO: events
 
   // --- focus:
 
   useEffect(() => {
     if (props.focus) {
       if (!focused) {
-        // console.log(`Editor, try focus, props.focus=${props.focus}, focused=${focused}, pos=${props.data.pos}`);
         focusEditor();
       }
     }
@@ -39,6 +44,16 @@ export default forwardRef((props: BlockProps, ref) => {
     setFocused(editorFocused);
   }, [editorFocused]);
 
+  // --- move:
+
+  const moveUp = useCallback(() => {
+    props.onMoveUp?.call(null, props.data);
+  }, [props.data.pos]);
+
+  const moveDown = useCallback(() => {
+    props.onMoveDown?.call(null, props.data);
+  }, [props.data.pos]);
+
   // --- ui:
 
   return (
@@ -49,8 +64,8 @@ export default forwardRef((props: BlockProps, ref) => {
         <span className='btn_border_icon'></span>
       </button>
       <div className={`editor_controls ${controlsOpen ? 'open' : ''}`} onMouseMove={() => setControlsOpen(true)} onMouseLeave={() => setControlsOpen(false)}>
-        <button className='btn ghost'><CaretUpOutlined /></button>
-        <button className='btn ghost'><CaretDownOutlined /></button>
+        <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
+        <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
         <button className='btn ghost'><LinkOutlined /></button>
         <button className='btn ghost'><PictureOutlined /></button>
       </div>

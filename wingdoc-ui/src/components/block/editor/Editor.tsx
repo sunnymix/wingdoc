@@ -23,30 +23,7 @@ export default forwardRef((props: BlockProps, ref) => {
       props.onEnter?.call(null, props.data, pos);
     },
     onLink: () => openLinker(),
-    onClick: (e: any) => { handleEditorClick(e) },
   });
-
-  const handleEditorClick = (e: any) => {
-    console.log(link);
-    if (linked) {
-      const selection = window.getSelection();
-      
-      const start = selection?.anchorOffset || -1;
-      const end = selection?.focusOffset || -1;
-      
-      if (start == end && start > 0 && start < editorText.length) {
-        const index = link.indexOf('/doc/');
-        if (index >= 0) {
-          const docLink = link.substr(index);
-          if (docLink.length > 0) {
-            history.push(docLink);
-          }
-        } else {
-          window.open(link, "_blank");
-        }
-      }
-    }
-  };
 
   // --- text:
 
@@ -86,7 +63,6 @@ export default forwardRef((props: BlockProps, ref) => {
   const [linked, setLinked] = useState<boolean>(props.data.link && props.data.link.length > 0);
   useEffect(() => {
     setLinked(link.length > 0);
-    console.log(link);
   }, [link]);
   const handleLinkerCancel = () => focusEditor();
   const handleLinkerSave = (link: string) => {
@@ -96,6 +72,29 @@ export default forwardRef((props: BlockProps, ref) => {
   const linkerRef = useRef<any>(null);
   const openLinker = () => {
     linkerRef.current.open();
+  };
+
+  // --- redirect:
+
+  const handleEditorClick = (e: any) => {
+    if (linked) {
+      const selection = window.getSelection();
+      
+      const start = selection?.anchorOffset || -1;
+      const end = selection?.focusOffset || -1;
+      
+      if (start == end && start > 0 && start < editorText.length) {
+        const index = link.indexOf('/doc/');
+        if (index >= 0) {
+          const docLink = link.substr(index);
+          if (docLink.length > 0) {
+            history.push(docLink);
+          }
+        } else {
+          window.open(link, "_blank");
+        }
+      }
+    }
   };
 
   // --- ui:
@@ -116,7 +115,7 @@ export default forwardRef((props: BlockProps, ref) => {
       </div>
     </div>
     <div className='editor_body'>
-      <div className='editor_content' {...editorProps} />
+      <div className='editor_content' {...editorProps} onClick={handleEditorClick} />
       <div className='editor_link'>
         <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
       </div>

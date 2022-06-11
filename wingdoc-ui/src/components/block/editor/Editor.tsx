@@ -5,6 +5,7 @@ import useEditor from "./EditorHook";
 import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import BlockApi from "../BlockApi";
 import Linker from "../linker/Linker";
+import { history } from "umi";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -22,7 +23,30 @@ export default forwardRef((props: BlockProps, ref) => {
       props.onEnter?.call(null, props.data, pos);
     },
     onLink: () => openLinker(),
+    onClick: (e: any) => { handleEditorClick(e) },
   });
+
+  const handleEditorClick = (e: any) => {
+    console.log(link);
+    if (linked) {
+      const selection = window.getSelection();
+      
+      const start = selection?.anchorOffset || -1;
+      const end = selection?.focusOffset || -1;
+      
+      if (start == end && start > 0 && start < editorText.length) {
+        const index = link.indexOf('/doc/');
+        if (index >= 0) {
+          const docLink = link.substr(index);
+          if (docLink.length > 0) {
+            history.push(docLink);
+          }
+        } else {
+          window.open(link, "_blank");
+        }
+      }
+    }
+  };
 
   // --- text:
 
@@ -59,8 +83,11 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- linker:
 
   const [link, setLink] = useState<string>(props.data.link || '');
-  const [linked, setLinked] = useState<boolean>(false);
-  useEffect(() => setLinked(link.length > 0), [link]);
+  const [linked, setLinked] = useState<boolean>(props.data.link && props.data.link.length > 0);
+  useEffect(() => {
+    setLinked(link.length > 0);
+    console.log(link);
+  }, [link]);
   const handleLinkerCancel = () => focusEditor();
   const handleLinkerSave = (link: string) => {
     setLink(link);

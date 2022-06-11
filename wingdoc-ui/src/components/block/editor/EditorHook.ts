@@ -4,6 +4,7 @@ export interface EditorProps {
   initialText: string,
   onEnter?: Function,
   onLink?: Function,
+  onClick?: Function,
 };
 
 export default (props: EditorProps) => {
@@ -114,6 +115,7 @@ export default (props: EditorProps) => {
     onFocus: handleFocus,
     onBlur: handleBlur,
     onKeyDown: handleKeyDown,
+    onClick: (e: any) => props.onClick?.call(null, e),
     ref: editorRef,
     dangerouslySetInnerHTML: {
       __html: text2HTML(props.initialText)

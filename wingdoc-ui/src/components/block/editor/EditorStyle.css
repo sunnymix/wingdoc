@@ -17,7 +17,7 @@
 
 .editor_controls {
   position: absolute;
-  display: block;
+  display: none;
 }
 
 .editor_controls.opened {

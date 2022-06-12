@@ -2,8 +2,6 @@ import { useCallback, useMemo, useRef, useState } from "react"
 
 export interface EditorProps {
   initialText: string,
-  onEnter?: Function,
-  onLink?: Function,
 };
 
 export default (props: EditorProps) => {
@@ -45,28 +43,6 @@ export default (props: EditorProps) => {
   const handlePaste = useCallback((e) => {
     e.preventDefault();
     document.execCommand('insertText', false, e.clipboardData.getData('text'));
-  }, []);
-
-  // --- key:
-
-  const handleKeyDown = useCallback((e) => {
-    const key = e.key.toLocaleLowerCase();
-    const isCmd = e.metaKey;
-    const isShift = e.shiftKey;
-
-    if (key == 'enter') {
-      if (isCmd) {
-        e.preventDefault();
-        props.onEnter?.call(null, 'end');
-      } else if (isShift) {
-        e.preventDefault();
-        props.onEnter?.call(null, 'start');
-      }
-    } else if (key == 'k') {
-      if (isCmd) {
-        props.onLink?.call(null);
-      }
-    }
   }, []);
 
   // --- clear:
@@ -113,7 +89,6 @@ export default (props: EditorProps) => {
     onPaste: handlePaste,
     onFocus: handleFocus,
     onBlur: handleBlur,
-    // onKeyDown: handleKeyDown,
     ref: editorRef,
     dangerouslySetInnerHTML: {
       __html: text2HTML(props.initialText)

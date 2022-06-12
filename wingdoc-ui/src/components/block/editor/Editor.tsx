@@ -13,10 +13,6 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
     initialText: props.data.text,
-    // onEnter: (pos: string) => {
-    //   props.onEnter?.call(null, props.data, pos);
-    // },
-    // onLink: () => openLinker(),
   });
 
   // --- text:

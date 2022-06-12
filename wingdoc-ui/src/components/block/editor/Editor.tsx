@@ -9,20 +9,14 @@ import { history } from "umi";
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  // --- key:
-
-  const onEnter = (pos: string) => {
-    props.onEnter?.call(null, props.data, pos);
-  };
-
   // --- editor:
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
     initialText: props.data.text,
-    onEnter: (pos: string) => {
-      props.onEnter?.call(null, props.data, pos);
-    },
-    onLink: () => openLinker(),
+    // onEnter: (pos: string) => {
+    //   props.onEnter?.call(null, props.data, pos);
+    // },
+    // onLink: () => openLinker(),
   });
 
   // --- text:
@@ -97,6 +91,28 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   };
 
+  // --- keydown:
+
+  const handleEditorKeyDown = (e: any) => {
+    const key = e.key.toLocaleLowerCase();
+    const isCmd = e.metaKey;
+    const isShift = e.shiftKey;
+
+    if (key == 'enter') {
+      if (isCmd) {
+        e.preventDefault();
+        props.onEnter?.call(null, props.data, 'end');
+      } else if (isShift) {
+        e.preventDefault();
+        props.onEnter?.call(null, props.data, 'start');
+      }
+    } else if (key == 'k') {
+      if (isCmd) {
+        openLinker();
+      }
+    }
+  };
+
   // --- ui:
 
   return (
@@ -115,7 +131,7 @@ export default forwardRef((props: BlockProps, ref) => {
       </div>
     </div>
     <div className='editor_body'>
-      <div className='editor_content' {...editorProps} onClick={handleEditorClick} />
+      <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} />
       <div className='editor_link'>
         <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
       </div>

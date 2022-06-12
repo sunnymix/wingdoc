@@ -113,7 +113,7 @@ export default (props: EditorProps) => {
     onPaste: handlePaste,
     onFocus: handleFocus,
     onBlur: handleBlur,
-    onKeyDown: handleKeyDown,
+    // onKeyDown: handleKeyDown,
     ref: editorRef,
     dangerouslySetInnerHTML: {
       __html: text2HTML(props.initialText)

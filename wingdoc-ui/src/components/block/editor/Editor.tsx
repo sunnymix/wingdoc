@@ -87,6 +87,12 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   };
 
+  // --- tasker:
+
+  const openTasker = () => {
+    console.log('open tasker');
+  };
+
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
@@ -106,6 +112,10 @@ export default forwardRef((props: BlockProps, ref) => {
       if (isCmd) {
         openLinker();
       }
+    } else if (key == 'u') {
+      if (isCmd) {
+        openTasker();
+      }
     }
   };
 
@@ -121,7 +131,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
         <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
-        <button className='btn ghost' onClick={moveDown}><CheckCircleOutlined /></button>
+        <button className='btn ghost' onClick={openTasker}><CheckCircleOutlined /></button>
         <button className='btn ghost' onClick={openLinker}><LinkOutlined /></button>
         <button className='btn ghost'><PictureOutlined /></button>
       </div>

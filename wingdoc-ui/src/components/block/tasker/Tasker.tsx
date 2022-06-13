@@ -1,4 +1,4 @@
-import { forwardRef, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import "@/components/common/CommonStyle.css";
 import "./TaskerStyle.css";
 import initialState from "@/.umi/plugin-initial-state/models/initialState";
@@ -59,6 +59,20 @@ export namespace Status {
 }
 
 export default forwardRef((props: TaskerProps, ref) => {
+
+  // --- ref:
+
+  useImperativeHandle(ref, () => ({
+    open: (tasked: boolean, cb?: Function) => {
+      open(tasked, cb);
+    },
+  }));
+
+  // --- open:
+
+  const open = (tasked: boolean, cb?: Function) => {
+    cb?.call(null, tasked);
+  }
 
   // --- status:
 

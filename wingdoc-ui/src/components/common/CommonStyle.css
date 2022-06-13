@@ -9,3 +9,50 @@
   border-radius: 1px;
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+/* --- btn: */
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  height: 26px;
+  min-width: 26px;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn.square {
+  height: 26px;
+}
+
+.btn.ghost {
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.btn_border_icon {
+  content: ' ';
+  display: block;
+  height: 10px;
+  width: 10px;
+  border: 2px solid #666;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.btn_text_icon {
+  font-size: 75%;
+}
+
+.btn:hover {
+  border-color: #bbb;
+  background-color: #fff;
+}
+
+.focused .btn_border_icon {
+  border-color: rgba(24, 144, 255, 1);
+}

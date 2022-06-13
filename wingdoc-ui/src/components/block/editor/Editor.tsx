@@ -6,6 +6,8 @@ import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined, Chec
 import BlockApi from "../BlockApi";
 import Linker from "../linker/Linker";
 import { history } from "umi";
+import Tasker from "../tasker/Tasker";
+import "@/components/common/CommonStyle.css";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -125,16 +127,19 @@ export default forwardRef((props: BlockProps, ref) => {
   <>
   <div className={`editor ${focused && 'focused'} ${linked && 'linked'}`}>
     <div className='editor_side'>
-      <button className='editor_sidebar btn ghost' onMouseEnter={hoverSidebar} onMouseLeave={unhoverSidebar}>
+      <button className='editor_sidebar btn ghost square' onMouseEnter={hoverSidebar} onMouseLeave={unhoverSidebar}>
         <span className='btn_border_icon'></span>
       </button>
       <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
-        <button className='btn ghost' onClick={moveUp}><CaretUpOutlined /></button>
-        <button className='btn ghost' onClick={moveDown}><CaretDownOutlined /></button>
-        <button className='btn ghost' onClick={openTasker}><CheckCircleOutlined /></button>
-        <button className='btn ghost' onClick={openLinker}><LinkOutlined /></button>
-        <button className='btn ghost'><PictureOutlined /></button>
+        <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
+        <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
+        <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>
+        <button className='btn ghost square' onClick={openLinker}><LinkOutlined /></button>
+        <button className='btn ghost square'><PictureOutlined /></button>
       </div>
+    </div>
+    <div className='editor_tasker'>
+      <Tasker blockId={props.data.id} />
     </div>
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} />

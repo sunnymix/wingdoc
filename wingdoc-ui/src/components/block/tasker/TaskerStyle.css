@@ -1,3 +1,15 @@
 .tasker {
   position: relative;
 }
+
+.tasker_menu {
+  position: absolute;
+  display: block;
+}
+
+.tasker_menu.opened {
+  display: block;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}

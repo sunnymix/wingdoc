@@ -91,8 +91,13 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- tasker:
 
+  const [tasked, setTasked] = useState<boolean>(props.data.type == 'TASKX');
   const openTasker = () => {
-    console.log('open tasker');
+    if (!tasked) {
+      setTasked(true);
+    } else {
+      setTasked(false);
+    }
   };
 
   // --- keydown:
@@ -138,8 +143,8 @@ export default forwardRef((props: BlockProps, ref) => {
         <button className='btn ghost square'><PictureOutlined /></button>
       </div>
     </div>
-    <div className='editor_tasker'>
-      <Tasker blockId={props.data.id} />
+    <div className={`editor_tasker ${tasked && 'opened'}`}>
+      <Tasker blockId={props.data.id} initialStatus={props.data.status} />
     </div>
     <div className='editor_body'>
       <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} />

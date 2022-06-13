@@ -1,9 +1,11 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import "@/components/common/CommonStyle.css";
 import "./TaskerStyle.css";
+import initialState from "@/.umi/plugin-initial-state/models/initialState";
 
 export interface TaskerProps {
   blockId: string,
+  initialStatus?: Status,
 };
 
 export enum Status { 
@@ -58,13 +60,17 @@ export namespace Status {
 
 export default forwardRef((props: TaskerProps, ref) => {
 
+  // --- status:
 
+  const [status, setStatus] = useState<Status>(props.initialStatus || Status.UN);
+
+  // --- ui:
 
   return (
   <>
   <div className='tasker'>
     <button className='tasker_control btn ghost square'>
-      <span className='btn_text_icon'>UN</span>
+      <span className='btn_text_icon'>{status}</span>
     </button>
     <div className={`tasker_menu opened`}>
       {Status.all().map((status: Status) =>

@@ -32,6 +32,11 @@
 .editor_tasker {
   flex-shrink: 0;
   flex-grow: 0;
+  display: none;
+}
+
+.editor_tasker.opened {
+  display: block;
 }
 
 /* --- body: */

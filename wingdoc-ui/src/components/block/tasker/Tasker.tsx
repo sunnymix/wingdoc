@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import "@/components/common/CommonStyle.css";
 import "./TaskerStyle.css";
-import initialState from "@/.umi/plugin-initial-state/models/initialState";
+import BlockApi from "../BlockApi";
 
 export interface TaskerProps {
   blockId: string,
@@ -63,15 +63,19 @@ export default forwardRef((props: TaskerProps, ref) => {
   // --- ref:
 
   useImperativeHandle(ref, () => ({
-    open: (tasked: boolean, cb?: Function) => {
-      open(tasked, cb);
-    },
+    open: (tasked: boolean, cb?: Function) => open(tasked, cb),
   }));
 
   // --- open:
 
   const open = (tasked: boolean, cb?: Function) => {
-    cb?.call(null, tasked);
+    var form = tasked ? { type: 'TASKX', status: Status.UN } : { type: 'TEXTX', status: '' };
+
+    BlockApi.updateBlock(props.blockId, form, (ok: any) => {
+      if (ok) {
+        cb?.call(null, tasked);
+      }
+    });
   }
 
   // --- status:

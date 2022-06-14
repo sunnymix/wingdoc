@@ -23,16 +23,16 @@ export default forwardRef((props: BlockProps, ref) => {
     (editorText !== props.data.text) && BlockApi.updateBlock(props.data.id, { text: editorText });
   }, [editorText]);
 
-  // --- sidebar:
+  // --- control:
 
-  const hoverSidebar = useCallback(() => setControlsOpened(true), []);
-  const unhoverSidebar = useCallback(() => setControlsOpened(false), []);
+  const hoverControl = useCallback(() => setMenuOpened(true), []);
+  const unhoverControl = useCallback(() => setMenuOpened(false), []);
 
-  // --- controls:
+  // --- menu:
 
-  const [controlsOpened, setControlsOpened] = useState<boolean>(false);
-  const hoverControls = useCallback(() => setControlsOpened(true), []);
-  const unhoverControls = useCallback(() => setControlsOpened(false), []);
+  const [menuOpened, setMenuOpened] = useState<boolean>(false);
+  const hoverMenu = useCallback(() => setMenuOpened(true), []);
+  const unhoverMenu = useCallback(() => setMenuOpened(false), []);
 
   // --- focus:
 
@@ -132,10 +132,10 @@ export default forwardRef((props: BlockProps, ref) => {
   <>
   <div className={`editor ${focused && 'focused'} ${linked && 'linked'}`}>
     <div className='editor_side'>
-      <button className='editor_sidebar btn ghost square' onMouseEnter={hoverSidebar} onMouseLeave={unhoverSidebar}>
+      <button className='editor_control btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
         <span className='btn_border_icon'></span>
       </button>
-      <div className={`editor_controls ${controlsOpened && 'opened'}`} onMouseEnter={hoverControls} onMouseLeave={unhoverControls}>
+      <div className={`editor_menu ${menuOpened && 'opened'}`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>
         <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
         <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>

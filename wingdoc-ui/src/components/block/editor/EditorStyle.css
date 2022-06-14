@@ -1,13 +1,12 @@
 .editor {
   display: flex;
-  border: 1px solid #eee;
   border-radius: 2px;
-  background-color: #f8f8f8;
+  background-color: #fff;
   position: relative;
 }
 
 .editor.focused {
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .editor_side {
@@ -15,12 +14,21 @@
   flex-grow: 0;
 }
 
-.editor_controls {
+.editor_control {
+  visibility: hidden;
+}
+
+.editor:hover .editor_control,
+.editor.focused .editor_control {
+  visibility: visible;
+}
+
+.editor_menu {
   position: absolute;
   display: none;
 }
 
-.editor_controls.opened {
+.editor_menu.opened {
   display: block;
   z-index: 100;
   background-color: #fff;
@@ -46,7 +54,6 @@
 }
 
 .editor_content {
-  border: 1px solid transparent;
   background-color: transparent;
   line-height: 24px;
   padding: 0 4px;

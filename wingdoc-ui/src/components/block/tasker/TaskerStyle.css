@@ -4,7 +4,7 @@
 
 .tasker_menu {
   position: absolute;
-  display: block;
+  display: none;
 }
 
 .tasker_menu.opened {

@@ -9,11 +9,11 @@ export interface TaskerProps {
 };
 
 export enum Status { 
-  UN = "UN", 
-  ON = "ON", 
-  UP = "UP", 
-  OK = "OK", 
-  NO = "NO" 
+  UN = "UN",
+  ON = "ON",
+  UP = "UP",
+  OK = "OK",
+  NO = "NO"
 };
 
 export namespace Status {
@@ -76,7 +76,11 @@ export default forwardRef((props: TaskerProps, ref) => {
         cb?.call(null, tasked);
       }
     });
-  }
+  };
+
+  // --- menu opened:
+
+  const [menuOpened, setMenuOpened] = useState<boolean>(false);
 
   // --- status:
 
@@ -85,6 +89,7 @@ export default forwardRef((props: TaskerProps, ref) => {
   // --- click:
 
   const handleClick = (status: Status) => {
+    setMenuOpened(false);
     BlockApi.updateBlock(props.blockId, { status }, (ok: any) => {
       if (ok) {
         setStatus(status); 
@@ -97,10 +102,10 @@ export default forwardRef((props: TaskerProps, ref) => {
   return (
   <>
   <div className='tasker'>
-    <button className='tasker_control btn ghost square'>
+    <button className='tasker_control btn ghost square' onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       <span className='btn_text_icon'>{status}</span>
     </button>
-    <div className={`tasker_menu opened`}>
+    <div className={`tasker_menu ${menuOpened && 'opened'}`}  onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       {Status.all().map((status: Status) =>
         <button className='btn ghost square' key={status} onClick={() => handleClick(status)}>
           <span className='btn_text_icon'>{status}</span>

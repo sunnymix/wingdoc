@@ -37,8 +37,8 @@
 
 .weekday_label {
   display: inline-flex;
-  font-size: 75%;
-  background-color: #eee;
+  /* font-size: 75%; */
+  /* background-color: #fff; */
   border-radius: 3px;
   padding: 2px 4px;
   height: 20px;
@@ -46,8 +46,8 @@
 }
 
 .weekday_label.today {
-  color: rgba(24, 144, 255, 1);
-  background-color: rgba(24, 144, 255, 0.2);
+  color: #188fff;
+  /* background-color: #188fff20; */
 }
 
 /* weeks */

@@ -20,7 +20,7 @@
 }
 
 .marks_tabs_item.focus {
-  background-color: #ddd;
+  background-color: #188fff20;
 }
 
 .marks_tabs_item.pin::after {
@@ -32,7 +32,7 @@
   height: 0;
   border: 3px solid transparent;
   border-radius: 3px;
-  border-color: #aaa transparent transparent #aaa;
+  border-color: #188fff transparent transparent #188fff;
 }
 
 .marks_tabs_item_link {

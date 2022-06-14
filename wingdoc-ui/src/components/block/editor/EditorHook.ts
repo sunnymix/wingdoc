@@ -32,6 +32,7 @@ export default (props: EditorProps) => {
 
     if (text === '') {
       editorRef.current.innerHTML = '';
+      setText(text);
     } else {
       setText(text);
     }

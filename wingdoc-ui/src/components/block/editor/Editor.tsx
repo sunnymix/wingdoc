@@ -27,7 +27,7 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   useEffect(() => {
-    (editorText !== props.data.text) && saveText();
+    saveText();
   }, [editorText]);
 
   // --- control:
@@ -148,6 +148,8 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
+    saveText();
+
     const key = e.key.toLocaleLowerCase();
     const isCmd = e.metaKey;
     const isShift = e.shiftKey;

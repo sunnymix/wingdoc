@@ -14,27 +14,30 @@
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-.tasker_btn {
-  font-weight: 600;
+.btn_tasker_icon {
+  font-weight: bold;
+  transform: scale(0.8);
 }
 
-.btn_text_icon.un {
+.btn_tasker_icon.un {
   color: #faad14;
 }
 
-.btn_text_icon.in,
-.btn_text_icon.on {
+.btn_tasker_icon.in,
+.btn_tasker_icon.do,
+.btn_tasker_icon.on {
   color: #40a9ff;
 }
 
-.btn_text_icon.ok {
+.btn_tasker_icon.ok {
   color: #52c41a;
 }
 
-.btn_text_icon.no {
-  color: #ccc;
+.btn_tasker_icon.no {
+  color: #aaa;
 }
 
-.btn_text_icon.bk {
+.btn_tasker_icon.bk,
+.btn_tasker_icon.up {
   color: #ff4d4f;
 }

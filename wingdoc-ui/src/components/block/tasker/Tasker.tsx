@@ -10,8 +10,8 @@ export interface TaskerProps {
 
 export enum Status { 
   UN = "UN",
-  IN = "IN",
-  BK = "BK",
+  ON = "ON",
+  UP = "UP",
   OK = "OK",
   NO = "NO"
 };
@@ -20,40 +20,25 @@ export namespace Status {
   export function all() {
     return [
       Status.UN,
-      Status.IN,
+      Status.ON,
       Status.OK,
-      Status.BK,
+      Status.UP,
       Status.NO,
     ];
   }
 
   export function of(str: string) {
     switch (str) {
-      case "IN":
-        return Status.IN;
+      case "ON":
+        return Status.ON;
       case "OK":
         return Status.OK;
-      case "BK":
-        return Status.BK;
+      case "UP":
+        return Status.UP;
       case "NO":
         return Status.NO;
       default: 
         return Status.UN;
-    }
-  }
-
-  export function color(status: Status) {
-    switch (status) {
-      case Status.IN:
-        return "#40a9ff";
-      case Status.OK:
-        return "#52c41a";
-      case Status.BK:
-        return "#ff4d4f";
-      case Status.NO:
-        return "#ccc";
-      default: 
-        return "#faad14";
     }
   }
 }
@@ -103,12 +88,12 @@ export default forwardRef((props: TaskerProps, ref) => {
   <>
   <div className='tasker'>
     <button className='tasker_control btn ghost square tasker_btn' onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
-      <span className={`btn_text_icon ${status.toLocaleLowerCase()}`}>{status.toLocaleLowerCase()}</span>
+      <span className={`btn_tasker_icon ${status.toLocaleLowerCase()}`}>{status}</span>
     </button>
     <div className={`tasker_menu ${menuOpened && 'opened'}`}  onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       {Status.all().map((status: Status) =>
         <button className='btn ghost square tasker_btn' key={status} onClick={() => handleClick(status)}>
-          <span className={`btn_text_icon ${status.toLocaleLowerCase()}`}>{status.toLocaleLowerCase()}</span>
+          <span className={`btn_tasker_icon ${status.toLocaleLowerCase()}`}>{status}</span>
         </button>)}
     </div>
   </div>

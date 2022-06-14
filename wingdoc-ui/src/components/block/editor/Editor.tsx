@@ -11,6 +11,8 @@ import "@/components/common/CommonStyle.css";
 
 export default forwardRef((props: BlockProps, ref) => {
 
+  // --- rootRef:
+
   // --- editor:
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
@@ -84,17 +86,33 @@ export default forwardRef((props: BlockProps, ref) => {
     return { start, end };
   };
 
-  const getCaretRelativePos = (e: any) => {
-    const { start, end } = getCaretPos(e);
-    // start, middle, end
-    var pos = 'middle';
-    if (start == 0) {
-      pos = 'start';
-    } else if (start == editorText.length) {
-      pos = 'end';
+  // --- !!! coordinates:
+
+  const getCaretCoordinates = (e: any) => {
+    // firstRow, lastRow 默认值为 true，表示只有一行
+    let x = 0, y = 0, row = 0, rowCount = 0, firstRow = true, lastRow = true, middleRow = false;
+    const isSupported = typeof window.getSelection !== "undefined";
+    if (isSupported) {
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount !== 0) {
+        const range = selection.getRangeAt(0).cloneRange();
+        range.collapse(true);
+        const rect = range.getClientRects()[0];
+        const containerRect = e.target.getClientRects()[0];
+        if (rect && containerRect) {
+          x = rect.left - containerRect.left;
+          y = rect.top - containerRect.top;
+          row = Math.floor(y / 26);
+          rowCount = Math.ceil(containerRect.height / 26);
+          firstRow = row == 0;
+          lastRow = row == rowCount - 1;
+          middleRow = row > 0 && row < rowCount - 1;
+        }
+      }
     }
-    return pos;
-  };
+    const res = { x, y, row, rowCount, firstRow, lastRow, middleRow };
+    return res;
+  }
 
   // --- redirect:
 
@@ -151,9 +169,15 @@ export default forwardRef((props: BlockProps, ref) => {
         openTasker();
       }
     } else if (key == 'arrowup') {
-      // TODO
+      if (getCaretCoordinates(e).firstRow) {
+        console.log('onFocusUp');
+        props.onFocusUp?.call(null, props.data);
+      }
     } else if (key == 'arrowdown') {
-      // TODO
+      if (getCaretCoordinates(e).lastRow) {
+        console.log('onFocusDown');
+        props.onFocusDown?.call(null, props.data);
+      }
     }
   };
 

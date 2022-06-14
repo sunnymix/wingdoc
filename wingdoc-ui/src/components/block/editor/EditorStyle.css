@@ -1,12 +1,11 @@
 .editor {
   display: flex;
-  border-radius: 2px;
   background-color: #fff;
   position: relative;
 }
 
 .editor.focused {
-  background-color: transparent;
+  background-color: #188fff10;
 }
 
 .editor_side {
@@ -62,7 +61,6 @@
 .editor_content:focus,
 .editor_content:active {
   outline: 0;
-  background-color: #fff;
 }
 
 .linked .editor_content {

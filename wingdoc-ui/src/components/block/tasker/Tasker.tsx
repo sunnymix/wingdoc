@@ -69,7 +69,7 @@ export default forwardRef((props: TaskerProps, ref) => {
   // --- open:
 
   const open = (tasked: boolean, cb?: Function) => {
-    const form = tasked ? { type: 'TASKX', status: Status.UN } : { type: 'TEXTX', status: '' };
+    const form = tasked ? { type: 'TASK', status: Status.UN } : { type: 'TEXT', status: '' };
 
     BlockApi.updateBlock(props.blockId, form, (ok: any) => {
       if (ok) {

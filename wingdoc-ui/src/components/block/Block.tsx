@@ -21,12 +21,7 @@ export interface BlockProps {
 
 const Block = forwardRef((props: BlockProps, ref) => {
   const { data } = props;
-
-  if (data.type == 'TEXTX' || data.type == 'TASKX') {
-    return <Editor {... props}/>;
-  }
-
-  return <TextBlock {... props}/>;
+  return <Editor {... props}/>;
 });
 
 export default Block;

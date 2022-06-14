@@ -91,7 +91,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- tasker:
 
-  const [tasked, setTasked] = useState<boolean>(props.data.type == 'TASKX');
+  const [tasked, setTasked] = useState<boolean>(props.data.type == 'TASK');
   const taskerRef = useRef<any>(null);
   const openTasker = () => {
     // TODO: use event handler

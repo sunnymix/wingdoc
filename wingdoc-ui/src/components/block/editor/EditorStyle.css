@@ -17,7 +17,7 @@
   visibility: hidden;
 }
 
-.editor:hover .editor_control,
+.editor.hovered .editor_control,
 .editor.focused .editor_control {
   visibility: visible;
 }

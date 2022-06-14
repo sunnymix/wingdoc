@@ -11,8 +11,6 @@ import "@/components/common/CommonStyle.css";
 
 export default forwardRef((props: BlockProps, ref) => {
 
-  // --- rootRef:
-
   // --- editor:
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
@@ -40,6 +38,10 @@ export default forwardRef((props: BlockProps, ref) => {
   const [menuOpened, setMenuOpened] = useState<boolean>(false);
   const hoverMenu = useCallback(() => setMenuOpened(true), []);
   const unhoverMenu = useCallback(() => setMenuOpened(false), []);
+
+  // --- hover:
+
+  const [hovered, setHovered] = useState<boolean>(false);
 
   // --- focus:
 
@@ -176,10 +178,12 @@ export default forwardRef((props: BlockProps, ref) => {
       }
     } else if (key == 'arrowdown') {
       if (getCaretCoordinates(e).lastRow) {
+        setHovered(false);
         props.onFocusDown?.call(null, props.data);
       }
     } else if (key == 'backspace') {
       if (isCmd || editorText.length == 0) {
+        setHovered(false);
         props.onDelete?.call(null, props.data);
       }
     }
@@ -189,7 +193,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   return (
   <>
-  <div className={`editor ${focused && 'focused'} ${linked && 'linked'}`}>
+  <div className={`editor ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <div className='editor_side'>
       <button className='editor_control btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
         <span className='btn_border_icon'></span>

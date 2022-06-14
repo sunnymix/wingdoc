@@ -13,3 +13,28 @@
   background-color: #fff;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
 }
+
+.tasker_btn {
+  font-weight: 600;
+}
+
+.btn_text_icon.un {
+  color: #faad14;
+}
+
+.btn_text_icon.in,
+.btn_text_icon.on {
+  color: #40a9ff;
+}
+
+.btn_text_icon.ok {
+  color: #52c41a;
+}
+
+.btn_text_icon.no {
+  color: #ccc;
+}
+
+.btn_text_icon.bk {
+  color: #ff4d4f;
+}

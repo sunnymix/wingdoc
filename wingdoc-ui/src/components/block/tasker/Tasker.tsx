@@ -10,8 +10,8 @@ export interface TaskerProps {
 
 export enum Status { 
   UN = "UN",
-  ON = "ON",
-  UP = "UP",
+  IN = "IN",
+  BK = "BK",
   OK = "OK",
   NO = "NO"
 };
@@ -20,21 +20,21 @@ export namespace Status {
   export function all() {
     return [
       Status.UN,
-      Status.ON,
+      Status.IN,
       Status.OK,
-      Status.UP,
+      Status.BK,
       Status.NO,
     ];
   }
 
   export function of(str: string) {
     switch (str) {
-      case "ON":
-        return Status.ON;
+      case "IN":
+        return Status.IN;
       case "OK":
         return Status.OK;
-      case "UP":
-        return Status.UP;
+      case "BK":
+        return Status.BK;
       case "NO":
         return Status.NO;
       default: 
@@ -44,11 +44,11 @@ export namespace Status {
 
   export function color(status: Status) {
     switch (status) {
-      case Status.ON:
+      case Status.IN:
         return "#40a9ff";
       case Status.OK:
         return "#52c41a";
-      case Status.UP:
+      case Status.BK:
         return "#ff4d4f";
       case Status.NO:
         return "#ccc";
@@ -102,13 +102,13 @@ export default forwardRef((props: TaskerProps, ref) => {
   return (
   <>
   <div className='tasker'>
-    <button className='tasker_control btn ghost square' onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
-      <span className='btn_text_icon'>{status}</span>
+    <button className='tasker_control btn ghost square tasker_btn' onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
+      <span className={`btn_text_icon ${status.toLocaleLowerCase()}`}>{status.toLocaleLowerCase()}</span>
     </button>
     <div className={`tasker_menu ${menuOpened && 'opened'}`}  onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       {Status.all().map((status: Status) =>
-        <button className='btn ghost square' key={status} onClick={() => handleClick(status)}>
-          <span className='btn_text_icon'>{status}</span>
+        <button className='btn ghost square tasker_btn' key={status} onClick={() => handleClick(status)}>
+          <span className={`btn_text_icon ${status.toLocaleLowerCase()}`}>{status.toLocaleLowerCase()}</span>
         </button>)}
     </div>
   </div>

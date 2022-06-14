@@ -44,10 +44,6 @@
   background-color: transparent;
 }
 
-.btn_text_icon {
-  font-size: 75%;
-}
-
 .btn:hover {
   border-color: #bbb;
   background-color: #fff;

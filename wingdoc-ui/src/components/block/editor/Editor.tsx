@@ -19,8 +19,13 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- text:
 
+  const saveText = () => {
+    BlockApi.updateBlock(props.data.id, { text: editorText });
+    return true;
+  };
+
   useEffect(() => {
-    (editorText !== props.data.text) && BlockApi.updateBlock(props.data.id, { text: editorText });
+    (editorText !== props.data.text) && saveText();
   }, [editorText]);
 
   // --- control:
@@ -66,14 +71,36 @@ export default forwardRef((props: BlockProps, ref) => {
     linkerRef.current.open();
   };
 
+  // --- caret:
+
+  const getCaretPos = (e: any) => {
+    const selection = window.getSelection();
+
+    var start = selection?.anchorOffset;
+    start = typeof(start) == 'undefined' ? -1 : start;
+
+    var end = selection?.focusOffset;
+    end = typeof(end) == 'undefined' ? -1 : end;
+    return { start, end };
+  };
+
+  const getCaretRelativePos = (e: any) => {
+    const { start, end } = getCaretPos(e);
+    // start, middle, end
+    var pos = 'middle';
+    if (start == 0) {
+      pos = 'start';
+    } else if (start == editorText.length) {
+      pos = 'end';
+    }
+    return pos;
+  };
+
   // --- redirect:
 
   const handleEditorClick = (e: any) => {
     if (linked) {
-      const selection = window.getSelection();
-      
-      const start = selection?.anchorOffset || -1;
-      const end = selection?.focusOffset || -1;
+      const { start, end } = getCaretPos(e);
       
       if (start == end && start > 0 && start < editorText.length) {
         const index = link.indexOf('/doc/');
@@ -123,6 +150,10 @@ export default forwardRef((props: BlockProps, ref) => {
       if (isCmd) {
         openTasker();
       }
+    } else if (key == 'arrowup') {
+      // TODO
+    } else if (key == 'arrowdown') {
+      // TODO
     }
   };
 

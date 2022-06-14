@@ -69,7 +69,7 @@ export default forwardRef((props: TaskerProps, ref) => {
   // --- open:
 
   const open = (tasked: boolean, cb?: Function) => {
-    var form = tasked ? { type: 'TASKX', status: Status.UN } : { type: 'TEXTX', status: '' };
+    const form = tasked ? { type: 'TASKX', status: Status.UN } : { type: 'TEXTX', status: '' };
 
     BlockApi.updateBlock(props.blockId, form, (ok: any) => {
       if (ok) {
@@ -82,6 +82,16 @@ export default forwardRef((props: TaskerProps, ref) => {
 
   const [status, setStatus] = useState<Status>(props.initialStatus || Status.UN);
 
+  // --- click:
+
+  const handleClick = (status: Status) => {
+    BlockApi.updateBlock(props.blockId, { status }, (ok: any) => {
+      if (ok) {
+        setStatus(status); 
+      }
+    });
+  };
+
   // --- ui:
 
   return (
@@ -92,7 +102,7 @@ export default forwardRef((props: TaskerProps, ref) => {
     </button>
     <div className={`tasker_menu opened`}>
       {Status.all().map((status: Status) =>
-        <button className='btn ghost square' key={status}>
+        <button className='btn ghost square' key={status} onClick={() => handleClick(status)}>
           <span className='btn_text_icon'>{status}</span>
         </button>)}
     </div>

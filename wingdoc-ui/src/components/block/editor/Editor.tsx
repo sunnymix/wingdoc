@@ -172,13 +172,15 @@ export default forwardRef((props: BlockProps, ref) => {
       }
     } else if (key == 'arrowup') {
       if (getCaretCoordinates(e).firstRow) {
-        console.log('onFocusUp');
         props.onFocusUp?.call(null, props.data);
       }
     } else if (key == 'arrowdown') {
       if (getCaretCoordinates(e).lastRow) {
-        console.log('onFocusDown');
         props.onFocusDown?.call(null, props.data);
+      }
+    } else if (key == 'backspace') {
+      if (isCmd || editorText.length == 0) {
+        props.onDelete?.call(null, props.data);
       }
     }
   };

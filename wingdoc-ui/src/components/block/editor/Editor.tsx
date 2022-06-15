@@ -199,7 +199,9 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- change block type:
 
   const changeBlockType = (type: BlockType) => {
-    setBlockType(type);
+    BlockApi.updateBlock(props.data.id, { type }, () => {
+      setBlockType(type);
+    });
   };
 
   // --- ui:

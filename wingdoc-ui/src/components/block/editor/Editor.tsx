@@ -196,11 +196,17 @@ export default forwardRef((props: BlockProps, ref) => {
     saveText();
   };
 
+  // --- change block type:
+
+  const changeBlockType = (type: BlockType) => {
+    setBlockType(type);
+  };
+
   // --- ui:
 
   return (
   <>
-  <div className={`editor ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+  <div className={`editor ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${blockType.toLocaleLowerCase()}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <div className='editor_side'>
       <button className='editor_control btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
         <span className='btn_border_icon'></span>
@@ -209,7 +215,7 @@ export default forwardRef((props: BlockProps, ref) => {
         <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
         {BlockType.all().map((type: BlockType, index: number) => 
-          <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type}>
+          <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type} onClick={(e) => changeBlockType(type)}>
             <span className='btn_text_icon'>{type.charAt(0)}</span>
           </button>)}
         <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>

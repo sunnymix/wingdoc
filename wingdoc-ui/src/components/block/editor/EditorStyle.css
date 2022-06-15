@@ -81,3 +81,10 @@
 .linked .editor_content {
   color: #1890ff;
 }
+
+.editor.code .editor_content {
+  font-family: 'Verily';
+  font-size: 90%;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+}

@@ -150,8 +150,6 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
-    saveText();
-
     const key = e.key.toLocaleLowerCase();
     const isCmd = e.metaKey;
     const isShift = e.shiftKey;
@@ -189,6 +187,10 @@ export default forwardRef((props: BlockProps, ref) => {
     }
   };
 
+  const handleEditorKeyUp = (e: any) => {
+    saveText();
+  };
+
   // --- ui:
 
   return (
@@ -210,7 +212,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
     </div>
     <div className='editor_body'>
-      <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} />
+      <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} onKeyUp={handleEditorKeyUp} />
       <div className='editor_link'>
         <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
       </div>

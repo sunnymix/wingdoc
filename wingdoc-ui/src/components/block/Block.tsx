@@ -3,6 +3,30 @@ import TextBlock from '@/components/block/components/TextBlock';
 import CodeBlock from './components/CodeBlock';
 import Editor from './editor/Editor';
 
+export enum BlockType {
+  TEXT = 'TEXT',
+  CODE = 'CODE',
+};
+
+export namespace BlockType {
+  export function all() {
+    return [
+      BlockType.TEXT,
+      BlockType.CODE,
+    ];
+  }
+
+  export function of(str: string) {
+    switch (str) {
+      case "CODE":
+        return BlockType.CODE;
+      case "TEXT":
+      default:
+        return BlockType.TEXT;
+    }
+  }
+}
+
 export interface BlockProps {
   data: any,
   showBlock?: boolean,

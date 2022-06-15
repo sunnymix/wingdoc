@@ -22,6 +22,8 @@
   visibility: visible;
 }
 
+/* --- menu: */
+
 .editor_menu {
   position: absolute;
   display: none;
@@ -32,6 +34,16 @@
   z-index: 100;
   background-color: #fff;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* --- block type btn: */
+
+.block_type_btn {
+  font-weight: bold;
+}
+
+.block_type_btn.active {
+  color: #188fff;
 }
 
 /* --- tasker: */
@@ -51,6 +63,8 @@
 .editor_body {
   flex-grow: 1;
 }
+
+/* --- content: */
 
 .editor_content {
   background-color: transparent;

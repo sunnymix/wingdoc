@@ -8,6 +8,7 @@ import Linker from "../linker/Linker";
 import { history } from "umi";
 import Tasker from "../tasker/Tasker";
 import "@/components/common/CommonStyle.css";
+import { BlockType } from "../Block";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -16,6 +17,10 @@ export default forwardRef((props: BlockProps, ref) => {
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
     initialText: props.data.text,
   });
+
+  // --- block type:
+
+  const [blockType, setBlockType] = useState<BlockType>(props.data.type || BlockType.TEXT);
 
   // --- text:
 
@@ -203,6 +208,10 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className={`editor_menu ${menuOpened && 'opened'}`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>
         <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
         <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
+        {BlockType.all().map((type: BlockType, index: number) => 
+          <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type}>
+            <span className='btn_text_icon'>{type.charAt(0)}</span>
+          </button>)}
         <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>
         <button className='btn ghost square' onClick={openLinker}><LinkOutlined /></button>
         <button className='btn ghost square'><PictureOutlined /></button>

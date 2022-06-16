@@ -1,8 +1,9 @@
 import { forwardRef, useEffect, useState } from "react";
-import Task, { Status } from "@/components/block/components/Task";
 import DocApi from "@/components/doc/DocApi";
 import TaskApi from "@/components/task/TaskApi";
 import { Link } from "umi";
+import Tasker from "@/components/block/tasker/Tasker";
+import { Status } from "@/components/block/tasker/Tasker";
 
 export interface WeekDayTasksProps {
   shortDate: string,
@@ -47,9 +48,8 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
       style={{
         display: "flex",
         alignItems: "flex-start",
-        borderBottom: "0 dashed #ddd",
       }}>
-      <Task id={task.id} show={true} defaultStatus={task.status}/>
+      <Tasker blockId={task.id} initialStatus={task.status} />
       <div>
         <Link
           to={`/doc/${task.docId}?block=${task.id}`}

@@ -227,7 +227,7 @@ export default forwardRef((props: BlockProps, ref) => {
         <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
         {BlockType.all().map((type: BlockType, index: number) => 
           <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type} onClick={(e) => changeBlockType(type)}>
-            <span className='btn_text_icon'>{type.charAt(0)}</span>
+            <span className='btn_text_icon'>{BlockType.short(type)}</span>
           </button>)}
         <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>
         <button className='btn ghost square' onClick={openLinker}><LinkOutlined /></button>

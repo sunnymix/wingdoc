@@ -1,11 +1,13 @@
 import { forwardRef } from 'react';
-import TextBlock from '@/components/block/components/TextBlock';
-import CodeBlock from './components/CodeBlock';
 import Editor from './editor/Editor';
 
 export enum BlockType {
   TEXT = 'TEXT',
   CODE = 'CODE',
+  H1 = 'H1',
+  H2 = 'H2',
+  H3 = 'H3',
+  H4 = 'H4',
 };
 
 export namespace BlockType {
@@ -13,16 +15,26 @@ export namespace BlockType {
     return [
       BlockType.TEXT,
       BlockType.CODE,
+      BlockType.H1,
+      BlockType.H2,
+      BlockType.H3,
+      BlockType.H4,
     ];
   }
 
-  export function of(str: string) {
-    switch (str) {
-      case "CODE":
-        return BlockType.CODE;
-      case "TEXT":
+  export function short(type: BlockType) {
+    switch (type) {
+      case BlockType.TEXT:
+        return 'T';
+      case BlockType.CODE:
+        return 'C';
+      case BlockType.H1:
+      case BlockType.H2:
+      case BlockType.H3:
+      case BlockType.H4:
+        return type;
       default:
-        return BlockType.TEXT;
+        return '?';
     }
   }
 }

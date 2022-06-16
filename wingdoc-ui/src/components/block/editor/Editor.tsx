@@ -162,6 +162,7 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
+    console.log(e);
     const code = e.code;
     const isCmd = e.metaKey;
     const isShift = e.shiftKey;
@@ -180,8 +181,8 @@ export default forwardRef((props: BlockProps, ref) => {
       if (isCmd) {
         openLinker();
       }
-    } else if (code == 'KeyU') {
-      if (isCmd) {
+    } else if (code == 'KeyT') {
+      if (isCmd && isOpt) {
         openTasker();
       }
     } else if (code == 'ArrowUp') {
@@ -198,7 +199,7 @@ export default forwardRef((props: BlockProps, ref) => {
         setHovered(false);
         props.onDelete?.call(null, props.data);
       }
-    } else if (code == 'KeyT') {
+    } else if (code == 'KeyP') {
       if (isCmd && isOpt) {
         e.preventDefault();
         changeBlockType(BlockType.TEXT);
@@ -207,6 +208,26 @@ export default forwardRef((props: BlockProps, ref) => {
       if (isCmd && isOpt) {
         e.preventDefault();
         changeBlockType(BlockType.CODE);
+      }
+    } else if (code == 'Digit1') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.H1);
+      }
+    } else if (code == 'Digit2') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.H2);
+      }
+    } else if (code == 'Digit3') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.H3);
+      }
+    } else if (code == 'Digit4') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.H4);
       }
     }
   };

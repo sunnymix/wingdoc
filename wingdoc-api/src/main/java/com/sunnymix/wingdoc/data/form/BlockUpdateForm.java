@@ -22,4 +22,6 @@ public class BlockUpdateForm {
 
     private String link;
 
+    private String img;
+
 }

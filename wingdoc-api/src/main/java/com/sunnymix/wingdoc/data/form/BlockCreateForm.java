@@ -32,6 +32,7 @@ public class BlockCreateForm {
                 "TEXT",
                 "",
                 text,
+                "",
                 ""
         );
     }
@@ -44,6 +45,7 @@ public class BlockCreateForm {
                 "TEXT",
                 "",
                 text,
+                "",
                 ""
         );
     }

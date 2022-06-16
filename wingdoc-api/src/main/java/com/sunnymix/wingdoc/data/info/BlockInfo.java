@@ -25,6 +25,8 @@ public class BlockInfo {
 
     private String link;
 
+    private String img;
+
     public static BlockInfo of(Block block) {
         if (block == null) {
             return null;
@@ -36,7 +38,8 @@ public class BlockInfo {
                 block.getType(),
                 block.getStatus(),
                 block.getText(),
-                block.getLink()
+                block.getLink(),
+                block.getImg()
         );
     }
 

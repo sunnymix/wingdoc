@@ -5,7 +5,7 @@
 /* --- footer: */
 
 .editor_footer {
-  height: 4px;
+  height: 8px;
   background-color: #fff;
 }
 
@@ -89,6 +89,7 @@
 /* --- content: */
 
 .editor_content {
+  color: #333;
   background-color: transparent;
   line-height: 24px;
   padding: 0 4px;
@@ -109,6 +110,10 @@
   font-size: 90%;
   border-radius: 2px;
   /* background-color: #f8f8f8; */
+}
+
+.editor.img .editor_content {
+  font-style: italic;
 }
 
 .editor.h1 .editor_content {

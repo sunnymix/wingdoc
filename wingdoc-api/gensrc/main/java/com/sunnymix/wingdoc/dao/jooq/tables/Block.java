@@ -15,7 +15,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -81,6 +81,11 @@ public class Block extends TableImpl<BlockRecord> {
      * The column <code>wingdoc.block.link</code>. 链接
      */
     public final TableField<BlockRecord, String> LINK = createField(DSL.name("link"), SQLDataType.VARCHAR(200).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "链接");
+
+    /**
+     * The column <code>wingdoc.block.img</code>. 图片
+     */
+    public final TableField<BlockRecord, String> IMG = createField(DSL.name("img"), SQLDataType.VARCHAR(200).nullable(false).defaultValue(DSL.inline("", SQLDataType.VARCHAR)), this, "图片");
 
     private Block(Name alias, Table<BlockRecord> aliased) {
         this(alias, aliased, null);
@@ -157,11 +162,11 @@ public class Block extends TableImpl<BlockRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<String, String, Integer, String, String, String, String> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row8<String, String, Integer, String, String, String, String, String> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

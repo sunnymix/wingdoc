@@ -16,6 +16,7 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- editor:
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
+    blockId: props.data.id,
     initialText: props.data.text,
   });
 
@@ -38,7 +39,7 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   useEffect(() => {
-    saveText();
+    // saveText();
   }, [editorText]);
 
   // --- control:
@@ -163,7 +164,6 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
-    console.log(e);
     const code = e.code;
     const isCmd = e.metaKey;
     const isShift = e.shiftKey;
@@ -234,7 +234,7 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   const handleEditorKeyUp = (e: any) => {
-    saveText();
+    // saveText();
   };
 
   const handleFooterClick = (e: any) => {
@@ -273,7 +273,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className='editor_body'>
         {(blockType == BlockType.IMG) && 
         <div className="editor_imager">
-          <Imager />
+          <Imager blockId={props.data.id} initialImg={props.data.img} />
         </div>}
         <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} onKeyUp={handleEditorKeyUp} />
         <div className='editor_link'>

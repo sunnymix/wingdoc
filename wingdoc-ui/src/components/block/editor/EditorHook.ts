@@ -1,14 +1,25 @@
 import { useCallback, useMemo, useRef, useState } from "react"
+import BlockApi from "../BlockApi";
 
 export interface EditorProps {
+  blockId: string,
   initialText: string,
 };
 
 export default (props: EditorProps) => {
 
   // --- text:
+
+  const saveText = (text: string) => {
+    BlockApi.updateBlock(props.blockId, { text });
+    return true;
+  };
   
   const [text, setText] = useState<string>(props.initialText);
+  const updateText = (text: string) => {
+    saveText(text);
+    setText(text);
+  };
 
   // --- focus:
 
@@ -32,9 +43,9 @@ export default (props: EditorProps) => {
 
     if (text === '') {
       editorRef.current.innerHTML = '';
-      setText(text);
+      updateText(text);
     } else {
-      setText(text);
+      updateText(text);
     }
 
   }, []);

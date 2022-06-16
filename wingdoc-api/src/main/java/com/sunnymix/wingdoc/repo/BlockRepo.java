@@ -77,6 +77,10 @@ public class BlockRepo {
             set = update.set(BLOCK.STATUS, form.getStatus());
         }
 
+        if (form.getImg() != null) {
+            set = update.set(BLOCK.IMG, form.getImg());
+        }
+
         if (set != null) {
             int updateResult = set.where(BLOCK.ID.eq(id))
                     .execute();

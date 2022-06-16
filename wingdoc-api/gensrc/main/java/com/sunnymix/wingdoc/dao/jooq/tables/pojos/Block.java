@@ -22,6 +22,7 @@ public class Block implements Serializable {
     private final String  status;
     private final String  text;
     private final String  link;
+    private final String  img;
 
     public Block(Block value) {
         this.id = value.id;
@@ -31,6 +32,7 @@ public class Block implements Serializable {
         this.status = value.status;
         this.text = value.text;
         this.link = value.link;
+        this.img = value.img;
     }
 
     public Block(
@@ -40,7 +42,8 @@ public class Block implements Serializable {
         String  type,
         String  status,
         String  text,
-        String  link
+        String  link,
+        String  img
     ) {
         this.id = id;
         this.docId = docId;
@@ -49,6 +52,7 @@ public class Block implements Serializable {
         this.status = status;
         this.text = text;
         this.link = link;
+        this.img = img;
     }
 
     /**
@@ -100,6 +104,13 @@ public class Block implements Serializable {
         return this.link;
     }
 
+    /**
+     * Getter for <code>wingdoc.block.img</code>. 图片
+     */
+    public String getImg() {
+        return this.img;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Block (");
@@ -111,6 +122,7 @@ public class Block implements Serializable {
         sb.append(", ").append(status);
         sb.append(", ").append(text);
         sb.append(", ").append(link);
+        sb.append(", ").append(img);
 
         sb.append(")");
         return sb.toString();

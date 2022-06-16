@@ -1,12 +1,24 @@
 .editor {
+  position: relative;
+}
+
+/* --- footer: */
+
+.editor_footer {
+  height: 4px;
+  background-color: #fff;
+}
+
+/* --- box: */
+
+.editor_box {
   display: flex;
   background-color: #fff;
   position: relative;
-  margin-bottom: 8px;
   border-radius: 2px;
 }
 
-.editor.focused {
+.editor.focused .editor_box {
   background-color: #188fff10;
 }
 

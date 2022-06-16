@@ -21,6 +21,11 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- block type:
 
   const [blockType, setBlockType] = useState<BlockType>(props.data.type || BlockType.TEXT);
+  const changeBlockType = (type: BlockType) => {
+    BlockApi.updateBlock(props.data.id, { type }, () => {
+      setBlockType(type);
+    });
+  };
 
   // --- text:
 
@@ -155,11 +160,13 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- keydown:
 
   const handleEditorKeyDown = (e: any) => {
-    const key = e.key.toLocaleLowerCase();
+    const code = e.code;
     const isCmd = e.metaKey;
     const isShift = e.shiftKey;
+    const isOpt = e.altKey;
+    const isCtr = e.ctrlKey;
 
-    if (key == 'enter') {
+    if (code == 'Enter') {
       if (isCmd) {
         e.preventDefault();
         props.onEnter?.call(null, props.data, 'end');
@@ -167,41 +174,43 @@ export default forwardRef((props: BlockProps, ref) => {
         e.preventDefault();
         props.onEnter?.call(null, props.data, 'start');
       }
-    } else if (key == 'k') {
+    } else if (code == 'KeyK') {
       if (isCmd) {
         openLinker();
       }
-    } else if (key == 'u') {
+    } else if (code == 'KeyU') {
       if (isCmd) {
         openTasker();
       }
-    } else if (key == 'arrowup') {
+    } else if (code == 'ArrowUp') {
       if (getCaretCoordinates(e).firstRow) {
         props.onFocusUp?.call(null, props.data);
       }
-    } else if (key == 'arrowdown') {
+    } else if (code == 'ArrowDown') {
       if (getCaretCoordinates(e).lastRow) {
         setHovered(false);
         props.onFocusDown?.call(null, props.data);
       }
-    } else if (key == 'backspace') {
+    } else if (code == 'Backspace') {
       if (isCmd || editorText.length == 0) {
         setHovered(false);
         props.onDelete?.call(null, props.data);
+      }
+    } else if (code == 'KeyT') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.TEXT);
+      }
+    } else if (code == 'KeyC') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.CODE);
       }
     }
   };
 
   const handleEditorKeyUp = (e: any) => {
     saveText();
-  };
-
-  // --- change block type:
-
-  const changeBlockType = (type: BlockType) => {
-    BlockApi.updateBlock(props.data.id, { type }, () => {
-      setBlockType(type);
-    });
   };
 
   // --- ui:

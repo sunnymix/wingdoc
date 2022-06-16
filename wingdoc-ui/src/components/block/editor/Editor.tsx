@@ -9,6 +9,7 @@ import { history } from "umi";
 import Tasker from "../tasker/Tasker";
 import "@/components/common/CommonStyle.css";
 import { BlockType } from "../Block";
+import Imager from "../imager/Imager";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -242,6 +243,8 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- TODO: editor className
 
+  // --- imager:
+
   // --- ui:
 
   return (
@@ -268,9 +271,13 @@ export default forwardRef((props: BlockProps, ref) => {
         <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
       </div>
       <div className='editor_body'>
+        {(blockType == BlockType.IMG) && 
+        <div className="editor_imager">
+          <Imager />
+        </div>}
         <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} onKeyUp={handleEditorKeyUp} />
         <div className='editor_link'>
-          <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel}/>
+          <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
         </div>
       </div>
     </div>

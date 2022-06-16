@@ -80,6 +80,12 @@
   flex-grow: 1;
 }
 
+/* --- imager: */
+
+.editor_imager {
+  padding: 0 4px;
+}
+
 /* --- content: */
 
 .editor_content {

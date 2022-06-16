@@ -9,37 +9,22 @@ export interface TaskerProps {
 };
 
 export enum Status { 
-  UN = "UN",
-  ON = "ON",
-  UP = "UP",
+  NEW = "NEW",
+  WIP = "WIP",
   OK = "OK",
-  NO = "NO"
+  UP = "UP",
+  DEL = "DEL"
 };
 
 export namespace Status {
   export function all() {
     return [
-      Status.UN,
-      Status.ON,
+      Status.NEW,
+      Status.WIP,
       Status.OK,
       Status.UP,
-      Status.NO,
+      Status.DEL,
     ];
-  }
-
-  export function of(str: string) {
-    switch (str) {
-      case "ON":
-        return Status.ON;
-      case "OK":
-        return Status.OK;
-      case "UP":
-        return Status.UP;
-      case "NO":
-        return Status.NO;
-      default: 
-        return Status.UN;
-    }
   }
 }
 
@@ -54,7 +39,7 @@ export default forwardRef((props: TaskerProps, ref) => {
   // --- open:
 
   const open = (tasked: boolean, cb?: Function) => {
-    const form = tasked ? { type: 'TASK', status: Status.UN } : { type: 'TEXT', status: '' };
+    const form = tasked ? { type: 'TASK', status: Status.NEW } : { type: 'TEXT', status: '' };
 
     BlockApi.updateBlock(props.blockId, form, (ok: any) => {
       if (ok) {
@@ -69,7 +54,7 @@ export default forwardRef((props: TaskerProps, ref) => {
 
   // --- status:
 
-  const [status, setStatus] = useState<Status>(props.initialStatus || Status.UN);
+  const [status, setStatus] = useState<Status>(props.initialStatus || Status.NEW);
 
   // --- click:
 
@@ -87,13 +72,17 @@ export default forwardRef((props: TaskerProps, ref) => {
   return (
   <>
   <div className='tasker'>
-    <button className='tasker_control btn ghost square tasker_btn' onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
-      <span className={`btn_tasker_icon ${status.toLocaleLowerCase()}`}>{status}</span>
+    <button className={`tasker_control btn ghost tasker_btn ${status.toLocaleLowerCase()}`} onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
+      <span className='tasker_btn_body'>
+        <span className='tasker_btn_text'>{status}</span>
+      </span>
     </button>
     <div className={`tasker_menu ${menuOpened && 'opened'}`}  onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       {Status.all().map((status: Status) =>
-        <button className='btn ghost square tasker_btn' key={status} onClick={() => handleClick(status)}>
-          <span className={`btn_tasker_icon ${status.toLocaleLowerCase()}`}>{status}</span>
+        <button className={`btn ghost tasker_btn  ${status.toLocaleLowerCase()}`} key={status} onClick={() => handleClick(status)}>
+          <span className='tasker_btn_body'>
+            <span className='tasker_btn_text'>{status}</span>
+          </span>
         </button>)}
     </div>
   </div>

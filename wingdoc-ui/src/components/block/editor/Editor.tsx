@@ -29,6 +29,8 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- text:
 
+  const lineHeight: number = 24;
+
   const saveText = () => {
     BlockApi.updateBlock(props.data.id, { text: editorText });
     return true;
@@ -114,8 +116,8 @@ export default forwardRef((props: BlockProps, ref) => {
         if (rect && containerRect) {
           x = rect.left - containerRect.left;
           y = rect.top - containerRect.top;
-          row = Math.floor(y / 26);
-          rowCount = Math.ceil(containerRect.height / 26);
+          row = Math.floor(y / lineHeight);
+          rowCount = Math.ceil(containerRect.height / lineHeight);
           firstRow = row == 0;
           lastRow = row == rowCount - 1;
           middleRow = row > 0 && row < rowCount - 1;

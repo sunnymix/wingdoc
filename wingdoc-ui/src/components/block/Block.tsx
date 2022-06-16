@@ -3,6 +3,7 @@ import Editor from './editor/Editor';
 
 export enum BlockType {
   TEXT = 'TEXT',
+  TASK = 'TASK',
   CODE = 'CODE',
   H1 = 'H1',
   H2 = 'H2',
@@ -14,6 +15,7 @@ export namespace BlockType {
   export function all() {
     return [
       BlockType.TEXT,
+      BlockType.TASK,
       BlockType.CODE,
       BlockType.H1,
       BlockType.H2,
@@ -25,6 +27,8 @@ export namespace BlockType {
   export function short(type: BlockType) {
     switch (type) {
       case BlockType.TEXT:
+        return 'P';
+      case BlockType.TASK:
         return 'T';
       case BlockType.CODE:
         return 'C';

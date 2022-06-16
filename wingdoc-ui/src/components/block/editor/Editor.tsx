@@ -221,7 +221,7 @@ export default forwardRef((props: BlockProps, ref) => {
   <>
   <div className={`editor ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${blockType.toLocaleLowerCase()}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
     <div className='editor_side'>
-      <button className='editor_control btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
+      <button className='editor_menu_btn btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
         <span className='btn_border_icon'></span>
       </button>
       <div className={`editor_menu ${menuOpened && 'opened'}`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>

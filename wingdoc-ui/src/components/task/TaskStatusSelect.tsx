@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Select } from "antd";
-import { Status } from "../block/components/Task";
+import { Status } from "../block/tasker/Tasker";
 
 export interface TaskStatusSelectProps {
   onChange?: Function,
@@ -24,7 +24,7 @@ export default forwardRef((props: TaskStatusSelectProps, ref) => {
     mode="multiple"
     allowClear={true}
     // TODO：定义为属性
-    defaultValue={[Status.ON, Status.UP]}
+    defaultValue={[Status.WIP, Status.UP]}
     onChange={handleChange}
     style={{minWidth: 80}}>
     {Status.all().map((status: Status) =>

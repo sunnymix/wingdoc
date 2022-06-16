@@ -3,27 +3,30 @@
   background-color: #fff;
   position: relative;
   margin-bottom: 8px;
+  border-radius: 2px;
 }
 
 .editor.focused {
   background-color: #188fff10;
 }
 
+/* --- side: */
+
 .editor_side {
   flex-shrink: 0;
   flex-grow: 0;
 }
 
-.editor_control {
+/* --- menu: */
+
+.editor_menu_btn {
   visibility: hidden;
 }
 
-.editor.hovered .editor_control,
-.editor.focused .editor_control {
+.editor.hovered .editor_menu_btn,
+.editor.focused .editor_menu_btn {
   visibility: visible;
 }
-
-/* --- menu: */
 
 .editor_menu {
   position: absolute;
@@ -87,7 +90,7 @@
   font-family: 'Verily';
   font-size: 90%;
   border-radius: 2px;
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
 }
 
 .editor.h1 .editor_content {

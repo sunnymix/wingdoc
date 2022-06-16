@@ -5,8 +5,9 @@ import TaskApi from "./TaskApi";
 import { Link, history } from 'umi';
 import Task from "@/components/block/components/Task";
 import TaskStatusSelect from "./TaskStatusSelect";
-import { Status } from "@/components/block/components/Task";
+import { Status } from "../block/tasker/Tasker";
 import { SearchOutlined } from "@ant-design/icons";
+import Tasker from "../block/tasker/Tasker";
 
 const TaskTable = forwardRef((props, ref) => {
 
@@ -17,7 +18,7 @@ const TaskTable = forwardRef((props, ref) => {
   // --- statusIn
   // TODO：传递到选择框
 
-  const defaultStatusIn = [Status.ON, Status.UP];
+  const defaultStatusIn = [Status.WIP, Status.UP];
 
   const [statusIn, setStatusIn] = useState<Status[]>(defaultStatusIn);
 
@@ -79,7 +80,7 @@ const TaskTable = forwardRef((props, ref) => {
         <tr key={task.id} onClick={() => history.push(`/doc/${task.docId}?block=${task.id}`)}>
           <td>
             <Space direction="horizontal" size="small">
-              <Task id={task.id} defaultStatus={task.status} show={true}/>
+              <Tasker blockId={task.id} initialStatus={task.status} />
               <div style={{fontFamily: '"Helvetica Neue", Helvetica, Arial',}}>{task.task}</div>
             </Space>
           </td>

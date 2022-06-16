@@ -2,3 +2,6 @@
   position: relative;
 }
 
+.imager_img {
+  display: inline-block;
+}

@@ -105,6 +105,9 @@
   color: #1890ff;
 }
 
+.editor.focused .editor_content {
+}
+
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;

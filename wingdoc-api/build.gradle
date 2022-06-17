@@ -38,6 +38,8 @@ dependencies {
     compileOnly "org.jooq:jooq-codegen:$_jooqVersion"
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Oss
+    implementation "com.aliyun.oss:aliyun-sdk-oss:3.10.2"
 }
 
 tasks.named('test') {

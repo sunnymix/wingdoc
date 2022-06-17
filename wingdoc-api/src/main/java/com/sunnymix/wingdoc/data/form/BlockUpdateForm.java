@@ -24,4 +24,8 @@ public class BlockUpdateForm {
 
     private String img;
 
+    public static BlockUpdateForm ofImg(String img) {
+        return BlockUpdateForm.builder().img(img).build();
+    }
+
 }

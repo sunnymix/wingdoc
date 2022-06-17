@@ -1,5 +1,7 @@
 package com.sunnymix.wingdoc.data;
 
+import com.sunnymix.wingdoc.common.Strings;
+
 import java.util.Random;
 import java.util.UUID;
 
@@ -16,6 +18,19 @@ public class Id {
                 .randomUUID().toString().replace("-", "")
                 .substring(start, start + length)
                 .toLowerCase();
+    }
+
+    public static String randomFilename(String filename) {
+        if (Strings.isEmpty(filename)) {
+            return filename;
+        }
+        int dotIndex = filename.lastIndexOf(".");
+        if (dotIndex > 0) {
+            String name = filename.substring(0, dotIndex);
+            String extension = filename.substring(dotIndex);
+            return String.format("%s--%s%s", name, newId(), extension);
+        }
+        return filename;
     }
 
 }

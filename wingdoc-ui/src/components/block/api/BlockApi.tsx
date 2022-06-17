@@ -1,5 +1,5 @@
 import axios from "axios";
-import Constant from "../common/Constant";
+import Constant from "../../common/Constant";
 
 const API_BLOCK_LIST = Constant.API_HOST + '/block/list/';
 

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from "react"
-import BlockApi from "../BlockApi";
+import BlockApi from "../api/BlockApi";
 
 export interface EditorProps {
   blockId: string,

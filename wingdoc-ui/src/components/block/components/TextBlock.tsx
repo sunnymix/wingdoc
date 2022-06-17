@@ -1,13 +1,13 @@
 import { FC, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { Menu, Dropdown, Input, Spin } from 'antd';
-import BlockApi from '../BlockApi';
+import BlockApi from '../api/BlockApi';
 import { ArrowUpOutlined, ArrowDownOutlined, LinkOutlined } from '@ant-design/icons';
 import OptionButton from '@/components/common/OptionButton';
 import Link from './Link';
 import Task from './Task';
 import { Status } from './Task';
 import { history } from 'umi';
-import { BlockProps } from '../Block';
+import { BlockProps } from '../block/Block';
 import '@/components/block/BlockStyle.css';
 
 const { TextArea } = Input;

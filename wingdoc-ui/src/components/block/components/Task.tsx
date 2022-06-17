@@ -1,6 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Dropdown, Button, Menu } from "antd";
-import BlockApi from "../BlockApi";
+import BlockApi from "../api/BlockApi";
 
 export interface TaskProps {
   id: any,

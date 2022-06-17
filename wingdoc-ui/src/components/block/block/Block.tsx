@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import Editor from './editor/Editor';
+import Editor from '../editor/Editor';
 
 export enum BlockType {
   TEXT = 'TEXT',

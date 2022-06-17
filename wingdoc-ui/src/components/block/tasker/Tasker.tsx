@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import "@/components/common/CommonStyle.css";
 import "./TaskerStyle.css";
-import BlockApi from "../BlockApi";
+import BlockApi from "../api/BlockApi";
 
 export interface TaskerProps {
   blockId: string,

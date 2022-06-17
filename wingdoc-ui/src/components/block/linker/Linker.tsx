@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Input, Space, Button } from "antd";
 const { TextArea } = Input;
-import BlockApi from "../BlockApi";
+import BlockApi from "../api/BlockApi";
 import "./LinkerStyle.css";
 
 export interface LinkerProps {

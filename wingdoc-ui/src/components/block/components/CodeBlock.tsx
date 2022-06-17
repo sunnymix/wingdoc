@@ -1,5 +1,5 @@
 import { forwardRef, useState } from "react";
-import { BlockProps } from "../Block";
+import { BlockProps } from "../block/Block";
 import './CodeBlockStyle.css';
 import CodeEditor, { SelectionText } from "@uiw/react-textarea-code-editor";
 

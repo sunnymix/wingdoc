@@ -1,14 +1,14 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-import { BlockProps } from "../Block";
+import { BlockProps } from "../block/Block";
 import './EditorStyle.css';
 import useEditor from "./EditorHook";
 import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined, CheckCircleOutlined } from '@ant-design/icons';
-import BlockApi from "../BlockApi";
+import BlockApi from "../api/BlockApi";
 import Linker from "../linker/Linker";
 import { history } from "umi";
 import Tasker from "../tasker/Tasker";
 import "@/components/common/CommonStyle.css";
-import { BlockType } from "../Block";
+import { BlockType } from "../block/Block";
 import Imager from "../imager/Imager";
 
 export default forwardRef((props: BlockProps, ref) => {
@@ -62,7 +62,10 @@ export default forwardRef((props: BlockProps, ref) => {
   const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    (props.focus && !focused) && focusEditor();
+    console.log(`editor: props.focus="${props.focus}"`);
+    if (props.focus) {
+      focusEditor();
+    }
   }, [props.focus]);
 
   useEffect(() => setFocused(editorFocused), [editorFocused]);

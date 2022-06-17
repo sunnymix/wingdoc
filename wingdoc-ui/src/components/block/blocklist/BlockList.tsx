@@ -1,16 +1,17 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import BlockApi from './BlockApi';
-import Block from './Block';
+import BlockApi from '../api/BlockApi';
+import Block from '../block/Block';
 import { useLocation } from 'umi';
+import './BlockListStyle.css';
 
-interface BlockListProps {
+interface BlockerListProps {
   docId: string,
   showBlock?: boolean,
   onEmptyFocus?: Function,
   onFocusChange?: Function,
 }
 
-export default forwardRef((props: BlockListProps, ref) => {
+export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- method bind
 
@@ -212,10 +213,22 @@ export default forwardRef((props: BlockListProps, ref) => {
     }
   };
 
+  // --- old ^^^^^^^^^^
+
+  // --- new vvvvvvvvvv:
+
+  // --- tail click:
+
+  const handleTailClick = (e: any) => {
+    if (blocks.length > 0) {
+      setFocusPos(blocks.length - 1);
+    }
+  };
+
   // --- ui
   
   return (
-    <div>
+    <div className='blocklist'>
       {blocks.map((block: any, index: number) => 
         <Block
           key={block.id}
@@ -231,8 +244,9 @@ export default forwardRef((props: BlockListProps, ref) => {
           onFocusDown={handleFocusDown}
           onSelectStart={handleSelectStart}
           onSelectStop={handleSelectStop}
-          onCopy={handleCopy}/>)
+          onCopy={handleCopy} />)
       }
+      <div className='blocklist_tail' onClick={handleTailClick}></div>
     </div>
   );
 });

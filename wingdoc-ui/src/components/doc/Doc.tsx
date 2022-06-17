@@ -2,7 +2,7 @@ import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from
 import DocApi from './DocApi';
 import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import BlockList from '../block/BlockList';
+import BlockList from '../block/blocklist/BlockList';
 import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
 import MarkApi from '../mark/MarkApi';
@@ -160,7 +160,7 @@ export default forwardRef((props: DocProps, ref) => {
         showBlock={showBlock}
         onEmptyFocus={handleBlockListEmptyFocus}
         onFocusChange={handleBlockListFocusChange}
-        ref={blockListRef}/>
+        ref={blockListRef} />
     </div>
   </div>
   </>;

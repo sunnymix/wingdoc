@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from '../api/BlockApi';
-import Block from '../block/Block';
+import Block, { BlockFocusing } from '../block/Block';
 import { useLocation } from 'umi';
 import './BlockListStyle.css';
 
@@ -13,16 +13,16 @@ interface BlockerListProps {
 
 export default forwardRef((props: BlockerListProps, ref) => {
 
-  // --- method bind
+  // --- imperative:
 
   useImperativeHandle(ref, () => ({
     add: handleAdd,
     focusPos: (pos: number) => {
-      setFocusPos(pos);
+      updateFocusing(pos);
     },
   }));
 
-  // -- props
+  // -- props:
 
   const { docId, showBlock, onEmptyFocus, onFocusChange } = props;
 
@@ -64,7 +64,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
       }
 
       if (newFocusPos >= 0) {
-        setFocusPos(newFocusPos);
+        updateFocusing(newFocusPos);
       } else {
         onEmptyFocus?.call(null);
       }
@@ -79,24 +79,27 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- focus
 
-  const [focusPos, setFocusPos] = useState<Number>(0);
+  const [focusing, setFocusing] = useState<BlockFocusing>({ pos: -1, ts: +(new Date())})
+
+  const updateFocusing = (pos: number) => {
+    setFocusing({ pos, ts: +(new Date()) });
+  };
 
   useEffect(() => {
-    // console.log('BlockList: focusPos: changed to: ', focusPos);
-    onFocusChange?.call(null, focusPos);
-  }, [focusPos]);
+    onFocusChange?.call(null, focusing);
+  }, [focusing]);
 
-  const handleFocus = (blockData: any) => {
-    setFocusPos(blockData.pos);
+  const handleFocus = (data: any) => {
+    updateFocusing(data.pos);
   };
 
   const handleFocusUp = (blockData: any) => {
     const newFocusPos = blockData.pos - 1;
-    setFocusPos(newFocusPos);
+    updateFocusing(newFocusPos);
   };
 
   const handleFocusDown = (blockData: any) => {
-    setFocusPos(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
+    updateFocusing(blockData.pos == blocks.length - 1 ? blockData.pos : blockData.pos + 1);
   };
 
   // --- add
@@ -221,7 +224,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const handleTailClick = (e: any) => {
     if (blocks.length > 0) {
-      setFocusPos(blocks.length - 1);
+      setFocusing({ pos: blocks.length - 1, ts: +(new Date())});
     }
   };
 
@@ -233,8 +236,8 @@ export default forwardRef((props: BlockerListProps, ref) => {
         <Block
           key={block.id}
           data={block}
+          focusing={focusing}
           showBlock={showBlock}
-          focus={index == focusPos}
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}
           onMoveUp={handleBlockMoveUp}

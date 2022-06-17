@@ -16,7 +16,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- props
 
-  const {data, focus, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
+  const {data, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
 
   const [text, setText] = useState(data.text);
 
@@ -170,7 +170,7 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   useEffect(() => {
-    if (focus) {
+    if (false) {
       // 当内部未聚焦时，再聚焦到输入框（避免事件循环）
       if (!innerFocus) {
         focusInput();

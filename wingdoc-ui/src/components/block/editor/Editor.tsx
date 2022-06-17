@@ -16,8 +16,14 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- editor:
 
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
-    blockId: props.data.id,
+    data: props.data,
     initialText: props.data.text,
+    onFocus: (e: any) => {
+      handleEditorFocus(e);
+    },
+    onBlur: (e: any) => {
+      setFocused(false);
+    },
   });
 
   // --- block type:
@@ -32,11 +38,6 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- text:
 
   const lineHeight: number = 24;
-
-  const saveText = () => {
-    BlockApi.updateBlock(props.data.id, { text: editorText });
-    return true;
-  };
 
   useEffect(() => {
     // saveText();
@@ -59,16 +60,24 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- focus:
 
+  const handleEditorFocus = (e: any) => {
+    props.onFocus?.call(null, props.data);
+  };
+
+  useEffect(() => {
+    if (props.focusing.pos == props.data.pos) {
+      // console.log(`editor[${props.data.pos}]: focusing on me! ${props.focusing.pos}/${props.focusing.ts}"`);
+      if (!focused) {
+        focusEditor();
+      }
+    }
+  }, [props.focusing])
+
   const [focused, setFocused] = useState<boolean>(false);
 
   useEffect(() => {
-    console.log(`editor: props.focus="${props.focus}"`);
-    if (props.focus) {
-      focusEditor();
-    }
-  }, [props.focus]);
-
-  useEffect(() => setFocused(editorFocused), [editorFocused]);
+    setFocused(editorFocused);
+  }, [editorFocused]);
 
   // --- move:
 

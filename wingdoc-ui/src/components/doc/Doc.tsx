@@ -7,6 +7,7 @@ import DocTitle from './DocTitle';
 import DocAuthor from './DocAuthor';
 import MarkApi from '../mark/MarkApi';
 import { useModel, useLocation } from 'umi';
+import { BlockFocusing } from '../block/block/Block';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -110,9 +111,8 @@ export default forwardRef((props: DocProps, ref) => {
 
   // --- blocklist focus change
 
-  const handleBlockListFocusChange = (focusPos: number) => {
-    // console.log('Doc: BlockList: onFocusChange: focusPos: ', focusPos);
-    if (focusPos >= 0) {
+  const handleBlockListFocusChange = (focusing: BlockFocusing) => {
+    if (focusing.pos >= 0) {
       setFocusTitle(false); 
     } else {
       setFocusTitle(true);

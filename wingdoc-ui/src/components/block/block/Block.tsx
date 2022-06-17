@@ -49,8 +49,8 @@ export namespace BlockType {
 
 export interface BlockProps {
   data: any,
+  focusing: BlockFocusing,
   showBlock?: boolean,
-  focus?: boolean,
   onEnter?: Function,
   onDelete?: Function,
   onMoveUp?: Function,
@@ -61,6 +61,11 @@ export interface BlockProps {
   onSelectStart?: Function,
   onSelectStop?: Function,
   onCopy?: Function
+};
+
+export interface BlockFocusing {
+  pos: number,
+  ts: number,
 };
 
 const Block = forwardRef((props: BlockProps, ref) => {

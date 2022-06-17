@@ -2,8 +2,10 @@ import { useCallback, useMemo, useRef, useState } from "react"
 import BlockApi from "../api/BlockApi";
 
 export interface EditorProps {
-  blockId: string,
+  data: any,
   initialText: string,
+  onFocus?: Function,
+  onBlur?: Function,
 };
 
 export default (props: EditorProps) => {
@@ -11,7 +13,7 @@ export default (props: EditorProps) => {
   // --- text:
 
   const saveText = (text: string) => {
-    BlockApi.updateBlock(props.blockId, { text });
+    BlockApi.updateBlock(props.data.id, { text });
     return true;
   };
   
@@ -66,18 +68,30 @@ export default (props: EditorProps) => {
 
   // --- focus:
 
-  const handleFocus = useCallback((e) => setFocused(true), []);
-  const handleBlur = useCallback((e) => setFocused(false), []);
+  const handleFocus = (e: any) => {
+    setFocused(true);
+    props.onFocus?.call(null, e);
+  };
 
-  const focusEditor = useCallback(() => {
-    var range = document.createRange();
-    range.setStart(editorRef.current, 0);
-    range.setEnd(editorRef.current, 0);
-    
-    var selection = window.getSelection();
-    selection?.removeAllRanges();
-    selection?.addRange(range);
-  }, []);
+  // --- blur:
+
+  const handleBlur = (e: any) => {
+    setFocused(false);
+    props.onBlur?.call(null, e);
+  };
+
+  const focusEditor = () => {
+    if (!focused) {
+      setFocused(true);
+      var range = document.createRange();
+      range.setStart(editorRef.current, 0);
+      range.setEnd(editorRef.current, 0);
+      
+      var selection = window.getSelection();
+      selection?.removeAllRanges();
+      selection?.addRange(range);
+    }
+  };
 
   // --- text2HTML:
 

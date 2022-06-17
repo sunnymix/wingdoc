@@ -6,6 +6,7 @@ export interface EditorProps {
   initialText: string,
   onFocus?: Function,
   onBlur?: Function,
+  onPasteImg?: Function,
 };
 
 export default (props: EditorProps) => {
@@ -54,10 +55,27 @@ export default (props: EditorProps) => {
 
   // --- paste:
 
-  const handlePaste = useCallback((e) => {
+  const handlePasteImg = (e: any) => {
+    const files = e.clipboardData.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      if (file && file.type.indexOf('image/') >= 0) {
+        props.onPasteImg?.call(null, e, file);
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const handlePasteText = (e: any) => {
     e.preventDefault();
     document.execCommand('insertText', false, e.clipboardData.getData('text'));
-  }, []);
+    return true;
+  };
+
+  const handlePaste = (e: any) => {
+    handlePasteImg(e) || handlePasteText(e);
+  };
 
   // --- clear:
 

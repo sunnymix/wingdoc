@@ -24,6 +24,9 @@ export default forwardRef((props: BlockProps, ref) => {
     onBlur: (e: any) => {
       setFocused(false);
     },
+    onPasteImg: (e: any, file: any) => {
+      pasteImg(e, file);
+    },
   });
 
   // --- block type:
@@ -257,6 +260,12 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- imager:
 
+  const imagerRef = useRef<any>(null);
+
+  const pasteImg = (e: any, file: any) => {
+    imagerRef.current.pasteImg(e, file);
+  };
+
   // --- ui:
 
   return (
@@ -285,7 +294,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className='editor_body'>
         {(blockType == BlockType.IMG) && 
         <div className="editor_imager">
-          <Imager blockId={props.data.id} initialImg={props.data.img} />
+          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} />
         </div>}
         <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} onKeyUp={handleEditorKeyUp} />
         <div className='editor_link'>

@@ -44,6 +44,20 @@ public class BlockRepo {
         return Out.ok(Page.list(blockInfoList.size()), blockInfoList);
     }
 
+    public Out<List<BlockInfo>> listBetween(String docId, Integer startPos, Integer endPos) {
+        List<BlockInfo> blockInfoList = getDsl()
+                .selectFrom(BLOCK)
+                .where(
+                        BLOCK.DOC_ID.eq(docId)
+                                .and(BLOCK.POS.ge(startPos))
+                                .and(BLOCK.POS.le(endPos)))
+                .orderBy(BLOCK.POS)
+                .fetchStreamInto(Block.class)
+                .map(BlockInfo::of)
+                .collect(Collectors.toList());
+        return Out.ok(Page.list(blockInfoList.size()), blockInfoList);
+    }
+
     public Out<BlockInfo> findOne(String id) {
         Block block = _findOne(id);
         BlockInfo blockInfo = BlockInfo.of(block);

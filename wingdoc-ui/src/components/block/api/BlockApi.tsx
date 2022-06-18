@@ -13,6 +13,14 @@ const getBlockListOfDoc = (docId: string, cb: Function) => {
     });
 };
 
+const getBlockListBetweenOfDoc = (docId: string, start: number, end: number, cb: Function) => {
+  axios.get(`${API_BLOCK_LIST}${docId}/between/${start}/${end}`)
+    .then(res => {
+      const data = res.data?.data || [];
+      cb(data);
+    });
+};
+
 const addBlockToDoc = (docId: String, form: any, cb: Function) => {
   axios.post(`${API_BLOCK_LIST}${docId}`, form)
     .then(res => {
@@ -55,6 +63,7 @@ const moveDown = (id: String, cb: Function) => {
 
 const BlockApi = {
   getBlockListOfDoc,
+  getBlockListBetweenOfDoc,
   addBlockToDoc,
   updateBlock,
   deleteBlock,

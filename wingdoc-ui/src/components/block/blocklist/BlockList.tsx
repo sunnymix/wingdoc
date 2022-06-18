@@ -233,8 +233,6 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const [hoveringPos, setHoveringPos] = useState<BlockPosState>(BlockPosState.of(-1));
 
-  const [selectingBlockDatas, setSelectingBlockDatas] = useState<BlockData[]>([]);
-
   const onMouseDown = (e: any, blockData: BlockData) => {
     setSelectingActive(BlockActiveState.of(true));
     setSelectingStartPos(BlockPosState.of(blockData.pos));
@@ -242,10 +240,23 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const onMouseUp = (e: any, blockData: BlockData) => {
     setSelectingActive(BlockActiveState.of(false));
+    onSelectingChange(selectingStartPos.pos, hoveringPos.pos);
   };
 
   const onMouseEnter = (e: any, blockData: BlockData) => {
     setHoveringPos(BlockPosState.of(blockData.pos));
+  };
+
+  const onSelectingChange = (startPos: number, endPos: number) => {
+    const ascOrder = endPos >= startPos;
+    const start = ascOrder ? startPos : endPos;
+    const end = ascOrder ? endPos : startPos;
+    BlockApi.getBlockListBetweenOfDoc(props.docId, start, end, (blockDatas: BlockData[]) => {
+      const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
+      // TODO：自定义复制组件
+      // navigator.clipboard 只能在 localhost 或 https 中使用
+      navigator.clipboard.writeText(text);
+    });
   };
 
   // --- ui

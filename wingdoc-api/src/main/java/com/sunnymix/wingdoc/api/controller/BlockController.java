@@ -57,6 +57,13 @@ public class BlockController {
         return blockRepo.list(docId);
     }
 
+    @GetMapping("/block/list/{docId}/between/{startPos}/{endPos}")
+    public Out<List<BlockInfo>> getBlockListOfDoc(@PathVariable("docId") String docId,
+                                                  @PathVariable("startPos") Integer startPos,
+                                                  @PathVariable("endPos") Integer endPos) {
+        return blockRepo.listBetween(docId, startPos, endPos);
+    }
+
     @PostMapping("/block/list/{docId}")
     public Out<BlockInfo> addBlockToDoc(@PathVariable("docId") String docId,
                                         @RequestBody BlockCreateForm form) {

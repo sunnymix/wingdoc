@@ -98,6 +98,17 @@ export default forwardRef((props: DocProps, ref) => {
     updateTitleFocusing(focusing.pos < 0);
   };
 
+  // --- tail click:
+
+  const handleTailClick = (e: any) => {
+    const blockListSize = blockListRef.current.getSize();
+    if (blockListSize > 0) {
+      focusBlockPos(blockListSize - 1);
+    } else {
+      updateTitleFocusing(true);
+    }
+  };
+
   // --- ui empty
 
   if (!doc) {
@@ -128,6 +139,7 @@ export default forwardRef((props: DocProps, ref) => {
         onEmptyFocus={handleBlockListEmptyFocus}
         onFocusChange={handleBlockListFocusChange}
         ref={blockListRef} />
+      <div className='blocklist_tail' onClick={handleTailClick}></div>
     </div>
   </div>
   </>;

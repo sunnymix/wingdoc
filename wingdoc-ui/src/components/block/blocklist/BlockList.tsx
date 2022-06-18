@@ -4,7 +4,7 @@ import Block, { BlockFocusing } from '../block/Block';
 import { useLocation } from 'umi';
 import './BlockListStyle.css';
 
-interface BlockerListProps {
+export interface BlockerListProps {
   docId: string,
   showBlock?: boolean,
   onEmptyFocus?: Function,
@@ -19,6 +19,9 @@ export default forwardRef((props: BlockerListProps, ref) => {
     add: handleAdd,
     focusPos: (pos: number) => {
       updateFocusing(pos);
+    },
+    getSize: () => {
+      return blocks.length;
     },
   }));
 
@@ -220,13 +223,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- new vvvvvvvvvv:
 
-  // --- tail click:
-
-  const handleTailClick = (e: any) => {
-    if (blocks.length > 0) {
-      setFocusing({ pos: blocks.length - 1, ts: +(new Date())});
-    }
-  };
+  
 
   // --- ui
   
@@ -249,7 +246,6 @@ export default forwardRef((props: BlockerListProps, ref) => {
           onSelectStop={handleSelectStop}
           onCopy={handleCopy} />)
       }
-      <div className='blocklist_tail' onClick={handleTailClick}></div>
     </div>
   );
 });

@@ -316,7 +316,9 @@ export default forwardRef((props: BlockProps, ref) => {
   const imagerRef = useRef<any>(null);
 
   const pasteImg = (e: any, file: any) => {
-    imagerRef.current.pasteImg(e, file);
+    if (imagerRef && imagerRef.current) {
+      imagerRef.current.pasteImg(e, file);
+    }
   };
 
   // --- ui:

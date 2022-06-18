@@ -251,12 +251,14 @@ export default forwardRef((props: BlockerListProps, ref) => {
     const ascOrder = endPos >= startPos;
     const start = ascOrder ? startPos : endPos;
     const end = ascOrder ? endPos : startPos;
-    BlockApi.getBlockListBetweenOfDoc(props.docId, start, end, (blockDatas: BlockData[]) => {
-      const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
-      // TODO：自定义复制组件
-      // navigator.clipboard 只能在 localhost 或 https 中使用
-      navigator.clipboard.writeText(text);
-    });
+    if (start >= 0 && end >= 0 && start != end) {
+      BlockApi.getBlockListBetweenOfDoc(props.docId, start, end, (blockDatas: BlockData[]) => {
+        const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
+        // TODO：自定义复制组件
+        // navigator.clipboard 只能在 localhost 或 https 中使用
+        navigator.clipboard.writeText(text);
+      });
+    }
   };
 
   // --- ui

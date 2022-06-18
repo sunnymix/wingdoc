@@ -38,7 +38,9 @@ export default (props: EditorProps) => {
     let text = '';
 
     e.target.childNodes.forEach((node: any, i: number) => {
-      text += (node.innerText || node.nodeValue || '').replace(/\n/g, '');
+      text += (node.innerText || node.nodeValue || '')
+        .replace(/\n/g, '')
+        .replace(' ', ' ');
       if (i != e.target.childNodes.length - 1) {
         text += '\n';
       }

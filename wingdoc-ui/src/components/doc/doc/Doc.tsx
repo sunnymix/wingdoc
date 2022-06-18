@@ -9,6 +9,7 @@ import MarkApi from "@/components/mark/MarkApi";
 import { useModel, useLocation } from 'umi';
 import { BlockFocusing } from "@/components/block/block/Block";
 import { Focusing } from '@/components/common/focus/Focus';
+import "./DocStyle.css";
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -139,7 +140,7 @@ export default forwardRef((props: DocProps, ref) => {
         onEmptyFocus={handleBlockListEmptyFocus}
         onFocusChange={handleBlockListFocusChange}
         ref={blockListRef} />
-      <div className='blocklist_tail' onClick={handleTailClick}></div>
+      <div className='doc_tail' onClick={handleTailClick}></div>
     </div>
   </div>
   </>;

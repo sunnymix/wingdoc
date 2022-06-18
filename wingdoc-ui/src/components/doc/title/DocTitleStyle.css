@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 0;
+  margin-bottom: 8px;
 }
 
 .doc_title_menu {

@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.imager_content {
+  padding: 0 4px;
+}
+
 .imager_img {
   display: inline-block;
 }

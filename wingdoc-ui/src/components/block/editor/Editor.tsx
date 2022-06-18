@@ -302,7 +302,7 @@ export default forwardRef((props: BlockProps, ref) => {
         </div>
       </div>
     </div>
-    <div className='editor_footer' onClick={handleFooterClick}></div>
+    <div className='editor_space' onClick={handleFooterClick}></div>
   </div>
   </>
   );

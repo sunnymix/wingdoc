@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Space, Input, Button } from 'antd';
-import DocApi from './DocApi';
+import DocApi from './api/DocApi';
 import TableStyle from '../common/TableStyle.css';
 import { history } from 'umi';
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";

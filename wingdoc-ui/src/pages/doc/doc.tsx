@@ -1,5 +1,5 @@
 import { useRouteMatch } from "umi";
-import Doc from "@/components/doc/Doc";
+import Doc from "@/components/doc/doc/Doc";
 
 export default () => {
   const route = useRouteMatch();

@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useState } from "react";
-import DocApi from "@/components/doc/DocApi";
+import DocApi from "@/components/doc/api/DocApi";
 import TaskApi from "@/components/task/TaskApi";
 import { Link } from "umi";
 import Tasker from "@/components/block/tasker/Tasker";

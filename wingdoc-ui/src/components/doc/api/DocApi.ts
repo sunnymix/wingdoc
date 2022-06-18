@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_HOST } from "../common/Constant";
+import { API_HOST } from "@/components/common/Constant";
 import moment from "moment";
 
 const getDocList = (query: any, cb: Function) => {

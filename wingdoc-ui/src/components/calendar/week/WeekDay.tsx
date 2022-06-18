@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from "react";
 import moment from "moment";
 import { Space, Popconfirm, Badge } from "antd";
 import { history } from "umi";
-import DocApi from "@/components/doc/DocApi";
+import DocApi from "@/components/doc/api/DocApi";
 import WeekDayTasks from "./WeekDayTasks";
 import TaskApi from "@/components/task/TaskApi";
 import "./WeekStyle.css";

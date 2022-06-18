@@ -1,13 +1,14 @@
 import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import DocApi from './DocApi';
+import DocApi from '../api/DocApi';
 import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import BlockList from '../block/blocklist/BlockList';
-import DocTitle from './DocTitle';
-import DocAuthor from './DocAuthor';
-import MarkApi from '../mark/MarkApi';
+import BlockList from "@/components/block/blocklist/BlockList";
+import DocTitle from '../title/DocTitle';
+import DocAuthor from '../DocAuthor';
+import MarkApi from "@/components/mark/MarkApi";
 import { useModel, useLocation } from 'umi';
-import { BlockFocusing } from '../block/block/Block';
+import { BlockFocusing } from "@/components/block/block/Block";
+import { Focusing } from '@/components/common/focus/Focus';
 
 const spinIcon = <LoadingOutlined spin />;
 
@@ -29,7 +30,11 @@ export default forwardRef((props: DocProps, ref) => {
 
   // --- title
 
-  const [focusTitle, setFocusTitle] = useState<boolean>(false);
+  const [titleFocusing, setTitleFocusing] = useState<Focusing>(Focusing.of(false));
+
+  const updateTitleFocusing = (val: boolean) => {
+    setTitleFocusing(Focusing.of(val));
+  };
 
   const handleTitleFocus = () => {
     focusBlockPos(-1);
@@ -43,25 +48,7 @@ export default forwardRef((props: DocProps, ref) => {
     refreshMarks(location?.pathname);
   };
 
-  // --- author
-
-  const [focusAuthor, setFocusAuthor] = useState<boolean>(false);
-
-  const handleAuthorFocus = () => {
-    focusBlockPos(-1);
-  };
-
-  const handleAuthorFocusUp = () => {
-    setFocusTitle(true);
-    setFocusAuthor(false);
-  };
-
-  const handleAuthorFocusDown = () => {
-    setFocusAuthor(false);
-    focusBlockPos(0);
-  };
-
-  // --- load
+  // --- location:
 
   const location: any = useLocation();
 
@@ -89,34 +76,26 @@ export default forwardRef((props: DocProps, ref) => {
   const blockListRef: any = useRef();
 
   const handleAdd = () => {
-    setFocusTitle(false);
-    if (blockListRef && blockListRef.current) {
-      blockListRef.current.add();
-    }
+    updateTitleFocusing(false);
+    blockListRef.current.add();
   };
 
   // --- block focus
 
   const focusBlockPos = (pos: number) => {
-    if (blockListRef.current) {
-      blockListRef.current.focusPos(pos);
-    }
+    blockListRef.current.focusPos(pos);
   };
 
   // --- blocklist empty focus
 
   const handleBlockListEmptyFocus = () => {
-    setFocusTitle(true);
+    updateTitleFocusing(true);
   };
 
   // --- blocklist focus change
 
   const handleBlockListFocusChange = (focusing: BlockFocusing) => {
-    if (focusing.pos >= 0) {
-      setFocusTitle(false); 
-    } else {
-      setFocusTitle(true);
-    }
+    updateTitleFocusing(focusing.pos < 0);
   };
 
   // --- ui empty
@@ -137,23 +116,11 @@ export default forwardRef((props: DocProps, ref) => {
       <div>
         <DocTitle id={doc.id}
           value={doc.title}
-          showBlock={showBlock}
-          focus={focusTitle}
+          focusing={titleFocusing}
           onFocus={handleTitleFocus}
           onEnter={handleAdd}
           onFocusDown={handleTitleFocusDown}
-          onShowBlock={() => setShowBlock(!showBlock)}
-          onChange={handleTitleChange}/>
-        <DocAuthor
-          id={doc.id}
-          value={doc.author}
-          showBlock={showBlock}
-          focus={focusAuthor}
-          onEnter={handleAdd}
-          onFocus={handleAuthorFocus}
-          onFocusUp={handleAuthorFocusUp}
-          onFocusDown={handleAuthorFocusDown}
-          onBlur={() => setFocusAuthor(false)}/>
+          onChange={handleTitleChange} />
       </div>
       <BlockList
         docId={doc.id}

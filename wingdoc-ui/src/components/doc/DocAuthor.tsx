@@ -1,6 +1,6 @@
 import { FC, forwardRef, useEffect, useRef, useState } from 'react';
 import { Input, Menu, Dropdown, Button } from 'antd';
-import DocApi from './DocApi';
+import DocApi from './api/DocApi';
 import OptionButton from '../common/OptionButton';
 
 const {TextArea} = Input;

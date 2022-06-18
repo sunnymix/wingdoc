@@ -1,0 +1,31 @@
+
+.doc_title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.doc_title_menu {
+  flex-grow: 0;
+}
+
+.doc_title_content {
+  flex-grow: 1;
+}
+
+.doc_title_menu_btn {
+  visibility: hidden;
+}
+
+.doc_title.hovered .doc_title_menu_btn,
+.doc_title.focused .doc_title_menu_btn {
+  visibility: visible;
+}
+
+/* --- textarea */
+
+.doc_title_textarea {
+  font-size: 140%;
+  font-weight: bold;
+}

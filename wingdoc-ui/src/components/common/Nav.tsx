@@ -2,7 +2,7 @@ import { Menu, Dropdown, Space, Button } from "antd";
 import { ReactNode, useEffect, useState } from "react";
 import { history, useLocation, Link } from "umi";
 import { PlusOutlined, CaretDownOutlined } from "@ant-design/icons";
-import DocApi from "@/components/doc/DocApi";
+import DocApi from "@/components/doc/api/DocApi";
 import "./NavStyle.css";
 import moment from "moment";
 import MarkTabs from "@/components/mark/MarkTabs";

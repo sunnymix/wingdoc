@@ -15,14 +15,15 @@
   display: flex;
   background-color: #fff;
   position: relative;
+  border-radius: 2px;
 }
 
 .editor.hovered .editor_box {
-  background-color: #188fff10;
+  background-color: #00000010;
 }
 
 .editor.focused .editor_box {
-  background-color: #188fff20;
+  background-color: #00000010;
 }
 
 .editor.selected .editor_box {
@@ -96,7 +97,7 @@
 /* --- content: */
 
 .editor_content {
-  color: #333;
+  color: #000;
   background-color: transparent;
   line-height: 24px;
   padding: 0 4px;

@@ -16,7 +16,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- props
 
-  const {data, onFocus, onSelectStart, onSelectStop, onCopy, showBlock} = props;
+  const {data, onFocus, onSelectStart, onSelectStop, onCopy} = props;
 
   const [text, setText] = useState(data.text);
 
@@ -313,7 +313,6 @@ export default forwardRef((props: BlockProps, ref) => {
   <div className='block' onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
     {innerFocus && <div className='block_focused'></div>}
     {data.selectAll && <div className='block_selected'></div>}
-    {showBlock && <div className='block_indicator'></div>}
     <div className={`block_options ${innerFocus ? 'active' : ''}`}>
       <Dropdown overlay={menu} placement="bottomLeft" onVisibleChange={handleOptionVisibleChange}>
         <OptionButton/>

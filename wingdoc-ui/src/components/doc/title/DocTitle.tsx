@@ -4,7 +4,7 @@ import DocApi from '../api/DocApi';
 import OptionButton from "@/components/common/OptionButton";
 import "@/components/common/CommonStyle.css";
 import './DocTitleStyle.css';
-import { Focusing } from '@/components/common/focus/Focus';
+import { Focusing } from '@/components/common/status/Status';
 
 const {TextArea} = Input;
 

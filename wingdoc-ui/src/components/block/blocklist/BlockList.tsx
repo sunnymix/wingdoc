@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from '../api/BlockApi';
-import Block, { BlockFocusing } from '../block/Block';
+import Block, { BlockActiveState, BlockData, BlockPosState } from '../block/Block';
 import { useLocation } from 'umi';
 import './BlockListStyle.css';
 
@@ -10,6 +10,8 @@ export interface BlockerListProps {
   onEmptyFocus?: Function,
   onFocusChange?: Function,
 }
+
+
 
 export default forwardRef((props: BlockerListProps, ref) => {
 
@@ -82,15 +84,15 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- focus
 
-  const [focusing, setFocusing] = useState<BlockFocusing>({ pos: -1, ts: +(new Date())})
+  const [focusingPos, setFocusingPos] = useState<BlockPosState>(BlockPosState.of(-1));
 
   const updateFocusing = (pos: number) => {
-    setFocusing({ pos, ts: +(new Date()) });
+    setFocusingPos(BlockPosState.of(pos));
   };
 
   useEffect(() => {
-    onFocusChange?.call(null, focusing);
-  }, [focusing]);
+    onFocusChange?.call(null, focusingPos);
+  }, [focusingPos]);
 
   const handleFocus = (data: any) => {
     updateFocusing(data.pos);
@@ -204,7 +206,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
     } else {
       updateSelections();
     }
-  }, [selectStopPos])
+  }, [selectStopPos]);
 
   // --- copy
 
@@ -223,7 +225,28 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- new vvvvvvvvvv:
 
-  
+  // --- select:
+
+  const [selectingActive, setSelectingActive] = useState<BlockActiveState>(BlockActiveState.of(false));
+
+  const [selectingStartPos, setSelectingStartPos] = useState<BlockPosState>(BlockPosState.of(-1));
+
+  const [hoveringPos, setHoveringPos] = useState<BlockPosState>(BlockPosState.of(-1));
+
+  const [selectingBlockDatas, setSelectingBlockDatas] = useState<BlockData[]>([]);
+
+  const onMouseDown = (e: any, blockData: BlockData) => {
+    setSelectingActive(BlockActiveState.of(true));
+    setSelectingStartPos(BlockPosState.of(blockData.pos));
+  };
+
+  const onMouseUp = (e: any, blockData: BlockData) => {
+    setSelectingActive(BlockActiveState.of(false));
+  };
+
+  const onMouseEnter = (e: any, blockData: BlockData) => {
+    setHoveringPos(BlockPosState.of(blockData.pos));
+  };
 
   // --- ui
   
@@ -233,8 +256,10 @@ export default forwardRef((props: BlockerListProps, ref) => {
         <Block
           key={block.id}
           data={block}
-          focusing={focusing}
-          showBlock={showBlock}
+          focusingPos={focusingPos}
+          hoveringPos={hoveringPos}
+          selectingActive={selectingActive}
+          selectingStartPos={selectingStartPos}
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}
           onMoveUp={handleBlockMoveUp}
@@ -244,7 +269,10 @@ export default forwardRef((props: BlockerListProps, ref) => {
           onFocusDown={handleFocusDown}
           onSelectStart={handleSelectStart}
           onSelectStop={handleSelectStop}
-          onCopy={handleCopy} />)
+          onCopy={handleCopy}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseEnter={onMouseEnter} />)
       }
     </div>
   );

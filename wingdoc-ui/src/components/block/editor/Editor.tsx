@@ -1,5 +1,5 @@
 import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
-import { BlockProps } from "../block/Block";
+import { BlockData, BlockProps } from "../block/Block";
 import './EditorStyle.css';
 import useEditor from "./EditorHook";
 import { LinkOutlined, CaretUpOutlined, CaretDownOutlined, PictureOutlined, CheckCircleOutlined } from '@ant-design/icons';
@@ -12,6 +12,12 @@ import { BlockType } from "../block/Block";
 import Imager from "../imager/Imager";
 
 export default forwardRef((props: BlockProps, ref) => {
+
+  // --- log:
+
+  const log = (msg: string, ...restArgs: any[]) => {
+    console.log(`editor[${props.data.pos}]: ${msg}`, restArgs);
+  };
 
   // --- editor:
 
@@ -61,6 +67,52 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const [hovered, setHovered] = useState<boolean>(false);
 
+  // --- select:
+
+  const [selected, setSelected] = useState<boolean>(false);
+
+  const onMouseDown = (e: any) => {
+    props.onMouseDown?.call(null, e, BlockData.of(props.data.id, props.data.pos, editorText));
+  };
+
+  const onMouseUp = (e: any) => {
+    props.onMouseUp?.call(null, e, BlockData.of(props.data.id, props.data.pos, editorText));
+  };
+
+  const onMouseEnter = (e: any) => {
+    setHovered(true);
+    props.onMouseEnter?.call(null, e, BlockData.of(props.data.id, props.data.pos, editorText));
+  };
+
+  const onMouseMove = (e: any) => {
+  };
+
+  const onMouseLeave = (e: any) => {
+    setHovered(false);
+  };
+  
+  useEffect(() => {
+    if (props.selectingActive.active) {
+      let min = -1, max = -1;
+      if (props.hoveringPos.pos < props.selectingStartPos.pos) {
+        min = props.hoveringPos.pos;
+        max = props.selectingStartPos.pos;
+      } else {
+        max = props.hoveringPos.pos;
+        min = props.selectingStartPos.pos;
+      }
+      if (min >= 0 && max >= 0 && min != max) {
+        let selected = false;
+        if (props.data.pos >= min && props.data.pos <= max) {
+          // log('selected me!', `range: ${min}, ${max}`);
+          selected = true;
+        }
+        setSelected(selected);
+      }
+    }
+    
+  }, [props.selectingActive, props.selectingStartPos, props.hoveringPos]);
+
   // --- focus:
 
   const handleEditorFocus = (e: any) => {
@@ -68,13 +120,14 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   useEffect(() => {
-    if (props.focusing.pos == props.data.pos) {
+    if (props.focusingPos.pos == props.data.pos) {
       // console.log(`editor[${props.data.pos}]: focusing on me! ${props.focusing.pos}/${props.focusing.ts}"`);
       if (!focused) {
         focusEditor();
       }
     }
-  }, [props.focusing])
+    setSelected(false);
+  }, [props.focusingPos])
 
   const [focused, setFocused] = useState<boolean>(false);
 
@@ -270,7 +323,10 @@ export default forwardRef((props: BlockProps, ref) => {
 
   return (
   <>
-  <div className={`editor ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${blockType.toLocaleLowerCase()}`} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+  <div
+    className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'}`}
+    onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
+    onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
     <div className='editor_box'>
       <div className='editor_side'>
         <button className='editor_menu_btn btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
@@ -296,7 +352,11 @@ export default forwardRef((props: BlockProps, ref) => {
         <div className="editor_imager">
           <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} />
         </div>}
-        <div className='editor_content' {...editorProps} onClick={handleEditorClick} onKeyDown={handleEditorKeyDown} onKeyUp={handleEditorKeyUp} />
+        <div
+          className='editor_content'
+          {...editorProps}
+          onClick={handleEditorClick}
+          onKeyDown={handleEditorKeyDown} />
         <div className='editor_link'>
           <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
         </div>

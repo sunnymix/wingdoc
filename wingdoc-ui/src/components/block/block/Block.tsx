@@ -49,8 +49,10 @@ export namespace BlockType {
 
 export interface BlockProps {
   data: any,
-  focusing: BlockFocusing,
-  showBlock?: boolean,
+  focusingPos: BlockPosState,
+  hoveringPos: BlockPosState,
+  selectingActive: BlockActiveState,
+  selectingStartPos: BlockPosState,
   onEnter?: Function,
   onDelete?: Function,
   onMoveUp?: Function,
@@ -60,13 +62,53 @@ export interface BlockProps {
   onFocusDown?: Function,
   onSelectStart?: Function,
   onSelectStop?: Function,
-  onCopy?: Function
+  onCopy?: Function,
+  onMouseDown?: Function,
+  onMouseUp?: Function,
+  onMouseEnter?: Function,
 };
 
-export interface BlockFocusing {
+// --- block data:
+
+export interface BlockData {
+  id: string,
+  pos: number,
+  text: string,
+};
+
+export namespace BlockData {
+  export function of(id: string, pos: number, text: string): BlockData {
+    return { id, pos, text };
+  }
+};
+
+// --- pos state:
+
+export interface BlockPosState {
   pos: number,
   ts: number,
 };
+
+export namespace BlockPosState {
+  export function of(pos: number): BlockPosState {
+    return { pos, ts: +(new Date()) };
+  }
+}
+
+// --- bool state:
+
+export interface BlockActiveState {
+  active: boolean,
+  ts: number,
+};
+
+export namespace BlockActiveState {
+  export function of(active: boolean): BlockActiveState {
+    return { active , ts: +(new Date()) };
+  }
+}
+
+// --- component:
 
 const Block = forwardRef((props: BlockProps, ref) => {
   const { data } = props;

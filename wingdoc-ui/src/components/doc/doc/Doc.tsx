@@ -7,8 +7,8 @@ import DocTitle from '../title/DocTitle';
 import DocAuthor from '../DocAuthor';
 import MarkApi from "@/components/mark/MarkApi";
 import { useModel, useLocation } from 'umi';
-import { BlockFocusing } from "@/components/block/block/Block";
-import { Focusing } from '@/components/common/focus/Focus';
+import { BlockPosState } from "@/components/block/block/Block";
+import { Focusing } from '@/components/common/status/Status';
 import "./DocStyle.css";
 
 const spinIcon = <LoadingOutlined spin />;
@@ -95,8 +95,8 @@ export default forwardRef((props: DocProps, ref) => {
 
   // --- blocklist focus change
 
-  const handleBlockListFocusChange = (focusing: BlockFocusing) => {
-    updateTitleFocusing(focusing.pos < 0);
+  const handleBlockListFocusChange = (pos: BlockPosState) => {
+    updateTitleFocusing(pos.pos < 0);
   };
 
   // --- tail click:

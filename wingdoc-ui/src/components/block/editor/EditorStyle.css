@@ -15,15 +15,18 @@
   display: flex;
   background-color: #fff;
   position: relative;
-  border-radius: 2px;
 }
 
 .editor.hovered .editor_box {
-  background-color: #188fff08;
+  background-color: #188fff10;
 }
 
 .editor.focused .editor_box {
-  background-color: #188fff10;
+  background-color: #188fff20;
+}
+
+.editor.selected .editor_box {
+  background-color: #188fff20;
 }
 
 /* --- side: */

@@ -15,7 +15,6 @@
   display: flex;
   background-color: #fff;
   position: relative;
-  border-radius: 2px;
 }
 
 .editor.hovered .editor_box {

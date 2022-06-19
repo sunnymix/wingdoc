@@ -1,9 +1,33 @@
 .imager {
   position: relative;
-  display: flex;
 }
 
-/* .imager_content {} */
+.imager_content {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #00000010;
+}
+
+.imager_content_placeholder {
+  display: none;
+  color: #ccc;
+  padding: 0 4px;
+}
+
+.imager.empty .imager_content_placeholder {
+  display: inline-block;
+}
+
+.imager_uploader {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  visibility: hidden;
+}
+
+.imager:hover .imager_uploader {
+  visibility: visible;
+}
 
 .imager_img {
   display: inline-block;

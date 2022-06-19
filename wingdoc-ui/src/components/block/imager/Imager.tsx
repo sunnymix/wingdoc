@@ -40,11 +40,17 @@ export default forwardRef((props: ImagerProps, ref) => {
 
   const [img, setImg] = useState<string>(props.initialImg || '');
 
+  const getImgEmpty = (): boolean => img.length == 0;
+
+  const [imgEmpty, setImgEmpty] = useState<boolean>(getImgEmpty());
+
+  useEffect(() => setImgEmpty(getImgEmpty()), [img]);
+
   // --- paste data:
 
   useEffect(() => {
     if (props.pasteData && props.pasteData.file) {
-      log('pasteData, file:', props.pasteData.file);
+      // log('pasteData, file:', props.pasteData.file);
       pasteImg(props.pasteData.file);
     }
   }, [props.pasteData]);
@@ -117,12 +123,13 @@ export default forwardRef((props: ImagerProps, ref) => {
 
   return (
   <>
-  <div className='imager'>
+  <div className={`imager ${imgEmpty && 'empty'}`}>
     <div className='imager_content'>
+      <span className='imager_content_placeholder'>Add image</span>
       <img className='imager_img' src={img} />
     </div>
-    <Upload {...uploadProps}>
-      <Button type='default' size='small'>Set image</Button>
+    <Upload className='imager_uploader' {...uploadProps}>
+      <Button type='default' size='small'>{`${imgEmpty ? 'Add' : 'Update'}`} image</Button>
     </Upload>
   </div>
   </>

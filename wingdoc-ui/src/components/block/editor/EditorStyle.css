@@ -15,6 +15,7 @@
   display: flex;
   background-color: #fff;
   position: relative;
+  border-radius: 2px;
 }
 
 .editor.hovered .editor_box {
@@ -91,6 +92,11 @@
 
 .editor_imager {
   padding: 0 4px;
+  display: none;
+}
+
+.editor.img .editor_imager {
+  display: block;
 }
 
 /* --- content: */

@@ -9,7 +9,7 @@ import { history } from "umi";
 import Tasker from "../tasker/Tasker";
 import "@/components/common/CommonStyle.css";
 import { BlockType } from "../block/Block";
-import Imager from "../imager/Imager";
+import Imager, { ImagerPasteData } from "../imager/Imager";
 
 export default forwardRef((props: BlockProps, ref) => {
 
@@ -21,9 +21,11 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- editor:
 
+  const [initialText, setInitialText] = useState<string>(props.data.text);
+
   const { editorProps, editorText, focusEditor, editorFocused } = useEditor({
     data: props.data,
-    initialText: props.data.text,
+    initialText: initialText,
     onFocus: (e: any) => {
       handleEditorFocus(e);
     },
@@ -48,8 +50,12 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const lineHeight: number = 24;
 
+  const saveText = (text: string) => {
+    BlockApi.updateBlock(props.data.id, { text });
+    return true;
+  };
+
   useEffect(() => {
-    // saveText();
   }, [editorText]);
 
   // --- control:
@@ -315,10 +321,13 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const imagerRef = useRef<any>(null);
 
+  const [imagerPasteData, setImagerPasteData] = useState<ImagerPasteData>(ImagerPasteData.of(null));
+
   const pasteImg = (e: any, file: any) => {
-    if (imagerRef && imagerRef.current) {
-      imagerRef.current.pasteImg(e, file);
-    }
+    changeBlockType(BlockType.IMG);
+    setImagerPasteData(ImagerPasteData.of(file));
+    setInitialText(file.name);
+    saveText(file.name);
   };
 
   // --- ui:
@@ -350,10 +359,9 @@ export default forwardRef((props: BlockProps, ref) => {
         <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
       </div>
       <div className='editor_body'>
-        {(blockType == BlockType.IMG) && 
         <div className="editor_imager">
-          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} />
-        </div>}
+          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
+        </div>
         <div
           className='editor_content'
           {...editorProps}

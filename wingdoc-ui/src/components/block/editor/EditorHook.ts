@@ -63,6 +63,7 @@ export default (props: EditorProps) => {
       const file = files[0];
       if (file && file.type.indexOf('image/') >= 0) {
         props.onPasteImg?.call(null, e, file);
+        e.preventDefault();
         return true;
       }
     }

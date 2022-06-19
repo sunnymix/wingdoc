@@ -8,4 +8,5 @@
 
 .imager_img {
   display: inline-block;
+  max-width: 50vw;
 }

@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./ImagerStyle.css";
 import type { UploadProps } from 'antd';
 import { Button, message, Upload } from 'antd';
@@ -7,21 +7,47 @@ import axios from "axios";
 export interface ImagerProps {
   blockId: string,
   initialImg: string | undefined,
+  pasteData?: ImagerPasteData | null,
+};
+
+export interface ImagerPasteData {
+  file: any,
+  ts: number,
+};
+export namespace ImagerPasteData {
+  export function of(file: any): ImagerPasteData {
+    return { file, ts: +(new Date()) }
+  }
 };
 
 export default forwardRef((props: ImagerProps, ref) => {
 
+  // --- log:
+
+  const log = (msg: string, ...args: any[]) => {
+    console.log(`imager: ${msg}`, ...args);
+  };
+
   // --- imperative:
 
   useImperativeHandle(ref, () => ({
-    pasteImg: (e: any, file: any) => {
-      pasteImg(e, file);
+    pasteImg: (file: any) => {
+      pasteImg(file);
     },
   }));
 
   // --- img:
 
   const [img, setImg] = useState<string>(props.initialImg || '');
+
+  // --- paste data:
+
+  useEffect(() => {
+    if (props.pasteData && props.pasteData.file) {
+      log('pasteData, file:', props.pasteData.file);
+      pasteImg(props.pasteData.file);
+    }
+  }, [props.pasteData]);
 
   // --- upload:
 
@@ -54,7 +80,7 @@ export default forwardRef((props: ImagerProps, ref) => {
 
   // --- paste:
 
-  const pasteImg = (e: any, file: any) => {
+  const pasteImg = (file: any) => {
     createFileObj(file).then(fileObj => {
       
       const form = new FormData();

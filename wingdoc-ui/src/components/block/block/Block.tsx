@@ -53,6 +53,7 @@ export interface BlockProps {
   hoveringPos: BlockPosState,
   selectingActive: BlockActiveState,
   selectingStartPos: BlockPosState,
+  selectingMulti: BlockSelectingMultiState,
   onEnter?: Function,
   onDelete?: Function,
   onMoveUp?: Function,
@@ -105,6 +106,28 @@ export interface BlockActiveState {
 export namespace BlockActiveState {
   export function of(active: boolean): BlockActiveState {
     return { active , ts: +(new Date()) };
+  }
+};
+
+// --- selecting:
+
+export interface BlockSelectingMultiState {
+  multi: boolean,
+  start: number,
+  end: number,
+  ts: number,
+};
+
+export namespace BlockSelectingMultiState {
+  export function of(_start: number, _end: number, selectingActive: boolean): BlockSelectingMultiState {
+    let start = _start, end = _end;
+    if (_start > _end) {
+      start = _end;
+      end = _start;
+    }
+
+    const multi = (start > -1 && end > -1 && start != end) && selectingActive;
+    return { multi, start, end, ts: +(new Date()) };
   }
 }
 

@@ -1,12 +1,11 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from '../api/BlockApi';
-import Block, { BlockActiveState, BlockData, BlockPosState } from '../block/Block';
+import Block, { BlockActiveState, BlockData, BlockPosState, BlockSelectingMultiState } from '../block/Block';
 import { useLocation } from 'umi';
 import './BlockListStyle.css';
 
 export interface BlockerListProps {
   docId: string,
-  showBlock?: boolean,
   onEmptyFocus?: Function,
   onFocusChange?: Function,
 }
@@ -29,7 +28,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // -- props:
 
-  const { docId, showBlock, onEmptyFocus, onFocusChange } = props;
+  const { docId, onEmptyFocus, onFocusChange } = props;
 
   // --- loading
 
@@ -225,7 +224,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   // --- new vvvvvvvvvv:
 
-  // --- select:
+  // --- selecting:
 
   const [selectingActive, setSelectingActive] = useState<BlockActiveState>(BlockActiveState.of(false));
 
@@ -233,17 +232,19 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const [hoveringPos, setHoveringPos] = useState<BlockPosState>(BlockPosState.of(-1));
 
+  const [selectingMulti, setSelectingMulti] = useState<BlockSelectingMultiState>(BlockSelectingMultiState.of(-1, -1, false));
+
   const onMouseDown = (e: any, blockData: BlockData) => {
     setSelectingActive(BlockActiveState.of(true));
     setSelectingStartPos(BlockPosState.of(blockData.pos));
   };
 
-  const onMouseUp = (e: any, blockData: BlockData) => {
-    onSelectingEnd();
-  };
-
   const onMouseEnter = (e: any, blockData: BlockData) => {
     setHoveringPos(BlockPosState.of(blockData.pos));
+  };
+
+  const onMouseUp = (e: any, blockData: BlockData) => {
+    onSelectingEnd();
   };
 
   const onMouseLeave = (e: any) => {
@@ -251,24 +252,27 @@ export default forwardRef((props: BlockerListProps, ref) => {
   }
 
   const onSelectingEnd = () => {
-    setSelectingActive(BlockActiveState.of(false));
-    onSelectingChange();
-  };
-
-  const onSelectingChange = () => {
-    var start = selectingStartPos.pos, end = hoveringPos.pos;
-    const ascOrder = start >= end;
-    start = ascOrder ? start : end;
-    end = ascOrder ? end : start;
-    if (start >= 0 && end >= 0 && start != end) {
-      BlockApi.getBlockListBetweenOfDoc(props.docId, start, end, (blockDatas: BlockData[]) => {
+    if (selectingMulti.multi) {
+      BlockApi.getBlockListBetweenOfDoc(props.docId, selectingMulti.start, selectingMulti.end, (blockDatas: BlockData[]) => {
         const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
-        // TODO：自定义复制组件
-        // navigator.clipboard 只能在 localhost 或 https 中使用
         navigator.clipboard.writeText(text);
       });
     }
+    setSelectingActive(BlockActiveState.of(false));
   };
+
+  useEffect(() => {
+    setSelectingMulti(BlockSelectingMultiState.of(
+      selectingStartPos.pos,
+      hoveringPos.pos,
+      selectingActive.active));
+  }, [selectingActive, selectingStartPos, hoveringPos]);
+
+  useEffect(() => {
+    if (selectingMulti.multi) {
+      window.getSelection()?.removeAllRanges();
+    }
+  }, [selectingMulti]);
 
   // --- ui
   
@@ -281,6 +285,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
           focusingPos={focusingPos}
           hoveringPos={hoveringPos}
           selectingActive={selectingActive}
+          selectingMulti={selectingMulti}
           selectingStartPos={selectingStartPos}
           onEnter={handleBlockEnter}
           onDelete={handleBlockDelete}

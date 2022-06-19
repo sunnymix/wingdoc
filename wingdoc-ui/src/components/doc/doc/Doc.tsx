@@ -27,8 +27,6 @@ export default forwardRef((props: DocProps, ref) => {
 
   const [doc, setDoc] = useState<any>(null);
 
-  const [showBlock, setShowBlock] = useState<any>(false);
-
   // --- title
 
   const [titleFocusing, setTitleFocusing] = useState<Focusing>(Focusing.of(false));
@@ -136,7 +134,6 @@ export default forwardRef((props: DocProps, ref) => {
       </div>
       <BlockList
         docId={doc.id}
-        showBlock={showBlock}
         onEmptyFocus={handleBlockListEmptyFocus}
         onFocusChange={handleBlockListFocusChange}
         ref={blockListRef} />

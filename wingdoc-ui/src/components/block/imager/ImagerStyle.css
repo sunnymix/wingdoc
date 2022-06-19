@@ -3,9 +3,7 @@
   display: flex;
 }
 
-.imager_content {
-  margin-right: 8px;
-}
+/* .imager_content {} */
 
 .imager_img {
   display: inline-block;

@@ -98,26 +98,17 @@ export default forwardRef((props: BlockProps, ref) => {
   };
   
   useEffect(() => {
-    if (props.selectingActive.active) {
-      let min = -1, max = -1;
-      if (props.hoveringPos.pos < props.selectingStartPos.pos) {
-        min = props.hoveringPos.pos;
-        max = props.selectingStartPos.pos;
-      } else {
-        max = props.hoveringPos.pos;
-        min = props.selectingStartPos.pos;
+    if (props.selectingMulti.multi) {
+      let selected = false;
+      if (props.data.pos >= props.selectingMulti.start 
+        && props.data.pos <= props.selectingMulti.end) {
+        // log('selected me!', `range: ${min}, ${max}`);
+        selected = true;
       }
-      if (min >= 0 && max >= 0 && min != max) {
-        let selected = false;
-        if (props.data.pos >= min && props.data.pos <= max) {
-          // log('selected me!', `range: ${min}, ${max}`);
-          selected = true;
-        }
-        setSelected(selected);
-      }
+      setSelected(selected);
     }
     
-  }, [props.selectingActive, props.selectingStartPos, props.hoveringPos]);
+  }, [props.selectingMulti]);
 
   // --- focus:
 

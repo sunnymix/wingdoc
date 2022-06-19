@@ -122,10 +122,8 @@ export default forwardRef((props: ImagerProps, ref) => {
       <img className='imager_img' src={img} />
     </div>
     <Upload {...uploadProps}>
-      <Button type='link' size='small'>Set image</Button>
+      <Button type='default' size='small'>Set image</Button>
     </Upload>
-    <div>
-    </div>
   </div>
   </>
   );

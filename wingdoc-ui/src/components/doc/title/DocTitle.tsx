@@ -1,7 +1,6 @@
 import {forwardRef, useEffect, useRef, useState} from 'react';
 import {Input, Menu, Dropdown} from 'antd';
 import DocApi from '../api/DocApi';
-import OptionButton from "@/components/common/OptionButton";
 import "@/components/common/CommonStyle.css";
 import './DocTitleStyle.css';
 import { Focusing } from '@/components/common/status/Status';
@@ -102,6 +101,7 @@ export default forwardRef((props: DocTitleProps, ref) => {
     <div className='doc_title_content'>
       <TextArea
         className='doc_title_textarea'
+        maxLength={100}
         ref={textRef}
         value={title}
         onChange={changeTitle}
@@ -112,7 +112,7 @@ export default forwardRef((props: DocTitleProps, ref) => {
         size='small'
         placeholder='title'
         autoSize={true}
-        onFocus={handleTextFocus}/>
+        onFocus={handleTextFocus} />
     </div>
   </div>
   </>

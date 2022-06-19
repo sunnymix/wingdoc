@@ -1,12 +1,14 @@
 .imager {
   position: relative;
+  display: flex;
 }
 
 .imager_content {
-  padding: 0 4px;
+  margin-right: 8px;
 }
 
 .imager_img {
   display: inline-block;
-  max-width: 50vw;
+  width: auto;
+  max-width: 80vw;
 }

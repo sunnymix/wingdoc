@@ -58,6 +58,7 @@ export default (props: EditorProps) => {
   // --- paste:
 
   const handlePasteImg = (e: any) => {
+    console.log('EditorHook paste', e);
     const files = e.clipboardData.files;
     if (files && files.length > 0) {
       const file = files[0];

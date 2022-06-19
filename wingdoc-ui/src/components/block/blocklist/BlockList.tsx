@@ -239,18 +239,27 @@ export default forwardRef((props: BlockerListProps, ref) => {
   };
 
   const onMouseUp = (e: any, blockData: BlockData) => {
-    setSelectingActive(BlockActiveState.of(false));
-    onSelectingChange(selectingStartPos.pos, hoveringPos.pos);
+    onSelectingEnd();
   };
 
   const onMouseEnter = (e: any, blockData: BlockData) => {
     setHoveringPos(BlockPosState.of(blockData.pos));
   };
 
-  const onSelectingChange = (startPos: number, endPos: number) => {
-    const ascOrder = endPos >= startPos;
-    const start = ascOrder ? startPos : endPos;
-    const end = ascOrder ? endPos : startPos;
+  const onMouseLeave = (e: any) => {
+    onSelectingEnd();
+  }
+
+  const onSelectingEnd = () => {
+    setSelectingActive(BlockActiveState.of(false));
+    onSelectingChange();
+  };
+
+  const onSelectingChange = () => {
+    var start = selectingStartPos.pos, end = hoveringPos.pos;
+    const ascOrder = start >= end;
+    start = ascOrder ? start : end;
+    end = ascOrder ? end : start;
     if (start >= 0 && end >= 0 && start != end) {
       BlockApi.getBlockListBetweenOfDoc(props.docId, start, end, (blockDatas: BlockData[]) => {
         const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
@@ -264,7 +273,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
   // --- ui
   
   return (
-    <div className='blocklist'>
+    <div className='blocklist' onMouseLeave={onMouseLeave}>
       {blocks.map((block: any, index: number) => 
         <Block
           key={block.id}

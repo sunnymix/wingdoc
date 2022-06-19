@@ -19,11 +19,11 @@
 }
 
 .editor.hovered .editor_box {
-  background-color: #00000010;
+  background-color: transparent;
 }
 
 .editor.focused .editor_box {
-  background-color: #00000010;
+  background-color: transparent;
 }
 
 .editor.selected .editor_box {

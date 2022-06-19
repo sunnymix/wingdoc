@@ -92,10 +92,7 @@ export default forwardRef((props: ImagerProps, ref) => {
             setImg(res.data.data);
             message.success(`${fileObj.name} file uploaded successfully`);
           }
-          
-          console.log(res);
         });
-
     });
   };
 

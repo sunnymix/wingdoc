@@ -49,31 +49,31 @@ public class TaskQueryService {
 
     public Out<DocTaskStatsInfo> stats(DocTaskQuery query) {
         List<Block> blockList = blockRepo.queryDocTask(query).getData();
-        Integer un = 0, on = 0, ok = 0, up = 0, no = 0;
+        Integer newCount = 0, wipCount = 0, okCount = 0, upCount = 0, delCount = 0;
         for (Block block : blockList) {
-            if (block.getStatus().equalsIgnoreCase("un")) {
-                un++;
-            } else if (block.getStatus().equalsIgnoreCase("on")) {
-                on++;
+            if (block.getStatus().equalsIgnoreCase("new")) {
+                newCount++;
+            } else if (block.getStatus().equalsIgnoreCase("wip")) {
+                wipCount++;
             } else if (block.getStatus().equalsIgnoreCase("ok")) {
-                ok++;
+                okCount++;
             } else if (block.getStatus().equalsIgnoreCase("up")) {
-                up++;
-            } else if (block.getStatus().equalsIgnoreCase("no")) {
-                no++;
+                upCount++;
+            } else if (block.getStatus().equalsIgnoreCase("del")) {
+                delCount++;
             }
         }
         Integer all = blockList.size();
-        Integer finished = ok + no;
+        Integer finished = okCount + delCount;
         Integer unfinished = all - finished;
         DocTaskStatsInfo stats = DocTaskStatsInfo.builder()
                 .docId(query.getDocId())
                 .all(all)
-                .un(un)
-                .on(on)
-                .ok(ok)
-                .up(up)
-                .no(no)
+                .newCount(newCount)
+                .wipCount(wipCount)
+                .okCount(okCount)
+                .upCount(upCount)
+                .delCount(delCount)
                 .finished(finished)
                 .unfinished(unfinished)
                 .build();

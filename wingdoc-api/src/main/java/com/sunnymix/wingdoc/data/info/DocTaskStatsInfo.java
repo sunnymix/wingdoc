@@ -20,19 +20,19 @@ public class DocTaskStatsInfo {
     private Integer all = 0;
 
     @Builder.Default
-    private Integer un = 0;
+    private Integer newCount = 0;
 
     @Builder.Default
-    private Integer on = 0;
+    private Integer wipCount = 0;
 
     @Builder.Default
-    private Integer ok = 0;
+    private Integer okCount = 0;
 
     @Builder.Default
-    private Integer up = 0;
+    private Integer upCount = 0;
 
     @Builder.Default
-    private Integer no = 0;
+    private Integer delCount = 0;
 
     @Builder.Default
     private Integer finished = 0;

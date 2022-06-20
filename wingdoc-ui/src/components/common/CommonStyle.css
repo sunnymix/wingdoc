@@ -52,6 +52,11 @@
   background-color: #fff;
 }
 
+.hovered .btn_border_icon {
+  border-color: #1890ff50;
+  border-color: #1890ff50 #1890ff50 transparent transparent;
+}
+
 .focused .btn_border_icon {
   /* border-color: #1890ff; */
   border-color: #1890ff #1890ff transparent transparent;

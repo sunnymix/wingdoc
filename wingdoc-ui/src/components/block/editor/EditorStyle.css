@@ -89,21 +89,31 @@
   position: relative;
 }
 
-.editor.hovered .editor_box::after,
-.editor.focused .editor_box::after,
-.editor.selected .editor_box::after {
+.editor .editor_box::after,
+.editor .editor_box::after,
+.editor .editor_box::after {
   content: ' ';
   position: absolute;
   top: 4px;
   bottom: 4px;
   left: 32px;
-  border-left: 2px solid #188fff50;
+  border-left: 2px solid transparent;
+  border-radius: 2px 0 0 2px;
+}
+
+.editor.hovered .editor_box::after {
+  border-color: #188fff50;
+}
+
+.editor.focused .editor_box::after,
+.editor.selected .editor_box::after {
+  border-color: #188fff;
 }
 
 /* --- imager: */
 
 .editor_imager {
-  padding: 0 6px;
+  padding: 0 8px;
   display: none;
 }
 
@@ -117,7 +127,7 @@
   color: #000;
   background-color: transparent;
   line-height: 24px;
-  padding: 0 6px;
+  padding: 0 8px;
   font-family: "Helvetica Neue", Helvetica, Arial;
 }
 

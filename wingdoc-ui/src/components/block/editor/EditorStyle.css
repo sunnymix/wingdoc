@@ -15,7 +15,6 @@
   display: flex;
   background-color: #fff;
   position: relative;
-  border-radius: 2px;
 }
 
 .editor.hovered .editor_box {
@@ -76,6 +75,7 @@
   flex-shrink: 0;
   flex-grow: 0;
   display: none;
+  margin-left: 2px;
 }
 
 .editor_tasker.opened {
@@ -86,12 +86,24 @@
 
 .editor_body {
   flex-grow: 1;
+  position: relative;
+}
+
+.editor.hovered .editor_box::after,
+.editor.focused .editor_box::after,
+.editor.selected .editor_box::after {
+  content: ' ';
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 32px;
+  border-left: 2px solid #188fff50;
 }
 
 /* --- imager: */
 
 .editor_imager {
-  padding: 0 4px;
+  padding: 0 8px;
   display: none;
 }
 
@@ -105,7 +117,7 @@
   color: #000;
   background-color: transparent;
   line-height: 24px;
-  padding: 0 4px;
+  padding: 0 8px;
   font-family: "Helvetica Neue", Helvetica, Arial;
 }
 

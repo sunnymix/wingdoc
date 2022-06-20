@@ -53,6 +53,7 @@
 }
 
 .focused .btn_border_icon {
+  /* border-color: #1890ff; */
   border-color: #1890ff #1890ff transparent transparent;
 }
 

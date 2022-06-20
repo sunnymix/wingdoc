@@ -20,7 +20,7 @@
 }
 
 .marks_tabs_item.focus {
-  background-color: #188fff20;
+  background-color: #188fff30;
 }
 
 .marks_tabs_item.pin::after {

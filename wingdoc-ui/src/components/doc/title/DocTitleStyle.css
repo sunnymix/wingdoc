@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .doc_title_menu {
@@ -28,4 +28,5 @@
 .doc_title_textarea {
   font-size: 140%;
   font-weight: bold;
+  padding: 0 4px !important;
 }

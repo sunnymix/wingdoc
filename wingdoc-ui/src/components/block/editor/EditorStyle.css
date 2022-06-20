@@ -128,21 +128,21 @@
 /* .editor.img .editor_content {} */
 
 .editor.h1 .editor_content {
-  font-size: 140%;
-  font-weight: bold;
-}
-
-.editor.h2 .editor_content {
   font-size: 130%;
   font-weight: bold;
 }
 
-.editor.h3 .editor_content {
+.editor.h2 .editor_content {
   font-size: 120%;
   font-weight: bold;
 }
 
-.editor.h4 .editor_content {
+.editor.h3 .editor_content {
   font-size: 110%;
+  font-weight: bold;
+}
+
+.editor.h4 .editor_content {
+  font-size: 100%;
   font-weight: bold;
 }

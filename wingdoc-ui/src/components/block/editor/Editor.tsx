@@ -171,7 +171,7 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const getCaretCoordinates = (e: any) => {
     // firstRow, lastRow 默认值为 true，表示只有一行
-    let x = 0, y = 0, row = 0, rowCount = 0, firstRow = true, lastRow = true, middleRow = false;
+    let x = 0, y = 0, row = 0, rowCount = 0, firstRow = false, lastRow = false, middleRow = false;
     const isSupported = typeof window.getSelection !== "undefined";
     if (isSupported) {
       const selection = window.getSelection();

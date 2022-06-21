@@ -321,6 +321,10 @@ export default forwardRef((props: BlockProps, ref) => {
     // saveText(file.name);
   };
 
+  const handleImagerClick = (e: any) => {
+    focusEditor();
+  };
+
   // --- ui:
 
   return (
@@ -358,7 +362,7 @@ export default forwardRef((props: BlockProps, ref) => {
         <div className='editor_link'>
           <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
         </div>
-        <div className="editor_imager">
+        <div className="editor_imager" onClick={handleImagerClick}>
           <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
         </div>
       </div>

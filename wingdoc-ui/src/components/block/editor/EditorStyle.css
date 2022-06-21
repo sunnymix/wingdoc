@@ -105,8 +105,7 @@
   border-color: #188fff50;
 }
 
-.editor.focused .editor_box::after,
-.editor.selected .editor_box::after {
+.editor.focused .editor_box::after {
   border-color: #188fff;
 }
 

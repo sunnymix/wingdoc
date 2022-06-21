@@ -11,7 +11,7 @@
   display: block;
   z-index: 100;
   background-color: #fff;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px 4px #00000010;
 }
 
 .btn.tasker_btn {
@@ -25,47 +25,47 @@
   justify-content: center;
   background-color: #fff;
   border-radius: 2px;
-  height: 16px;
-  width: 85%;
+  height: 14px;
+  width: 26px;
 }
 
 .btn.tasker_btn .tasker_btn_text {
   display: block;
   font-weight: bold;
-  transform: scale(0.7);
+  transform: scale(0.65);
 }
 
 .btn.tasker_btn.new .tasker_btn_body {
-  background-color: #faad1420;
+  background-color: #faad14;
 }
 .btn.tasker_btn.new .tasker_btn_text {
-  color: #faad14;
+  color: #fff;
 }
 
 .btn.tasker_btn.wip .tasker_btn_body {
-  background-color: #40a9ff20;
+  background-color: #40a9ff;
 }
 .btn.tasker_btn.wip .tasker_btn_text {
-  color: #40a9ff;
+  color: #fff;
 }
 
 .btn.tasker_btn.ok .tasker_btn_body {
-  background-color: #52c41a20;
+  background-color: #52c41a;
 }
 .btn.tasker_btn.ok .tasker_btn_text {
-  color: #52c41a;
+  color: #fff;
 }
 
 .btn.tasker_btn.up .tasker_btn_body {
-  background-color: #ff4d4f20;
+  background-color: #ff4d4f;
 }
 .btn.tasker_btn.up .tasker_btn_text {
-  color: #ff4d4f;
+  color: #fff;
 }
 
 .btn.tasker_btn.del .tasker_btn_body {
-  background-color: #aaaaaa20;
+  background-color: #aaaaaa;
 }
 .btn.tasker_btn.del .tasker_btn_text {
-  color: #aaaaaa;
+  color: #fff;
 }

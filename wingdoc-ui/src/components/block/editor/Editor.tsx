@@ -317,8 +317,8 @@ export default forwardRef((props: BlockProps, ref) => {
   const pasteImg = (e: any, file: any) => {
     changeBlockType(BlockType.IMG);
     setImagerPasteData(ImagerPasteData.of(file));
-    setInitialText(file.name);
-    saveText(file.name);
+    // setInitialText(file.name);
+    // saveText(file.name);
   };
 
   // --- ui:
@@ -350,9 +350,6 @@ export default forwardRef((props: BlockProps, ref) => {
         <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
       </div>
       <div className='editor_body'>
-        <div className="editor_imager">
-          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
-        </div>
         <div
           className='editor_content'
           {...editorProps}
@@ -360,6 +357,9 @@ export default forwardRef((props: BlockProps, ref) => {
           onKeyDown={handleEditorKeyDown} />
         <div className='editor_link'>
           <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
+        </div>
+        <div className="editor_imager">
+          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
         </div>
       </div>
     </div>

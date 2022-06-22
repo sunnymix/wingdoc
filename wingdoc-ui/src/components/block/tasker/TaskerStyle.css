@@ -15,7 +15,7 @@
 }
 
 .btn.tasker_btn {
-  width: 32px;
+  width: 36px;
   justify-content: center;
 }
 
@@ -25,8 +25,8 @@
   justify-content: center;
   background-color: #fff;
   border-radius: 2px;
-  height: 14px;
-  width: 26px;
+  height: 16px;
+  width: 28px;
 }
 
 .btn.tasker_btn .tasker_btn_text {

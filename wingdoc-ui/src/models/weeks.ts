@@ -19,7 +19,7 @@ export default () => {
 
   // --- height multiple
 
-  const [heightMultiple, setHeightMultipel] = useState<number>(2);
+  const [heightMultiple, setHeightMultipel] = useState<number>(1);
 
   return {
     weeksBefore,

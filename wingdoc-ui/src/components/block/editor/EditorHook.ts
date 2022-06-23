@@ -104,14 +104,18 @@ export default (props: EditorProps) => {
 
   const focusEditor = () => {
     if (!focused) {
+      console.log(editorRef.current.childNodes);
+
       setFocused(true);
-      var range = document.createRange();
-      range.setStart(editorRef.current, 0);
-      range.setEnd(editorRef.current, 0);
-      
-      var selection = window.getSelection();
-      selection?.removeAllRanges();
-      selection?.addRange(range);
+      if (editorRef.current.childNodes && editorRef.current.childNodes.length > 0) {
+        var range = document.createRange();
+        range.setStart(editorRef.current.childNodes[0], 0);
+        range.setEnd(editorRef.current.childNodes[0], 0);
+        
+        var selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range); 
+      }
     }
   };
 

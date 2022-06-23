@@ -170,8 +170,10 @@ export default forwardRef((props: BlockProps, ref) => {
   // --- !!! coordinates:
 
   const getCaretCoordinates = (e: any) => {
-    // firstRow, lastRow 默认值为 true，表示只有一行
-    let x = 0, y = 0, row = 0, rowCount = 0, firstRow = false, lastRow = false, middleRow = false;
+    const contentRect = e.target.getClientRects()[0];
+    const rowCount = Math.ceil(contentRect.height / lineHeight);
+
+    let x = 0, y = 0, row = 0, firstRow = true, lastRow = false, middleRow = false;
     const isSupported = typeof window.getSelection !== "undefined";
     if (isSupported) {
       const selection = window.getSelection();
@@ -179,18 +181,21 @@ export default forwardRef((props: BlockProps, ref) => {
         const range = selection.getRangeAt(0).cloneRange();
         range.collapse(true);
         const rect = range.getClientRects()[0];
-        const containerRect = e.target.getClientRects()[0];
-        if (rect && containerRect) {
-          x = rect.left - containerRect.left;
-          y = rect.top - containerRect.top;
+        if (rect && contentRect) {
+          x = rect.left - contentRect.left;
+          y = rect.top - contentRect.top;
           row = Math.floor(y / lineHeight);
-          rowCount = Math.ceil(containerRect.height / lineHeight);
           firstRow = row == 0;
           lastRow = row == rowCount - 1;
           middleRow = row > 0 && row < rowCount - 1;
         }
       }
     }
+
+    if (row == 0 && rowCount == 1) {
+      firstRow = lastRow = true;
+    }
+
     const res = { x, y, row, rowCount, firstRow, lastRow, middleRow };
     return res;
   }

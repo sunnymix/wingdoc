@@ -58,7 +58,6 @@ export default (props: EditorProps) => {
   // --- paste:
 
   const handlePasteImg = (e: any) => {
-    console.log('EditorHook paste', e);
     const files = e.clipboardData.files;
     if (files && files.length > 0) {
       const file = files[0];
@@ -104,8 +103,6 @@ export default (props: EditorProps) => {
 
   const focusEditor = () => {
     if (!focused) {
-      console.log(editorRef.current.childNodes);
-
       setFocused(true);
       if (editorRef.current.childNodes && editorRef.current.childNodes.length > 0) {
         var range = document.createRange();

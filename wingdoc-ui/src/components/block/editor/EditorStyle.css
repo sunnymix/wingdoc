@@ -89,23 +89,23 @@
   position: relative;
 }
 
-.editor .editor_box::after,
-.editor .editor_box::after,
-.editor .editor_box::after {
+.editor .editor_body::after,
+.editor .editor_body::after,
+.editor .editor_body::after {
   content: ' ';
   position: absolute;
   top: 4px;
   bottom: 4px;
-  left: 36px;
+  left: 0;
   border-left: 2px solid transparent;
-  border-radius: 2px 0 0 2px;
+  border-radius: 2px;
 }
 
-.editor.hovered .editor_box::after {
+.editor.hovered .editor_body::after {
   border-color: #188fff50;
 }
 
-.editor.focused .editor_box::after {
+.editor.focused .editor_body::after {
   border-color: #188fff;
 }
 

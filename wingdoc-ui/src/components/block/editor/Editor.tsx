@@ -202,20 +202,18 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- redirect:
 
-  const handleEditorClick = (e: any) => {
+  const handleLinkerClick = (e: any) => {
+    e.preventDefault();
     if (linked) {
-      const { start, end } = getCaretPos(e);
-      
-      if (start == end && start > 0 && start < editorText.length) {
-        const index = link.indexOf('/doc/');
-        if (index >= 0) {
-          const docLink = link.substr(index);
-          if (docLink.length > 0) {
-            history.push(docLink);
-          }
-        } else {
-          window.open(link, "_blank");
+      const index = link.indexOf('/doc/');
+      if (index >= 0) {
+        const docLink = link.substr(index);
+        if (docLink.length > 0) {
+          history.push(docLink);
         }
+      } else {
+        window.open(link, "_blank");
+        focusEditor();
       }
     }
   };
@@ -362,17 +360,18 @@ export default forwardRef((props: BlockProps, ref) => {
         <div
           className='editor_content'
           {...editorProps}
-          onClick={handleEditorClick}
           onKeyDown={handleEditorKeyDown} />
-        <div className='editor_link'>
-          <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
-        </div>
         <div className="editor_imager" onClick={handleImagerClick}>
           <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
         </div>
+        <div className='editor_link'>
+          {linked && <a className='editor_link_anchor' href={link} onClick={handleLinkerClick}>{link}</a>}
+          <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
+        </div>
       </div>
     </div>
-    <div className='editor_space' onClick={handleFooterClick}></div>
+    <div className='editor_space' onClick={handleFooterClick}>
+    </div>
   </div>
   </>
   );

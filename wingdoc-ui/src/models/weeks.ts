@@ -7,11 +7,11 @@ export default () => {
 
   // --- weeks before
 
-  const [weeksBefore, setWeeksBefore] = useState<number>(0);
+  const [weeksBefore, setWeeksBefore] = useState<number>(1);
 
   // --- weeks after
 
-  const [weeksAfter, setWeeksAfter] = useState<number>(0);
+  const [weeksAfter, setWeeksAfter] = useState<number>(1);
 
   // --- weekend show
 

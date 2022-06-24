@@ -278,6 +278,11 @@ export default forwardRef((props: BlockProps, ref) => {
         e.preventDefault();
         changeBlockType(BlockType.CODE);
       }
+    } else if (code == 'KeyG') {
+      if (isCmd && isOpt) {
+        e.preventDefault();
+        changeBlockType(BlockType.IMG);
+      }
     } else if (code == 'Digit1') {
       if (isCmd && isOpt) {
         e.preventDefault();

@@ -94,11 +94,10 @@
 .editor .editor_body::after {
   content: ' ';
   position: absolute;
-  top: 4px;
-  bottom: 4px;
+  top: 0;
+  bottom: 0;
   left: 0;
   border-left: 2px solid transparent;
-  border-radius: 2px;
 }
 
 .editor.hovered .editor_body::after {
@@ -125,6 +124,7 @@
 .editor_content {
   color: #000;
   background-color: transparent;
+  border: 1px solid transparent;
   line-height: 24px;
   padding: 0 8px;
   font-family: "Helvetica Neue", Helvetica, Arial;
@@ -142,8 +142,8 @@
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;
-  border-radius: 2px;
-  /* background-color: #f8f8f8; */
+  border-color: #ddd;
+  background-color: #f8f8f8;
 }
 
 /* .editor.img .editor_content {} */

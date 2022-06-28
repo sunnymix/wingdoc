@@ -12,6 +12,7 @@
 
 .doc_title_content {
   flex-grow: 1;
+  margin-left: 40px;
 }
 
 .doc_title_menu_btn {

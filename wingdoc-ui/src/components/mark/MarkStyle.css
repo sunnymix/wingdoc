@@ -30,9 +30,9 @@
   top: 2px;
   width: 0;
   height: 0;
-  border: 3px solid transparent;
+  border: 4px solid transparent;
   border-radius: 3px;
-  border-color: #ff4d4f transparent transparent #ff4d4f;
+  border-color: #188fff transparent transparent #188fff;
 }
 
 .marks_tabs_item_link {

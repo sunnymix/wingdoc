@@ -171,7 +171,12 @@ export default forwardRef((props: BlockProps, ref) => {
 
   const getCaretCoordinates = (e: any) => {
     const contentRect = e.target.getClientRects()[0];
-    const rowCount = Math.ceil(contentRect.height / lineHeight);
+    const contentStyle = window.getComputedStyle(e.target, null);
+    const borderVertical = +(contentStyle.getPropertyValue('border-top-width').replace('px', '')) + 
+      +(contentStyle.getPropertyValue('border-bottom-width').replace('px', ''));
+    const contentHeight = contentRect.height - borderVertical;
+    
+    const rowCount = Math.floor(contentHeight / lineHeight);
 
     let x = 0, y = 0, row = 0, firstRow = true, lastRow = false, middleRow = false;
     const isSupported = typeof window.getSelection !== "undefined";

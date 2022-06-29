@@ -142,7 +142,7 @@
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;
-  border-color: #ddd;
+  /* border-color: #eee; */
   background-color: #f8f8f8;
 }
 

@@ -97,15 +97,18 @@
   top: 0;
   bottom: 0;
   left: 0;
-  border-left: 2px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
 }
 
 .editor.hovered .editor_body::after {
-  border-color: #188fff50;
+  border-left-color: #188fff60;
+  border-right-color: #188fff20;
 }
 
 .editor.focused .editor_body::after {
-  border-color: #188fff;
+  border-left-color: #188fff;
+  border-right-color: #188fff60;
 }
 
 /* --- imager: */

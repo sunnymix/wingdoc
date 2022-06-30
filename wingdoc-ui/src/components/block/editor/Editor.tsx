@@ -154,6 +154,11 @@ export default forwardRef((props: BlockProps, ref) => {
     linkerRef.current.open();
   };
 
+  // --- imaged:
+
+  const judgeImaged = useCallback((img: any) => img && img.length > 0, []);
+  const [imaged, setImaged] = useState<boolean>(judgeImaged(props.data.img));
+
   // --- caret:
 
   const getCaretPos = (e: any) => {
@@ -343,7 +348,7 @@ export default forwardRef((props: BlockProps, ref) => {
   return (
   <>
   <div
-    className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'}`}
+    className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'} ${imaged && 'imaged'}`}
     onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
     onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
     <div className='editor_box'>

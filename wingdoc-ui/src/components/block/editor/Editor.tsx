@@ -156,8 +156,11 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- imaged:
 
-  const judgeImaged = useCallback((img: any) => img && img.length > 0, []);
-  const [imaged, setImaged] = useState<boolean>(judgeImaged(props.data.img));
+  const isImaged = useCallback((img: any) => img && img.length > 0, []);
+  const [imaged, setImaged] = useState<boolean>(isImaged(props.data.img));
+  const handleImagerChange = useCallback((img: any) => {
+    setImaged((isImaged(img)));
+  }, [])
 
   // --- caret:
 
@@ -288,11 +291,6 @@ export default forwardRef((props: BlockProps, ref) => {
         e.preventDefault();
         changeBlockType(BlockType.CODE);
       }
-    } else if (code == 'KeyG') {
-      if (isCmd && isOpt) {
-        e.preventDefault();
-        changeBlockType(BlockType.IMG);
-      }
     } else if (code == 'Digit1') {
       if (isCmd && isOpt) {
         e.preventDefault();
@@ -333,10 +331,7 @@ export default forwardRef((props: BlockProps, ref) => {
   const [imagerPasteData, setImagerPasteData] = useState<ImagerPasteData>(ImagerPasteData.of(null));
 
   const pasteImg = (e: any, file: any) => {
-    changeBlockType(BlockType.IMG);
     setImagerPasteData(ImagerPasteData.of(file));
-    // setInitialText(file.name);
-    // saveText(file.name);
   };
 
   const handleImagerClick = (e: any) => {
@@ -377,7 +372,7 @@ export default forwardRef((props: BlockProps, ref) => {
           {...editorProps}
           onKeyDown={handleEditorKeyDown} />
         <div className="editor_imager" onClick={handleImagerClick}>
-          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} />
+          <Imager ref={imagerRef} blockId={props.data.id} initialImg={props.data.img} pasteData={imagerPasteData} onChange={handleImagerChange} />
         </div>
         <div className='editor_link'>
           {linked && <a className='editor_link_anchor' href={link} onClick={handleLinkerClick}>{link}</a>}

@@ -5,7 +5,6 @@
 .imager_content {
   position: relative;
   display: inline-block;
-  border: 1px solid #00000010;
 }
 
 .imager_content_placeholder {

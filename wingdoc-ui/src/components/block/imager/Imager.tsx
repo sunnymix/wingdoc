@@ -8,6 +8,7 @@ export interface ImagerProps {
   blockId: string,
   initialImg: string | undefined,
   pasteData?: ImagerPasteData | null,
+  onChange?: Function,
 };
 
 export interface ImagerPasteData {
@@ -96,6 +97,7 @@ export default forwardRef((props: ImagerProps, ref) => {
         .then(res => {
           if (res.data.success === true) {
             setImg(res.data.data);
+            props.onChange?.call(null, res.data.data);
             message.success(`${fileObj.name} file uploaded successfully`);
           }
         });
@@ -112,6 +114,7 @@ export default forwardRef((props: ImagerProps, ref) => {
     onChange(info) {
       if (info.file.status === 'done') {
         setImg(info.file.response.data);
+        props.onChange?.call(null, info.file.response.data);
         message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);

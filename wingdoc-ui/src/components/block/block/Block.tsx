@@ -18,7 +18,6 @@ export namespace BlockType {
       BlockType.TEXT,
       BlockType.TASK,
       BlockType.CODE,
-      BlockType.IMG,
       BlockType.H1,
       BlockType.H2,
       BlockType.H3,
@@ -34,8 +33,6 @@ export namespace BlockType {
         return 'T';
       case BlockType.CODE:
         return 'C';
-      case BlockType.IMG:
-        return 'G';
       case BlockType.H1:
       case BlockType.H2:
       case BlockType.H3:

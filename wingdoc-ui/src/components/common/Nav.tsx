@@ -48,11 +48,6 @@ const items: NavItemProps[] = [
     path: "/calendar",
     key: "calendar",
   },
-  {
-    label: "Media",
-    path: "/media",
-    key: "media",
-  }
 ];
 
 export default (props: any) => {

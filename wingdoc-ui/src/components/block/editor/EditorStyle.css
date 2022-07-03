@@ -34,6 +34,9 @@
 .editor_side {
   flex-shrink: 0;
   flex-grow: 0;
+  display: flex;
+  width: 75px;
+  justify-content: flex-end;
 }
 
 /* --- menu: */
@@ -47,12 +50,12 @@
   visibility: visible;
 }
 
-.editor_menu {
+.editor_menu_box {
   position: absolute;
   display: none;
 }
 
-.editor_menu.opened {
+.editor_menu.opened .editor_menu_box {
   display: block;
   z-index: 100;
   background-color: #fff;
@@ -74,12 +77,12 @@
 .editor_tasker {
   flex-shrink: 0;
   flex-grow: 0;
-  visibility: hidden;
+  display: none;
   margin-left: 2px;
 }
 
 .editor_tasker.opened {
-  visibility: visible;
+  display: block;
 }
 
 /* --- body: */
@@ -89,7 +92,7 @@
   position: relative;
 }
 
-/* .editor .editor_body::after,
+.editor .editor_body::after,
 .editor .editor_body::after,
 .editor .editor_body::after {
   content: ' ';
@@ -109,7 +112,7 @@
 .editor.focused .editor_body::after {
   border-left-color: #188fff;
   border-right-color: #188fff60;
-} */
+}
 
 /* --- imager: */
 

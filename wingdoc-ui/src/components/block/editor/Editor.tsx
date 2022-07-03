@@ -348,23 +348,25 @@ export default forwardRef((props: BlockProps, ref) => {
     onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
     <div className='editor_box'>
       <div className='editor_side'>
-        <button className='editor_menu_btn btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
-          <span className='btn_border_icon'></span>
-        </button>
-        <div className={`editor_menu ${menuOpened && 'opened'}`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>
-          <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
-          <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
-          {BlockType.all().map((type: BlockType, index: number) => 
-            <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type} onClick={(e) => changeBlockType(type)}>
-              <span className='btn_text_icon'>{BlockType.short(type)}</span>
-            </button>)}
-          <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>
-          <button className='btn ghost square' onClick={openLinker}><LinkOutlined /></button>
-          <button className='btn ghost square'><PictureOutlined /></button>
+        <div className={`editor_menu ${menuOpened && 'opened'}`}>
+          <button className='editor_menu_btn btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
+            <span className='btn_border_icon'></span>
+          </button>
+          <div className={`editor_menu_box`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>
+            <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>
+            <button className='btn ghost square' onClick={moveDown}><CaretDownOutlined /></button>
+            {BlockType.all().map((type: BlockType, index: number) => 
+              <button className={`block_type_btn btn ghost square ${(type == blockType) && 'active'}`} key={type} onClick={(e) => changeBlockType(type)}>
+                <span className='btn_text_icon'>{BlockType.short(type)}</span>
+              </button>)}
+            <button className='btn ghost square' onClick={openTasker}><CheckCircleOutlined /></button>
+            <button className='btn ghost square' onClick={openLinker}><LinkOutlined /></button>
+            <button className='btn ghost square'><PictureOutlined /></button>
+          </div>
         </div>
-      </div>
-      <div className={`editor_tasker ${tasked && 'opened'}`}>
-        <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
+        <div className={`editor_tasker ${tasked && 'opened'}`}>
+          <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
+        </div>
       </div>
       <div className='editor_body'>
         <div

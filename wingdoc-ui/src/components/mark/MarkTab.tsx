@@ -3,10 +3,12 @@ import { Mark } from "./MarkTabs";
 import { Dropdown, Menu } from "antd";
 import "./MarkStyle.css";
 import { Link } from "umi";
+import moment from "moment";
 import MarkApi from "./MarkApi";
 import { MoreOutlined, PushpinFilled } from "@ant-design/icons";
 import DocTaskStatus from "../doc/DocTaskStatus";
 import WeekDayLabel from "../calendar/week/WeekDayLabel";
+import { Weekday } from "../calendar/week/WeekDay";
 
 export interface MarkTabProps {
   mark: Mark,
@@ -31,9 +33,19 @@ export default forwardRef((props: MarkTabProps, ref) => {
     });
   };
 
+  const format = "YYYYMMDD";
+
   const displayTitle = (mark: Mark) => {
-    if (mark.docTitle && mark.docTitle.length > 0) {
-      return mark.docTitle;
+    const title = (mark.docTitle || '').trim();
+    if (title.length > 0) {
+      if (title.length >= format.length && !isNaN(+title)) {
+        const titleAsMoment = moment(title);
+        const day = titleAsMoment.format('M.D');
+        const weekday = +(titleAsMoment.format("E")) - 1;
+        const weekdayTitle = Weekday.title(weekday);
+        return `${day} ${weekdayTitle}`;
+      }
+      return title;
     }
     return "untitled";
   };
@@ -84,7 +96,6 @@ export default forwardRef((props: MarkTabProps, ref) => {
     <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""}`} key={mark.id}>
       <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
         <div className="marks_tabs_item_title">{displayTitle(mark)}</div>
-        <WeekDayLabel className="marks_tabs_item_weekday" text={mark.docTitle} />
         <DocTaskStatus className="marks_tabs_item_task_status" docId={mark.docId} />
       </Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>

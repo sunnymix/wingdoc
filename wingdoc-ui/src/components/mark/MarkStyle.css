@@ -54,6 +54,11 @@
   margin-right: 4px;
 }
 
+.marks_tabs_item.today .marks_tabs_item_title {
+  color: #188fff;
+  font-weight: bold;
+}
+
 .marks_tabs_item_title {
   flex-shrink: 0;
   margin-left: 4px;

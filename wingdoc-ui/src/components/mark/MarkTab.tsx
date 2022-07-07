@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { Mark } from "./MarkTabs";
 import { Dropdown, Menu } from "antd";
 import "./MarkStyle.css";
@@ -35,20 +35,38 @@ export default forwardRef((props: MarkTabProps, ref) => {
 
   const format = "YYYYMMDD";
 
-  const displayTitle = (mark: Mark) => {
-    const title = (mark.docTitle || '').trim();
-    if (title.length > 0) {
-      if (title.length >= format.length && !isNaN(+title)) {
-        const titleAsMoment = moment(title);
+  // --- display title:
+
+  const [displayTitle, setDisplayTitle] = useState<string>('');
+  const [isToday, setIsToday] = useState<boolean>(false);
+
+  const updateDisplayTitle = (_title: string) => {
+    var newTitle = (_title || '').trim();
+    var isToday = false;
+
+    if (newTitle.length > 0) {
+      if (newTitle.length >= format.length && !isNaN(+newTitle)) {
+        const titleAsMoment = moment(newTitle);
         const day = titleAsMoment.format('M.D');
         const weekday = +(titleAsMoment.format("E")) - 1;
         const weekdayTitle = Weekday.title(weekday);
-        return `${day} ${weekdayTitle}`;
+        newTitle = `${day} ${weekdayTitle}`;
+
+        isToday = moment().format("YYYYMMDD") == _title;
       }
-      return title;
+    } else {
+      newTitle = 'untitled';
     }
-    return "untitled";
+
+    setDisplayTitle(newTitle);
+    setIsToday(isToday);
   };
+
+  
+  
+  useEffect(() => {
+    updateDisplayTitle(mark.docTitle);
+  }, [mark.docTitle]);
 
   // --- pin
 
@@ -93,9 +111,9 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- ui
 
   return (
-    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""}`} key={mark.id}>
+    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""} ${isToday && 'today'}`} key={mark.id}>
       <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
-        <div className="marks_tabs_item_title">{displayTitle(mark)}</div>
+        <div className="marks_tabs_item_title">{displayTitle}</div>
         <DocTaskStatus className="marks_tabs_item_task_status" docId={mark.docId} />
       </Link>
       <Dropdown overlay={moreMenu} placement="bottomLeft" trigger={['click']}>

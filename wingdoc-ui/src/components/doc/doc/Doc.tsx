@@ -43,26 +43,13 @@ export default forwardRef((props: DocProps, ref) => {
     focusBlockPos(0);
   };
 
-  const handleTitleChange = (newDoc: any) => {
-    refreshMarks(location?.pathname);
-  };
-
   // --- location:
-
-  const location: any = useLocation();
-
-  const { refreshMarks } = useModel("marks", (model: any) => ({
-    refreshMarks: model.refreshMarks,
-  }));
 
   const loadDoc = () => {
     setLoading(true);
     DocApi.getDoc(id, (doc: any) => {
       setLoading(false);
       setDoc(doc);
-      MarkApi.addMark(doc.id, () => {
-        refreshMarks(location?.pathname);
-      });
     });
   };
 
@@ -129,8 +116,7 @@ export default forwardRef((props: DocProps, ref) => {
           focusing={titleFocusing}
           onFocus={handleTitleFocus}
           onEnter={handleAdd}
-          onFocusDown={handleTitleFocusDown}
-          onChange={handleTitleChange} />
+          onFocusDown={handleTitleFocusDown} />
       </div>
       <BlockList
         docId={doc.id}

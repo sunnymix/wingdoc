@@ -62,8 +62,6 @@ export default forwardRef((props: MarkTabProps, ref) => {
     setIsToday(isToday);
   };
 
-  
-  
   useEffect(() => {
     updateDisplayTitle(mark.docTitle);
   }, [mark.docTitle]);
@@ -111,7 +109,7 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- ui
 
   return (
-    <div className={`marks_tabs_item ${mark.focus ? "focus" : ""} ${mark.pin ? "pin" : ""} ${isToday && 'today'}`} key={mark.id}>
+    <div className={`marks_tabs_item ${mark.focus && 'focus'} ${mark.pin && 'pin'} ${isToday && 'today'}`} key={mark.id}>
       <Link className="marks_tabs_item_link" to={`/doc/${mark.docId}`}>
         <div className="marks_tabs_item_title">{displayTitle}</div>
         <DocTaskStatus className="marks_tabs_item_task_status" docId={mark.docId} />

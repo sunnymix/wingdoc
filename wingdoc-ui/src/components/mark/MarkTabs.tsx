@@ -16,20 +16,12 @@ export interface MarkTabsProps {}
 
 export default forwardRef((props: MarkTabsProps, ref) => {
 
-  // --- location
-
-  const location: any = useLocation();
-
   // --- marks
 
   const { marks, refreshMarks } = useModel("marks", (model: any) => ({
     marks: model.marks,
     refreshMarks: model.refreshMarks,
   }));
-
-  useEffect(() => {
-    refreshMarks(location?.pathname);
-  }, [location?.pathname])
 
   // --- handle all change
 

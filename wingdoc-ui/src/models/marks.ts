@@ -37,12 +37,5 @@ export default () => {
     });
   }, []);
 
-  // --- auto refresh
-  useEffect(() => {
-    setInterval(() => {
-      refreshMarks(currentPath)
-    }, 10 * 60 * 1000);
-  }, []);
-
   return { marks, refreshMarks };
 };

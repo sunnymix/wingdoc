@@ -1,4 +1,4 @@
-import { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { FC, forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import DocApi from '../api/DocApi';
 import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -42,6 +42,14 @@ export default forwardRef((props: DocProps, ref) => {
   const handleTitleFocusDown = () => {
     focusBlockPos(0);
   };
+
+  const { refreshMarks } = useModel("marks", (model: any) => ({
+    refreshMarks: model.refreshMarks,
+  }));
+
+  const handleTitleChange = useCallback((newDoc: any) => {
+    refreshMarks('/doc/' + props.id);
+  }, []);
 
   // --- location:
 
@@ -116,7 +124,8 @@ export default forwardRef((props: DocProps, ref) => {
           focusing={titleFocusing}
           onFocus={handleTitleFocus}
           onEnter={handleAdd}
-          onFocusDown={handleTitleFocusDown} />
+          onFocusDown={handleTitleFocusDown}
+          onChange={handleTitleChange} />
       </div>
       <BlockList
         docId={doc.id}

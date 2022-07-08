@@ -49,7 +49,7 @@ export namespace Weekday {
       "四",
       "五",
       "六",
-      "七",
+      "日",
     ][weekday]
   }
 

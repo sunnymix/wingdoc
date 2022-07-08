@@ -37,5 +37,9 @@ export default () => {
     });
   }, []);
 
+  useEffect(() => {
+    refreshMarks('');
+  }, []);
+
   return { marks, refreshMarks };
 };

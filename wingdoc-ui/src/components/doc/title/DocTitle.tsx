@@ -37,10 +37,12 @@ export default forwardRef((props: DocTitleProps, ref) => {
 
   const changeTitle = (e: any) => {
     const newTitle = e.target.value || "";
-    setTitle(newTitle);
-    DocApi.updateDoc(props.id, { title: newTitle }, (newDoc: any) => {
-      props.onChange?.call(null, newDoc);
-    });
+    if (newTitle != title) {
+      setTitle(newTitle);
+      DocApi.updateDoc(props.id, { title: newTitle }, (newDoc: any) => {
+        props.onChange?.call(null, newDoc);
+      });
+    }
   };
 
   // --- hover:

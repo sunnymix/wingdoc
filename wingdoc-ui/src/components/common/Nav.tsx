@@ -85,7 +85,8 @@ export default (props: any) => {
   <div className='nav'>
     {items.map((item: NavItemProps, index: number) => (
       <div className={`nav_item ${(item.key == activeKey) && 'active'}`} key={index} onClick={() => handleTabClick(item.path)}>
-        <div style={{zIndex: 2, position: "relative",}}>{item.label}</div></div>
+        {item.label}
+      </div>
     ))}
     <Dropdown overlay={createMenu} placement="bottomLeft">
       <div className='nav_new_button'>

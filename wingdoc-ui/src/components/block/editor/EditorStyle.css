@@ -69,7 +69,7 @@
 }
 
 .block_type_btn.active {
-  color: #188fff;
+  color: #176efe;
 }
 
 /* --- tasker: */
@@ -100,18 +100,20 @@
   top: 4px;
   bottom: 4px;
   left: 0;
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 0px solid transparent;
 }
 
 .editor.hovered .editor_body::after {
-  border-left-color: #188fff60;
-  border-right-color: #188fff20;
+  border-left-color: #176efe40;
+  border-right-color: #176efe20;
+  display: none;
 }
 
 .editor.focused .editor_body::after {
-  border-left-color: #188fff;
-  border-right-color: #188fff60;
+  display: none;
+  border-left-color: #176efe;
+  border-right-color: #176efe40;
 }
 
 /* --- imager: */

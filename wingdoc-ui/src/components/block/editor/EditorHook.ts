@@ -106,8 +106,9 @@ export default (props: EditorProps) => {
       setFocused(true);
       if (editorRef.current.childNodes && editorRef.current.childNodes.length > 0) {
         var range = document.createRange();
-        range.setStart(editorRef.current.childNodes[0], 0);
-        range.setEnd(editorRef.current.childNodes[0], 0);
+        const focusElement = editorRef.current;
+        range.setStart(focusElement, 0);
+        range.setEnd(focusElement, 0);
         
         var selection = window.getSelection();
         selection?.removeAllRanges();

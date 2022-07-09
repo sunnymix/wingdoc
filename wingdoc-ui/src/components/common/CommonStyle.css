@@ -19,7 +19,7 @@
   min-width: 24px;
   padding: 0;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 1px;
   background-color: #f8f8f8;
   align-items: center;
   justify-content: center;
@@ -37,14 +37,10 @@
 .btn_border_icon {
   content: ' ';
   display: block;
-  height: 10px;
-  width: 10px;
-
-  border: 2px solid #1890ff;
-  border-color: #1890ff #1890ff transparent transparent;
+  height: 2px;
+  width: 2px;
   border-radius: 50%;
   background-color: transparent;
-  transform: rotate(45deg);
 }
 
 .btn:hover {
@@ -53,13 +49,11 @@
 }
 
 .hovered .btn_border_icon {
-  border-color: #1890ff50;
-  border-color: #1890ff50 #1890ff50 transparent transparent;
+  background-color: #00000050;
 }
 
 .focused .btn_border_icon {
-  /* border-color: #1890ff; */
-  border-color: #1890ff #1890ff transparent transparent;
+  background-color: #176efe50;
 }
 
 /* --- */

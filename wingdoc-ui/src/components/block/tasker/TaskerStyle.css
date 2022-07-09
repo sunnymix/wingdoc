@@ -11,7 +11,7 @@
   display: block;
   z-index: 100;
   background-color: #fff;
-  box-shadow: 0 0 4px 4px #00000010;
+  box-shadow: 0 0 1px 1px #00000010;
 }
 
 .btn.tasker_btn {
@@ -24,7 +24,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 0px;
   height: 16px;
   width: 28px;
 }
@@ -43,7 +43,7 @@
 }
 
 .btn.tasker_btn.wip .tasker_btn_body {
-  background-color: #40a9ff;
+  background-color: #176efe;
 }
 .btn.tasker_btn.wip .tasker_btn_text {
   color: #fff;

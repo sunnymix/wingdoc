@@ -10,23 +10,16 @@
   height: 34px;
   line-height: 34px;
   font-weight: 500;
-  color: #fff;
+  color: #aaa;
 }
 
 .nav_item.active .nav_item_active_mask {
   display: block;
 }
 
-.nav_item_active_mask {
-  z-index: 1;
-  position: absolute;
-  display: none;
-  left: 2px;
-  right: 2px;
-  top: 2px;
-  bottom: 2px;
-  border-radius: 2px;
-  background-color: #188fff90;
+.nav_item.active {
+  color: #fff;
+  background-color: #000;
 }
 
 .nav_new_button {

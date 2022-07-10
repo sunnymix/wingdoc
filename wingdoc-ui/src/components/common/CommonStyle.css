@@ -49,11 +49,11 @@
 }
 
 .hovered .btn_border_icon {
-  background-color: #00000050;
+  background-color: #aaa;
 }
 
 .focused .btn_border_icon {
-  background-color: #176efe50;
+  background-color: #333;
 }
 
 /* --- */

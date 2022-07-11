@@ -143,18 +143,11 @@
   outline: 0;
 }
 
-/* .linked .editor_content {
-  color: #1890ff;
-} */
-
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;
-  /* border-color: #eee; */
   background-color: #00000005;
 }
-
-/* .editor.img .editor_content {} */
 
 .editor.h1 .editor_content {
   font-size: 130%;
@@ -176,7 +169,7 @@
   font-weight: bold;
 }
 
-/* --- linker */
+/* --- linker: */
 
 .editor_link_anchor {
   padding: 0 8px;

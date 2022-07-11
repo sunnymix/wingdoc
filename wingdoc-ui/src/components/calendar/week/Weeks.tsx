@@ -1,6 +1,6 @@
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useCallback, useEffect, useState } from "react";
 import Week from "./Week";
-import { Space, InputNumber, Checkbox } from "antd";
+import { Space, InputNumber, Checkbox, Button } from "antd";
 import "./WeekStyle.css";
 import { useModel } from "umi";
 
@@ -56,7 +56,14 @@ export default forwardRef((props: WeekListProps, ref) => {
     setWeeks(weeks);
   }, [weeksBefore, weeksAfter, weekendShow]);
 
-  // --- ui
+  // --- focus this week:
+
+  const handleFocusThisWeek = useCallback((e: any) => {
+    setWeeksBefore(0);
+    setWeeksAfter(0);
+  }, []);
+
+  // --- ui:
 
   return <>
   <Space className="weeks" direction="vertical" size="middle">
@@ -65,6 +72,8 @@ export default forwardRef((props: WeekListProps, ref) => {
       <InputNumber className='weeks_input' min={0} value={weeksAfter} onChange={handleWeeksAfterUpdate} addonAfter="周后" />
       <InputNumber className='weeks_input' min={1} value={heightMultiple} onChange={handleHeightMultipleUpdate} addonAfter="空间" />
       <Checkbox defaultChecked={weekendShow} onChange={handleWeekendShowUpdate}>周末</Checkbox>
+      <Button className="focus_this_week" type='link' onClick={handleFocusThisWeek}>本周</Button>
+      <Button className="last_three_weeks" type='link'>近3周</Button>
     </Space>
     <div className="weeks_body">
       {weeks.map((week: number) => 

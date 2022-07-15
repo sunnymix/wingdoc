@@ -216,7 +216,11 @@ export default forwardRef((props: BlockerListProps, ref) => {
       console.log("copy:", all);
       // TODO：自定义复制组件
       // navigator.clipboard 只能在 localhost 或 https 中使用
-      navigator.clipboard.writeText(all);
+      try {
+        navigator.clipboard.writeText(all);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -255,7 +259,14 @@ export default forwardRef((props: BlockerListProps, ref) => {
     if (selectingMulti.multi) {
       BlockApi.getBlockListBetweenOfDoc(props.docId, selectingMulti.start, selectingMulti.end, (blockDatas: BlockData[]) => {
         const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
-        navigator.clipboard.writeText(text);
+        console.log(text);
+        try {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       });
     }
     setSelectingActive(BlockActiveState.of(false));

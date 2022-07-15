@@ -37,8 +37,8 @@
 .btn_border_icon {
   content: ' ';
   display: block;
-  height: 2px;
-  width: 2px;
+  height: 1px;
+  width: 1px;
   border-radius: 50%;
   background-color: transparent;
 }

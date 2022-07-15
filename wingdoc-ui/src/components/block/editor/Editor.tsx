@@ -350,7 +350,7 @@ export default forwardRef((props: BlockProps, ref) => {
       <div className='editor_side'>
         <div className={`editor_menu ${menuOpened && 'opened'}`}>
           <button className='editor_menu_btn btn ghost square' onMouseEnter={hoverControl} onMouseLeave={unhoverControl}>
-            <span className='btn_border_icon'></span>
+            <span className='editor_menu_icon'>{BlockType.short(blockType)}</span>
           </button>
           <div className={`editor_menu_box`} onMouseEnter={hoverMenu} onMouseLeave={unhoverMenu}>
             <button className='btn ghost square' onClick={moveUp}><CaretUpOutlined /></button>

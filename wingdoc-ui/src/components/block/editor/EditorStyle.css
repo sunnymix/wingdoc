@@ -46,8 +46,8 @@
 .editor .editor_side::before {
   content: ' ';
   position: absolute;
-  top: 13px;
-  bottom: 13px;
+  top: 26px;
+  bottom: 0;
   left: 19px;
   width: 1px;
   border-radius: 50%;
@@ -73,20 +73,41 @@
   height: 1px;
   width: 1px;
   border-radius: 50%;
+  display: none;
 }
 
 .editor.hovered .editor_side::after {
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .editor.focused .editor_side::after {
-  background-color: #999;
+  background-color: #bbb;
 }
 
 /* --- menu: */
 
 .editor_menu_btn {
   visibility: hidden;
+}
+
+.editor_menu_icon {
+  display: inline-block;
+  padding: 0 4px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  background-color: #fff;
+  transform: scale(0.65);
+  color: #bbb;
+}
+
+.editor.hovered .editor_menu_icon {
+  color: #ddd;
+  border-color: #ddd;
+}
+
+.editor.focused .editor_menu_icon {
+  color: #bbb;
+  border-color: #bbb;
 }
 
 .editor.hovered .editor_menu_btn,

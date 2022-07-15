@@ -319,7 +319,7 @@ export default forwardRef((props: BlockProps, ref) => {
   };
 
   const handleFooterClick = (e: any) => {
-    focusEditor();
+    focusEditor('lastRow');
   };
 
   // --- TODO: editor className

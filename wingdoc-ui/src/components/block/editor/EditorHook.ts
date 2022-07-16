@@ -101,19 +101,19 @@ export default (props: EditorProps) => {
     props.onBlur?.call(null, e);
   };
 
-  const focusEditor = (posOpt?: string) => {
+  const focusEditor = (row?: string) => {
     if (!focused) {
       setFocused(true);
 
-      // start, end, firstRow, lastRow
-      const pos = posOpt || 'firstRow';
+      // first / last
+      row = row || 'first';
 
       var focusElement = editorRef.current;
       var childSize = (editorRef.current.childNodes && editorRef.current.childNodes.length) || 0;
 
       if (childSize > 0) {
         focusElement = editorRef.current.childNodes[0];
-        if (pos == 'lastRow') {
+        if (row == 'last') {
           focusElement = editorRef.current.childNodes[childSize - 1];
         }
       }

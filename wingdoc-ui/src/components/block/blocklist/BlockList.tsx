@@ -100,7 +100,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const handleFocusUp = (blockData: any) => {
     const newFocusPos = blockData.pos - 1;
-    updateFocusing(newFocusPos);
+    updateFocusing(newFocusPos, 'last');
   };
 
   const handleFocusDown = (blockData: any) => {

@@ -186,7 +186,7 @@ export default forwardRef((props: BlockProps, ref) => {
     
     const rowCount = Math.floor(contentHeight / lineHeight);
 
-    let x = 0, y = 0, row = 0, firstRow = true, lastRow = false, middleRow = false;
+    let x = 0, y = 0, row = 0, firstRow = false, lastRow = false, middleRow = false;
     const isSupported = typeof window.getSelection !== "undefined";
     if (isSupported) {
       const selection = window.getSelection();

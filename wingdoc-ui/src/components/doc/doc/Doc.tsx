@@ -76,8 +76,8 @@ export default forwardRef((props: DocProps, ref) => {
 
   // --- block focus
 
-  const focusBlockPos = (pos: number) => {
-    blockListRef.current.focusPos(pos);
+  const focusBlockPos = (pos: number, row?: string) => {
+    blockListRef.current.focusPos(pos, row);
   };
 
   // --- blocklist empty focus
@@ -97,7 +97,7 @@ export default forwardRef((props: DocProps, ref) => {
   const handleTailClick = (e: any) => {
     const blockListSize = blockListRef.current.getSize();
     if (blockListSize > 0) {
-      focusBlockPos(blockListSize - 1);
+      focusBlockPos(blockListSize - 1, 'last');
     } else {
       updateTitleFocusing(true);
     }

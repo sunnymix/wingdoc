@@ -84,11 +84,12 @@ export namespace BlockData {
 export interface BlockPosState {
   pos: number,
   ts: number,
+  row?: string,
 };
 
 export namespace BlockPosState {
-  export function of(pos: number): BlockPosState {
-    return { pos, ts: +(new Date()) };
+  export function of(pos: number, row?: string): BlockPosState {
+    return { pos, ts: +(new Date()), row };
   }
 }
 

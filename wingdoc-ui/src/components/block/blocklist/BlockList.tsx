@@ -18,8 +18,8 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   useImperativeHandle(ref, () => ({
     add: handleAdd,
-    focusPos: (pos: number) => {
-      updateFocusing(pos);
+    focusPos: (pos: number, row?: string) => {
+      updateFocusing(pos, row);
     },
     getSize: () => {
       return blocks.length;
@@ -85,8 +85,9 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const [focusingPos, setFocusingPos] = useState<BlockPosState>(BlockPosState.of(-1));
 
-  const updateFocusing = (pos: number) => {
-    setFocusingPos(BlockPosState.of(pos));
+  const updateFocusing = (pos: number, row?: string) => {
+    // row: first / last
+    setFocusingPos(BlockPosState.of(pos, row));
   };
 
   useEffect(() => {

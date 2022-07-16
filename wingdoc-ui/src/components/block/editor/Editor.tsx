@@ -120,7 +120,7 @@ export default forwardRef((props: BlockProps, ref) => {
     if (props.focusingPos.pos == props.data.pos) {
       // console.log(`editor[${props.data.pos}]: focusing on me! ${props.focusing.pos}/${props.focusing.ts}"`);
       if (!focused) {
-        focusEditor();
+        focusEditor(props.focusingPos.row);
       }
     }
     setSelected(false);

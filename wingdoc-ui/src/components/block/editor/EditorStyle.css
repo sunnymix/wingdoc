@@ -49,16 +49,16 @@
   top: 26px;
   bottom: 6px;
   left: 19px;
-  width: 1px;
+  border-left: 1px solid transparent;
   border-radius: 50%;
 }
 
 .editor.hovered .editor_side::before {
-  background-color: #eee;
+  border-color: #eee;
 }
 
 .editor.focused .editor_side::before {
-  background-color: #ddd;
+  border-color: #ddd;
 }
 
 /* --- editor-side::after */

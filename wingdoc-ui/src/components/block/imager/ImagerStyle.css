@@ -17,14 +17,14 @@
   display: inline-block;
 }
 
-.imager_uploader {
+.imager_actions {
   position: absolute;
   left: 0;
   top: 100%;
   visibility: hidden;
 }
 
-.imager:hover .imager_uploader {
+.imager:hover .imager_actions {
   visibility: visible;
 }
 

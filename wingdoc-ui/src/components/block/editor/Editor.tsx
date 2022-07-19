@@ -35,6 +35,9 @@ export default forwardRef((props: BlockProps, ref) => {
     onPasteImg: (e: any, file: any) => {
       pasteImg(e, file);
     },
+    onTextChange: (data: any) => {
+      props.onTextChange?.call(null, data);
+    },
   });
 
   // --- block type:

@@ -7,6 +7,7 @@ export interface EditorProps {
   onFocus?: Function,
   onBlur?: Function,
   onPasteImg?: Function,
+  onTextChange?: Function,
 };
 
 export default (props: EditorProps) => {
@@ -22,6 +23,7 @@ export default (props: EditorProps) => {
   const updateText = (text: string) => {
     saveText(text);
     setText(text);
+    props.onTextChange?.call(null, { id: props.data.id, text: text });
   };
 
   // --- focus:

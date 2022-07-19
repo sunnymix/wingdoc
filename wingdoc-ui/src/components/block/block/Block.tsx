@@ -63,6 +63,7 @@ export interface BlockProps {
   onMouseDown?: Function,
   onMouseUp?: Function,
   onMouseEnter?: Function,
+  onTextChange?: Function,
 };
 
 // --- block data:

@@ -72,7 +72,9 @@ export default (props: EditorProps) => {
 
   const handlePasteText = (e: any) => {
     e.preventDefault();
-    document.execCommand('insertText', false, e.clipboardData.getData('text'));
+    const pasteText = e.clipboardData.getData('text');
+    document.execCommand('insertText', false, pasteText);
+    // 备注：paste事件会触发input事件，所以无需额外处理paste的文本变化。
     return true;
   };
 

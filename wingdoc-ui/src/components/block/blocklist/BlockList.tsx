@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import BlockApi from '../api/BlockApi';
 import Block, { BlockActiveState, BlockData, BlockPosState, BlockSelectingMultiState } from '../block/Block';
 import { useLocation } from 'umi';
@@ -258,17 +258,14 @@ export default forwardRef((props: BlockerListProps, ref) => {
 
   const onSelectingEnd = () => {
     if (selectingMulti.multi) {
-      BlockApi.getBlockListBetweenOfDoc(props.docId, selectingMulti.start, selectingMulti.end, (blockDatas: BlockData[]) => {
-        const text = blockDatas.map((blockData: BlockData, index: number) => blockData.text).join("\n\n");
-        console.log(text);
-        try {
-          if (navigator.clipboard) {
-            navigator.clipboard.writeText(text);
-          }
-        } catch (error) {
-          console.log(error);
+      var text = '';
+      for (var i = selectingMulti.start; i <= selectingMulti.end; i++) {
+        if (i >= 0 && i < blocks.length) {
+          const item = blocks[i];
+          text = text + item.text + '\n\n';
         }
-      });
+      }
+      console.log(text);
     }
     setSelectingActive(BlockActiveState.of(false));
   };
@@ -285,6 +282,24 @@ export default forwardRef((props: BlockerListProps, ref) => {
       window.getSelection()?.removeAllRanges();
     }
   }, [selectingMulti]);
+
+  // --- text change:
+
+  const handleTextChange = (data: any) => {
+    // data: { id, text }
+    const newBlocks: any = [];
+    for (var i = 0; i < blocks.length; i++) {
+      const item = blocks[i];
+      if (item.id == data.id) {
+        const newItem = { ...item };
+        newItem.text = data.text;
+        newBlocks.push(newItem);
+      } else {
+        newBlocks.push(item);
+      }
+    }
+    setBlocks(newBlocks);
+  };
 
   // --- ui
   
@@ -311,7 +326,8 @@ export default forwardRef((props: BlockerListProps, ref) => {
           onCopy={handleCopy}
           onMouseDown={onMouseDown}
           onMouseUp={onMouseUp}
-          onMouseEnter={onMouseEnter} />)
+          onMouseEnter={onMouseEnter}
+          onTextChange={handleTextChange} />)
       }
     </div>
   );

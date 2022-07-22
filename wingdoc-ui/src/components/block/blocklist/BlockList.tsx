@@ -208,26 +208,29 @@ export default forwardRef((props: BlockerListProps, ref) => {
     }
   }, [selectStopPos]);
 
-  // --- copy
-
-  const handleCopy = (block: any) => {
-    const selectBlocks = blocks.filter((block: any, index: number) => block.selectAll);
-    if (selectBlocks.length > 0) {
-      const all = selectBlocks.map((block: any, index: number) => block.text).join("\n");
-      console.log("copy:", all);
-      // TODO：自定义复制组件
-      // navigator.clipboard 只能在 localhost 或 https 中使用
-      try {
-        navigator.clipboard.writeText(all);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   // --- old ^^^^^^^^^^
 
   // --- new vvvvvvvvvv:
+
+  // --- copy:
+
+  const copyText = useCallback((text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.style.position = 'fixed';
+    textarea.style.left = '0';
+    textarea.style.top = '0';
+    textarea.style.opacity = '0';
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }, []);
+
+  const handleCopy = (block: any) => {
+    // TODO
+  };
 
   // --- selecting:
 
@@ -261,11 +264,12 @@ export default forwardRef((props: BlockerListProps, ref) => {
       var text = '';
       for (var i = selectingMulti.start; i <= selectingMulti.end; i++) {
         if (i >= 0 && i < blocks.length) {
+          const isLast = i == selectingMulti.end;
           const item = blocks[i];
-          text = text + item.text + '\n\n';
+          text = text + item.text + (isLast ? '\n' : '\n\n');
         }
       }
-      console.log(text);
+      copyText(text);
     }
     setSelectingActive(BlockActiveState.of(false));
   };

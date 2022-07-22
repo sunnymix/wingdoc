@@ -114,10 +114,8 @@ export default forwardRef((props: DocProps, ref) => {
   // --- ui
 
   return <>
-  <div
-    style={{
-    }}>
-    <div>
+  <div className={`doc`}>
+    <div className={`doc_body`}>
       <div>
         <DocTitle id={doc.id}
           value={doc.title}

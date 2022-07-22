@@ -1,3 +1,10 @@
+.doc {
+  border: 1px solid #eee;
+}
+
+.doc_body {
+}
+
 .doc_tail {
   height: 100vh;
   background-color: #fff;

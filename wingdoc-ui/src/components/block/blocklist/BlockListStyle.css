@@ -1,2 +1,13 @@
 
+.blocklist {
+    display: flex;
+}
 
+.blocklist_toc {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.blocklist_body {
+    flex-grow: 1;
+}

@@ -292,7 +292,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
   const handleTextChange = (data: any) => {
     // data: { id, text }
     const newBlocks: any = [];
-    for (var i = 0; i < blocks.length; i++) {
+    for (let i = 0; i < blocks.length; i++) {
       const item = blocks[i];
       if (item.id == data.id) {
         const newItem = { ...item };
@@ -308,31 +308,36 @@ export default forwardRef((props: BlockerListProps, ref) => {
   // --- ui
   
   return (
-    <div className='blocklist' onMouseLeave={onMouseLeave}>
-      {blocks.map((block: any, index: number) => 
-        <Block
-          key={block.id}
-          data={block}
-          focusingPos={focusingPos}
-          hoveringPos={hoveringPos}
-          selectingActive={selectingActive}
-          selectingMulti={selectingMulti}
-          selectingStartPos={selectingStartPos}
-          onEnter={handleBlockEnter}
-          onDelete={handleBlockDelete}
-          onMoveUp={handleBlockMoveUp}
-          onMoveDown={handleBlockMoveDown}
-          onFocus={handleFocus}
-          onFocusUp={handleFocusUp}
-          onFocusDown={handleFocusDown}
-          onSelectStart={handleSelectStart}
-          onSelectStop={handleSelectStop}
-          onCopy={handleCopy}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
-          onMouseEnter={onMouseEnter}
-          onTextChange={handleTextChange} />)
-      }
+    <div className='blocklist'>
+      <div className='blocklist_toc'>
+        <div>TOC</div>
+      </div>
+      <div className='blocklist_body' onMouseLeave={onMouseLeave}>
+        {blocks.map((block: any, index: number) =>
+          <Block
+            key={block.id}
+            data={block}
+            focusingPos={focusingPos}
+            hoveringPos={hoveringPos}
+            selectingActive={selectingActive}
+            selectingMulti={selectingMulti}
+            selectingStartPos={selectingStartPos}
+            onEnter={handleBlockEnter}
+            onDelete={handleBlockDelete}
+            onMoveUp={handleBlockMoveUp}
+            onMoveDown={handleBlockMoveDown}
+            onFocus={handleFocus}
+            onFocusUp={handleFocusUp}
+            onFocusDown={handleFocusDown}
+            onSelectStart={handleSelectStart}
+            onSelectStop={handleSelectStop}
+            onCopy={handleCopy}
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseEnter={onMouseEnter}
+            onTextChange={handleTextChange} />)
+        }
+      </div>
     </div>
   );
 });

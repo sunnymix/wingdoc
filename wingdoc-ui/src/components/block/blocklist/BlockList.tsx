@@ -3,6 +3,7 @@ import BlockApi from '../api/BlockApi';
 import Block, { BlockActiveState, BlockData, BlockPosState, BlockSelectingMultiState } from '../block/Block';
 import { useLocation } from 'umi';
 import './BlockListStyle.css';
+import Toc from '../toc/Toc';
 
 export interface BlockerListProps {
   docId: string,
@@ -310,7 +311,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
   return (
     <div className='blocklist'>
       <div className='blocklist_toc'>
-        <div>TOC</div>
+        <Toc />
       </div>
       <div className='blocklist_body' onMouseLeave={onMouseLeave}>
         {blocks.map((block: any, index: number) =>

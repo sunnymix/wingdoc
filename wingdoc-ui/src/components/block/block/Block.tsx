@@ -41,6 +41,18 @@ export namespace BlockType {
         return '?';
     }
   }
+
+  export function tocFilter(type: BlockType) {
+    switch (type) {
+      case BlockType.H1:
+      case BlockType.H2:
+      case BlockType.H3:
+      case BlockType.H4:
+        return true;
+      default:
+        return false;
+    }
+  }
 }
 
 export interface BlockProps {

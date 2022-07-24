@@ -311,7 +311,7 @@ export default forwardRef((props: BlockerListProps, ref) => {
   return (
     <div className='blocklist'>
       <div className='blocklist_toc'>
-        <Toc />
+        <Toc docId={props.docId} blocks={blocks} />
       </div>
       <div className='blocklist_body' onMouseLeave={onMouseLeave}>
         {blocks.map((block: any, index: number) =>

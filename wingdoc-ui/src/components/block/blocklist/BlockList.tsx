@@ -40,6 +40,15 @@ export default forwardRef((props: BlockerListProps, ref) => {
   const location: any = useLocation();
   const queryBlock = location.query?.block || null;
 
+  useEffect(() => {
+    if (queryBlock) {
+      const newFocusPos = findBlockPos(blocks);
+      if (newFocusPos >= 0) {
+        updateFocusing(newFocusPos);
+      }
+    }
+  }, [queryBlock]);
+
   const findBlockPos = (blocks: any[]) => {
     const findBlocks = blocks.filter((block: any) => block.id == queryBlock);
     if (findBlocks.length > 0) {

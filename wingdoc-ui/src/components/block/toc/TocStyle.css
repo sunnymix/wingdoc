@@ -1,8 +1,11 @@
 .toc {
   width: 200px;
+  position: fixed;
+  left: 20px;
+  top: 100px;
 }
 
 .toc_item {
   display: block;
-  padding: 2px 10px;
+  padding: 4px 8px;
 }

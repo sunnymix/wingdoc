@@ -40,6 +40,7 @@ export default forwardRef((props: TocProps, ref) => {
 
   return (
     <div className='toc'>
+      <div className='toc_title'>目录</div>
       {items.map((item: any, index: number) =>
         <a className='toc_item' key={item.id} href={item.link} onClick={(e: any) => handleClick(e, item)}>
           {item.text}

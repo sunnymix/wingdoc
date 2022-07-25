@@ -1,11 +1,12 @@
 .toc {
-  width: 200px;
+  background-color: #f5f5f7;
+  width: 240px;
   position: fixed;
   left: 20px;
-  top: 100px;
+  top: 90px;
 }
 
 .toc_item {
   display: block;
-  padding: 4px 8px;
+  padding: 5px 10px;
 }

@@ -312,7 +312,8 @@ export default forwardRef((props: BlockerListProps, ref) => {
         newBlocks.push(item);
       }
     }
-    setBlocks(newBlocks);
+    // setBlocks(newBlocks);
+    // FIXME: 重构复制功能。
   };
 
   // --- ui

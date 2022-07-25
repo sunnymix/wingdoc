@@ -116,15 +116,13 @@ export default forwardRef((props: DocProps, ref) => {
   return <>
   <div className={`doc`}>
     <div className={`doc_body`}>
-      <div>
-        <DocTitle id={doc.id}
-          value={doc.title}
-          focusing={titleFocusing}
-          onFocus={handleTitleFocus}
-          onEnter={handleAdd}
-          onFocusDown={handleTitleFocusDown}
-          onChange={handleTitleChange} />
-      </div>
+      <DocTitle id={doc.id}
+        value={doc.title}
+        focusing={titleFocusing}
+        onFocus={handleTitleFocus}
+        onEnter={handleAdd}
+        onFocusDown={handleTitleFocusDown}
+        onChange={handleTitleChange} />
       <BlockList
         docId={doc.id}
         onEmptyFocus={handleBlockListEmptyFocus}

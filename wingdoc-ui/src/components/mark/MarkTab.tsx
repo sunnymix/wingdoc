@@ -1,8 +1,8 @@
 import { forwardRef, useEffect, useState } from "react";
-import { Mark } from "./MarkTabs";
+import { Mark, MarkChangeEvent } from "./MarkTabs";
 import { Dropdown, Menu } from "antd";
 import "./MarkStyle.css";
-import { Link } from "umi";
+import { Link, useModel } from "umi";
 import moment from "moment";
 import MarkApi from "./MarkApi";
 import { MoreOutlined, PushpinFilled } from "@ant-design/icons";
@@ -16,6 +16,7 @@ export interface MarkTabProps {
   onPin?: Function,
   onUnpin?: Function,
   onChange?: Function,
+  onRefresh?: Function,
 };
 
 export default forwardRef((props: MarkTabProps, ref) => {
@@ -23,6 +24,12 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- props
 
   const { mark, onDelete, onPin, onUnpin, onChange } = props;
+
+  // --- model:
+
+  const { refreshMark } = useModel("marks", (model: any) => ({
+    refreshMark: model.refreshMark,
+  }));
 
   // --- close
 
@@ -85,7 +92,9 @@ export default forwardRef((props: MarkTabProps, ref) => {
   // --- refresh
 
   const handleRefresh = () => {
-    // TODO
+    const event: MarkChangeEvent = { mark: props.mark, ts: +(new Date()) };
+    props.onRefresh?.call(null, event);
+    refreshMark(event);
   };
 
   // --- clone

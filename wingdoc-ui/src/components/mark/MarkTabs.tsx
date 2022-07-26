@@ -12,6 +12,11 @@ export interface Mark {
   focus?: boolean,
 }
 
+export interface MarkChangeEvent {
+  mark: Mark,
+  ts: number,
+}
+
 export interface MarkTabsProps {}
 
 export default forwardRef((props: MarkTabsProps, ref) => {

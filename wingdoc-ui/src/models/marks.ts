@@ -1,4 +1,4 @@
-import { Mark } from "@/components/mark/MarkTabs";
+import { Mark, MarkChangeEvent } from "@/components/mark/MarkTabs";
 import { useState, useCallback, useEffect } from "react";
 import MarkApi from "@/components/mark/MarkApi";
 
@@ -41,5 +41,13 @@ export default () => {
     refreshMarks('');
   }, []);
 
-  return { marks, refreshMarks };
+  const refreshMark = useCallback((markChange: MarkChangeEvent) => {
+    console.log('refresh mark', markChange);
+  }, []);
+
+  return {
+    marks,
+    refreshMarks,
+    refreshMark,
+  };
 };

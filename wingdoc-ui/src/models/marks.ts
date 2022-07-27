@@ -41,9 +41,16 @@ export default () => {
     refreshMarks('');
   }, []);
 
+  // --- refresh mark:
+
   const refreshMark = useCallback((markChange: MarkChangeEvent) => {
-    console.log('refresh mark', markChange);
+    console.log('markChange', markChange);
+    setMarkChange(markChange);
   }, []);
+
+  // --- mark change event:
+  
+  const [markChange, setMarkChange] = useState<MarkChangeEvent|null>(null);
 
   return {
     marks,

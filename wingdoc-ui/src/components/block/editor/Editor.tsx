@@ -321,7 +321,7 @@ export default forwardRef((props: BlockProps, ref) => {
     // saveText();
   };
 
-  const handleFooterClick = (e: any) => {
+  const handleSpaceClick = (e: any) => {
     focusEditor('last');
   };
 
@@ -349,6 +349,7 @@ export default forwardRef((props: BlockProps, ref) => {
     className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'} ${imaged && 'imaged'}`}
     onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
     onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+    <div className='editor_space_before' onClick={handleSpaceClick}></div>
     <div className='editor_box'>
       <div className='editor_side'>
         <div className={`editor_menu ${menuOpened && 'opened'}`}>
@@ -385,8 +386,7 @@ export default forwardRef((props: BlockProps, ref) => {
         </div>
       </div>
     </div>
-    <div className='editor_space' onClick={handleFooterClick}>
-    </div>
+    <div className='editor_space_after' onClick={handleSpaceClick}></div>
   </div>
   </>
   );

@@ -2,10 +2,10 @@
   position: relative;
 }
 
-/* --- footer: */
+/* --- space: */
 
-.editor_space {
-  height: 24px;
+.editor_space_after {
+  height: 16px;
   background-color: #fff;
 }
 
@@ -194,20 +194,44 @@
   font-size: 130%;
   font-weight: bold;
 }
+.editor.h1 .editor_space_before {
+  height: 0px;
+}
+.editor.h1 .editor_space_after {
+  height: 0px;
+}
 
 .editor.h2 .editor_content {
   font-size: 120%;
   font-weight: bold;
+}
+.editor.h2 .editor_space_before {
+  height: 0px;
+}
+.editor.h2 .editor_space_after {
+  height: 0px;
 }
 
 .editor.h3 .editor_content {
   font-size: 110%;
   font-weight: bold;
 }
+.editor.h3 .editor_space_before {
+  height: 0px;
+}
+.editor.h3 .editor_space_after {
+  height: 0px;
+}
 
 .editor.h4 .editor_content {
   font-size: 100%;
   font-weight: bold;
+}
+.editor.h4 .editor_space_before {
+  height: 0px;
+}
+.editor.h4 .editor_space_after {
+  height: 0px;
 }
 
 /* --- linker: */

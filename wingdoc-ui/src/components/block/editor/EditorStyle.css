@@ -60,7 +60,6 @@
   bottom: 0px;
   left: -2px;
   border-left: 1px solid transparent;
-  border-radius: 50%;
 }
 
 .editor.hovered .editor_content::before {
@@ -81,7 +80,7 @@
   display: inline-block;
   padding: 0 4px;
   border: 1px solid #ddd;
-  border-radius: 2px;
+  border-radius: 1px;
   background-color: #fff;
   transform: scale(0.65);
   color: #bbb;
@@ -142,7 +141,6 @@
 .editor_body {
   flex-grow: 1;
   position: relative;
-  max-width: 70%;
 }
 
 /* --- imager: */

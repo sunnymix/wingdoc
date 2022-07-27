@@ -1,5 +1,7 @@
 .doc_body {
+  margin-top: 60px;
   margin-left: 260px;
+  max-width: 60%;
 }
 
 .doc_tail {

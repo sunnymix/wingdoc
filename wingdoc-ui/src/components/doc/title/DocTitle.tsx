@@ -95,11 +95,6 @@ export default forwardRef((props: DocTitleProps, ref) => {
 
   return <>
   <div className={`doc_title ${hovered && 'hovered'} ${focused && 'focused'}`} onMouseMove={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-    <div className='doc_title_menu'>
-      <button className='doc_title_menu_btn btn ghost square'>
-        <span className='btn_border_icon'></span>
-      </button>
-    </div>
     <div className='doc_title_content'>
       <TextArea
         className='doc_title_textarea'

@@ -4,16 +4,20 @@
 
 /* --- space: */
 
+.editor_space_before,
+.editor_space_after {
+  background-color: #fff;
+}
+
 .editor_space_after {
   height: 16px;
-  background-color: transparent;
 }
 
 /* --- box: */
 
 .editor_box {
   display: flex;
-  background-color: #fff;
+  background-color: transparent;
   position: relative;
 }
 
@@ -25,7 +29,7 @@
   background-color: transparent;
 }
 
-.editor.selected .editor_box {
+.editor.selected .editor_content {
   background-color: #188fff20;
 }
 
@@ -38,12 +42,14 @@
   width: 75px;
   justify-content: flex-end;
   border-right: 1px solid #f2f2f2;
+  background-color: transparent;
 }
 
 /* --- editor-side::before */
 
 .editor .editor_content {
   position: relative;
+  background-color: #fff;
 }
 
 .editor .editor_content::before {
@@ -58,11 +64,11 @@
 }
 
 .editor.hovered .editor_content::before {
-  border-color: #eee;
+  border-color: #ddd;
 }
 
 .editor.focused .editor_content::before {
-  border-color: #ddd;
+  border-color: #bbb;
 }
 
 /* --- menu: */
@@ -136,6 +142,7 @@
 .editor_body {
   flex-grow: 1;
   position: relative;
+  max-width: 70%;
 }
 
 /* --- imager: */
@@ -168,7 +175,7 @@
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;
-  background-color: #00000005;
+  background-color: #f8f8f8;
 }
 
 .editor.h1 .editor_content {
@@ -216,6 +223,10 @@
 }
 
 /* --- linker: */
+
+.editor_link {
+  background-color: #fff;
+}
 
 .editor_link_anchor {
   padding: 0 8px;

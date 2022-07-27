@@ -349,7 +349,6 @@ export default forwardRef((props: BlockProps, ref) => {
     className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'} ${imaged && 'imaged'}`}
     onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
     onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
-    <div className='editor_space_before' onClick={handleSpaceClick}></div>
     <div className='editor_box'>
       <div className='editor_side'>
         <div className={`editor_menu ${menuOpened && 'opened'}`}>
@@ -373,6 +372,7 @@ export default forwardRef((props: BlockProps, ref) => {
         </div>
       </div>
       <div className='editor_body'>
+        <div className='editor_space_before' onClick={handleSpaceClick}></div>
         <div
           className='editor_content'
           {...editorProps}
@@ -384,9 +384,9 @@ export default forwardRef((props: BlockProps, ref) => {
           {linked && <a className='editor_link_anchor' href={link} onClick={handleLinkerClick}>{link}</a>}
           <Linker ref={linkerRef} blockId={props.data.id} link={link} onSave={handleLinkerSave} onCancel={handleLinkerCancel} />
         </div>
+        <div className='editor_space_after' onClick={handleSpaceClick}></div>
       </div>
     </div>
-    <div className='editor_space_after' onClick={handleSpaceClick}></div>
   </div>
   </>
   );

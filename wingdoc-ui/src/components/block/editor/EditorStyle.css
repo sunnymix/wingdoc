@@ -6,7 +6,7 @@
 
 .editor_space_after {
   height: 16px;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 /* --- box: */
@@ -37,51 +37,32 @@
   display: flex;
   width: 75px;
   justify-content: flex-end;
+  border-right: 1px solid #f2f2f2;
 }
 
 /* --- editor-side::before */
 
-.editor .editor_side::before,
-.editor .editor_side::before,
-.editor .editor_side::before {
+.editor .editor_content {
+  position: relative;
+}
+
+.editor .editor_content::before {
   content: ' ';
   position: absolute;
-  top: 26px;
-  bottom: 6px;
-  left: 19px;
+  z-index: 1;
+  top: 0px;
+  bottom: 0px;
+  left: -2px;
   border-left: 1px solid transparent;
   border-radius: 50%;
 }
 
-.editor.hovered .editor_side::before {
+.editor.hovered .editor_content::before {
   border-color: #eee;
 }
 
-.editor.focused .editor_side::before {
+.editor.focused .editor_content::before {
   border-color: #ddd;
-}
-
-/* --- editor-side::after */
-
-.editor_side::after,
-.editor_side::after,
-.editor_side::after {
-  content: ' ';
-  position: absolute;
-  bottom: 13px;
-  left: 19px;
-  height: 1px;
-  width: 1px;
-  border-radius: 50%;
-  display: none;
-}
-
-.editor.hovered .editor_side::after {
-  background-color: #ddd;
-}
-
-.editor.focused .editor_side::after {
-  background-color: #bbb;
 }
 
 /* --- menu: */
@@ -93,7 +74,7 @@
 .editor_menu_icon {
   display: inline-block;
   padding: 0 4px;
-  /* border: 1px solid #ddd; */
+  border: 1px solid #ddd;
   border-radius: 2px;
   background-color: #fff;
   transform: scale(0.65);
@@ -102,12 +83,12 @@
 
 .editor.hovered .editor_menu_icon {
   color: #ddd;
-  /* border-color: #ddd; */
+  border-color: #ddd;
 }
 
 .editor.focused .editor_menu_icon {
   color: #bbb;
-  /* border-color: #bbb; */
+  border-color: #bbb;
 }
 
 .editor.hovered .editor_menu_btn,
@@ -142,12 +123,12 @@
 .editor_tasker {
   flex-shrink: 0;
   flex-grow: 0;
-  visibility: hidden;
   margin-left: 2px;
+  display: none;
 }
 
 .editor_tasker.opened {
-  visibility: visible;
+  display: block;
 }
 
 /* --- body: */

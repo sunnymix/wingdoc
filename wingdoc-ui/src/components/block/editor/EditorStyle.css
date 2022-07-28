@@ -81,7 +81,7 @@
   padding: 0 4px;
   border: 1px solid #ddd;
   border-radius: 1px;
-  background-color: #fff;
+  background-color: transparent;
   transform: scale(0.65);
   color: #bbb;
 }
@@ -161,7 +161,7 @@
   background-color: transparent;
   border: 1px solid transparent;
   line-height: 24px;
-  padding: 0 8px;
+  padding: 0 16px;
   font-family: "Helvetica Neue", Helvetica, Arial;
 }
 
@@ -176,48 +176,42 @@
   background-color: #f8f8f8;
 }
 
+.editor.selected.code .editor_content {
+  background-color: #188fff20;
+}
+
+.editor.h1 .editor_space_before,
+.editor.h2 .editor_space_before,
+.editor.h3 .editor_space_before,
+.editor.h4 .editor_space_before {
+  height: 16px;
+}
+
+.editor.h1 .editor_side,
+.editor.h2 .editor_side,
+.editor.h3 .editor_side,
+.editor.h4 .editor_side {
+  padding-top: 16px;
+}
+
 .editor.h1 .editor_content {
   font-size: 130%;
   font-weight: bold;
-}
-.editor.h1 .editor_space_before {
-  height: 0px;
-}
-.editor.h1 .editor_space_after {
-  height: 0px;
 }
 
 .editor.h2 .editor_content {
   font-size: 120%;
   font-weight: bold;
 }
-.editor.h2 .editor_space_before {
-  height: 0px;
-}
-.editor.h2 .editor_space_after {
-  height: 0px;
-}
 
 .editor.h3 .editor_content {
   font-size: 110%;
   font-weight: bold;
 }
-.editor.h3 .editor_space_before {
-  height: 0px;
-}
-.editor.h3 .editor_space_after {
-  height: 0px;
-}
 
 .editor.h4 .editor_content {
   font-size: 100%;
   font-weight: bold;
-}
-.editor.h4 .editor_space_before {
-  height: 0px;
-}
-.editor.h4 .editor_space_after {
-  height: 0px;
 }
 
 /* --- linker: */

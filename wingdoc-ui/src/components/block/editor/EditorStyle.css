@@ -83,7 +83,7 @@
   width: 24px;
   height: 14px;
   line-height: 14px;
-  border: 1px solid #ddd;
+  border: 0px solid #ddd;
   border-radius: 1px;
   background-color: transparent;
 }
@@ -92,7 +92,7 @@
   display: inline-block;
   color: #bbb;
   font-weight: 500;
-  transform: scale(0.65);
+  transform: scale(0.6);
 }
 
 .editor.hovered .editor_menu_icon {
@@ -182,7 +182,7 @@
 .editor.code .editor_content {
   font-family: 'Verily';
   font-size: 90%;
-  background-color: #f8f8f8;
+  background-color: #fafafa;
 }
 
 .editor.selected.code .editor_content {
@@ -196,11 +196,25 @@
   height: 16px;
 }
 
+.editor.first.h1 .editor_space_before,
+.editor.first.h2 .editor_space_before,
+.editor.first.h3 .editor_space_before,
+.editor.first.h4 .editor_space_before {
+  height: 0px;
+}
+
 .editor.h1 .editor_side,
 .editor.h2 .editor_side,
 .editor.h3 .editor_side,
 .editor.h4 .editor_side {
   padding-top: 16px;
+}
+
+.editor.first.h1 .editor_side,
+.editor.first.h2 .editor_side,
+.editor.first.h3 .editor_side,
+.editor.first.h4 .editor_side {
+  padding-top: 0px;
 }
 
 .editor.h1 .editor_content {
@@ -227,6 +241,7 @@
 
 .editor_link {
   background-color: #fff;
+  padding-left: 24px;
 }
 
 .editor_link_anchor {
@@ -234,5 +249,4 @@
   display: inline-block;
   font-size: 80%;
   color: #aaa;
-  border-radius: 2px;
 }

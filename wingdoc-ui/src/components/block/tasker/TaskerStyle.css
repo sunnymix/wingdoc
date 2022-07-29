@@ -32,7 +32,7 @@
 .btn.tasker_btn .tasker_btn_text {
   display: block;
   font-weight: 500;
-  transform: scale(0.65);
+  transform: scale(0.6);
 }
 
 .btn.tasker_btn.new .tasker_btn_body {

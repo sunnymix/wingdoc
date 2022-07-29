@@ -346,7 +346,7 @@ export default forwardRef((props: BlockProps, ref) => {
   return (
   <>
   <div
-    className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'} ${imaged && 'imaged'}`}
+    className={`editor ${blockType.toLocaleLowerCase()} ${hovered && 'hovered'} ${focused && 'focused'} ${linked && 'linked'} ${selected && 'selected'} ${imaged && 'imaged'} ${props.data.pos === 0 && 'first'}`}
     onMouseEnter={onMouseEnter} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave}
     onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
     <div className='editor_box'>

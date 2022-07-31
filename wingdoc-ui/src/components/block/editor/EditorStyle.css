@@ -100,7 +100,11 @@
 }
 
 .editor.hovered .editor_menu_btn,
-.editor.focused .editor_menu_btn {
+.editor.focused .editor_menu_btn,
+.editor.h1 .editor_menu_btn,
+.editor.h2 .editor_menu_btn,
+.editor.h3 .editor_menu_btn,
+.editor.h4 .editor_menu_btn {
   visibility: visible;
 }
 

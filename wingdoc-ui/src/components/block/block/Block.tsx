@@ -48,6 +48,7 @@ export namespace BlockType {
       case BlockType.H2:
       case BlockType.H3:
       case BlockType.H4:
+      case BlockType.TASK:
         return true;
       default:
         return false;

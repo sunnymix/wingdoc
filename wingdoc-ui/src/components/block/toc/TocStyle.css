@@ -1,6 +1,6 @@
 .toc {
   background-color: transparent;
-  width: 255px;
+  width: 320px;
   position: fixed;
   left: 20px;
   top: 150px;
@@ -14,4 +14,30 @@
 .toc_item {
   display: block;
   padding: 5px 10px;
+  word-break: break-all;
+}
+
+.toc_item.h1 .toc_item_body {
+  display: block;
+  margin-left: 0px;
+}
+
+.toc_item.h2 .toc_item_body {
+  display: block;
+  margin-left: 10px;
+}
+
+.toc_item.h3 .toc_item_body {
+  display: block;
+  margin-left: 20px;
+}
+
+.toc_item.h4 .toc_item_body {
+  display: block;
+  margin-left: 30px;
+}
+
+.toc_item.task .toc_item_body {
+  display: block;
+  margin-left: 30px;
 }

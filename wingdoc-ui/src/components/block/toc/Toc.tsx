@@ -21,7 +21,7 @@ export default forwardRef((props: TocProps, ref) => {
         return { 
           id: block.id,
           type: block.type,
-          text: block.text,
+          text: (block.text || '').substr(0, 20),
           link: `/doc/${props.docId}?block=${block.id}`,
         };
       }
@@ -42,8 +42,8 @@ export default forwardRef((props: TocProps, ref) => {
     <div className='toc'>
       <div className='toc_title'>目录</div>
       {items.map((item: any, index: number) =>
-        <a className='toc_item' key={item.id} href={item.link} onClick={(e: any) => handleClick(e, item)}>
-          {item.text}
+        <a className={`toc_item ${item.type.toLocaleLowerCase()}`} key={item.id} href={item.link} onClick={(e: any) => handleClick(e, item)}>
+          <span className={`toc_item_body`}>{item.text}</span>
         </a>
       )}
     </div>

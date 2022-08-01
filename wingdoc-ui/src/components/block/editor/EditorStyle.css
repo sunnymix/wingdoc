@@ -85,8 +85,8 @@
 .editor_menu_icon_text {
   display: inline-block;
   color: #bbb;
-  font-weight: 500;
-  transform: scale(0.6);
+  font-weight: bold;
+  transform: scale(0.5);
 }
 
 .editor.hovered .editor_menu_icon {

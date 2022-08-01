@@ -31,41 +31,41 @@
 
 .btn.tasker_btn .tasker_btn_text {
   display: block;
-  font-weight: 500;
-  transform: scale(0.6);
+  font-weight: bold;
+  transform: scale(0.65);
 }
 
 .btn.tasker_btn.new .tasker_btn_body {
-  background-color: #faad14;
+  background-color: #faad1400;
 }
 .btn.tasker_btn.new .tasker_btn_text {
-  color: #fff;
+  color: #faad14;
 }
 
 .btn.tasker_btn.wip .tasker_btn_body {
-  background-color: #176efe;
+  background-color: #176efe00;
 }
 .btn.tasker_btn.wip .tasker_btn_text {
-  color: #fff;
+  color: #176efe;
 }
 
 .btn.tasker_btn.ok .tasker_btn_body {
-  background-color: #52c41a;
+  background-color: #52c41a00;
 }
 .btn.tasker_btn.ok .tasker_btn_text {
-  color: #fff;
+  color: #52c41a;
 }
 
 .btn.tasker_btn.up .tasker_btn_body {
-  background-color: #ff4d4f;
+  background-color: #ff4d4f00;
 }
 .btn.tasker_btn.up .tasker_btn_text {
-  color: #fff;
+  color: #ff4d4f;
 }
 
 .btn.tasker_btn.del .tasker_btn_body {
-  background-color: #aaaaaa;
+  background-color: #aaaaaa00;
 }
 .btn.tasker_btn.del .tasker_btn_text {
-  color: #fff;
+  color: #aaaaaa;
 }

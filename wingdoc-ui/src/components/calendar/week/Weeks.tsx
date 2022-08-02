@@ -68,6 +68,16 @@ export default forwardRef((props: WeekListProps, ref) => {
     setWeeksAfter(1);
   }, []);
 
+  const handleFocusBackward = useCallback((e: any) => {
+    setWeeksBefore(1);
+    setWeeksAfter(0);
+  }, []);
+
+  const handleFocusForward = useCallback((e: any) => {
+    setWeeksBefore(0);
+    setWeeksAfter(1);
+  }, []);
+
   // --- ui:
 
   return <>
@@ -77,8 +87,10 @@ export default forwardRef((props: WeekListProps, ref) => {
       <InputNumber className='weeks_input' min={0} value={weeksAfter} onChange={handleWeeksAfterUpdate} addonAfter="周后" />
       <InputNumber className='weeks_input' min={1} value={heightMultiple} onChange={handleHeightMultipleUpdate} addonAfter="空间" />
       <Checkbox defaultChecked={weekendShow} onChange={handleWeekendShowUpdate}>周末</Checkbox>
-      <Button className="focus_this_week" type='link' onClick={handleFocusThisWeek}>本周</Button>
-      <Button className="focus_three_weeks" type='link' onClick={handleFocusThreeWeeks}>近3周</Button>
+      <Button className="focus_this_week" type='ghost' onClick={handleFocusThisWeek}>本周</Button>
+      <Button className="focus_three_weeks" type='ghost' onClick={handleFocusThreeWeeks}>近3周</Button>
+      <Button className="focus_backward" type='ghost' onClick={handleFocusBackward}>回顾</Button>
+      <Button className="focus_forward" type='ghost' onClick={handleFocusForward}>前瞻</Button>
     </Space>
     <div className="weeks_body">
       {weeks.map((week: number) => 

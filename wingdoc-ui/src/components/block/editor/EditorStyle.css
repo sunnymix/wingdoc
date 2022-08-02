@@ -177,8 +177,8 @@
   outline: 0;
 }
 
-.editor.task .editor_content * {
-  font-weight: 500;
+.editor.task .editor_content > *:first-child {
+  font-weight: bold;
 }
 
 .editor.code .editor_content {
@@ -220,22 +220,22 @@
 }
 
 .editor.h1 .editor_content {
-  font-size: 130%;
+  font-size: 160%;
   font-weight: bold;
 }
 
 .editor.h2 .editor_content {
-  font-size: 120%;
+  font-size: 140%;
   font-weight: bold;
 }
 
 .editor.h3 .editor_content {
-  font-size: 110%;
+  font-size: 120%;
   font-weight: bold;
 }
 
 .editor.h4 .editor_content {
-  font-size: 100%;
+  font-size: 110%;
   font-weight: bold;
 }
 

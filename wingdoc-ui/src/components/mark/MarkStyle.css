@@ -21,14 +21,18 @@
   background-color: transparent;
 }
 
-.marks_tabs_item.pin::after {
+.marks_tabs_item::after {
   content: ' ';
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   height: 0;
-  border-top: 2px solid #888;
+  border-top: 2px solid transparent;
+}
+
+.marks_tabs_item.pin::after {
+  border-color: #176efe90;
 }
 
 .marks_tabs_item_link {

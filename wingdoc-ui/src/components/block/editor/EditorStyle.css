@@ -139,7 +139,7 @@
   display: none;
 }
 
-.editor_tasker.opened {
+.editor.task .editor_tasker {
   display: block;
 }
 
@@ -177,8 +177,9 @@
   outline: 0;
 }
 
-.editor.task .editor_content > *:first-child {
-  font-weight: bold;
+.editor.task .editor_content > *:first-child,
+.editor.task .editor_content > *:first-child > *:first-child {
+  font-weight: bold !important;
 }
 
 .editor.code .editor_content {

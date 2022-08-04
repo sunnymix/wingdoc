@@ -38,7 +38,10 @@ export default forwardRef((props: MarkTabsProps, ref) => {
 
   return (
     <div className="mark_tabs scrollbar_small">
-      {marks.map((mark: Mark) => 
+      {marks.filter((mark: Mark) => mark.pin > 0).map((mark: Mark) => 
+        <MarkTab key={mark.id} mark={mark} onChange={handleMarkChange} />
+      )}
+      {marks.filter((mark: Mark) => mark.pin <= 0).map((mark: Mark) => 
         <MarkTab key={mark.id} mark={mark} onChange={handleMarkChange} />
       )}
     </div>

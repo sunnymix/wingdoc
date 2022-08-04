@@ -29,7 +29,7 @@ public class MarkRepo {
     public Out<List<Mark>> query() {
         List<Mark> marks = dsl
                 .selectFrom(MARK)
-                .orderBy(MARK.PIN.desc(), MARK.ID.desc())
+                .orderBy(MARK.PIN, MARK.ID)
                 .fetchStreamInto(Mark.class)
                 .collect(Collectors.toList());
         return Out.ok(Page.list(marks.size()), marks);

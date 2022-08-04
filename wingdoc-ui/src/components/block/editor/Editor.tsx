@@ -236,14 +236,14 @@ export default forwardRef((props: BlockProps, ref) => {
 
   // --- tasker:
 
-  const [tasked, setTasked] = useState<boolean>(props.data.type == 'TASK');
   const taskerRef = useRef<any>(null);
   const openTasker = () => {
-    // TODO: use event handler
-    taskerRef.current.open(!tasked, (newTasked: boolean) => {
-      setTasked(newTasked);
-    });
+    const isTask = blockType == BlockType.TASK;
+    taskerRef.current.open(!isTask);
   };
+  const handleTaskChange = useCallback((block: any) => {
+    setBlockType(block.type);
+  }, []);
 
   // --- keydown:
 
@@ -369,8 +369,8 @@ export default forwardRef((props: BlockProps, ref) => {
             <button className='btn ghost square'><PictureOutlined /></button>
           </div>
         </div>
-        <div className={`editor_tasker ${tasked && 'opened'}`}>
-          <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} />
+        <div className={`editor_tasker`}>
+          <Tasker ref={taskerRef} blockId={props.data.id} initialStatus={props.data.status} onChange={handleTaskChange} />
         </div>
       </div>
       <div className='editor_body'>

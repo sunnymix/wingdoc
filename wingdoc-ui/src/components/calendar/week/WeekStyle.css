@@ -19,6 +19,10 @@
   border-width: 1px;
 }
 
+.weekday.weekend .weekday_border {
+  background-color: #f5f5f7;
+}
+
 .weekday_content {
   z-index: 2;
   position: relative;

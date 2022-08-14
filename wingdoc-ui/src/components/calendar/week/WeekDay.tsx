@@ -104,6 +104,8 @@ export default forwardRef((props: WeekDayProps, ref) => {
 
   const isLastDay = Weekday.isLastDay(weekday);
 
+  const isWeekend = Weekday.isWeekend(props.weekday);
+
   // --- docId
 
   const [docId, setDocId] = useState<any>(null);
@@ -176,7 +178,7 @@ export default forwardRef((props: WeekDayProps, ref) => {
   );
 
   return <>
-  <div className="weekday">
+  <div className={`weekday ${isWeekend && 'weekend'}`}>
     <div className="weekday_border"></div>
     <div className="weekday_content">
       <div className="weekday_content_header">

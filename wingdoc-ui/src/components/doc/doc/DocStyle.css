@@ -2,10 +2,24 @@
   margin-top: 60px;
   margin-left: 18%;
   max-width: 55%;
+  position: relative;
+}
+
+.doc_body::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 75px;
+  right: 0;
+  content: ' ';
   background-color: #fff;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 0 1px 1px #00000008;
 }
 
 .doc_tail {
-  height: 100vh;
+  height: 50vh;
   background-color: #e7e7e7;
 }

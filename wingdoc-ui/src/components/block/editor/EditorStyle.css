@@ -36,8 +36,6 @@
   display: flex;
   width: 75px;
   justify-content: flex-end;
-  border-right: 1px solid #f2f2f2;
-  background-color: #e7e7e7;
 }
 
 /* --- editor-side::before */
@@ -52,16 +50,16 @@
   z-index: 1;
   top: 0px;
   bottom: 0px;
-  left: -2px;
+  left: -1px;
   border-left: 1px solid transparent;
 }
 
 .editor.hovered .editor_content::before {
-  border-color: #ddd;
+  border-color: #aaa;
 }
 
 .editor.focused .editor_content::before {
-  border-color: #bbb;
+  border-color: #888;
 }
 
 /* --- menu: */
@@ -221,17 +219,17 @@
 }
 
 .editor.h1 .editor_content {
-  font-size: 150%;
-  font-weight: bold;
-}
-
-.editor.h2 .editor_content {
   font-size: 140%;
   font-weight: bold;
 }
 
-.editor.h3 .editor_content {
+.editor.h2 .editor_content {
   font-size: 130%;
+  font-weight: bold;
+}
+
+.editor.h3 .editor_content {
+  font-size: 120%;
   font-weight: bold;
 }
 

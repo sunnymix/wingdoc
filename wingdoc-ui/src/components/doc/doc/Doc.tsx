@@ -128,8 +128,8 @@ export default forwardRef((props: DocProps, ref) => {
         onEmptyFocus={handleBlockListEmptyFocus}
         onFocusChange={handleBlockListFocusChange}
         ref={blockListRef} />
-      <div className='doc_tail' onClick={handleTailClick}></div>
     </div>
+    <div className='doc_tail' onClick={handleTailClick}></div>
   </div>
   </>;
 });

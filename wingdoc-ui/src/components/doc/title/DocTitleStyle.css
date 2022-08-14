@@ -8,7 +8,6 @@
 .doc_title_side {
   flex-shrink: 0;
   flex-grow: 0;
-  background-color: #e7e7e7;
   width: 75px;
 }
 
@@ -29,7 +28,7 @@
 /* --- textarea */
 
 .doc_title_textarea {
-  font-size: 150%;
+  font-size: 140%;
   line-height: 24px;
   font-weight: bold;
   padding: 0 4px !important;

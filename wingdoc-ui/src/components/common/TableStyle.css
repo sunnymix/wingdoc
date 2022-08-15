@@ -1,6 +1,8 @@
 table.simple {
   border-collapse: collapse;
   width: 100%;
+  border-left: 1px solid #dedede;
+  border-right: 1px solid #dedede;
 }
 
 table.auto {
@@ -9,7 +11,7 @@ table.auto {
 
 table.simple th,
 table.simple td {
-  padding: 6px 0;
+  padding: 6px 20px;
   vertical-align: middle;
   border-top: 1px solid #dedede;
   border-bottom: 1px solid #dedede;

@@ -16,15 +16,15 @@ const getDocId = (path: any) => {
 
 export default () => {
 
-  // --- current path
+  // --- current path:
   var currentPath = '';
 
-  // --- marks
+  // --- marks:
   const [marks, setMarks] = useState<Mark[]>([]);
 
-  // --- refresh
+  // --- refresh:
   const refreshMarks = useCallback((path: any) => {
-    currentPath = path;
+    currentPath = path;  
     MarkApi.queryMarks({}, (marks: any) => {
       const newMarks: Mark[] = [];
       if (marks && marks.length > 0) {

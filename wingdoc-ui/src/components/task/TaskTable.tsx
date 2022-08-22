@@ -80,7 +80,7 @@ const TaskTable = forwardRef((props, ref) => {
           <td>
             <Space direction="horizontal" size="small">
               <Tasker blockId={task.id} initialStatus={task.status} />
-              <div style={{fontFamily: '"Helvetica Neue", Helvetica, Arial',}}>{task.task}</div>
+              <div style={{fontFamily: '"Helvetica Neue", Helvetica, Arial',}}>{TaskApi.wrapTaskTitle(task.task)}</div>
             </Space>
           </td>
         </tr>

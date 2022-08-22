@@ -16,18 +16,6 @@ interface TaskProps {
   docId: String,
 };
 
-function wrapTaskTitle(task: string) {
-  let result = '';
-  if (task && task.length > 0) {
-    result = task;
-    const returnIndex = task.indexOf('\n');
-    if (returnIndex >= 0) {
-      result = task.substring(0, returnIndex);
-    }
-  }
-  return result;
-}
-
 export default forwardRef((props: WeekDayTasksProps, ref) => {
 
   // --- props
@@ -70,7 +58,7 @@ export default forwardRef((props: WeekDayTasksProps, ref) => {
             fontSize: "80%",
             fontFamily: '"Helvetica Neue", Helvetica, Arial',
             whiteSpace: "nowrap",
-          }}>{wrapTaskTitle(task.task)}</Link>
+          }}>{TaskApi.wrapTaskTitle(task.task)}</Link>
       </div>
     </div>
   );

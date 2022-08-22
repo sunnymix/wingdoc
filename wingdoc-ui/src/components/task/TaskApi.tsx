@@ -20,9 +20,22 @@ const fetchTaskStats = (query: any, cb: Function) => {
     });
 };
 
+const wrapTaskTitle = (task: string) => {
+  let result = '';
+  if (task && task.length > 0) {
+    result = task;
+    const returnIndex = task.indexOf('\n');
+    if (returnIndex >= 0) {
+      result = task.substring(0, returnIndex);
+    }
+  }
+  return result;
+};
+
 const TaskApi = {
   fetchTaskList,
   fetchTaskStats,
+  wrapTaskTitle
 };
 
 export default TaskApi;

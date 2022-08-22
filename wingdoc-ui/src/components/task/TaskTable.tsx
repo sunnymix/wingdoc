@@ -17,7 +17,7 @@ const TaskTable = forwardRef((props, ref) => {
   // --- statusIn
   // TODO：传递到选择框
 
-  const defaultStatusIn = [Status.WIP, Status.UP];
+  const defaultStatusIn = [Status.NEW, Status.WIP, Status.UP];
 
   const [statusIn, setStatusIn] = useState<Status[]>(defaultStatusIn);
 

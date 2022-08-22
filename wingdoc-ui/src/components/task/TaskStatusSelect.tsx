@@ -24,7 +24,7 @@ export default forwardRef((props: TaskStatusSelectProps, ref) => {
     mode="multiple"
     allowClear={true}
     // TODO：定义为属性
-    defaultValue={[Status.WIP, Status.UP]}
+    defaultValue={[Status.NEW, Status.WIP, Status.UP]}
     onChange={handleChange}
     style={{minWidth: 80}}>
     {Status.all().map((status: Status) =>

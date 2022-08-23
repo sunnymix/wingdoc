@@ -79,6 +79,7 @@ export default forwardRef((props: TaskerProps, ref) => {
   <div className='tasker'>
     <button className={`tasker_control btn ghost tasker_btn ${status.toLocaleLowerCase()}`} onMouseMove={() => setMenuOpened(true)} onMouseLeave={() => setMenuOpened(false)}>
       <span className='tasker_btn_body'>
+        <span className='tasker_btn_icon'></span>
         <span className='tasker_btn_text'>{status}</span>
       </span>
     </button>
@@ -86,6 +87,7 @@ export default forwardRef((props: TaskerProps, ref) => {
       {Status.all().map((status: Status) =>
         <button className={`btn ghost tasker_btn  ${status.toLocaleLowerCase()}`} key={status} onClick={() => handleClick(status)}>
           <span className='tasker_btn_body'>
+            <span className='tasker_btn_icon'></span>
             <span className='tasker_btn_text'>{status}</span>
           </span>
         </button>)}

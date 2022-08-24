@@ -84,11 +84,11 @@
 }
 
 .btn.tasker_btn.del .tasker_btn_body {
-  background-color: #aaaaaa00;
+  background-color: #cccccc00;
 }
 .btn.tasker_btn.del .tasker_btn_icon {
-  background-color: #aaaaaa;
+  background-color: #cccccc;
 }
 .btn.tasker_btn.del .tasker_btn_text {
-  color: #aaaaaa;
+  color: #cccccc;
 }

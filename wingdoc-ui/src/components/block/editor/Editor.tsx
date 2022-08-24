@@ -267,7 +267,8 @@ export default forwardRef((props: BlockProps, ref) => {
         openLinker();
       }
     } else if (code == 'KeyT') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
+        e.preventDefault();
         openTasker();
       }
     } else if (code == 'ArrowUp') {
@@ -285,32 +286,32 @@ export default forwardRef((props: BlockProps, ref) => {
         props.onDelete?.call(null, props.data);
       }
     } else if (code == 'KeyP') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.TEXT);
       }
     } else if (code == 'KeyC') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.CODE);
       }
     } else if (code == 'Digit1') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.H1);
       }
     } else if (code == 'Digit2') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.H2);
       }
     } else if (code == 'Digit3') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.H3);
       }
     } else if (code == 'Digit4') {
-      if (isCmd && isOpt) {
+      if (isCmd && (isOpt || isShift)) {
         e.preventDefault();
         changeBlockType(BlockType.H4);
       }

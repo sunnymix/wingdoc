@@ -1,5 +1,4 @@
-
-export const API_HOST = "http://localhost:8020"
+export const API_HOST = "/wingdoc-api"
 
 const Constant = {
   API_HOST,

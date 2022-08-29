@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pid=$(lsof -n -i :8022 | grep LISTEN | sed -r "s/java[ ]+([0-9]+).*/\1/g")
+echo $pid
+

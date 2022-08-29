@@ -1,0 +1,19 @@
+#!/bin/sh
+
+port=8022
+
+echo 'Build wingdoc-api:'
+
+./gradlew build
+
+pid=$(lsof -n -i :$port | grep LISTEN | sed -r "s/java[ ]+([0-9]+).*/\1/g")
+if [ -n $pid ]
+then
+  echo ""
+  echo "Currently process:$pid is running on port:$port"
+  echo "Kill running process:$pid"
+  echo ""
+  kill -9 $pid
+fi
+
+nohup java -Dserver.port=$port -jar ./build/libs/wingdoc-api-0.0.1-SNAPSHOT.jar & > /dev/null 2>&1 &

@@ -38,22 +38,28 @@ export default (props: EditorProps) => {
 
   const handleInput = useCallback((e) => {
     let text = '';
+    const childSize = e.target.childNodes.length;
+    const isOneLine = childSize == 1;
 
     e.target.childNodes.forEach((node: any, i: number) => {
       text += (node.innerText || node.nodeValue || '')
         .replace(/\n/g, '')
         .replace(/[\u00A0\u1680​\u180e\u2000-\u2009\u200a​\u200b​\u202f\u205f​\u3000]/g, ' ');
-      if (i != e.target.childNodes.length - 1) {
+      const isNotLastLine = i < childSize - 1;
+      if (isNotLastLine) {
         text += '\n';
       }
     });
 
-    if (text === '') {
-      editorRef.current.innerHTML = '';
-      updateText(text);
-    } else {
-      updateText(text);
+    if (isOneLine) {
+      let htmlContent = (text || '').trim();
+      if (htmlContent.length == 0) {
+        htmlContent = '<br/>';
+        editorRef.current.innerHTML = `<div id=>${htmlContent}</div>`;
+      }
     }
+
+    updateText(text);
 
   }, []);
 

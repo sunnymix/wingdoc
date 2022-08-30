@@ -28,61 +28,39 @@ public class MarkRepo {
 
     public Out<List<Mark>> query() {
         List<Mark> marks = dsl
-                .selectFrom(MARK)
-                .orderBy(MARK.PIN, MARK.ID)
-                .fetchStreamInto(Mark.class)
-                .collect(Collectors.toList());
+            .selectFrom(MARK)
+            .orderBy(
+                MARK.PIN.desc(),
+                MARK.ID.asc()
+            )
+            .fetchStreamInto(Mark.class)
+            .collect(Collectors.toList());
         return Out.ok(Page.list(marks.size()), marks);
     }
 
     public Out<Boolean> add(String docId) {
-        if (_exist(docId)) {
+        if (_existMark(docId)) {
             return Out.ok(true);
         }
 
-        _create(docId);
+        _createMark(docId);
 
         return Out.ok(true);
     }
 
     public Out<Boolean> pin(String docId) {
-        Mark maxPinMark = _maxPin();
-        Integer pin = maxPinMark != null ? maxPinMark.getPin() + 1 : 1;
-
-        Mark mark = _one(docId);
-
-        if (mark != null) {
-            if (maxPinMark != null && maxPinMark.getDocId().equals(docId)) {
-                return Out.ok(true);
-            }
-
-            _updatePin(mark.getId(), pin);
-        } else {
-            _create(docId, pin);
-        }
-
+        _deleteMark(docId);
+        _createMark(docId, 1);
         return Out.ok(true);
     }
 
     public Out<Boolean> unpin(String docId) {
-        Mark mark = _one(docId);
-
-        if (mark != null) {
-            _updatePin(mark.getId(), 0);
-        }
-
+        _deleteMark(docId);
+        _createMark(docId, 0);
         return Out.ok(true);
     }
 
-    private Mark _maxPin() {
-        return dsl
-                .selectFrom(MARK)
-                .orderBy(MARK.PIN.desc())
-                .limit(1)
-                .fetchOneInto(Mark.class);
-    }
-
-    private void _create(String docId, Integer pin) {
+    private void _createMark(String docId, Integer pin) {
         MarkRecord record = new MarkRecord();
         record.setId(null);
         record.setDocId(docId);
@@ -90,44 +68,29 @@ public class MarkRepo {
         dsl.executeInsert(record);
     }
 
-    private void _create(String docId) {
-        _create(docId, 0);
-    }
-
-    private void _updatePin(Integer id, Integer pin) {
-        dsl
-                .update(MARK)
-                .set(MARK.PIN, pin)
-                .where(MARK.ID.eq(id))
-                .execute();
+    private void _createMark(String docId) {
+        _createMark(docId, 0);
     }
 
     public Out<Boolean> delete(String docId) {
-        return Out.ok(_delete(docId));
+        return Out.ok(_deleteMark(docId));
     }
 
     private Integer _count(String docId) {
         return dsl
-                .fetchCount(MARK, MARK.DOC_ID.eq(docId));
+            .fetchCount(MARK, MARK.DOC_ID.eq(docId));
 
     }
 
-    private Mark _one(String docId) {
-        return dsl
-                .selectFrom(MARK)
-                .where(MARK.DOC_ID.eq(docId))
-                .fetchOneInto(Mark.class);
-    }
-
-    private boolean _exist(String docId) {
+    private boolean _existMark(String docId) {
         return _count(docId) > 0;
     }
 
-    private boolean _delete(String docId) {
+    private boolean _deleteMark(String docId) {
         dsl
-                .deleteFrom(MARK)
-                .where(MARK.DOC_ID.eq(docId))
-                .execute();
+            .deleteFrom(MARK)
+            .where(MARK.DOC_ID.eq(docId))
+            .execute();
         return true;
     }
 

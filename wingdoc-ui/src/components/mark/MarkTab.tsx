@@ -57,7 +57,7 @@ export default forwardRef((props: MarkTabProps, ref) => {
         const day = titleAsMoment.format('M.D');
         const weekday = +(titleAsMoment.format("E")) - 1;
         const weekdayTitle = Weekday.title(weekday);
-        newTitle = `${day} ${weekdayTitle}`;
+        newTitle = `${day}${weekdayTitle}`;
 
         isToday = moment().format("YYYYMMDD") == _title;
       }

@@ -4,6 +4,7 @@ import type { UploadProps } from 'antd';
 import { Button, message, Upload, Image } from 'antd';
 import axios from "axios";
 import BlockApi from "../api/BlockApi";
+import ImagerApi from "./ImagerApi";
 
 export interface ImagerProps {
   blockId: string,
@@ -94,7 +95,7 @@ export default forwardRef((props: ImagerProps, ref) => {
       const form = new FormData();
       form.append('img', file);
 
-      axios.post(`http://localhost:8020/block/${props.blockId}/img`, form)
+      axios.post(ImagerApi.makeBlockImgApiUrl(props.blockId), form)
         .then(res => {
           if (res.data.success === true) {
             setImg(res.data.data);
@@ -108,7 +109,7 @@ export default forwardRef((props: ImagerProps, ref) => {
   // --- props:
 
   const uploadProps: UploadProps = {
-    action: `http://localhost:8020/block/${props.blockId}/img`,
+    action: ImagerApi.makeBlockImgApiUrl(props.blockId),
     name: 'img',
     maxCount: 1,
     showUploadList: false,

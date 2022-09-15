@@ -27,6 +27,7 @@
     "moment": "^2.29.3",
     "react": "17.x",
     "react-dom": "17.x",
+    "react-custom-scrollbars": "^4.2.1",
     "react-draggable": "^4.4.4",
     "umi": "^3.5.20"
   },

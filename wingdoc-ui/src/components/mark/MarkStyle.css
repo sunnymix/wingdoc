@@ -2,17 +2,17 @@
 .mark_tabs {
   display: flex;
   background-color: #e7e7e7;
-  margin-bottom: 15px;
-  overflow: hidden;
-  overflow-x: scroll;
+  padding-bottom: 6px;
 }
 
 .marks_tabs_item {
   flex-shrink: 0;
   position: relative;
   display: flex;
+  align-items: center;
   flex-wrap: nowrap;
   overflow: hidden;
+  padding-top: 3px;
   height: 34px;
   border-radius: 0px;
 }

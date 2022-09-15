@@ -3,6 +3,7 @@ import { useEffect, forwardRef } from "react";
 import { useLocation, useModel } from "umi";
 import MarkTab from "./MarkTab";
 import "@/components/common/CommonStyle.css";
+import { Scrollbars } from "react-custom-scrollbars";
 
 export interface Mark {
   id: number,
@@ -32,15 +33,26 @@ export default forwardRef((props: MarkTabsProps, ref) => {
 
   const handleMarkChange = () => {
     refreshMarks(location?.pathname);
-  }
+  };
+
+  // --- scrollbar:
+
+  const renderThumb = (origProps: any) => {
+    const { style, ...props } = origProps;
+    return <div style={{...style, backgroundColor: '#ccc', height: 2, marginTop: 6}} {...props}> </div>;
+  };
 
   // --- ui
 
   return (
-    <div className="mark_tabs scrollbar_small">
-      {marks.map((mark: Mark) => 
-        <MarkTab key={mark.id} mark={mark} onChange={handleMarkChange} />
-      )}
-    </div>
+    <>
+      <Scrollbars autoHeight renderThumbHorizontal={renderThumb}>
+        <div className="mark_tabs">
+          {marks.map((mark: Mark) => 
+            <MarkTab key={mark.id} mark={mark} onChange={handleMarkChange} />
+          )}
+        </div>
+      </Scrollbars>
+    </>
   )
 });
